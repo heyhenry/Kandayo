@@ -31,3 +31,8 @@ As a long time maplestory player and having sought out similar services, I decid
 - Flame score calculator redirect feature
 - Curated list of bossing guides feature
 - optimize damage calculator feature
+
+# Notes
+- Future time management/tracking resource will be added
+- Resources used will be tracked and stored will be added
+- Additional tools and services used will be acknowledged and added
