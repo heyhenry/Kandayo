@@ -1,4 +1,4 @@
 # Online resources used to help me bring my app to fruition
 The following are the resources I have read, referred and learnt from to better understand the concepts, logic and code to achieve my vision for this application.
 
-- 
+- Adding border and border colour: https://www.geeksforgeeks.org/how-to-change-border-color-in-tkinter-widget/
