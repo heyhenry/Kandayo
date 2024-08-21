@@ -1,5 +1,6 @@
 # source origin: https://stackoverflow.com/questions/39614027/list-available-font-families-in-tkinter
 # credit to: jimmiesrustled
+# this code is used purely to see the available fonts for the tkinter app
 
 from tkinter import *
 from tkinter import font
