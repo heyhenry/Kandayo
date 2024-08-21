@@ -5,3 +5,6 @@ The following are the resources I have read, referred and learnt from to better 
 - Adding border efficiently: https://stackoverflow.com/questions/50691267/how-to-add-a-border-for-a-frame-in-python-tkinter
 - Dealing with ignored frame attributes: https://stackoverflow.com/questions/11413459/adding-label-to-frame-in-tkinter-ignores-the-attributes-of-frame
 - Using fonts: https://www.tutorialspoint.com/python/tk_fonts.htm
+- Listbox attributes: https://www.tutorialspoint.com/python/tk_listbox.htm
+- Button attributes: https://www.tutorialspoint.com/python/tk_button.htm
+- Unpacking dictionary information: https://stackoverflow.com/questions/1897623/unpacking-a-passed-dictionary-into-the-functions-name-space-in-python
