@@ -18,10 +18,15 @@ orange_frame.grid(row=3, column=1, sticky='nwse')
 green_frame.grid(row=4, column=1, sticky='nwse')
 
 yellow_frame.grid_propagate(False)
+red_frame.grid_propagate(False)
 
 # yellow frame
 co_lbl = tk.Label(yellow_frame, text='Characters Overview', font=('Helvetica', 18), bg='yellow')
 co_lbl.place(relx=0.5, rely=0.5, anchor='center')
+
+# red frame
+chars_lb = tk.Listbox(red_frame, height=30)
+chars_lb.place(relx=0.5, rely=0.5, anchor='center')
 
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
