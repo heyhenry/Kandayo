@@ -1,6 +1,7 @@
 import tkinter as tk
 
 root = tk.Tk()
+root.resizable(False, False)
 
 # frames setup
 yellow_frame = tk.Frame(root, width=600, height=80, bg='yellow', highlightbackground='black', highlightthickness=2, borderwidth=1, padx=5, pady=5)
