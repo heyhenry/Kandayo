@@ -58,6 +58,28 @@ addchar_btn.grid(row=0, column=0)
 updchar_btn.grid(row=0, column=1)
 delchar_btn.grid(row=0, column=2)
 
+# magenta frame
+
+
+
+# temp using blue_button params
+utc_time = tk.Button(magenta_frame, text='Current Time (UTC)', **blue_buttons)
+ursus_time = tk.Button(magenta_frame, text='Til Next Ursus', **blue_buttons)
+daily_reset = tk.Button(magenta_frame, text='Til Daily Reset', **blue_buttons)
+weekly_reset = tk.Button(magenta_frame, text='Til Weekly Reset', **blue_buttons)
+
+magenta_frame.grid_rowconfigure(0, weight=1)
+magenta_frame.grid_rowconfigure(1, weight=1)
+magenta_frame.grid_rowconfigure(2, weight=1)
+magenta_frame.grid_rowconfigure(3, weight=1)
+magenta_frame.grid_columnconfigure(0, weight=1)
+magenta_frame.grid_columnconfigure(1, weight=1)
+
+utc_time.grid(row=0, column=0)
+ursus_time.grid(row=1, column=0)
+daily_reset.grid(row=2, column=0)
+weekly_reset.grid(row=3, column=0)
+
 # root configs for resizability ('can ignore for time being, may reinstate later')
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
