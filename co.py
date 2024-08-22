@@ -31,6 +31,8 @@ chars_lb = tk.Listbox(red_frame, height=30)
 chars_lb.place(relx=0.5, rely=0.5, anchor='center')
 
 # blue frame
+
+# to check if buttons are working correctly
 def run(i : str):
     if i == 'add':
         print('add works')
@@ -41,7 +43,7 @@ def run(i : str):
     else:
         print('Error!')
 
-blue_buttons = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'sunken'}
+blue_buttons = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
 addchar_btn = tk.Button(blue_frame, text='Add Char', **blue_buttons, command=lambda:run('add'))
 updchar_btn = tk.Button(blue_frame, text='Update Char', **blue_buttons, command=lambda:run('upd'))
