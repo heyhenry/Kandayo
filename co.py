@@ -1,4 +1,6 @@
 import tkinter as tk
+from datetime import timezone
+import datetime as dt
 
 root = tk.Tk()
 root.resizable(False, False)
@@ -60,13 +62,39 @@ delchar_btn.grid(row=0, column=2)
 
 # magenta frame
 
+# get current utc time
+utc_time = dt.datetime.now(timezone.utc)
+utc_time = utc_time.strftime("%H:%M")
 
+# split hour and min vars
+utc_hour = utc_time[0]+utc_time[1]
+utc_min = utc_time[3]+utc_time[4]
+
+# hour and min for max utc
+maxutc_hour = '24'
+maxutc_min = '00'
+
+# daily reset time remaining
+dr_remaining = tk.StringVar()
+
+def daily_reset_mafs():
+    hours_left = int(maxutc_hour) - int(utc_hour)
+    if int(utc_min) > 0:
+        hours_left = hours_left - 1
+        mins_left = 60 - int(utc_min)
+    dr_remaining.set(f"{hours_left} hours and {mins_left} minutes til daily reset.")
+    daily_reset_display.config(textvariable=dr_remaining)
 
 # temp using blue_button params
 utc_time = tk.Button(magenta_frame, text='Current Time (UTC)', **blue_buttons)
 ursus_time = tk.Button(magenta_frame, text='Til Next Ursus', **blue_buttons)
-daily_reset = tk.Button(magenta_frame, text='Til Daily Reset', **blue_buttons)
+daily_reset = tk.Button(magenta_frame, text='Til Daily Reset', **blue_buttons, command=daily_reset_mafs)
 weekly_reset = tk.Button(magenta_frame, text='Til Weekly Reset', **blue_buttons)
+
+utc_time_display = tk.Label(magenta_frame)
+ursus_time_display = tk.Label(magenta_frame)
+daily_reset_display = tk.Label(magenta_frame)
+weekly_reset_display = tk.Label(magenta_frame)
 
 magenta_frame.grid_rowconfigure(0, weight=1)
 magenta_frame.grid_rowconfigure(1, weight=1)
@@ -79,6 +107,11 @@ utc_time.grid(row=0, column=0)
 ursus_time.grid(row=1, column=0)
 daily_reset.grid(row=2, column=0)
 weekly_reset.grid(row=3, column=0)
+
+utc_time_display.grid(row=0, column=1)
+ursus_time_display.grid(row=1, column=1)
+daily_reset_display.grid(row=2, column=1)
+weekly_reset_display.grid(row=3, column=1)
 
 # root configs for resizability ('can ignore for time being, may reinstate later')
 root.grid_rowconfigure(0, weight=1)
