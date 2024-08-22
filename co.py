@@ -62,22 +62,32 @@ delchar_btn.grid(row=0, column=2)
 
 # magenta frame
 
-# get current utc time
-utc_time = dt.datetime.now(timezone.utc)
-utc_time = utc_time.strftime("%H:%M")
+curr_time = tk.StringVar()
 
-# split hour and min vars
-utc_hour = utc_time[0]+utc_time[1]
-utc_min = utc_time[3]+utc_time[4]
-
-# hour and min for max utc
-maxutc_hour = '24'
-maxutc_min = '00'
+def current_time_mafs():
+    utc_time = dt.datetime.now(timezone.utc)
+    utc_time = utc_time.strftime("%H:%M")
+    curr_time.set(f"Current time is {utc_time}")
+    utc_time_display.config(textvariable=curr_time)
 
 # daily reset time remaining
 dr_remaining = tk.StringVar()
 
+# calculates time (hours:mins) remaining til next day based on UTC
 def daily_reset_mafs():
+
+    # get current utc time
+    utc_time = dt.datetime.now(timezone.utc)
+    utc_time = utc_time.strftime("%H:%M")
+
+    # split hour and min vars
+    utc_hour = utc_time[0]+utc_time[1]
+    utc_min = utc_time[3]+utc_time[4]
+
+    # hour and min for max utc
+    maxutc_hour = '24'
+    maxutc_min = '00'
+
     hours_left = int(maxutc_hour) - int(utc_hour)
     if int(utc_min) > 0:
         hours_left = hours_left - 1
@@ -86,9 +96,9 @@ def daily_reset_mafs():
     daily_reset_display.config(textvariable=dr_remaining)
 
 # temp using blue_button params
-utc_time = tk.Button(magenta_frame, text='Current Time (UTC)', **blue_buttons)
+utc_time = tk.Button(magenta_frame, text='Current Time (UTC)', **blue_buttons, command=lambda:current_time_mafs())
 ursus_time = tk.Button(magenta_frame, text='Til Next Ursus', **blue_buttons)
-daily_reset = tk.Button(magenta_frame, text='Til Daily Reset', **blue_buttons, command=daily_reset_mafs)
+daily_reset = tk.Button(magenta_frame, text='Til Daily Reset', **blue_buttons, command=lambda:daily_reset_mafs())
 weekly_reset = tk.Button(magenta_frame, text='Til Weekly Reset', **blue_buttons)
 
 utc_time_display = tk.Label(magenta_frame)
