@@ -86,8 +86,7 @@ def daily_reset_mafs():
 
     # hour and min for max utc
     maxutc_hour = '24'
-    maxutc_min = '00'
-
+    
     hours_left = int(maxutc_hour) - int(utc_hour)
     if int(utc_min) > 0:
         hours_left = hours_left - 1

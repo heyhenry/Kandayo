@@ -8,3 +8,6 @@ The following are the resources I have read, referred and learnt from to better 
 - Listbox attributes: https://www.tutorialspoint.com/python/tk_listbox.htm
 - Button attributes: https://www.tutorialspoint.com/python/tk_button.htm
 - Unpacking dictionary information: https://stackoverflow.com/questions/1897623/unpacking-a-passed-dictionary-into-the-functions-name-space-in-python
+- Working with DateTime: https://www.w3schools.com/python/python_datetime.asp
+- Getting different timezones with DateTime: https://www.geeksforgeeks.org/get-utc-timestamp-in-python/
+- How to create a live digital clock: https://handhikayp.medium.com/generate-a-simple-digital-clock-with-python-tkinter-796a5b298872
