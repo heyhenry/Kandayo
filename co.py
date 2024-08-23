@@ -1,6 +1,6 @@
 import tkinter as tk
-from datetime import timezone
-import datetime
+from datetime import timezone, timedelta
+import datetime as dt
 
 root = tk.Tk()
 root.resizable(False, False)
@@ -65,7 +65,7 @@ delchar_btn.grid(row=0, column=2)
 # updates the utc time clock
 def update_utc():
     # finds the utc timezone's time
-    utc_time = datetime.datetime.now(timezone.utc)
+    utc_time = dt.datetime.now(timezone.utc)
     # reformats the time to string 
     string_time = utc_time.strftime('%H:%M:%S %p')
     # updates the display label that showcases the utc time
