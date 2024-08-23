@@ -69,38 +69,72 @@ def update_utc():
     # reformats the time to string 
     string_time = utc_time.strftime('%H:%M:%S %p')
     # updates the display label that showcases the utc time
-    utc_livetime_display.config(text=string_time)
+    utc_livetime_lbl.config(text=f"Current Server Time: {string_time}")
     # executes the update_utc function after time elapse (in ms)
-    utc_livetime_display.after(1000, update_utc)
+    utc_livetime_lbl.after(1000, update_utc)
+
+# bonus as in 2x rewards
+def bonus_ursus_tracker():
+
+    uto_start_str = '01:00:00'
+    uto_end_str = '05:00:00'
+
+    utt_start_str = '18:00:00'
+    utt_end_str = '22:00:00'
+
+    utc_time = dt.datetime.now(timezone.utc)
+    today = utc_time.date()
+
+    uto_start = dt.datetime.combine(today, dt.datetime.strptime(uto_start_str, '%H:%M:%S').time(), tzinfo=timezone.utc)
+    uto_end = dt.datetime.combine(today, dt.datetime.strptime(uto_end_str, '%H:%M:%S').time(), tzinfo=timezone.utc)
+
+    utt_start = dt.datetime.combine(today, dt.datetime.strptime(utt_start_str, '%H:%M:%S').time(), tzinfo=timezone.utc)
+    utt_end = dt.datetime.combine(today, dt.datetime.strptime(utt_end_str, '%H:%M:%S').time(), tzinfo=timezone.utc)
+
+    if utc_time >= uto_start and utc_time <= uto_end:
+        ursus_time.config(text="It's Ursus 2x Now! (Round 1)")
+        ursus_time.after(1000, bonus_ursus_tracker)
+    elif utc_time >= utt_start and utc_time <= utt_end:
+        ursus_time.config(text="It's Ursus 2x Now! (Round 2)")
+        ursus_time.after(1000, bonus_ursus_tracker)
+    else:
+        if utc_time <= uto_start:
+            next_ursus = uto_start
+        elif utc_time <= utt_start:
+            next_ursus = utt_start
+        else:
+            next_ursus = uto_start + timedelta(days=1)
+
+    time_remaining = next_ursus - utc_time
+
+    days = time_remaining.days
+    seconds = time_remaining.seconds
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    seconds = (seconds % 3600) % 60
+
+    time_remaining_str = f"{days} days, {hours} hours, {minutes} minutes, {seconds} seconds"
+
+    ursus_time.config(text=f"Next Ursus is at {next_ursus.strftime('%H:%M:%S')} \n Time Remaining until next Ursus: {time_remaining_str}")
+    ursus_time.after(1000, bonus_ursus_tracker)
+
 
 # temp using blue_button params
-utc_livetime_lbl = tk.Label(magenta_frame, text='UTC TIME:')
-ursus_time = tk.Button(magenta_frame, text='Til Next Ursus', **blue_buttons)
+utc_livetime_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
+ursus_time = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 daily_reset = tk.Button(magenta_frame, text='Til Daily Reset', **blue_buttons)
 weekly_reset = tk.Button(magenta_frame, text='Til Weekly Reset', **blue_buttons)
-
-utc_livetime_display = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
-ursus_time_display = tk.Label(magenta_frame)
-daily_reset_display = tk.Label(magenta_frame)
-weekly_reset_display = tk.Label(magenta_frame)
 
 magenta_frame.grid_rowconfigure(0, weight=1)
 magenta_frame.grid_rowconfigure(1, weight=1)
 magenta_frame.grid_rowconfigure(2, weight=1)
 magenta_frame.grid_rowconfigure(3, weight=1)
 magenta_frame.grid_columnconfigure(0, weight=1)
-magenta_frame.grid_columnconfigure(1, weight=1)
-
 
 utc_livetime_lbl.grid(row=0, column=0)
 ursus_time.grid(row=1, column=0)
 daily_reset.grid(row=2, column=0)
 weekly_reset.grid(row=3, column=0)
-
-utc_livetime_display.grid(row=0, column=1)
-ursus_time_display.grid(row=1, column=1)
-daily_reset_display.grid(row=2, column=1)
-weekly_reset_display.grid(row=3, column=1)
 
 # root configs for resizability ('can ignore for time being, may reinstate later')
 root.grid_rowconfigure(0, weight=1)
@@ -109,6 +143,7 @@ root.grid_columnconfigure(1, weight=1)
 
 # initial function execution to start off the clock upon app startup
 update_utc()
+bonus_ursus_tracker()
 
 root.mainloop()
 

@@ -45,7 +45,7 @@ def time_until_next_ursus():
 
     time_remaining_str = f"{days} days, {hours} hours, {minutes} minutes, {seconds} seconds"
 
-    ursus_lbl.config(text=f"Next Ursus is at {next_ursus.strftime("%H:%M:%S")} & Time Remaining until next Ursus: {time_remaining_str}")
+    ursus_lbl.config(text=f"Next Ursus is at {next_ursus.strftime("%H:%M:%S")} \n Time Remaining until next Ursus: {time_remaining_str}")
     ursus_lbl.after(1000, time_until_next_ursus)
 
 ursus_lbl = tk.Label(root, font=('Kozuka Gothic Pro B', 12))
