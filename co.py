@@ -62,42 +62,15 @@ delchar_btn.grid(row=0, column=2)
 
 # magenta frame
 
-# curr_time = tk.StringVar()
-
-# def current_time_mafs():
-#     utc_time = datetime.datetime.now(timezone.utc)
-#     utc_time = utc_time.strftime("%H:%M")
-#     curr_time.set(f"Current time is {utc_time}")
-#     utc_time_display.config(textvariable=curr_time)
-
-# daily reset time remaining
-# dr_remaining = tk.StringVar()
-
-# # calculates time (hours:mins) remaining til next day based on UTC
-# def daily_reset_mafs():
-
-#     # get current utc time
-#     utc_time = datetime.datetime.now(timezone.utc)
-#     utc_time = utc_time.strftime("%H:%M")
-
-#     # split hour and min vars
-#     utc_hour = utc_time[0]+utc_time[1]
-#     utc_min = utc_time[3]+utc_time[4]
-
-#     # hour and min for max utc
-#     maxutc_hour = '24'
-    
-#     hours_left = int(maxutc_hour) - int(utc_hour)
-#     if int(utc_min) > 0:
-#         hours_left = hours_left - 1
-#         mins_left = 60 - int(utc_min)
-#     dr_remaining.set(f"{hours_left} hours and {mins_left} minutes til daily reset.")
-#     daily_reset_display.config(textvariable=dr_remaining)
-
+# updates the utc time clock
 def update_utc():
+    # finds the utc timezone's time
     utc_time = datetime.datetime.now(timezone.utc)
-    string_time = utc_time.strftime('%H:%M:%S')
+    # reformats the time to string 
+    string_time = utc_time.strftime('%H:%M:%S %p')
+    # updates the display label that showcases the utc time
     utc_livetime_display.config(text=string_time)
+    # executes the update_utc function after time elapse (in ms)
     utc_livetime_display.after(1000, update_utc)
 
 # temp using blue_button params
@@ -134,6 +107,7 @@ root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 
+# initial function execution to start off the clock upon app startup
 update_utc()
 
 root.mainloop()
