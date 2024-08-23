@@ -73,24 +73,30 @@ def update_utc():
     # executes the update_utc function after time elapse (in ms)
     utc_livetime_lbl.after(1000, update_utc)
 
-# bonus as in 2x rewards
+# ursus time countdown and tracker algorithm (sidenote: bonus as in 2x rewards)
 def bonus_ursus_tracker():
 
+    # ursus time ranges
     uto_start_str = '01:00:00'
     uto_end_str = '05:00:00'
 
     utt_start_str = '18:00:00'
     utt_end_str = '22:00:00'
 
+    # get the current utc time aka server time
     utc_time = dt.datetime.now(timezone.utc)
+
+    # get today's day
     today = utc_time.date()
 
+    # create datetime objects for the ursus times (aka the triggers)
     uto_start = dt.datetime.combine(today, dt.datetime.strptime(uto_start_str, '%H:%M:%S').time(), tzinfo=timezone.utc)
     uto_end = dt.datetime.combine(today, dt.datetime.strptime(uto_end_str, '%H:%M:%S').time(), tzinfo=timezone.utc)
 
     utt_start = dt.datetime.combine(today, dt.datetime.strptime(utt_start_str, '%H:%M:%S').time(), tzinfo=timezone.utc)
     utt_end = dt.datetime.combine(today, dt.datetime.strptime(utt_end_str, '%H:%M:%S').time(), tzinfo=timezone.utc)
 
+    # check if server time is currently within the bonus ursus time period
     if utc_time >= uto_start and utc_time <= uto_end:
         ursus_time.config(text="It's Ursus 2x Now! (Round 1)")
         ursus_time.after(1000, bonus_ursus_tracker)
@@ -98,26 +104,32 @@ def bonus_ursus_tracker():
         ursus_time.config(text="It's Ursus 2x Now! (Round 2)")
         ursus_time.after(1000, bonus_ursus_tracker)
     else:
+        # determine when the next trigger is (aka ursus bonus time)
         if utc_time <= uto_start:
             next_ursus = uto_start
         elif utc_time <= utt_start:
             next_ursus = utt_start
         else:
+            # if the current time has passed for both triggers (ursus times), next_ursus will store the first ursus of the next day
             next_ursus = uto_start + timedelta(days=1)
 
+    # calculate the time remaining til next bonus ursus
     time_remaining = next_ursus - utc_time
 
+    # extract the components of the time_remaining object (timedelta object)
     days = time_remaining.days
     seconds = time_remaining.seconds
     hours = seconds // 3600
     minutes = (seconds % 3600) // 60
     seconds = (seconds % 3600) % 60
 
+    # format the result for time remaining
     time_remaining_str = f"{days} days, {hours} hours, {minutes} minutes, {seconds} seconds"
 
+    # update the ursus_time label with relevant realtime 
     ursus_time.config(text=f"Next Ursus is at {next_ursus.strftime('%H:%M:%S')} \n Time Remaining until next Ursus: {time_remaining_str}")
+    # prompt execution of function every second for a live reading of the ursus time tracker
     ursus_time.after(1000, bonus_ursus_tracker)
-
 
 # temp using blue_button params
 utc_livetime_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
