@@ -1,6 +1,6 @@
 import tkinter as tk
 from datetime import timezone
-import datetime as dt
+import datetime
 
 root = tk.Tk()
 root.resizable(False, False)
@@ -62,45 +62,51 @@ delchar_btn.grid(row=0, column=2)
 
 # magenta frame
 
-curr_time = tk.StringVar()
+# curr_time = tk.StringVar()
 
-def current_time_mafs():
-    utc_time = dt.datetime.now(timezone.utc)
-    utc_time = utc_time.strftime("%H:%M")
-    curr_time.set(f"Current time is {utc_time}")
-    utc_time_display.config(textvariable=curr_time)
+# def current_time_mafs():
+#     utc_time = datetime.datetime.now(timezone.utc)
+#     utc_time = utc_time.strftime("%H:%M")
+#     curr_time.set(f"Current time is {utc_time}")
+#     utc_time_display.config(textvariable=curr_time)
 
 # daily reset time remaining
-dr_remaining = tk.StringVar()
+# dr_remaining = tk.StringVar()
 
-# calculates time (hours:mins) remaining til next day based on UTC
-def daily_reset_mafs():
+# # calculates time (hours:mins) remaining til next day based on UTC
+# def daily_reset_mafs():
 
-    # get current utc time
-    utc_time = dt.datetime.now(timezone.utc)
-    utc_time = utc_time.strftime("%H:%M")
+#     # get current utc time
+#     utc_time = datetime.datetime.now(timezone.utc)
+#     utc_time = utc_time.strftime("%H:%M")
 
-    # split hour and min vars
-    utc_hour = utc_time[0]+utc_time[1]
-    utc_min = utc_time[3]+utc_time[4]
+#     # split hour and min vars
+#     utc_hour = utc_time[0]+utc_time[1]
+#     utc_min = utc_time[3]+utc_time[4]
 
-    # hour and min for max utc
-    maxutc_hour = '24'
+#     # hour and min for max utc
+#     maxutc_hour = '24'
     
-    hours_left = int(maxutc_hour) - int(utc_hour)
-    if int(utc_min) > 0:
-        hours_left = hours_left - 1
-        mins_left = 60 - int(utc_min)
-    dr_remaining.set(f"{hours_left} hours and {mins_left} minutes til daily reset.")
-    daily_reset_display.config(textvariable=dr_remaining)
+#     hours_left = int(maxutc_hour) - int(utc_hour)
+#     if int(utc_min) > 0:
+#         hours_left = hours_left - 1
+#         mins_left = 60 - int(utc_min)
+#     dr_remaining.set(f"{hours_left} hours and {mins_left} minutes til daily reset.")
+#     daily_reset_display.config(textvariable=dr_remaining)
+
+def update_utc():
+    utc_time = datetime.datetime.now(timezone.utc)
+    string_time = utc_time.strftime('%H:%M:%S')
+    utc_livetime_display.config(text=string_time)
+    utc_livetime_display.after(1000, update_utc)
 
 # temp using blue_button params
-utc_time = tk.Button(magenta_frame, text='Current Time (UTC)', **blue_buttons, command=lambda:current_time_mafs())
+utc_livetime_lbl = tk.Label(magenta_frame, text='UTC TIME:')
 ursus_time = tk.Button(magenta_frame, text='Til Next Ursus', **blue_buttons)
-daily_reset = tk.Button(magenta_frame, text='Til Daily Reset', **blue_buttons, command=lambda:daily_reset_mafs())
+daily_reset = tk.Button(magenta_frame, text='Til Daily Reset', **blue_buttons)
 weekly_reset = tk.Button(magenta_frame, text='Til Weekly Reset', **blue_buttons)
 
-utc_time_display = tk.Label(magenta_frame)
+utc_livetime_display = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 ursus_time_display = tk.Label(magenta_frame)
 daily_reset_display = tk.Label(magenta_frame)
 weekly_reset_display = tk.Label(magenta_frame)
@@ -112,12 +118,13 @@ magenta_frame.grid_rowconfigure(3, weight=1)
 magenta_frame.grid_columnconfigure(0, weight=1)
 magenta_frame.grid_columnconfigure(1, weight=1)
 
-utc_time.grid(row=0, column=0)
+
+utc_livetime_lbl.grid(row=0, column=0)
 ursus_time.grid(row=1, column=0)
 daily_reset.grid(row=2, column=0)
 weekly_reset.grid(row=3, column=0)
 
-utc_time_display.grid(row=0, column=1)
+utc_livetime_display.grid(row=0, column=1)
 ursus_time_display.grid(row=1, column=1)
 daily_reset_display.grid(row=2, column=1)
 weekly_reset_display.grid(row=3, column=1)
@@ -126,6 +133,8 @@ weekly_reset_display.grid(row=3, column=1)
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
+
+update_utc()
 
 root.mainloop()
 
