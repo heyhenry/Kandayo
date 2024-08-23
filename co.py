@@ -153,7 +153,7 @@ root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 
-# initial function execution to start off the clock upon app startup
+# initial function execution to start off the various clocks and time trackers upon app startup
 update_utc()
 bonus_ursus_tracker()
 
