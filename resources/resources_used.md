@@ -15,3 +15,6 @@ The following are the resources I have read, referred and learnt from to better 
 - Understanding DateTime: https://realpython.com/python-datetime/
 - Converting time data from TimeDelta: https://stackoverflow.com/questions/2119472/convert-a-timedelta-to-days-hours-and-minutes
 - Understanding Time Arithmetic using DateTime and it's module TimeDelta: project's misc folder/cdt and countdown_timer related files supported by ChatGPT queries
+- Understanding weekday attribute from DateTime: https://www.geeksforgeeks.org/weekday-function-of-datetime-date-class-in-python/
+- Understanding Time Delta Intervals + Arithmetic: https://www.datacamp.com/tutorial/timedelta-python-time-intervals
+- Time maths and formulas: https://www.sololearn.com/en/Discuss/187185/how-to-convert-seconds-to-minutes-hours-and-days
