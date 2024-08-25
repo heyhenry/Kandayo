@@ -153,7 +153,7 @@ def daily_reset():
     seconds = (seconds % 3600) % 60
 
     # create string format of time remaining data
-    time_remaining_str = f"{hours} hours, {minutes} minutes, {seconds} seconds"
+    time_remaining_str = f"Daily Reset in {hours} hours, {minutes} minutes, {seconds} seconds"
 
     # update the label responsible for displaing the daily reset timer
     daily_reset_lbl.config(text=time_remaining_str)
@@ -186,6 +186,7 @@ root.grid_columnconfigure(1, weight=1)
 # initial function execution to start off the various clocks and time trackers upon app startup
 update_utc()
 bonus_ursus_tracker()
+daily_reset()
 
 root.mainloop()
 
