@@ -161,11 +161,63 @@ def daily_reset():
     # auto execute daily_reset function every second
     daily_reset_lbl.after(1000, daily_reset)
 
+def weekly_reset():
+
+    # get current utc datetime and other details
+    utc_time = dt.datetime.now(timezone.utc)
+    today = utc_time.date()
+    current_weekday = utc_time.weekday()
+
+    # the target day (i.e. thursday)
+    target_weekyday = 3
+
+    # calculate how many days until target day
+    days_until_target = (target_weekyday - current_weekday + 7) % 7
+
+    # check to see if today is target day and reset to 7 days if its today
+    if days_until_target == 0:
+        days_until_target = 7
+
+    # next thursday timedelta obj
+    next_thursday_date = today + timedelta(days=days_until_target)
+
+    # target day settings
+    trigger_str = '00:00:00'
+    trigger_time = dt.datetime.strptime(trigger_str, '%H:%M:%S').time()
+
+    # next thursday datetime obj
+    next_thursday = dt.datetime.combine(next_thursday_date, trigger_time, tzinfo=timezone.utc)
+    
+    # check if today is the target day
+    if utc_time.weekday() == 3:
+        print('Weekly Reset is Today')
+        weekly_reset_lbl.after(1000, weekly_reset)
+    # if its not the target day ..
+    else:
+        # calcuate the time remaining until next thursday from today
+        time_remaining = next_thursday - utc_time
+
+        # extract components from the time_remaining timedelta obj
+        days = time_remaining.days
+        seconds = time_remaining.seconds
+        hours = seconds // 3600
+        minutes = (seconds % 3600) // 60
+        seconds = (seconds % 3600) % 60
+
+        # string format of time_remaining info
+        time_remaining_str = f"Weekly Reset in {days} days, {hours} hours, {minutes} minutes, {seconds} seconds"
+
+        # update weekly_reset label
+        weekly_reset_lbl.config(text=time_remaining_str)
+
+        # auto execute weekly_reset function after a second
+        weekly_reset_lbl.after(1000, weekly_reset)
+
 # temp using blue_button params
 utc_livetime_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 ursus_time = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 daily_reset_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
-weekly_reset = tk.Button(magenta_frame, text='Til Weekly Reset', **blue_buttons)
+weekly_reset_lbl = tk.Button(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 
 magenta_frame.grid_rowconfigure(0, weight=1)
 magenta_frame.grid_rowconfigure(1, weight=1)
@@ -176,7 +228,7 @@ magenta_frame.grid_columnconfigure(0, weight=1)
 utc_livetime_lbl.grid(row=0, column=0)
 ursus_time.grid(row=1, column=0)
 daily_reset_lbl.grid(row=2, column=0)
-weekly_reset.grid(row=3, column=0)
+weekly_reset_lbl.grid(row=3, column=0)
 
 # root configs for resizability ('can ignore for time being, may reinstate later')
 root.grid_rowconfigure(0, weight=1)
@@ -187,6 +239,7 @@ root.grid_columnconfigure(1, weight=1)
 update_utc()
 bonus_ursus_tracker()
 daily_reset()
+weekly_reset()
 
 root.mainloop()
 
