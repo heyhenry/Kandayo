@@ -46,9 +46,22 @@ def run(i : str):
     else:
         print('Error!')
 
+def add_character_popup():
+
+    def popup_close():
+        ac_win.destroy()
+
+    # ac = add character
+    ac_win = tk.Toplevel(blue_frame)
+    ac_win.title('Add Character')
+    ac_test_lbl = tk.Label(ac_win, text='Poob')
+    ac_test_lbl.pack()
+    ac_close = tk.Button(ac_win, text='Close Pop-Up', command=popup_close)
+    ac_close.pack()
+
 btn_params = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
-addchar_btn = tk.Button(blue_frame, text='Add Char', **btn_params, command=lambda:run('add'))
+addchar_btn = tk.Button(blue_frame, text='Add Char', **btn_params, command=add_character_popup)
 updchar_btn = tk.Button(blue_frame, text='Update Char', **btn_params, command=lambda:run('upd'))
 delchar_btn = tk.Button(blue_frame, text='Delete Char', **btn_params, command=lambda:run('del'))
 
