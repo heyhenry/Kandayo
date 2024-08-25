@@ -1,6 +1,7 @@
 import tkinter as tk
 from datetime import timezone, timedelta
 import datetime as dt
+import webbrowser
 
 root = tk.Tk()
 # root.resizable(False, False)
@@ -246,15 +247,25 @@ orange_frame.grid_columnconfigure(0, weight=1)
 
 # green frame
 
+def redirect_flame_calc():
+    webbrowser.open(r"https://starlinez.github.io/games/maplestory/item-flames")
+
+def redirect_bossing_guide():
+    webbrowser.open(r"https://www.youtube.com/watch?v=y74KWpY9xQ0&list=PLa2-sX6gKTH_63Zfjp_W2cmWX7t6rnOuM")
+
+def redirect_wse_calc():
+    webbrowser.open(r"https://brendonmay.github.io/wseCalculator/")
+
+
 guide_calc_lbl = tk.Label(green_frame, text='Guides & Calculators', font=('Kozuka Gothic Pro B', 12), background='green')
-flame_calc_btn = tk.Button(green_frame, text='Flame Score Calculator', font=('Kozuka Gothic Pro B', 12))
-bossing_guide_btn = tk.Button(green_frame, text='Curated List of Bossing Guides', font=('Kozuka Gothic Pro B', 12))
-damage_calc_btn = tk.Button(green_frame, text='Optimize Damage Calculator', font=('Kozuka Gothic Pro B', 12))
+flame_calc_btn = tk.Button(green_frame, text='Flame Score Calculator', font=('Kozuka Gothic Pro B', 12), command=redirect_flame_calc)
+bossing_guide_btn = tk.Button(green_frame, text='Curated List of Bossing Guides', font=('Kozuka Gothic Pro B', 12), command=redirect_bossing_guide)
+wse_calc_btn = tk.Button(green_frame, text='Optimize WSE Calculator', font=('Kozuka Gothic Pro B', 12), command=redirect_wse_calc)
 
 guide_calc_lbl.grid(row=0, columnspan=3)
 flame_calc_btn.grid(row=1, column=0)
 bossing_guide_btn.grid(row=1, column=1)
-damage_calc_btn.grid(row=1, column=2)
+wse_calc_btn.grid(row=1, column=2)
 
 green_frame.grid_rowconfigure(0, weight=1)
 green_frame.grid_rowconfigure(1, weight=1)
