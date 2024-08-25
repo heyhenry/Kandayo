@@ -46,11 +46,11 @@ def run(i : str):
     else:
         print('Error!')
 
-blue_buttons = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
+btn_params = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
-addchar_btn = tk.Button(blue_frame, text='Add Char', **blue_buttons, command=lambda:run('add'))
-updchar_btn = tk.Button(blue_frame, text='Update Char', **blue_buttons, command=lambda:run('upd'))
-delchar_btn = tk.Button(blue_frame, text='Delete Char', **blue_buttons, command=lambda:run('del'))
+addchar_btn = tk.Button(blue_frame, text='Add Char', **btn_params, command=lambda:run('add'))
+updchar_btn = tk.Button(blue_frame, text='Update Char', **btn_params, command=lambda:run('upd'))
+delchar_btn = tk.Button(blue_frame, text='Delete Char', **btn_params, command=lambda:run('del'))
 
 blue_frame.grid_rowconfigure(0, weight=1)
 blue_frame.grid_columnconfigure(0, weight=1)
@@ -236,7 +236,7 @@ magenta_frame.grid_columnconfigure(0, weight=1)
 # orange frame
 
 balance_lbl = tk.Label(orange_frame, text='Accumulated Balance: $ XXXXXXXXXX', font=('Kozuka Gothic Pro B', 12), background='orange')
-reset_bal_btn = tk.Button(orange_frame, text='Reset Balance', font=('Kozuka Gothic Pro B', 12))
+reset_bal_btn = tk.Button(orange_frame, text='Reset Balance', **btn_params)
 
 balance_lbl.grid(row=0, column=0)
 reset_bal_btn.grid(row=1, column=0)
@@ -247,20 +247,22 @@ orange_frame.grid_columnconfigure(0, weight=1)
 
 # green frame
 
+# opens website when prompted
 def redirect_flame_calc():
     webbrowser.open(r"https://starlinez.github.io/games/maplestory/item-flames")
 
+# opens website when prompted
 def redirect_bossing_guide():
     webbrowser.open(r"https://www.youtube.com/watch?v=y74KWpY9xQ0&list=PLa2-sX6gKTH_63Zfjp_W2cmWX7t6rnOuM")
 
+# opens website when prompted
 def redirect_wse_calc():
     webbrowser.open(r"https://brendonmay.github.io/wseCalculator/")
 
-
 guide_calc_lbl = tk.Label(green_frame, text='Guides & Calculators', font=('Kozuka Gothic Pro B', 12), background='green')
-flame_calc_btn = tk.Button(green_frame, text='Flame Score Calculator', font=('Kozuka Gothic Pro B', 12), command=redirect_flame_calc)
-bossing_guide_btn = tk.Button(green_frame, text='Curated List of Bossing Guides', font=('Kozuka Gothic Pro B', 12), command=redirect_bossing_guide)
-wse_calc_btn = tk.Button(green_frame, text='Optimize WSE Calculator', font=('Kozuka Gothic Pro B', 12), command=redirect_wse_calc)
+flame_calc_btn = tk.Button(green_frame, text='Flame Score Calculator', **btn_params, command=redirect_flame_calc)
+bossing_guide_btn = tk.Button(green_frame, text='Curated List of Bossing Guides', **btn_params, command=redirect_bossing_guide)
+wse_calc_btn = tk.Button(green_frame, text='Optimize WSE Calculator', **btn_params, command=redirect_wse_calc)
 
 guide_calc_lbl.grid(row=0, columnspan=3)
 flame_calc_btn.grid(row=1, column=0)
