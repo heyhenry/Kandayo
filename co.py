@@ -2,6 +2,9 @@ import tkinter as tk
 from datetime import timezone, timedelta
 import datetime as dt
 import webbrowser
+import charinfo
+
+
 
 root = tk.Tk()
 # root.resizable(False, False)
