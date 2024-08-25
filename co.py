@@ -62,7 +62,7 @@ delchar_btn.grid(row=0, column=2)
 
 # magenta frame
 
-# updates the utc time clock
+# updates the utc time clock aka server time
 def update_utc():
     # finds the utc timezone's time
     utc_time = dt.datetime.now(timezone.utc)
@@ -98,11 +98,11 @@ def bonus_ursus_tracker():
 
     # check if server time is currently within the bonus ursus time period
     if utc_time >= uto_start and utc_time <= uto_end:
-        ursus_time.config(text="It's Ursus 2x Now! (Round 1)")
-        ursus_time.after(1000, bonus_ursus_tracker)
+        ursus_time_lbl.config(text="It's Ursus 2x Now! (Round 1)")
+        ursus_time_lbl.after(1000, bonus_ursus_tracker)
     elif utc_time >= utt_start and utc_time <= utt_end:
-        ursus_time.config(text="It's Ursus 2x Now! (Round 2)")
-        ursus_time.after(1000, bonus_ursus_tracker)
+        ursus_time_lbl.config(text="It's Ursus 2x Now! (Round 2)")
+        ursus_time_lbl.after(1000, bonus_ursus_tracker)
     else:
         # determine when the next trigger is (aka ursus bonus time)
         if utc_time <= uto_start:
@@ -127,10 +127,11 @@ def bonus_ursus_tracker():
     time_remaining_str = f"{days} days, {hours} hours, {minutes} minutes, {seconds} seconds"
 
     # update the ursus_time label with relevant realtime 
-    ursus_time.config(text=f"Next Ursus is at {next_ursus.strftime('%H:%M:%S')} \n Time Remaining until next Ursus: {time_remaining_str}")
+    ursus_time_lbl.config(text=f"Next Ursus is at {next_ursus.strftime('%H:%M:%S')} \n Time Remaining until next Ursus: {time_remaining_str}")
     # prompt execution of function every second for a live reading of the ursus time tracker
-    ursus_time.after(1000, bonus_ursus_tracker)
+    ursus_time_lbl.after(1000, bonus_ursus_tracker)
 
+# update time remaining until daily reset
 def daily_reset():
 
     # the new day trigger
@@ -161,6 +162,7 @@ def daily_reset():
     # auto execute daily_reset function every second
     daily_reset_lbl.after(1000, daily_reset)
 
+# update time remaining until weekly reset
 def weekly_reset():
 
     # get current utc datetime and other details
@@ -215,7 +217,7 @@ def weekly_reset():
 
 # temp using blue_button params
 utc_livetime_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
-ursus_time = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
+ursus_time_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 daily_reset_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 weekly_reset_lbl = tk.Button(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 
@@ -226,7 +228,7 @@ magenta_frame.grid_rowconfigure(3, weight=1)
 magenta_frame.grid_columnconfigure(0, weight=1)
 
 utc_livetime_lbl.grid(row=0, column=0)
-ursus_time.grid(row=1, column=0)
+ursus_time_lbl.grid(row=1, column=0)
 daily_reset_lbl.grid(row=2, column=0)
 weekly_reset_lbl.grid(row=3, column=0)
 
