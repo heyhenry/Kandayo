@@ -3,7 +3,7 @@ from datetime import timezone, timedelta
 import datetime as dt
 
 root = tk.Tk()
-root.resizable(False, False)
+# root.resizable(False, False)
 
 # frames setup
 yellow_frame = tk.Frame(root, width=600, height=80, bg='yellow', highlightbackground='black', highlightthickness=2, borderwidth=1, padx=5, pady=5)
@@ -221,16 +221,28 @@ ursus_time_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 daily_reset_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 weekly_reset_lbl = tk.Button(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 
+utc_livetime_lbl.grid(row=0, column=0)
+ursus_time_lbl.grid(row=1, column=0)
+daily_reset_lbl.grid(row=2, column=0)
+weekly_reset_lbl.grid(row=3, column=0)
+
 magenta_frame.grid_rowconfigure(0, weight=1)
 magenta_frame.grid_rowconfigure(1, weight=1)
 magenta_frame.grid_rowconfigure(2, weight=1)
 magenta_frame.grid_rowconfigure(3, weight=1)
 magenta_frame.grid_columnconfigure(0, weight=1)
 
-utc_livetime_lbl.grid(row=0, column=0)
-ursus_time_lbl.grid(row=1, column=0)
-daily_reset_lbl.grid(row=2, column=0)
-weekly_reset_lbl.grid(row=3, column=0)
+# orange frame
+
+balance_lbl = tk.Label(orange_frame, text='Accumulated Balance: $ XXXXXXXXXX', font=('Kozuka Gothic Pro B', 12))
+reset_bal_btn = tk.Button(orange_frame, text='Reset Balance', font=('Kozuka Gothic Pro B', 12))
+
+balance_lbl.grid(row=0, column=0)
+reset_bal_btn.grid(row=1, column=0)
+
+orange_frame.grid_rowconfigure(0, weight=1)
+orange_frame.grid_rowconfigure(1, weight=1)
+orange_frame.grid_columnconfigure(0, weight=1)
 
 # root configs for resizability ('can ignore for time being, may reinstate later')
 root.grid_rowconfigure(0, weight=1)
