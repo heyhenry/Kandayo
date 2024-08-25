@@ -131,10 +131,40 @@ def bonus_ursus_tracker():
     # prompt execution of function every second for a live reading of the ursus time tracker
     ursus_time.after(1000, bonus_ursus_tracker)
 
+def daily_reset():
+
+    # the new day trigger
+    trigger_str = '00:00:00'
+
+    # current time 
+    utc_time = dt.datetime.now(timezone.utc)
+
+    # setup datetime obj
+    today = utc_time.date()
+    trigger = dt.datetime.combine(today, dt.datetime.strptime(trigger_str, '%H:%M:%S').time(), tzinfo=timezone.utc)
+
+    # calculate time remaining until new day
+    time_remaining = (trigger + timedelta(days=1)) - utc_time
+    
+    # extract components of the time_remaining timedelta obj
+    seconds = time_remaining.seconds
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    seconds = (seconds % 3600) % 60
+
+    # create string format of time remaining data
+    time_remaining_str = f"{hours} hours, {minutes} minutes, {seconds} seconds"
+
+    # update the label responsible for displaing the daily reset timer
+    daily_reset_lbl.config(text=time_remaining_str)
+
+    # auto execute daily_reset function every second
+    daily_reset_lbl.after(1000, daily_reset)
+
 # temp using blue_button params
 utc_livetime_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 ursus_time = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
-daily_reset = tk.Button(magenta_frame, text='Til Daily Reset', **blue_buttons)
+daily_reset_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
 weekly_reset = tk.Button(magenta_frame, text='Til Weekly Reset', **blue_buttons)
 
 magenta_frame.grid_rowconfigure(0, weight=1)
@@ -145,7 +175,7 @@ magenta_frame.grid_columnconfigure(0, weight=1)
 
 utc_livetime_lbl.grid(row=0, column=0)
 ursus_time.grid(row=1, column=0)
-daily_reset.grid(row=2, column=0)
+daily_reset_lbl.grid(row=2, column=0)
 weekly_reset.grid(row=3, column=0)
 
 # root configs for resizability ('can ignore for time being, may reinstate later')
