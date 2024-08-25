@@ -20,4 +20,5 @@ The following are the resources I have read, referred and learnt from to better 
 - Time maths and formulas: https://www.sololearn.com/en/Discuss/187185/how-to-convert-seconds-to-minutes-hours-and-days
 - Hyperlinking buttons in Tkinter: https://stackoverflow.com/questions/52882399/how-to-add-a-hyperlink-to-a-tkinter-button
 - Hyperlinking buttons in Tkinter pt2: https://code.activestate.com/recipes/580774-tkinter-link-or-hyperlink-button/
+- Creating popups in Tkinter: https://www.tutorialspoint.com/how-do-i-create-a-popup-window-in-tkinter
 
