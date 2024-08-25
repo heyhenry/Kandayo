@@ -244,6 +244,24 @@ orange_frame.grid_rowconfigure(0, weight=1)
 orange_frame.grid_rowconfigure(1, weight=1)
 orange_frame.grid_columnconfigure(0, weight=1)
 
+# green frame
+
+guide_calc_lbl = tk.Label(green_frame, text='Guides & Calculators', font=('Kozuka Gothic Pro B', 12))
+flame_calc_btn = tk.Button(green_frame, text='Flame Score Calculator', font=('Kozuka Gothic Pro B', 12))
+bossing_guide_btn = tk.Button(green_frame, text='Curated List of Bossing Guides', font=('Kozuka Gothic Pro B', 12))
+damage_calc_btn = tk.Button(green_frame, text='Optimize Damage Calculator', font=('Kozuka Gothic Pro B', 12))
+
+guide_calc_lbl.grid(row=0, columnspan=3)
+flame_calc_btn.grid(row=1, column=0)
+bossing_guide_btn.grid(row=1, column=1)
+damage_calc_btn.grid(row=1, column=2)
+
+green_frame.grid_rowconfigure(0, weight=1)
+green_frame.grid_rowconfigure(1, weight=1)
+green_frame.grid_columnconfigure(0, weight=1)
+green_frame.grid_columnconfigure(1, weight=1)
+green_frame.grid_columnconfigure(2, weight=1)
+
 # root configs for resizability ('can ignore for time being, may reinstate later')
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
