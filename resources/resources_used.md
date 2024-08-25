@@ -18,3 +18,6 @@ The following are the resources I have read, referred and learnt from to better 
 - Understanding weekday attribute from DateTime: https://www.geeksforgeeks.org/weekday-function-of-datetime-date-class-in-python/
 - Understanding Time Delta Intervals + Arithmetic: https://www.datacamp.com/tutorial/timedelta-python-time-intervals
 - Time maths and formulas: https://www.sololearn.com/en/Discuss/187185/how-to-convert-seconds-to-minutes-hours-and-days
+- Hyperlinking buttons in Tkinter: https://stackoverflow.com/questions/52882399/how-to-add-a-hyperlink-to-a-tkinter-button
+- Hyperlinking buttons in Tkinter pt2: https://code.activestate.com/recipes/580774-tkinter-link-or-hyperlink-button/
+
