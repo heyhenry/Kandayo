@@ -216,10 +216,10 @@ def weekly_reset():
         weekly_reset_lbl.after(1000, weekly_reset)
 
 # temp using blue_button params
-utc_livetime_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
-ursus_time_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
-daily_reset_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12))
-weekly_reset_lbl = tk.Button(magenta_frame, font=('Kozuka Gothic Pro B', 12))
+utc_livetime_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12), background='magenta')
+ursus_time_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12), background='magenta')
+daily_reset_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12), background='magenta')
+weekly_reset_lbl = tk.Label(magenta_frame, font=('Kozuka Gothic Pro B', 12), background='magenta')
 
 utc_livetime_lbl.grid(row=0, column=0)
 ursus_time_lbl.grid(row=1, column=0)
@@ -234,7 +234,7 @@ magenta_frame.grid_columnconfigure(0, weight=1)
 
 # orange frame
 
-balance_lbl = tk.Label(orange_frame, text='Accumulated Balance: $ XXXXXXXXXX', font=('Kozuka Gothic Pro B', 12))
+balance_lbl = tk.Label(orange_frame, text='Accumulated Balance: $ XXXXXXXXXX', font=('Kozuka Gothic Pro B', 12), background='orange')
 reset_bal_btn = tk.Button(orange_frame, text='Reset Balance', font=('Kozuka Gothic Pro B', 12))
 
 balance_lbl.grid(row=0, column=0)
@@ -246,7 +246,7 @@ orange_frame.grid_columnconfigure(0, weight=1)
 
 # green frame
 
-guide_calc_lbl = tk.Label(green_frame, text='Guides & Calculators', font=('Kozuka Gothic Pro B', 12))
+guide_calc_lbl = tk.Label(green_frame, text='Guides & Calculators', font=('Kozuka Gothic Pro B', 12), background='green')
 flame_calc_btn = tk.Button(green_frame, text='Flame Score Calculator', font=('Kozuka Gothic Pro B', 12))
 bossing_guide_btn = tk.Button(green_frame, text='Curated List of Bossing Guides', font=('Kozuka Gothic Pro B', 12))
 damage_calc_btn = tk.Button(green_frame, text='Optimize Damage Calculator', font=('Kozuka Gothic Pro B', 12))
