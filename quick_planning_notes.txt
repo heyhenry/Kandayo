@@ -1,0 +1,9 @@
+How to implement characters?
+Use CharInfo class for character obj to store each character info
+
+How to store data?
+Currently go with local storage, so Json file storage
+
+How to access and manipulate characters?
+Use a dictionary, where the key will be the character's name as that is unique.
+so.. characters = {Key (character's name) : Value (CharInfo Obj), etc, etc}

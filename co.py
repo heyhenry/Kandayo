@@ -4,7 +4,8 @@ import datetime as dt
 import webbrowser
 import charinfo
 
-
+# list of charinfo (characters) objs
+characters = {}
 
 root = tk.Tk()
 # root.resizable(False, False)
