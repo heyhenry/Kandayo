@@ -67,18 +67,25 @@ def add_character_popup():
     ac_job = tk.StringVar()
     ac_level = tk.StringVar()
 
+    aesthetic_params = {'font': ('Kozuka Gothic Pro B', 12)}
+
+    def close_ac():
+        ac_win.destroy()
+
     # ac short for add_character
     ac_win = tk.Toplevel(blue_frame)
     ac_win.title('Add New Character')
+    ac_win.geometry('300x200+650+150')
     
-    ac_title_lbl = tk.Label(ac_win, text='Add New Character')
-    ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:')
+    ac_title_lbl = tk.Label(ac_win, text='Add New Character', **aesthetic_params)
+    ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:', **aesthetic_params)
     ac_ign_entry = tk.Entry(ac_win, textvariable=ac_ign)
-    ac_job_lbl = tk.Label(ac_win, text='Job (Class):')
+    ac_job_lbl = tk.Label(ac_win, text='Job (Class):', **aesthetic_params)
     ac_job_entry = tk.Entry(ac_win, textvariable=ac_job)
-    ac_level_lbl = tk.Label(ac_win, text='Level:')
+    ac_level_lbl = tk.Label(ac_win, text='Level:', **aesthetic_params)
     ac_level_entry = tk.Entry(ac_win, textvariable=ac_level)
-    ac_submit_btn = tk.Button(ac_win, text='Add to Roster', command="")
+    ac_submit_btn = tk.Button(ac_win, text='Add to Roster', command="", **aesthetic_params)
+    ac_cancel_btn = tk.Button(ac_win, text='Cancel', command=close_ac, **aesthetic_params)
 
     ac_title_lbl.grid(row=0, columnspan=2)
     ac_ign_lbl.grid(row=1, column=0)
@@ -87,7 +94,17 @@ def add_character_popup():
     ac_job_entry.grid(row=2, column=1)
     ac_level_lbl.grid(row=3, column=0)
     ac_level_entry.grid(row=3, column=1)
-    ac_submit_btn.grid(row=4, columnspan=2)
+    ac_submit_btn.grid(row=4, column=0)
+    ac_cancel_btn.grid(row=4, column=1)
+
+    ac_win.rowconfigure(0, weight=1)
+    ac_win.rowconfigure(1, weight=1)
+    ac_win.rowconfigure(2, weight=1)
+    ac_win.rowconfigure(3, weight=1)
+    ac_win.rowconfigure(4, weight=1)
+    ac_win.columnconfigure(0, weight=1)
+    ac_win.columnconfigure(1, weight=1)
+
 
 btn_params = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
