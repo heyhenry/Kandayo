@@ -52,16 +52,42 @@ def run(i : str):
 
 def add_character_popup():
 
-    def popup_close():
-        ac_win.destroy()
+    # def popup_close():
+    #     ac_win.destroy()
 
-    # ac = add character
+    # # ac = add character
+    # ac_win = tk.Toplevel(blue_frame)
+    # ac_win.title('Add Character')
+    # ac_test_lbl = tk.Label(ac_win, text='Poob')
+    # ac_test_lbl.pack()
+    # ac_close = tk.Button(ac_win, text='Close Pop-Up', command=popup_close)
+    # ac_close.pack()
+
+    ac_ign = tk.StringVar()
+    ac_job = tk.StringVar()
+    ac_level = tk.StringVar()
+
+    # ac short for add_character
     ac_win = tk.Toplevel(blue_frame)
-    ac_win.title('Add Character')
-    ac_test_lbl = tk.Label(ac_win, text='Poob')
-    ac_test_lbl.pack()
-    ac_close = tk.Button(ac_win, text='Close Pop-Up', command=popup_close)
-    ac_close.pack()
+    ac_win.title('Add New Character')
+    
+    ac_title_lbl = tk.Label(ac_win, text='Add New Character')
+    ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:')
+    ac_ign_entry = tk.Entry(ac_win, textvariable=ac_ign)
+    ac_job_lbl = tk.Label(ac_win, text='Job (Class):')
+    ac_job_entry = tk.Entry(ac_win, textvariable=ac_job)
+    ac_level_lbl = tk.Label(ac_win, text='Level:')
+    ac_level_entry = tk.Entry(ac_win, textvariable=ac_level)
+    ac_submit_btn = tk.Button(ac_win, text='Add to Roster', command="")
+
+    ac_title_lbl.grid(row=0, columnspan=2)
+    ac_ign_lbl.grid(row=1, column=0)
+    ac_ign_entry.grid(row=1, column=1)
+    ac_job_lbl.grid(row=2, column=0)
+    ac_job_entry.grid(row=2, column=1)
+    ac_level_lbl.grid(row=3, column=0)
+    ac_level_entry.grid(row=3, column=1)
+    ac_submit_btn.grid(row=4, columnspan=2)
 
 btn_params = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
