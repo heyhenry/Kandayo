@@ -3,9 +3,12 @@ from datetime import timezone, timedelta
 import datetime as dt
 import webbrowser
 import charinfo
+import json
 
 # list of charinfo (characters) objs
 characters = {}
+
+storage_filename = 'chars_save.json'
 
 root = tk.Tk()
 # root.resizable(False, False)
