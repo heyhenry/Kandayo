@@ -52,17 +52,6 @@ def run(i : str):
 
 def add_character_popup():
 
-    # def popup_close():
-    #     ac_win.destroy()
-
-    # # ac = add character
-    # ac_win = tk.Toplevel(blue_frame)
-    # ac_win.title('Add Character')
-    # ac_test_lbl = tk.Label(ac_win, text='Poob')
-    # ac_test_lbl.pack()
-    # ac_close = tk.Button(ac_win, text='Close Pop-Up', command=popup_close)
-    # ac_close.pack()
-
     ac_ign = tk.StringVar()
     ac_job = tk.StringVar()
     ac_level = tk.StringVar()
