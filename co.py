@@ -2,13 +2,20 @@ import tkinter as tk
 from datetime import timezone, timedelta
 import datetime as dt
 import webbrowser
-import charinfo
+from charinfo import CharInfo
 import json
 
 # list of charinfo (characters) objs
 characters = {}
 
 storage_filename = 'chars_save.json'
+
+def create_char(ign, job, level):
+
+    new_char = CharInfo(ign, job, level, False)
+    characters[new_char.ign] = new_char
+    # print(characters)
+    new_char.charinfo_str()
 
 root = tk.Tk()
 # root.resizable(False, False)
@@ -76,7 +83,7 @@ def add_character_popup():
     ac_job_entry = tk.Entry(ac_win, textvariable=ac_job)
     ac_level_lbl = tk.Label(ac_win, text='Level:', **aesthetic_params)
     ac_level_entry = tk.Entry(ac_win, textvariable=ac_level)
-    ac_submit_btn = tk.Button(ac_win, text='Add to Roster', command="", **aesthetic_params)
+    ac_submit_btn = tk.Button(ac_win, text='Add to Roster', command=lambda:create_char(ac_ign.get(), ac_job.get(), ac_level.get()), **aesthetic_params)
     ac_cancel_btn = tk.Button(ac_win, text='Cancel', command=close_ac, **aesthetic_params)
 
     ac_title_lbl.grid(row=0, columnspan=2)

@@ -4,3 +4,6 @@ class CharInfo:
         self.job = job
         self.level = level
         self.capped = capped
+
+    def charinfo_str(self):
+        print(f"ign: {self.ign}, job: {self.job}, level: {self.level}, capped: {self.capped}")
