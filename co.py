@@ -1,9 +1,24 @@
+# Todo next session: 
+# - Double check dictionary retains valid information and format
+# - Learn how to store the characters dictionary nicely into json storage file ('chars_save.json')
+# - Learn how to redistribute characters dictionary content as string for display etc (if its an issue)
+# - create function that updates the characters dictionary as well as the storage file simultaneously 
+# - create function or add onto an existing function that reflects and implements these changes in the listbox in real time as well
+# - create delete character entry function
+# - update character details function 
+# - figure a way to incorporate the boss checklist for each character
+# - - maybe add all the bosses as vars in the charInfo and update add_char popup to reflect ability to select bosses
+# - - maybe just have a new popup display the bosses, with relevant stuff (bosses killed, party size, mesos gained) that gets saved as a separate obj? (cont.)
+# - - (cont. ^) maybe second boss obj can be added in a list form for characters i.e. {char_name : [charinfo obj, bossing obj]} ? main thing - find a way to retain player's character progression (cont.)
+# - - (cont. ^) maybe forget about the mesos accumulated (party size identification/calculations) for the time being and have it as a simple boss checklist
+
 import tkinter as tk
 from datetime import timezone, timedelta
 import datetime as dt
 import webbrowser
 from charinfo import CharInfo
 import json
+import os # note to self: needed to find json file from prev experience
 
 # list of charinfo (characters) objs
 characters = {}
