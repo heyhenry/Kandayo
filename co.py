@@ -25,15 +25,27 @@ characters = {}
 
 storage_filename = 'chars_save.json'
 
+# custom json serializer
+def custom_serializer(obj):
+    if isinstance(obj, CharInfo):
+        return {
+            'ign': obj.ign,
+            'job': obj.job,
+            'level': obj.level,
+            'capped': obj.capped
+        }
+    return obj
+
 def create_char(ign, job, level):
 
     new_char = CharInfo(ign, job, level, False)
     characters[new_char.ign] = new_char
     # print(characters)
-    new_char.charinfo_str()
+    # new_char.charinfo_str()
+
 
 root = tk.Tk()
-# root.resizable(False, False)
+root.resizable(False, False)
 
 # frames setup
 yellow_frame = tk.Frame(root, width=600, height=80, bg='yellow', highlightbackground='black', highlightthickness=2, borderwidth=1, padx=5, pady=5)
@@ -75,6 +87,7 @@ def run(i : str):
     else:
         print('Error!')
 
+# add a new character pop-up window
 def add_character_popup():
 
     ac_ign = tk.StringVar()
@@ -83,6 +96,7 @@ def add_character_popup():
 
     aesthetic_params = {'font': ('Kozuka Gothic Pro B', 12)}
 
+    # close pop-up window
     def close_ac():
         ac_win.destroy()
 
@@ -118,7 +132,6 @@ def add_character_popup():
     ac_win.rowconfigure(4, weight=1)
     ac_win.columnconfigure(0, weight=1)
     ac_win.columnconfigure(1, weight=1)
-
 
 btn_params = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
