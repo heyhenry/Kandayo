@@ -21,6 +21,7 @@ The following are the resources I have read, referred and learnt from to better 
 - Hyperlinking buttons in Tkinter: https://stackoverflow.com/questions/52882399/how-to-add-a-hyperlink-to-a-tkinter-button
 - Hyperlinking buttons in Tkinter pt2: https://code.activestate.com/recipes/580774-tkinter-link-or-hyperlink-button/
 - Creating popups in Tkinter: https://www.tutorialspoint.com/how-do-i-create-a-popup-window-in-tkinter
+- Differences in json's dump() and dumps() functions: https://reqbin.com/code/python/c6fxmvxt/python-dump-vs-dumps-example
 - Creating a custom json serialization: https://howtodoinjava.com/python-json/custom-class-serialization/
 - Writing dictionary data to json file: https://www.geeksforgeeks.org/how-to-convert-python-dictionary-to-json/
 - Writing json file data back into dictionary: https://www.geeksforgeeks.org/convert-json-to-dictionary-in-python/
