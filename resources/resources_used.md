@@ -26,3 +26,6 @@ The following are the resources I have read, referred and learnt from to better 
 - Writing dictionary data to json file: https://www.geeksforgeeks.org/how-to-convert-python-dictionary-to-json/
 - Writing json file data back into dictionary: https://www.geeksforgeeks.org/convert-json-to-dictionary-in-python/
 - Creating error box: https://www.geeksforgeeks.org/validating-entry-widget-in-python-tkinter/
+- Selecting item from Tkinter listbox: https://www.geeksforgeeks.org/how-to-get-selected-value-from-listbox-in-tkinter/
+- Deleting a dictionary key: https://www.python-engineer.com/posts/delete-key-dictionary/
+- Removing item from json file and updatng json file: https://www.geeksforgeeks.org/how-to-remove-key-value-pair-from-a-json-file-in-python/

@@ -89,7 +89,7 @@ def delete_char():
     for i in chars_lb.curselection():
         selected_ign = chars_lb.get(i)
 
-    # delete the selected character key from the json save file
+    # load and delete the selected character key from the json save file
     with open(storage_filename, 'r') as file:
         json_data = json.load(file)
         del json_data[selected_ign]
