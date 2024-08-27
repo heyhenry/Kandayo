@@ -1,10 +1,10 @@
 # Todo next session: 
-# - Double check dictionary retains valid information and format
-# - Learn how to store the characters dictionary nicely into json storage file ('chars_save.json')
+# - Double check dictionary retains valid information and format x
+# - Learn how to store the characters dictionary nicely into json storage file ('chars_save.json') x
 # - Learn how to redistribute characters dictionary content as string for display etc (if its an issue)
-# - create function that updates the characters dictionary as well as the storage file simultaneously 
-# - create function or add onto an existing function that reflects and implements these changes in the listbox in real time as well
-# - create delete character entry function
+# - create function that updates the characters dictionary as well as the storage file simultaneously x
+# - create function or add onto an existing function that reflects and implements these changes in the listbox in real time as well x
+# - create delete character entry function x
 # - update character details function 
 # - figure a way to incorporate the boss checklist for each character
 # - - maybe add all the bosses as vars in the charInfo and update add_char popup to reflect ability to select bosses
@@ -24,6 +24,7 @@ import os # note to self: needed to find json file from prev experience
 # list of charinfo (characters) objs
 characters = {}
 
+# json save file
 storage_filename = 'chars_save.json'
 
 # custom json serializer
@@ -222,7 +223,6 @@ def add_character_popup():
     ac_win.rowconfigure(4, weight=1)
     ac_win.columnconfigure(0, weight=1)
     ac_win.columnconfigure(1, weight=1)
-
 
 btn_params = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
