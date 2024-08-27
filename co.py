@@ -76,11 +76,11 @@ def load_characters():
             for char_ign, char_info in characters_data.items():
                 characters[char_ign] = CharInfo(char_ign, char_info['job'], char_info['level'], char_info['capped'])
 
-# to check if characters dictionary is storing data correctly
-# def check_characters():
-#     load_characters()
-#     for k, v in characters.items():
-#         v.charinfo_str()
+# check if characters dictionary is storing data correctly
+def check_characters():
+    load_characters()
+    for k, v in characters.items():
+        v.charinfo_str()
 
 # check_characters()
 
