@@ -1,11 +1,4 @@
 # Todo next session: 
-# - Double check dictionary retains valid information and format x
-# - Learn how to store the characters dictionary nicely into json storage file ('chars_save.json') x
-# - Learn how to redistribute characters dictionary content as string for display etc (if its an issue)
-# - create function that updates the characters dictionary as well as the storage file simultaneously x
-# - create function or add onto an existing function that reflects and implements these changes in the listbox in real time as well x
-# - create delete character entry function x
-# - update character details function 
 # - figure a way to incorporate the boss checklist for each character
 # - - maybe add all the bosses as vars in the charInfo and update add_char popup to reflect ability to select bosses
 # - - maybe just have a new popup display the bosses, with relevant stuff (bosses killed, party size, mesos gained) that gets saved as a separate obj? (cont.)
@@ -163,17 +156,6 @@ chars_lb = tk.Listbox(red_frame, height=30)
 chars_lb.place(relx=0.5, rely=0.5, anchor='center')
 
 # blue frame
-
-# to check if buttons are working correctly
-def run(i : str):
-    if i == 'add':
-        print('add works')
-    elif i == 'upd':
-        print('update works')
-    elif i == 'del':
-        print('delete works')
-    else:
-        print('Error!')
 
 # add a new character pop-up window
 def add_character_popup():
@@ -566,7 +548,3 @@ load_characters()
 populate_entries()
 
 root.mainloop()
-
-# fast note for next session pickup
-# continue to work on the update_character function (as follows)
-# - ensure that if a ign is updated, that the ign is not already in the dictionary, aside from the currently accessed key
