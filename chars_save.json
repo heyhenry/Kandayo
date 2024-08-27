@@ -16,5 +16,17 @@
         "job": "Warrior",
         "level": "29",
         "capped": false
+    },
+    "Pookie": {
+        "ign": "Pookie",
+        "job": "Archer",
+        "level": "192",
+        "capped": false
+    },
+    "Uluru": {
+        "ign": "Uluru",
+        "job": "Mage",
+        "level": "29",
+        "capped": false
     }
 }
