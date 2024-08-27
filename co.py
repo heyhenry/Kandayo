@@ -248,6 +248,39 @@ def update_character_popup():
         uc_win.destroy()
         messagebox.showerror('Character Selection Error', 
                              'A character has not been selected from the list.')
+        
+    # check if the updated ign is already registered for another character
+    def validate_updated_entry():
+
+        # temp dictionary to manipulate the characters dictionary, purely for validation checking
+        temp = {}
+
+        # copying data from characters dictionary to temp
+        for key, val in characters.items():
+            temp[key] = val
+
+        # deleting the selected character obj in temp
+        del temp[selected_ign]
+
+        # checking if the newly proposed ign update is already registered for another character in the established list
+        if uc_ign.get() in temp.keys():
+            uc_win.destroy()
+            # error message prompt if that is the case
+            messagebox.showerror('IGN Error',
+                                 'The new IGN already exists for another character in the registered list.')
+        else:
+
+            # ** Maybe find put this in its own function called 'update_character()' ? **
+            # updates the existing character entry 
+
+            # deletes the old character entry in characters dictionary
+            del characters[selected_ign]
+            
+            # create a new character entry with updated details into the characters dictionary
+            create_char(uc_ign.get(), uc_job.get(), uc_level.get())
+
+            # closes the popup window
+            uc_win.destroy()
 
     # set the input fields with existing character data
     uc_ign.set(characters[selected_ign].ign)
@@ -261,7 +294,7 @@ def update_character_popup():
     uc_job_entry = tk.Entry(uc_win, textvariable=uc_job)
     uc_level_lbl = tk.Label(uc_win, text='Level:', **aesthetic_params)
     uc_level_entry = tk.Entry(uc_win, textvariable=uc_level)
-    uc_submit_btn = tk.Button(uc_win, text='Update Roster', **aesthetic_params)
+    uc_submit_btn = tk.Button(uc_win, text='Update Roster', **aesthetic_params, command=validate_updated_entry)
     uc_cancel_btn = tk.Button(uc_win, text='Cancel', **aesthetic_params, command=uc_win.destroy)
 
     uc_title_lbl.grid(row=0, columnspan=2)
