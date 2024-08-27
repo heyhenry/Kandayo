@@ -36,6 +36,7 @@ def custom_serializer(obj):
         }
     return obj
 
+# create a new character entry
 def create_char(ign, job, level):
 
     new_char = CharInfo(ign, job, level, False)
@@ -45,10 +46,30 @@ def create_char(ign, job, level):
     
     with open(storage_filename, 'w') as outfile:
         outfile.write(json_data)
-    
-    # print(characters)
-    # new_char.charinfo_str()
 
+# read and add existing character entries found in the json save file to the characters dictionary
+def load_characters():
+
+    # check if file exists
+    if os.path.exists(storage_filename):
+
+        # read the file
+        with open(storage_filename, 'r') as file:
+
+            # load the json file data
+            characters_data = json.load(file)
+
+            # update the characters dictionary with existing character entries in the selected json save file
+            for char_ign, char_info in characters_data.items():
+                characters[char_ign] = CharInfo(char_ign, char_info['job'], char_info['level'], char_info['capped'])
+
+#
+def check_characters():
+    load_characters()
+    for k, v in characters.items():
+        v.charinfo_str()
+
+check_characters()
 
 root = tk.Tk()
 root.resizable(False, False)

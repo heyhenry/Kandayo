@@ -1,8 +1,20 @@
 {
-    "Henry": {
-        "ign": "Henry",
-        "job": "Mage",
-        "level": "19",
+    "Joe": {
+        "ign": "Joe",
+        "job": "Warrior",
+        "level": "29",
+        "capped": false
+    },
+    "Roe": {
+        "ign": "Roe",
+        "job": "Warrior",
+        "level": "29",
+        "capped": false
+    },
+    "Poe": {
+        "ign": "Poe",
+        "job": "Warrior",
+        "level": "29",
         "capped": false
     }
 }
