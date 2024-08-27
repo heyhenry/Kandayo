@@ -224,10 +224,68 @@ def add_character_popup():
     ac_win.columnconfigure(0, weight=1)
     ac_win.columnconfigure(1, weight=1)
 
+def update_character_popup():
+
+    uc_ign = tk.StringVar()
+    uc_job = tk.StringVar()
+    uc_level = tk.StringVar()
+
+    aesthetic_params = {'font': ('Kozuka Gothic Pro B', 12)}
+
+    selected_ign = ''
+
+    # selected a character from listbox and store in selected_ign
+    for i in chars_lb.curselection():
+        selected_ign = chars_lb.get(i)
+
+    uc_win = tk.Toplevel(blue_frame)
+    uc_win.title('Update Character')
+    uc_win.geometry('300x200+650+150')
+
+    # validation check to see if a character has been selected from the listbox
+    # if none selected, show error prompt 
+    if selected_ign == '':
+        uc_win.destroy()
+        messagebox.showerror('Character Selection Error', 
+                             'A character has not been selected from the list.')
+
+    # set the input fields with existing character data
+    uc_ign.set(characters[selected_ign].ign)
+    uc_job.set(characters[selected_ign].job)
+    uc_level.set(characters[selected_ign].level)
+
+    uc_title_lbl = tk.Label(uc_win, text='Update Character', **aesthetic_params)
+    uc_ign_lbl = tk.Label(uc_win, text='In-Game Name:', **aesthetic_params)
+    uc_ign_entry = tk.Entry(uc_win, textvariable=uc_ign)
+    uc_job_lbl = tk.Label(uc_win, text='Job (Class):', **aesthetic_params)
+    uc_job_entry = tk.Entry(uc_win, textvariable=uc_job)
+    uc_level_lbl = tk.Label(uc_win, text='Level:', **aesthetic_params)
+    uc_level_entry = tk.Entry(uc_win, textvariable=uc_level)
+    uc_submit_btn = tk.Button(uc_win, text='Update Roster', **aesthetic_params)
+    uc_cancel_btn = tk.Button(uc_win, text='Cancel', **aesthetic_params, command=uc_win.destroy)
+
+    uc_title_lbl.grid(row=0, columnspan=2)
+    uc_ign_lbl.grid(row=1, column=0)
+    uc_ign_entry.grid(row=1, column=1)
+    uc_job_lbl.grid(row=2, column=0)
+    uc_job_entry.grid(row=2, column=1)
+    uc_level_lbl.grid(row=3, column=0)
+    uc_level_entry.grid(row=3, column=1)
+    uc_submit_btn.grid(row=4, column=0)
+    uc_cancel_btn.grid(row=4, column=1)
+
+    uc_win.grid_rowconfigure(0, weight=1)
+    uc_win.grid_rowconfigure(1, weight=1)
+    uc_win.grid_rowconfigure(2, weight=1)
+    uc_win.grid_rowconfigure(3, weight=1)
+    uc_win.grid_rowconfigure(4, weight=1)
+    uc_win.grid_columnconfigure(0, weight=1)
+    uc_win.grid_columnconfigure(1, weight=1)
+
 btn_params = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
 addchar_btn = tk.Button(blue_frame, text='Add Char', **btn_params, command=add_character_popup)
-updchar_btn = tk.Button(blue_frame, text='Update Char', **btn_params, command=lambda:run('upd'))
+updchar_btn = tk.Button(blue_frame, text='Update Char', **btn_params, command=update_character_popup)
 delchar_btn = tk.Button(blue_frame, text='Delete Char', **btn_params, command=delete_char)
 
 blue_frame.grid_rowconfigure(0, weight=1)
