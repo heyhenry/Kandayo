@@ -34,5 +34,23 @@
         "job": "Tank",
         "level": "182",
         "capped": false
+    },
+    "Toe": {
+        "ign": "Toe",
+        "job": "Archer",
+        "level": "18",
+        "capped": false
+    },
+    "Goe": {
+        "ign": "Goe",
+        "job": "Pilot",
+        "level": "18",
+        "capped": false
+    },
+    "Broe": {
+        "ign": "Broe",
+        "job": "Berserker",
+        "level": "199",
+        "capped": false
     }
 }

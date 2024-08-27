@@ -60,6 +60,9 @@ def create_char(ign, job, level):
         with open(storage_filename, 'w') as outfile:
             outfile.write(json_data)
 
+        chars_lb.delete(0, 'end')
+        populate_entries()
+
 # read and add existing character entries found in the json save file to the characters dictionary
 def load_characters():
 
@@ -111,6 +114,14 @@ co_lbl = tk.Label(yellow_frame, text='Characters Overview', font=('Kozuka Gothic
 co_lbl.place(relx=0.5, rely=0.5, anchor='center')
 
 # red frame
+
+# fill listbox 'chars_lb' with all characters found in characters dictionary
+def populate_entries():
+
+    # loop through the characters dictionary and insert their character ign
+    for char_ign in characters:
+        chars_lb.insert('end', char_ign)
+
 chars_lb = tk.Listbox(red_frame, height=30)
 chars_lb.place(relx=0.5, rely=0.5, anchor='center')
 
@@ -180,6 +191,7 @@ def add_character_popup():
     ac_win.rowconfigure(4, weight=1)
     ac_win.columnconfigure(0, weight=1)
     ac_win.columnconfigure(1, weight=1)
+
 
 btn_params = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
@@ -423,6 +435,9 @@ weekly_reset()
 
 # loads the existing character entries into the characters dictionary
 load_characters()
+
+# load up listbox data
+populate_entries()
 
 root.mainloop()
 
