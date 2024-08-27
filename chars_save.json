@@ -1,56 +1,14 @@
 {
-    "Joe": {
-        "ign": "Joe",
-        "job": "Mage",
-        "level": "299",
+    "newman01": {
+        "ign": "newman01",
+        "job": "Warrior",
+        "level": "19",
         "capped": false
     },
-    "Roe": {
-        "ign": "Roe",
+    "newman03": {
+        "ign": "newman03",
         "job": "Warrior",
         "level": "29",
-        "capped": false
-    },
-    "Poe": {
-        "ign": "Poe",
-        "job": "Warrior",
-        "level": "29",
-        "capped": false
-    },
-    "Pookie": {
-        "ign": "Pookie",
-        "job": "Archer",
-        "level": "192",
-        "capped": false
-    },
-    "Uluru": {
-        "ign": "Uluru",
-        "job": "Mage",
-        "level": "29",
-        "capped": false
-    },
-    "Poopie": {
-        "ign": "Poopie",
-        "job": "Tank",
-        "level": "182",
-        "capped": false
-    },
-    "Toe": {
-        "ign": "Toe",
-        "job": "Archer",
-        "level": "18",
-        "capped": false
-    },
-    "Goe": {
-        "ign": "Goe",
-        "job": "Pilot",
-        "level": "18",
-        "capped": false
-    },
-    "Broe": {
-        "ign": "Broe",
-        "job": "Berserker",
-        "level": "199",
         "capped": false
     }
 }

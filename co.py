@@ -79,6 +79,37 @@ def load_characters():
             for char_ign, char_info in characters_data.items():
                 characters[char_ign] = CharInfo(char_ign, char_info['job'], char_info['level'], char_info['capped'])
 
+# delete an existing character entry
+def delete_char():
+
+    # store selected character key
+    selected_ign = ''
+
+    # retrieve the selected character ign which is also the key
+    for i in chars_lb.curselection():
+        selected_ign = chars_lb.get(i)
+
+    # delete the selected character key from the json save file
+    with open(storage_filename, 'r') as file:
+        json_data = json.load(file)
+        del json_data[selected_ign]
+
+    # update the json save file
+    with open(storage_filename, 'w') as outfile:
+        json.dump(json_data, outfile, indent=4)
+
+    # delete the key from the characters dictionary
+    del characters[selected_ign]
+
+    # delete all character entries in the current listbox
+    chars_lb.delete(0, 'end')
+
+    # update the listbox with latest characters data
+    populate_entries()
+
+    # logger to check if character dictionary reflects action change
+    # print(characters.keys())
+
 # check if characters dictionary is storing data correctly
 def check_characters():
     load_characters()
@@ -197,7 +228,7 @@ btn_params = {'font':('Kozuka Gothic Pro B', 12), 'relief': 'raised'}
 
 addchar_btn = tk.Button(blue_frame, text='Add Char', **btn_params, command=add_character_popup)
 updchar_btn = tk.Button(blue_frame, text='Update Char', **btn_params, command=lambda:run('upd'))
-delchar_btn = tk.Button(blue_frame, text='Delete Char', **btn_params, command=lambda:run('del'))
+delchar_btn = tk.Button(blue_frame, text='Delete Char', **btn_params, command=delete_char)
 
 blue_frame.grid_rowconfigure(0, weight=1)
 blue_frame.grid_columnconfigure(0, weight=1)
