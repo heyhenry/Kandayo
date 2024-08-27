@@ -28,5 +28,11 @@
         "job": "Mage",
         "level": "29",
         "capped": false
+    },
+    "Poopie": {
+        "ign": "Poopie",
+        "job": "Tank",
+        "level": "182",
+        "capped": false
     }
 }

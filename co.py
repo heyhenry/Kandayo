@@ -13,6 +13,7 @@
 # - - (cont. ^) maybe forget about the mesos accumulated (party size identification/calculations) for the time being and have it as a simple boss checklist
 
 import tkinter as tk
+from tkinter import messagebox
 from datetime import timezone, timedelta
 import datetime as dt
 import webbrowser
@@ -135,9 +136,17 @@ def add_character_popup():
 
     aesthetic_params = {'font': ('Kozuka Gothic Pro B', 12)}
 
-    # close pop-up window
-    def close_ac():
-        ac_win.destroy()
+    # check to see if character already exists
+    def validate_character_entry(check_ign):
+        # if character already exists in characters dictionary, give error message and close pop-up
+        if check_ign in characters.keys():
+            messagebox.showerror('Invalid IGN (Player Name)',
+                                 'The IGN (Character Name) has already been registered.')
+            ac_win.destroy()
+        else:
+            # otherwise, update characters dictionary with new entry and close pop-up
+            create_char(ac_ign.get(), ac_job.get(), ac_level.get())
+            ac_win.destroy()
 
     # ac short for add_character
     ac_win = tk.Toplevel(blue_frame)
@@ -151,8 +160,8 @@ def add_character_popup():
     ac_job_entry = tk.Entry(ac_win, textvariable=ac_job)
     ac_level_lbl = tk.Label(ac_win, text='Level:', **aesthetic_params)
     ac_level_entry = tk.Entry(ac_win, textvariable=ac_level)
-    ac_submit_btn = tk.Button(ac_win, text='Add to Roster', command=lambda:create_char(ac_ign.get(), ac_job.get(), ac_level.get()), **aesthetic_params)
-    ac_cancel_btn = tk.Button(ac_win, text='Cancel', command=close_ac, **aesthetic_params)
+    ac_submit_btn = tk.Button(ac_win, text='Add to Roster', command=lambda:validate_character_entry(ac_ign.get()), **aesthetic_params)
+    ac_cancel_btn = tk.Button(ac_win, text='Cancel', command=ac_win.destroy, **aesthetic_params)
 
     ac_title_lbl.grid(row=0, columnspan=2)
     ac_ign_lbl.grid(row=1, column=0)
