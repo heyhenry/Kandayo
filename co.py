@@ -530,3 +530,6 @@ populate_entries()
 
 root.mainloop()
 
+# fast note for next session pickup
+# continue to work on the update_character function (as follows)
+# - ensure that if a ign is updated, that the ign is not already in the dictionary, aside from the currently accessed key
