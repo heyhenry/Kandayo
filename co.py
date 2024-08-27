@@ -90,26 +90,31 @@ def delete_char():
     for i in chars_lb.curselection():
         selected_ign = chars_lb.get(i)
 
-    # load and delete the selected character key from the json save file
-    with open(storage_filename, 'r') as file:
-        json_data = json.load(file)
-        del json_data[selected_ign]
+    if selected_ign == '':
+        messagebox.showerror('No Selection Error', 
+                             'No character has been selected in the list.')
+    else:
 
-    # update the json save file
-    with open(storage_filename, 'w') as outfile:
-        json.dump(json_data, outfile, indent=4)
+        # load and delete the selected character key from the json save file
+        with open(storage_filename, 'r') as file:
+            json_data = json.load(file)
+            del json_data[selected_ign]
 
-    # delete the key from the characters dictionary
-    del characters[selected_ign]
+        # update the json save file
+        with open(storage_filename, 'w') as outfile:
+            json.dump(json_data, outfile, indent=4)
 
-    # delete all character entries in the current listbox
-    chars_lb.delete(0, 'end')
+        # delete the key from the characters dictionary
+        del characters[selected_ign]
 
-    # update the listbox with latest characters data
-    populate_entries()
+        # delete all character entries in the current listbox
+        chars_lb.delete(0, 'end')
 
-    # logger to check if character dictionary reflects action change
-    # print(characters.keys())
+        # update the listbox with latest characters data
+        populate_entries()
+
+        # logger to check if character dictionary reflects action change
+        # print(characters.keys())
 
 # check if characters dictionary is storing data correctly
 def check_characters():
@@ -238,14 +243,9 @@ def update_character_popup():
     for i in chars_lb.curselection():
         selected_ign = chars_lb.get(i)
 
-    uc_win = tk.Toplevel(blue_frame)
-    uc_win.title('Update Character')
-    uc_win.geometry('300x200+650+150')
-
     # validation check to see if a character has been selected from the listbox
     # if none selected, show error prompt 
     if selected_ign == '':
-        uc_win.destroy()
         messagebox.showerror('Character Selection Error', 
                              'A character has not been selected from the list.')
         
@@ -286,6 +286,10 @@ def update_character_popup():
     uc_ign.set(characters[selected_ign].ign)
     uc_job.set(characters[selected_ign].job)
     uc_level.set(characters[selected_ign].level)
+
+    uc_win = tk.Toplevel(blue_frame)
+    uc_win.title('Update Character')
+    uc_win.geometry('300x200+650+150')
 
     uc_title_lbl = tk.Label(uc_win, text='Update Character', **aesthetic_params)
     uc_ign_lbl = tk.Label(uc_win, text='In-Game Name:', **aesthetic_params)

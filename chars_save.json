@@ -1,14 +1,8 @@
 {
-    "newman03": {
-        "ign": "newman03",
+    "Mizukage": {
+        "ign": "Mizukage",
         "job": "Warrior",
-        "level": "29",
-        "capped": false
-    },
-    "newman01": {
-        "ign": "newman01",
-        "job": "Warriorasdf",
-        "level": "19asdf",
+        "level": "203",
         "capped": false
     }
 }
