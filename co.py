@@ -39,11 +39,19 @@ def custom_serializer(obj):
 # create a new character entry
 def create_char(ign, job, level):
 
+    # loads the existing character entries into the characters dictionary
+    load_characters()
+
+    # create a new character obj
     new_char = CharInfo(ign, job, level, False)
+    
+    # add new character obj to the characters dictionary
     characters[new_char.ign] = new_char
     
+    # set serialization for characters dictionary for json save file / serialize the characters dictionary to json string
     json_data = json.dumps(characters, default=custom_serializer, indent=4)
     
+    # save latest version of characters dictionary to the json save file / updates the json save file with latest data
     with open(storage_filename, 'w') as outfile:
         outfile.write(json_data)
 
@@ -63,13 +71,13 @@ def load_characters():
             for char_ign, char_info in characters_data.items():
                 characters[char_ign] = CharInfo(char_ign, char_info['job'], char_info['level'], char_info['capped'])
 
-#
-def check_characters():
-    load_characters()
-    for k, v in characters.items():
-        v.charinfo_str()
+# to check if characters dictionary is storing data correctly
+# def check_characters():
+#     load_characters()
+#     for k, v in characters.items():
+#         v.charinfo_str()
 
-check_characters()
+# check_characters()
 
 root = tk.Tk()
 root.resizable(False, False)
