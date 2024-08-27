@@ -387,23 +387,23 @@ def bonus_ursus_tracker():
             # if the current time has passed for both triggers (ursus times), next_ursus will store the first ursus of the next day
             next_ursus = uto_start + timedelta(days=1)
 
-            # calculate the time remaining til next bonus ursus
-            time_remaining = next_ursus - utc_time
+        # calculate the time remaining til next bonus ursus
+        time_remaining = next_ursus - utc_time
 
-            # extract the components of the time_remaining object (timedelta object)
-            days = time_remaining.days
-            seconds = time_remaining.seconds
-            hours = seconds // 3600
-            minutes = (seconds % 3600) // 60
-            seconds = (seconds % 3600) % 60
+        # extract the components of the time_remaining object (timedelta object)
+        days = time_remaining.days
+        seconds = time_remaining.seconds
+        hours = seconds // 3600
+        minutes = (seconds % 3600) // 60
+        seconds = (seconds % 3600) % 60
 
-            # format the result for time remaining
-            time_remaining_str = f"{days} days, {hours} hours, {minutes} minutes, {seconds} seconds"
+        # format the result for time remaining
+        time_remaining_str = f"{days} days, {hours} hours, {minutes} minutes, {seconds} seconds"
 
-            # update the ursus_time label with relevant realtime 
-            ursus_time_lbl.config(text=f"Next Ursus is at {next_ursus.strftime('%H:%M:%S')} \n Time Remaining until next Ursus: {time_remaining_str}")
-            # prompt execution of function every second for a live reading of the ursus time tracker
-            ursus_time_lbl.after(1000, bonus_ursus_tracker)
+        # update the ursus_time label with relevant realtime 
+        ursus_time_lbl.config(text=f"Next Ursus is at {next_ursus.strftime('%H:%M:%S')} \n Time Remaining until next Ursus: {time_remaining_str}")
+        # prompt execution of function every second for a live reading of the ursus time tracker
+        ursus_time_lbl.after(1000, bonus_ursus_tracker)
 
 # update time remaining until daily reset
 def daily_reset():
