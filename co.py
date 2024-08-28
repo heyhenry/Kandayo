@@ -118,7 +118,7 @@ def check_characters():
 # check_characters()
 
 root = tk.Tk()
-root.resizable(False, False)
+# root.resizable(False, False)
 
 # frames setup
 yellow_frame = tk.Frame(root, width=600, height=80, bg='yellow', highlightbackground='black', highlightthickness=2, borderwidth=1, padx=5, pady=5)
@@ -490,14 +490,11 @@ magenta_frame.grid_columnconfigure(0, weight=1)
 
 # orange frame
 
-balance_lbl = tk.Label(orange_frame, text='Accumulated Balance: $ XXXXXXXXXX', font=('Kozuka Gothic Pro B', 12), background='orange')
-reset_bal_btn = tk.Button(orange_frame, text='Reset Balance', **btn_params)
+bossing_checklist_btn = tk.Button(orange_frame, text='Bossing Checklist', **btn_params)
 
-balance_lbl.grid(row=0, column=0)
-reset_bal_btn.grid(row=1, column=0)
+bossing_checklist_btn.grid(row=0, column=0)
 
 orange_frame.grid_rowconfigure(0, weight=1)
-orange_frame.grid_rowconfigure(1, weight=1)
 orange_frame.grid_columnconfigure(0, weight=1)
 
 # green frame
