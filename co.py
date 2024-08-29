@@ -448,7 +448,7 @@ def weekly_reset():
     
     # check if today is the target day
     if utc_time.weekday() == 3:
-        print('Weekly Reset is Today')
+        weekly_reset_lbl.config(text='Weekly Reset is Today')
         weekly_reset_lbl.after(1000, weekly_reset)
     # if its not the target day ..
     else:

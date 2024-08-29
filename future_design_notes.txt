@@ -1,0 +1,21 @@
+For the bossing checklist...
+
+1. Could have the orange frame be a larget set size with the single button, that when pressed alongside selecting a character in the listbox
+will fill the orange frame with a image of the character + the checkboxes of all the weekly bosses, maybe even a price accumulation counter. 
+
+2. popup of a list of all the weekly bosses when button in orange frame is pressed alongside a character in the listbox
+
+3. utilise tkinter notebook and have the character listbox set on the 2nd tab as well + weekly bosses checklist on 
+the right side that will change status depending on which character has been selected, 
+to reflect the selected characters progression in clearing bosses for the week.
+
+4. have another frame that appears on the bottom that showcases all the weekly bosses that have been cleared and those that havent so user
+doesnt have to manually click on each listbox and check the checklist
+
+*Note to self*: Initially will go with point 2 to have some content up and running, then in later version update and improve for better
+user experience, readability and general accessibility of actions and desires (i.e. what is in demand for their needs)
+
+
+For the realtime countdowns, clocks and trackers section...
+
+1. Thinking of changing full text display to visual representation via circular progress bar with bare minumum text required to understand the visuals
