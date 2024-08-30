@@ -1,0 +1,12 @@
+{
+    "henry": {
+        "player_name": "henry",
+        "job": "SSS",
+        "level": "tank",
+        "boss_list": {
+            "magnus": true,
+            "pinkbean": false,
+            "zakum": true
+        }
+    }
+}
