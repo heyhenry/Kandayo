@@ -22,14 +22,17 @@ storage_filename = 'chars_save.json'
 
 # custom json serializer
 def custom_serializer(obj):
+    # the main obj
     if isinstance(obj, CharInfo):
         return {
             'ign': obj.ign,
             'job': obj.job,
             'level': obj.level,
             'capped': obj.capped,
+            # recursion used here to serialize the sub obj and format as part of main obj
             'bosses': custom_serializer(obj.bosses)
         }
+    # the sub obj included in the main obj
     elif isinstance(obj, BossList):
         return {
            'Chaos Pink Bean': obj.cpb,
@@ -67,6 +70,7 @@ def create_char(ign, job, level):
         print('Already Exists!')
     else:
 
+        # create a defaulted bosslist obj
         boss_list = BossList(False, False, False, False, False, False, False, False, False, False, False,
                              False, False, False, False, False, False, False, False, False, False, False
                              )
