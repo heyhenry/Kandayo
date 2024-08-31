@@ -1,10 +1,10 @@
 {
     "henry": {
         "player_name": "henry",
-        "job": "SSS",
-        "level": "tank",
+        "rank": "SSS",
+        "role": "tank",
         "boss_list": {
-            "magnus": true,
+            "magnus": false,
             "pinkbean": false,
             "zakum": true
         }
