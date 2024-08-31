@@ -27,7 +27,8 @@ def custom_serializer(obj):
             'ign': obj.ign,
             'job': obj.job,
             'level': obj.level,
-            'capped': obj.capped
+            'capped': obj.capped,
+            'bosses': custom_serializer(obj.bosses)
         }
     elif isinstance(obj, BossList):
         return {
@@ -66,8 +67,12 @@ def create_char(ign, job, level):
         print('Already Exists!')
     else:
 
+        boss_list = BossList(False, False, False, False, False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False, False, False, False, False
+                             )
+
         # create a new character obj
-        new_char = CharInfo(ign, job, level, False)
+        new_char = CharInfo(ign, job, level, False, boss_list)
         
         # add new character obj to the characters dictionary
         characters[new_char.ign] = new_char
@@ -96,7 +101,7 @@ def load_characters():
 
             # update the characters dictionary with existing character entries in the selected json save file
             for char_ign, char_info in characters_data.items():
-                characters[char_ign] = CharInfo(char_ign, char_info['job'], char_info['level'], char_info['capped'])
+                characters[char_ign] = CharInfo(char_ign, char_info['job'], char_info['level'], char_info['capped'], char_info['bosses'])
 
 # delete an existing character entry
 def delete_char():
