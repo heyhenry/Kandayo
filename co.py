@@ -10,7 +10,7 @@ from tkinter import messagebox
 from datetime import timezone, timedelta
 import datetime as dt
 import webbrowser
-from charinfo import CharInfo
+from charinfo import CharInfo, BossList
 import json
 import os # note to self: needed to find json file from prev experience
 
@@ -28,6 +28,31 @@ def custom_serializer(obj):
             'job': obj.job,
             'level': obj.level,
             'capped': obj.capped
+        }
+    elif isinstance(obj, BossList):
+        return {
+           'Chaos Pink Bean': obj.cpb,
+           'Hard Hilla': obj.hh,
+           'Cygnus': obj.cyg,
+           'Chaos Zakum': obj.czak,
+           'Princess No': obj.pno,
+           'Chaos Queen': obj.cqueen,
+           'Chaos Pierre': obj.cpierre,
+           'Chaos VonBon': obj.cvonbon,
+           'Chaos Vellum': obj.cvell,
+           'Akechi Mitsuhide': obj.akechi,
+           'Hard Magnus': obj.hmag,
+           'Chaos Papulatus': obj.cpap,
+           'Lotus': obj.lotus,
+           'Damien': obj.damien,
+           'Guardian Slime': obj.gslime,
+           'Lucid': obj.lucid,
+           'Will': obj.will,
+           'Gloom': obj.gloom,
+           'Darknell': obj.darknell,
+           'Versus Hilla': obj.vhilla,
+           'Seren': obj.seren,
+           'Kaling': obj.kaling 
         }
     return obj
 
