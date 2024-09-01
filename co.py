@@ -550,7 +550,7 @@ def bossing_checklist_popup():
     # bc_win.geometry()    
 
     bc_character_lbl = tk.Label(bc_win, text=f"{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}")
-    bc_weeklies_completed_lbl = tk.Label(bc_win, text=f"Weeklies Completed: {characters[selected_ign].capped}")
+    bc_weeklies_completed_lbl = tk.Checkbutton(bc_win, text=f"Weeklies Completed: {characters[selected_ign].capped}")
 
     # first column of bosses
     bc_cpb_check = tk.Checkbutton(bc_win, text='Chaos Pink Bean')
@@ -577,10 +577,11 @@ def bossing_checklist_popup():
     bc_vhilla_check = tk.Checkbutton(bc_win, text='Versus Hilla')
     bc_seren_check = tk.Checkbutton(bc_win, text='Seren')
     bc_kaling_check = tk.Checkbutton(bc_win, text='Kaling')
-    
 
-    bc_character_lbl.grid(row=0, column=0)
-    bc_weeklies_completed_lbl.grid(row=1, column=0)
+    bc_close_btn = tk.Button(bc_win, text='Close')
+
+    bc_character_lbl.grid(row=0, columnspan=2)
+    bc_weeklies_completed_lbl.grid(row=1, columnspan=2)
 
     bc_cpb_check.grid(row=2, column=0, sticky='w')
     bc_hh_check.grid(row=3, column=0, sticky='w')
@@ -605,6 +606,8 @@ def bossing_checklist_popup():
     bc_vhilla_check.grid(row=10, column=1, sticky='w')
     bc_seren_check.grid(row=11, column=1, sticky='w')
     bc_kaling_check.grid(row=12, column=1, sticky='w')
+
+    bc_close_btn.grid(row=13, columnspan=2)
 
 bossing_checklist_btn = tk.Button(orange_frame, text='Bossing Checklist', **btn_params, command=bossing_checklist_popup)
 
