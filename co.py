@@ -524,7 +524,36 @@ magenta_frame.grid_columnconfigure(0, weight=1)
 
 # orange frame
 
-bossing_checklist_btn = tk.Button(orange_frame, text='Bossing Checklist', **btn_params)
+# bossing checklist popup
+def bossing_checklist_popup():
+
+    aesthetic_params = {'font': ('Kozuka Gothic Pro B', 12)}
+
+    selected_ign = ''
+
+    # selected character from listbox gets stored in selected_ign
+    for i in chars_lb.curselection():
+        selected_ign = chars_lb.get(i)
+
+    # validation check to see if a character has been stored in selected_ign
+    # if there is no character stored, then show error message and do not execute rest of the function's code
+    if selected_ign == '':
+        messagebox.showerror('Character Selection Error',
+                             'A character has not been selected from the list.')
+        # a return statement is required here to let the program know to discontinue the rest of the code 
+        # note: unlike in the update_character_popup function, as the aforementioned prevents code execution via 
+        # the inability to set the tkinter variables, letting the program know to not run the rest of the function's code
+        return
+
+    bc_win = tk.Toplevel(orange_frame)
+    bc_win.title('Bossing Checklist')
+    # bc_win.geometry()    
+
+    bc_ign_lbl = tk.Label(bc_win, text=characters[selected_ign].ign)
+    bc_ign_lbl.pack()
+
+
+bossing_checklist_btn = tk.Button(orange_frame, text='Bossing Checklist', **btn_params, command=bossing_checklist_popup)
 
 bossing_checklist_btn.grid(row=0, column=0)
 
