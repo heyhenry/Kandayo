@@ -527,6 +527,10 @@ magenta_frame.grid_columnconfigure(0, weight=1)
 # bossing checklist popup
 def bossing_checklist_popup():
 
+    # saving the checked state of bosses
+    def save_bossing_progress():
+
+
     aesthetic_params = {'font': ('Kozuka Gothic Pro B', 12)}
 
     selected_ign = ''
