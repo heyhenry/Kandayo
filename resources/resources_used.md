@@ -30,3 +30,4 @@ The following are the resources I have read, referred and learnt from to better 
 - Deleting a dictionary key: https://www.python-engineer.com/posts/delete-key-dictionary/
 - Removing item from json file and updatng json file: https://www.geeksforgeeks.org/how-to-remove-key-value-pair-from-a-json-file-in-python/
 - Accessing an attribute in an object in a dictionary: https://stackoverflow.com/questions/48091943/python-accessing-attributes-of-an-object-as-a-dict-value
+- Aligning checkbuttons in tkinter: https://stackoverflow.com/questions/44286796/how-to-align-these-checkbuttons-in-tkinter
