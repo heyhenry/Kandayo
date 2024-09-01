@@ -527,9 +527,28 @@ magenta_frame.grid_columnconfigure(0, weight=1)
 # bossing checklist popup
 def bossing_checklist_popup():
 
-    # saving the checked state of bosses
-    def save_bossing_progress():
-
+    cb_cpb = tk.IntVar()
+    cb_hh = tk.IntVar()
+    cb_cyg = tk.IntVar()
+    cb_czak = tk.IntVar()
+    cb_pno = tk.IntVar()
+    cb_cqueen = tk.IntVar()
+    cb_cpierre = tk.IntVar()
+    cb_cvonbon = tk.IntVar()
+    cb_cvell = tk.IntVar()
+    cb_akechi = tk.IntVar()
+    cb_hmag = tk.IntVar()
+    cb_cpap = tk.IntVar()
+    cb_lotus = tk.IntVar()
+    cb_damien = tk.IntVar()
+    cb_gslime = tk.IntVar()
+    cb_lucid = tk.IntVar()
+    cb_will = tk.IntVar()
+    cb_gloom = tk.IntVar()
+    cb_darknell = tk.IntVar()
+    cb_vhilla = tk.IntVar()
+    cb_seren = tk.IntVar()
+    cb_kaling = tk.IntVar()
 
     aesthetic_params = {'font': ('Kozuka Gothic Pro B', 12)}
 
@@ -549,6 +568,16 @@ def bossing_checklist_popup():
         # the inability to set the tkinter variables, letting the program know to not run the rest of the function's code
         return
 
+    # saving the checked state of bosses
+    def updating_bossing_progress(cb_boss):
+
+        # change dictionary value for selected boss
+        if cb_boss.get():
+            characters[selected_ign].bosses['Chaos Pink Bean'] = True
+        else:
+            characters[selected_ign].bosses['Chaos Pink Bean'] = False
+        print(characters[selected_ign].bosses['Chaos Pink Bean'])
+
     bc_win = tk.Toplevel(orange_frame)
     bc_win.title('Bossing Checklist')
     # bc_win.geometry()    
@@ -557,30 +586,30 @@ def bossing_checklist_popup():
     bc_weeklies_completed_lbl = tk.Checkbutton(bc_win, text=f"Weeklies Completed: {characters[selected_ign].capped}", **aesthetic_params)
 
     # first column of bosses
-    bc_cpb_check = tk.Checkbutton(bc_win, text='Chaos Pink Bean', **aesthetic_params)
-    bc_hh_check = tk.Checkbutton(bc_win, text='Hard Hilla', **aesthetic_params)
-    bc_cyg_check = tk.Checkbutton(bc_win, text='Cygnus', **aesthetic_params)
-    bc_czak_check = tk.Checkbutton(bc_win, text='Chaos Zakum', **aesthetic_params)
-    bc_pno_check = tk.Checkbutton(bc_win, text='Princess No', **aesthetic_params)
-    bc_cqueen_check = tk.Checkbutton(bc_win, text='Chaos Queen', **aesthetic_params)
-    bc_cpierre_check = tk.Checkbutton(bc_win, text='Chaos Pierre', **aesthetic_params)
-    bc_cvonbon_check = tk.Checkbutton(bc_win, text='Chaos Von Bon', **aesthetic_params)
-    bc_cvell_check = tk.Checkbutton(bc_win, text='Chaos Vellum', **aesthetic_params)
-    bc_akechi_check = tk.Checkbutton(bc_win, text='Akechi Mitsuhide', **aesthetic_params)
-    bc_hmag_check = tk.Checkbutton(bc_win, text='Hard Magnus', **aesthetic_params)
+    bc_cpb_check = tk.Checkbutton(bc_win, text='Chaos Pink Bean', **aesthetic_params, variable=cb_cpb, command=lambda:updating_bossing_progress(cb_cpb))
+    bc_hh_check = tk.Checkbutton(bc_win, text='Hard Hilla', **aesthetic_params, variable=cb_hh)
+    bc_cyg_check = tk.Checkbutton(bc_win, text='Cygnus', **aesthetic_params, variable=cb_cyg)
+    bc_czak_check = tk.Checkbutton(bc_win, text='Chaos Zakum', **aesthetic_params, variable=cb_czak)
+    bc_pno_check = tk.Checkbutton(bc_win, text='Princess No', **aesthetic_params, variable=cb_pno)
+    bc_cqueen_check = tk.Checkbutton(bc_win, text='Chaos Queen', **aesthetic_params, variable=cb_cqueen)
+    bc_cpierre_check = tk.Checkbutton(bc_win, text='Chaos Pierre', **aesthetic_params, variable=cb_cpierre)
+    bc_cvonbon_check = tk.Checkbutton(bc_win, text='Chaos Von Bon', **aesthetic_params, variable=cb_cvonbon)
+    bc_cvell_check = tk.Checkbutton(bc_win, text='Chaos Vellum', **aesthetic_params, variable=cb_cvell)
+    bc_akechi_check = tk.Checkbutton(bc_win, text='Akechi Mitsuhide', **aesthetic_params, variable=cb_akechi)
+    bc_hmag_check = tk.Checkbutton(bc_win, text='Hard Magnus', **aesthetic_params, variable=cb_hmag)
 
     # second column of bosses
-    bc_cpap_check = tk.Checkbutton(bc_win, text='Chaos Papulatus', **aesthetic_params)
-    bc_lotus_check = tk.Checkbutton(bc_win, text='Lotus', **aesthetic_params)
-    bc_damien_check = tk.Checkbutton(bc_win, text='Damien', **aesthetic_params)
-    bc_gslime_check = tk.Checkbutton(bc_win, text='Guardian Slime', **aesthetic_params)
-    bc_lucid_check = tk.Checkbutton(bc_win, text='Lucid', **aesthetic_params)
-    bc_will_check = tk.Checkbutton(bc_win, text='Will', **aesthetic_params)
-    bc_gloom_check = tk.Checkbutton(bc_win, text='Gloom', **aesthetic_params)
-    bc_darknell_check = tk.Checkbutton(bc_win, text='Darknell', **aesthetic_params)
-    bc_vhilla_check = tk.Checkbutton(bc_win, text='Versus Hilla', **aesthetic_params)
-    bc_seren_check = tk.Checkbutton(bc_win, text='Seren', **aesthetic_params)
-    bc_kaling_check = tk.Checkbutton(bc_win, text='Kaling', **aesthetic_params)
+    bc_cpap_check = tk.Checkbutton(bc_win, text='Chaos Papulatus', **aesthetic_params, variable=cb_cpap)
+    bc_lotus_check = tk.Checkbutton(bc_win, text='Lotus', **aesthetic_params, variable=cb_lotus)
+    bc_damien_check = tk.Checkbutton(bc_win, text='Damien', **aesthetic_params, variable=cb_damien)
+    bc_gslime_check = tk.Checkbutton(bc_win, text='Guardian Slime', **aesthetic_params, variable=cb_gslime)
+    bc_lucid_check = tk.Checkbutton(bc_win, text='Lucid', **aesthetic_params, variable=cb_lucid)
+    bc_will_check = tk.Checkbutton(bc_win, text='Will', **aesthetic_params, variable=cb_will)
+    bc_gloom_check = tk.Checkbutton(bc_win, text='Gloom', **aesthetic_params, variable=cb_gloom)
+    bc_darknell_check = tk.Checkbutton(bc_win, text='Darknell', **aesthetic_params, variable=cb_darknell)
+    bc_vhilla_check = tk.Checkbutton(bc_win, text='Versus Hilla', **aesthetic_params, variable=cb_vhilla)
+    bc_seren_check = tk.Checkbutton(bc_win, text='Seren', **aesthetic_params, variable=cb_seren)
+    bc_kaling_check = tk.Checkbutton(bc_win, text='Kaling', **aesthetic_params, variable=cb_kaling)
 
     bc_close_btn = tk.Button(bc_win, text='Close', **aesthetic_params)
 
@@ -685,3 +714,7 @@ load_characters()
 populate_entries()
 
 root.mainloop()
+
+# note for next session:
+# continue working on function 'saving_bossing_progress(v)'
+# ^ figure out how to save the state globally in characters and then potentially create an update_character function that doesnt require the call of create_char.
