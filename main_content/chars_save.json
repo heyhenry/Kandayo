@@ -5,7 +5,7 @@
         "level": "280",
         "capped": false,
         "bosses": {
-            "Chaos Pink Bean": true,
+            "Chaos Pink Bean": false,
             "Hard Hilla": false,
             "Cygnus": true,
             "Chaos Zakum": false,

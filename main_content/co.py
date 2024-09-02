@@ -649,7 +649,7 @@ def bossing_checklist_popup():
     bc_seren_check = tk.Checkbutton(bc_win, text='Seren', **aesthetic_params, variable=cb_seren)
     bc_kaling_check = tk.Checkbutton(bc_win, text='Kaling', **aesthetic_params, variable=cb_kaling)
 
-    bc_close_btn = tk.Button(bc_win, text='Close', **aesthetic_params)
+    bc_close_btn = tk.Button(bc_win, text='Close', **aesthetic_params, command=bc_win.destroy)
 
     # storing the checkstate values to circumvent python's garbage collection
     bc_cpb_check.var = cb_cpb
@@ -671,6 +671,7 @@ def bossing_checklist_popup():
     bc_will_check.var = cb_will
     bc_gloom_check.var = cb_gloom
     bc_darknell_check.var = cb_darknell
+    bc_vhilla_check.var = cb_vhilla
     bc_seren_check.var = cb_seren
     bc_kaling_check.var = cb_kaling
 
