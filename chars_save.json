@@ -1,38 +1,8 @@
 {
-    "Remu1002": {
-        "ign": "Remu1002",
-        "job": "Dark Knight",
-        "level": "280",
-        "capped": false,
-        "bosses": {
-            "Chaos Pink Bean": false,
-            "Hard Hilla": true,
-            "Cygnus": false,
-            "Chaos Zakum": false,
-            "Princess No": false,
-            "Chaos Queen": false,
-            "Chaos Pierre": false,
-            "Chaos VonBon": false,
-            "Chaos Vellum": false,
-            "Akechi Mitsuhide": false,
-            "Hard Magnus": false,
-            "Chaos Papulatus": true,
-            "Lotus": true,
-            "Damien": true,
-            "Guardian Slime": true,
-            "Lucid": true,
-            "Will": true,
-            "Gloom": true,
-            "Darknell": true,
-            "Versus Hilla": true,
-            "Seren": true,
-            "Kaling": true
-        }
-    },
-    "Rezu": {
-        "ign": "Rezu",
-        "job": "Mage",
-        "level": "199",
+    "asdfs": {
+        "ign": "asdfs",
+        "job": "fasdfa",
+        "level": "123123",
         "capped": false,
         "bosses": {
             "Chaos Pink Bean": false,

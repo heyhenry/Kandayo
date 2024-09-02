@@ -82,6 +82,7 @@ def create_char(ign, job, level):
 
         chars_lb.delete(0, 'end')
         populate_entries()
+        print(characters)
 
 # read and add existing character entries found in the json save file to the characters dictionary
 def load_characters():
@@ -544,6 +545,9 @@ def bossing_checklist_popup():
     # selected character from listbox gets stored in selected_ign
     for i in chars_lb.curselection():
         selected_ign = chars_lb.get(i)
+
+    # load the characters dictionary directly via parsing the json file into a python object
+    load_characters()
 
     # validation check to see if a character has been stored in selected_ign
     # if there is no character stored, then show error message and do not execute rest of the function's code
