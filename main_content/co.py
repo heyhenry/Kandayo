@@ -593,12 +593,28 @@ def bossing_checklist_popup():
     cb_kaling.set(characters[selected_ign].bosses['Kaling'])
 
 
-    # # updating the checkstate of bosses from the bosslist obj of a character
-    # def updating_bossing_progress(cb_boss):
+    # updating the checkstate of bosses from the bosslist obj of a character
+    def updating_bossing_progress(boss_name, cb_boss):
         
-    #     if cb_boss.get():
-    #         characters[selected_ign].bosses[]
+        # if user ticks
+        if cb_boss.get():
+            #change the value of the boss in the boss obj of the selected character
+            characters[selected_ign].bosses[boss_name] = True
 
+            # update the new change in the json save file
+            json_object = json.dumps(characters, indent=4, default=custom_serializer)
+
+            with open(storage_filename, 'w') as outfile:
+                outfile.write(json_object)
+        
+        # if user unticks
+        else:
+            characters[selected_ign].bosses[boss_name] = False
+
+            json_object = json.dumps(characters, indent=4, default=custom_serializer)
+
+            with open(storage_filename, 'w') as outfile:
+                outfile.write(json_object)
 
     bc_win = tk.Toplevel(orange_frame)
     bc_win.title('Bossing Checklist')
@@ -608,7 +624,7 @@ def bossing_checklist_popup():
     bc_weeklies_completed_lbl = tk.Checkbutton(bc_win, text=f"Weeklies Completed: {characters[selected_ign].capped}", **aesthetic_params)
 
     # first column of bosses
-    bc_cpb_check = tk.Checkbutton(bc_win, text='Chaos Pink Bean', **aesthetic_params, variable=cb_cpb)#, command=lambda:updating_bossing_progress(cb_cpb)
+    bc_cpb_check = tk.Checkbutton(bc_win, text='Chaos Pink Bean', **aesthetic_params, variable=cb_cpb, command=lambda:updating_bossing_progress('Chaos Pink Bean', cb_cpb))
     bc_hh_check = tk.Checkbutton(bc_win, text='Hard Hilla', **aesthetic_params, variable=cb_hh)
     bc_cyg_check = tk.Checkbutton(bc_win, text='Cygnus', **aesthetic_params, variable=cb_cyg)
     bc_czak_check = tk.Checkbutton(bc_win, text='Chaos Zakum', **aesthetic_params, variable=cb_czak)
@@ -758,6 +774,11 @@ load_characters()
 
 # load up listbox data
 populate_entries()
+
+# print tests
+# print(characters['Remu1002'].bosses)
+# cpb = 'Chaos Pink Bean'
+# print(characters['Remu1002'].bosses[cpb])
 
 root.mainloop()
 
