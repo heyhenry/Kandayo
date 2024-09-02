@@ -1,10 +1,3 @@
-# Todo next session: 
-# - figure a way to incorporate the boss checklist for each character
-# - - maybe add all the bosses as vars in the charInfo and update add_char popup to reflect ability to select bosses
-# - - maybe just have a new popup display the bosses, with relevant stuff (bosses killed, party size, mesos gained) that gets saved as a separate obj? (cont.)
-# - - (cont. ^) maybe second boss obj can be added in a list form for characters i.e. {char_name : [charinfo obj, bossing obj]} ? main thing - find a way to retain player's character progression (cont.)
-# - - (cont. ^) maybe forget about the mesos accumulated (party size identification/calculations) for the time being and have it as a simple boss checklist
-
 import tkinter as tk
 from tkinter import messagebox
 from datetime import timezone, timedelta
@@ -12,7 +5,7 @@ import datetime as dt
 import webbrowser
 from charinfo import CharInfo, BossList
 import json
-import os # note to self: needed to find json file from prev experience
+import os 
 
 # list of charinfo (characters) objs
 characters = {}
@@ -65,7 +58,6 @@ def create_char(ign, job, level):
 
     # character entry validation
     # checks to see if the character already exists in the characters dictionary, if so do not process given character entry and output error message
-    # ** Self Note ** Find a way to pass the error to the pop-up window and prevent ability to submit
     if ign in characters.keys():
         print('Already Exists!')
     else:
@@ -139,9 +131,6 @@ def delete_char():
 
         # update the listbox with latest characters data
         populate_entries()
-
-        # logger to check if character dictionary reflects action change
-        # print(characters.keys())
 
 # check if characters dictionary is storing data correctly
 def check_characters():
@@ -285,9 +274,6 @@ def update_character_popup():
             messagebox.showerror('IGN Error',
                                  'The new IGN already exists for another character in the registered list.')
         else:
-
-            # ** Maybe find put this in its own function called 'update_character()' ? **
-            # updates the existing character entry 
 
             # deletes the old character entry in characters dictionary
             del characters[selected_ign]
@@ -619,10 +605,9 @@ def bossing_checklist_popup():
 
     bc_win = tk.Toplevel(orange_frame)
     bc_win.title('Bossing Checklist')
-    # bc_win.geometry()    
+    bc_win.geometry('400x700')    
 
     bc_character_lbl = tk.Label(bc_win, text=f"{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}", **aesthetic_params)
-    bc_weeklies_completed_lbl = tk.Checkbutton(bc_win, text=f"Weeklies Completed: {characters[selected_ign].capped}", **aesthetic_params)
 
     # first column of bosses
     bc_cpb_check = tk.Checkbutton(bc_win, text='Chaos Pink Bean', **aesthetic_params, variable=cb_cpb, command=lambda:updating_bossing_progress('Chaos Pink Bean', cb_cpb))
@@ -650,7 +635,7 @@ def bossing_checklist_popup():
     bc_seren_check = tk.Checkbutton(bc_win, text='Seren', **aesthetic_params, variable=cb_seren, command=lambda:updating_bossing_progress('Seren', cb_seren))
     bc_kaling_check = tk.Checkbutton(bc_win, text='Kaling', **aesthetic_params, variable=cb_kaling, command=lambda:updating_bossing_progress('Kaling', cb_kaling))
 
-    bc_close_btn = tk.Button(bc_win, text='Close', **aesthetic_params, command=bc_win.destroy)
+    bc_close_btn = tk.Button(bc_win, text='Close', **aesthetic_params, width=15, command=bc_win.destroy)
 
     # storing the checkstate values to circumvent python's garbage collection
     bc_cpb_check.var = cb_cpb
@@ -678,31 +663,30 @@ def bossing_checklist_popup():
 
     # grid layout configs
     bc_character_lbl.grid(row=0, columnspan=2)
-    bc_weeklies_completed_lbl.grid(row=1, columnspan=2)
 
-    bc_cpb_check.grid(row=2, column=0, sticky='w')
-    bc_hh_check.grid(row=3, column=0, sticky='w')
-    bc_cyg_check.grid(row=4, column=0, sticky='w')
-    bc_czak_check.grid(row=5, column=0, sticky='w')
-    bc_pno_check.grid(row=6, column=0, sticky='w')
-    bc_cqueen_check.grid(row=7, column=0, sticky='w')
-    bc_cpierre_check.grid(row=8, column=0, sticky='w')
-    bc_cvonbon_check.grid(row=9, column=0, sticky='w')
-    bc_cvell_check.grid(row=10, column=0, sticky='w')
-    bc_akechi_check.grid(row=11, column=0, sticky='w')
-    bc_hmag_check.grid(row=12, column=0, sticky='w')
+    bc_cpb_check.grid(row=2, column=0, sticky='w', padx=20)
+    bc_hh_check.grid(row=3, column=0, sticky='w', padx=20)
+    bc_cyg_check.grid(row=4, column=0, sticky='w', padx=20)
+    bc_czak_check.grid(row=5, column=0, sticky='w', padx=20)
+    bc_pno_check.grid(row=6, column=0, sticky='w', padx=20)
+    bc_cqueen_check.grid(row=7, column=0, sticky='w', padx=20)
+    bc_cpierre_check.grid(row=8, column=0, sticky='w', padx=20)
+    bc_cvonbon_check.grid(row=9, column=0, sticky='w', padx=20)
+    bc_cvell_check.grid(row=10, column=0, sticky='w', padx=20)
+    bc_akechi_check.grid(row=11, column=0, sticky='w', padx=20)
+    bc_hmag_check.grid(row=12, column=0, sticky='w', padx=20)
 
-    bc_cpap_check.grid(row=2, column=1, sticky='w')
-    bc_lotus_check.grid(row=3, column=1, sticky='w')
-    bc_damien_check.grid(row=4, column=1, sticky='w')
-    bc_gslime_check.grid(row=5, column=1, sticky='w')
-    bc_lucid_check.grid(row=6, column=1, sticky='w')
-    bc_will_check.grid(row=7, column=1, sticky='w')
-    bc_gloom_check.grid(row=8, column=1, sticky='w')
-    bc_darknell_check.grid(row=9, column=1, sticky='w')
-    bc_vhilla_check.grid(row=10, column=1, sticky='w')
-    bc_seren_check.grid(row=11, column=1, sticky='w')
-    bc_kaling_check.grid(row=12, column=1, sticky='w')
+    bc_cpap_check.grid(row=2, column=1, sticky='w', padx=20)
+    bc_lotus_check.grid(row=3, column=1, sticky='w', padx=20)
+    bc_damien_check.grid(row=4, column=1, sticky='w', padx=20)
+    bc_gslime_check.grid(row=5, column=1, sticky='w', padx=20)
+    bc_lucid_check.grid(row=6, column=1, sticky='w', padx=20)
+    bc_will_check.grid(row=7, column=1, sticky='w', padx=20)
+    bc_gloom_check.grid(row=8, column=1, sticky='w', padx=20)
+    bc_darknell_check.grid(row=9, column=1, sticky='w', padx=20)
+    bc_vhilla_check.grid(row=10, column=1, sticky='w', padx=20)
+    bc_seren_check.grid(row=11, column=1, sticky='w', padx=20)
+    bc_kaling_check.grid(row=12, column=1, sticky='w', padx=20)
 
     bc_close_btn.grid(row=13, columnspan=2)
 
@@ -777,16 +761,4 @@ load_characters()
 # load up listbox data
 populate_entries()
 
-# print tests
-# print(characters['Remu1002'].bosses)
-# cpb = 'Chaos Pink Bean'
-# print(characters['Remu1002'].bosses[cpb])
-
 root.mainloop()
-
-# note for next session:
-# continue working on function 'saving_bossing_progress(v)'
-# ^ figure out how to save the state globally in characters and then potentially create an update_character function that doesnt require the call of create_char.
-
-# the 'lambda o:o.__dict__ helped update the json file data for the boss boolean states, but does not save the checkbutton save state, 
-# also i dont understand lambda o: o.__dict__ enough, learn and use or find different method to acheive same outcome
