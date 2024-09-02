@@ -527,6 +527,7 @@ magenta_frame.grid_columnconfigure(0, weight=1)
 # bossing checklist popup
 def bossing_checklist_popup():
 
+    # checkbutton vars
     cb_cpb = tk.IntVar()
     cb_hh = tk.IntVar()
     cb_cyg = tk.IntVar()

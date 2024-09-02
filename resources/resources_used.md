@@ -31,6 +31,8 @@ The following are the resources I have read, referred and learnt from to better 
 - Removing item from json file and updatng json file: https://www.geeksforgeeks.org/how-to-remove-key-value-pair-from-a-json-file-in-python/
 - Accessing an attribute in an object in a dictionary: https://stackoverflow.com/questions/48091943/python-accessing-attributes-of-an-object-as-a-dict-value
 - Aligning checkbuttons in tkinter: https://stackoverflow.com/questions/44286796/how-to-align-these-checkbuttons-in-tkinter
+- Reading and writing json to a file in python: https://www.geeksforgeeks.org/reading-and-writing-json-to-a-file-in-python/
+- Reading json file using python: https://www.geeksforgeeks.org/read-json-file-using-python/
 - Save states for checkbuttons in tkinter: https://stackoverflow.com/questions/70821194/how-to-save-and-restore-the-status-of-a-variable-number-of-tkinter-checkbuttons
 - Checkbutton checkstatus saving in TopLevel widgets and garbage collection: https://stackoverflow.com/questions/59797094/tkinter-checkbutton-not-updating-when-changing-variable
 - Checkbutton saving the checkstatus in toplevel widgets and garbage collection (additional): https://stackoverflow.com/questions/65652146/checkbutton-status-check-in-toplevel
