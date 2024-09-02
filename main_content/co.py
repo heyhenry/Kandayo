@@ -548,7 +548,7 @@ def bossing_checklist_popup():
     cb_darknell = tk.IntVar()
     cb_vhilla = tk.IntVar()
     cb_seren = tk.IntVar()
-    cb_kaling = tk.IntVar()
+    cb_kaling = tk.IntVar() 
 
     aesthetic_params = {'font': ('Kozuka Gothic Pro B', 12)}
 
@@ -568,15 +568,37 @@ def bossing_checklist_popup():
         # the inability to set the tkinter variables, letting the program know to not run the rest of the function's code
         return
 
-    # saving the checked state of bosses
-    def updating_bossing_progress(cb_boss):
+    # load the bosses checkstates
+    cb_cpb.set(characters[selected_ign].bosses['Chaos Pink Bean'])
+    cb_hh.set(characters[selected_ign].bosses['Hard Hilla'])
+    cb_cyg.set(characters[selected_ign].bosses['Cygnus'])
+    cb_czak.set(characters[selected_ign].bosses['Chaos Zakum'])
+    cb_pno.set(characters[selected_ign].bosses['Princess No'])
+    cb_cqueen.set(characters[selected_ign].bosses['Chaos Queen'])
+    cb_cpierre.set(characters[selected_ign].bosses['Chaos Pierre'])
+    cb_cvonbon.set(characters[selected_ign].bosses['Chaos VonBon'])
+    cb_cvell.set(characters[selected_ign].bosses['Chaos Vellum'])
+    cb_akechi.set(characters[selected_ign].bosses['Akechi Mitsuhide'])
+    cb_hmag.set(characters[selected_ign].bosses['Hard Magnus'])
+    cb_cpap.set(characters[selected_ign].bosses['Chaos Papulatus'])
+    cb_lotus.set(characters[selected_ign].bosses['Lotus'])
+    cb_damien.set(characters[selected_ign].bosses['Damien'])
+    cb_gslime.set(characters[selected_ign].bosses['Guardian Slime'])
+    cb_lucid.set(characters[selected_ign].bosses['Lucid'])
+    cb_will.set(characters[selected_ign].bosses['Will'])
+    cb_gloom.set(characters[selected_ign].bosses['Gloom'])
+    cb_darknell.set(characters[selected_ign].bosses['Darknell'])
+    cb_vhilla.set(characters[selected_ign].bosses['Versus Hilla'])
+    cb_seren.set(characters[selected_ign].bosses['Seren'])
+    cb_kaling.set(characters[selected_ign].bosses['Kaling'])
 
-        # change dictionary value for selected boss
-        if cb_boss.get():
-            characters[selected_ign].bosses['Chaos Pink Bean'] = True
-        else:
-            characters[selected_ign].bosses['Chaos Pink Bean'] = False
-        print(characters[selected_ign].bosses['Chaos Pink Bean'])
+
+    # # updating the checkstate of bosses from the bosslist obj of a character
+    # def updating_bossing_progress(cb_boss):
+        
+    #     if cb_boss.get():
+    #         characters[selected_ign].bosses[]
+
 
     bc_win = tk.Toplevel(orange_frame)
     bc_win.title('Bossing Checklist')
@@ -586,7 +608,7 @@ def bossing_checklist_popup():
     bc_weeklies_completed_lbl = tk.Checkbutton(bc_win, text=f"Weeklies Completed: {characters[selected_ign].capped}", **aesthetic_params)
 
     # first column of bosses
-    bc_cpb_check = tk.Checkbutton(bc_win, text='Chaos Pink Bean', **aesthetic_params, variable=cb_cpb, command=lambda:updating_bossing_progress(cb_cpb))
+    bc_cpb_check = tk.Checkbutton(bc_win, text='Chaos Pink Bean', **aesthetic_params, variable=cb_cpb)#, command=lambda:updating_bossing_progress(cb_cpb)
     bc_hh_check = tk.Checkbutton(bc_win, text='Hard Hilla', **aesthetic_params, variable=cb_hh)
     bc_cyg_check = tk.Checkbutton(bc_win, text='Cygnus', **aesthetic_params, variable=cb_cyg)
     bc_czak_check = tk.Checkbutton(bc_win, text='Chaos Zakum', **aesthetic_params, variable=cb_czak)
@@ -613,6 +635,30 @@ def bossing_checklist_popup():
 
     bc_close_btn = tk.Button(bc_win, text='Close', **aesthetic_params)
 
+    # storing the checkstate values to circumvent python's garbage collection
+    bc_cpb_check.var = cb_cpb
+    bc_hh_check.var = cb_hh
+    bc_cyg_check.var = cb_cyg
+    bc_czak_check.var = cb_czak
+    bc_pno_check.var = cb_pno
+    bc_cqueen_check.var = cb_cqueen
+    bc_cpierre_check.var = cb_cpierre
+    bc_cvonbon_check.var = cb_cvonbon
+    bc_cvell_check.var = cb_cvell
+    bc_akechi_check.var = cb_akechi
+    bc_hmag_check.var = cb_hmag
+    bc_cpap_check.var = cb_cpap
+    bc_lotus_check.var = cb_lotus
+    bc_damien_check.var = cb_damien
+    bc_gslime_check.var = cb_gslime
+    bc_lucid_check.var = cb_lucid
+    bc_will_check.var = cb_will
+    bc_gloom_check.var = cb_gloom
+    bc_darknell_check.var = cb_darknell
+    bc_seren_check.var = cb_seren
+    bc_kaling_check.var = cb_kaling
+
+    # grid layout configs
     bc_character_lbl.grid(row=0, columnspan=2)
     bc_weeklies_completed_lbl.grid(row=1, columnspan=2)
 
@@ -718,3 +764,6 @@ root.mainloop()
 # note for next session:
 # continue working on function 'saving_bossing_progress(v)'
 # ^ figure out how to save the state globally in characters and then potentially create an update_character function that doesnt require the call of create_char.
+
+# the 'lambda o:o.__dict__ helped update the json file data for the boss boolean states, but does not save the checkbutton save state, 
+# also i dont understand lambda o: o.__dict__ enough, learn and use or find different method to acheive same outcome
