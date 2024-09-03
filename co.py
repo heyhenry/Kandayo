@@ -177,7 +177,13 @@ def populate_entries():
         chars_lb.insert('end', char_ign)
 
 chars_lb = tk.Listbox(red_frame, height=30)
-chars_lb.place(relx=0.5, rely=0.5, anchor='center')
+clb_scrollbar = tk.Scrollbar(red_frame)
+
+chars_lb.pack(side='left', fill='both', expand=True, padx=(20, 0), pady=20)
+clb_scrollbar.pack(side='right', fill='both', padx=(0, 20), pady=20)
+
+chars_lb.config(yscrollcommand=clb_scrollbar.set)
+clb_scrollbar.config(command=chars_lb.yview)
 
 # blue frame
 
