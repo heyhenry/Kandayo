@@ -36,3 +36,5 @@ The following are the resources I have read, referred and learnt from to better 
 - Save states for checkbuttons in tkinter: https://stackoverflow.com/questions/70821194/how-to-save-and-restore-the-status-of-a-variable-number-of-tkinter-checkbuttons
 - Checkbutton checkstatus saving in TopLevel widgets and garbage collection: https://stackoverflow.com/questions/59797094/tkinter-checkbutton-not-updating-when-changing-variable
 - Checkbutton saving the checkstatus in toplevel widgets and garbage collection (additional): https://stackoverflow.com/questions/65652146/checkbutton-status-check-in-toplevel
+- Place() method of tkinter: https://stackoverflow.com/questions/52472105/does-grid-has-a-fill-attribute-like-pack-in-tkinter
+- Scrollbar Tkinter: https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/

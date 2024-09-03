@@ -149,36 +149,6 @@
             "Kaling": false
         }
     },
-    "ghhj": {
-        "ign": "ghhj",
-        "job": "ghgh",
-        "level": "ghjg",
-        "capped": false,
-        "bosses": {
-            "Chaos Pink Bean": false,
-            "Hard Hilla": false,
-            "Cygnus": false,
-            "Chaos Zakum": false,
-            "Princess No": false,
-            "Chaos Queen": false,
-            "Chaos Pierre": false,
-            "Chaos VonBon": false,
-            "Chaos Vellum": false,
-            "Akechi Mitsuhide": false,
-            "Hard Magnus": false,
-            "Chaos Papulatus": false,
-            "Lotus": false,
-            "Damien": false,
-            "Guardian Slime": false,
-            "Lucid": false,
-            "Will": false,
-            "Gloom": false,
-            "Darknell": false,
-            "Versus Hilla": false,
-            "Seren": false,
-            "Kaling": false
-        }
-    },
     "thjghj": {
         "ign": "thjghj",
         "job": "ghjghj",
@@ -543,6 +513,36 @@
         "ign": "123123",
         "job": "12312",
         "level": "1231231",
+        "capped": false,
+        "bosses": {
+            "Chaos Pink Bean": false,
+            "Hard Hilla": false,
+            "Cygnus": false,
+            "Chaos Zakum": false,
+            "Princess No": false,
+            "Chaos Queen": false,
+            "Chaos Pierre": false,
+            "Chaos VonBon": false,
+            "Chaos Vellum": false,
+            "Akechi Mitsuhide": false,
+            "Hard Magnus": false,
+            "Chaos Papulatus": false,
+            "Lotus": false,
+            "Damien": false,
+            "Guardian Slime": false,
+            "Lucid": false,
+            "Will": false,
+            "Gloom": false,
+            "Darknell": false,
+            "Versus Hilla": false,
+            "Seren": false,
+            "Kaling": false
+        }
+    },
+    "sdf": {
+        "ign": "sdf",
+        "job": "f",
+        "level": "df",
         "capped": false,
         "bosses": {
             "Chaos Pink Bean": false,

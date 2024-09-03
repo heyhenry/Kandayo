@@ -789,7 +789,7 @@ green_frame.grid_columnconfigure(0, weight=1)
 green_frame.grid_columnconfigure(1, weight=1)
 green_frame.grid_columnconfigure(2, weight=1)
 
-# root configs for resizability ('can ignore for time being, may reinstate later')
+# root configs for resizability
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
