@@ -56,33 +56,26 @@ def custom_serializer(obj):
 # create a new character entry
 def create_char(ign, job, level):    
 
-    # character entry validation
-    # checks to see if the character already exists in the characters dictionary, if so do not process given character entry and output error message
-    if ign in characters.keys():
-        print('Already Exists!')
-    else:
+    # create a defaulted bosslist obj
+    boss_list = BossList(False, False, False, False, False, False, False, False, False, False, False,
+                            False, False, False, False, False, False, False, False, False, False, False
+                            )
 
-        # create a defaulted bosslist obj
-        boss_list = BossList(False, False, False, False, False, False, False, False, False, False, False,
-                             False, False, False, False, False, False, False, False, False, False, False
-                             )
+    # create a new character obj
+    new_char = CharInfo(ign, job, level, False, boss_list)
+    
+    # add new character obj to the characters dictionary
+    characters[new_char.ign] = new_char
+    
+    # set serialization for characters dictionary for json save file / serialize the characters dictionary to json string
+    json_data = json.dumps(characters, default=custom_serializer, indent=4)
+    
+    # save latest version of characters dictionary to the json save file / updates the json save file with latest data
+    with open(storage_filename, 'w') as outfile:
+        outfile.write(json_data)
 
-        # create a new character obj
-        new_char = CharInfo(ign, job, level, False, boss_list)
-        
-        # add new character obj to the characters dictionary
-        characters[new_char.ign] = new_char
-        
-        # set serialization for characters dictionary for json save file / serialize the characters dictionary to json string
-        json_data = json.dumps(characters, default=custom_serializer, indent=4)
-        
-        # save latest version of characters dictionary to the json save file / updates the json save file with latest data
-        with open(storage_filename, 'w') as outfile:
-            outfile.write(json_data)
-
-        chars_lb.delete(0, 'end')
-        populate_entries()
-        print(characters)
+    chars_lb.delete(0, 'end')
+    populate_entries()
 
 # read and add existing character entries found in the json save file to the characters dictionary
 def load_characters():
@@ -200,9 +193,13 @@ def add_character_popup():
     def validate_character_entry(check_ign):
         # if character already exists in characters dictionary, give error message and close pop-up
         if check_ign in characters.keys():
+            ac_win.destroy()
             messagebox.showerror('Invalid IGN (Player Name)',
                                  'The IGN (Character Name) has already been registered.')
+        elif ac_ign.get() == '' or ac_job.get() == '' or ac_level.get() == '':
             ac_win.destroy()
+            messagebox.showerror('Missing Information',
+                                 'All Input Fields are not filled.')
         else:
             # otherwise, update characters dictionary with new entry and close pop-up
             create_char(ac_ign.get(), ac_job.get(), ac_level.get())
