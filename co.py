@@ -583,6 +583,42 @@ def bossing_checklist_popup():
     cb_seren.set(characters[selected_ign].bosses['Seren'])
     cb_kaling.set(characters[selected_ign].bosses['Kaling'])
 
+    def reset_bosses():
+
+        # reset all checkbutton variables to False
+        cb_cpb.set(False)
+        cb_hh.set(False)
+        cb_cyg.set(False)
+        cb_czak.set(False)
+        cb_pno.set(False)
+        cb_cqueen.set(False)
+        cb_cpierre.set(False)
+        cb_cvonbon.set(False)
+        cb_cvell.set(False)
+        cb_akechi.set(False)
+        cb_hmag.set(False)
+        cb_cpap.set(False)
+        cb_lotus.set(False)
+        cb_damien.set(False)
+        cb_gslime.set(False)
+        cb_lucid.set(False)
+        cb_will.set(False)
+        cb_gloom.set(False)
+        cb_darknell.set(False)
+        cb_vhilla.set(False)
+        cb_seren.set(False)
+        cb_kaling.set(False)
+
+        # run through all bosses in the selected character's bosslist obj
+        for boss_name, boss_val in characters[selected_ign].bosses.items():
+            # set boss value to false
+            characters[selected_ign].bosses[boss_name] = False
+
+        # update latest data to json save file
+        json_object = json.dumps(characters, indent=4, default=custom_serializer)
+
+        with open(storage_filename, 'w') as outfile:
+            outfile.write(json_object)
 
     # updating the checkstate of bosses from the bosslist obj of a character
     def updating_bossing_progress(boss_name, cb_boss):
@@ -639,7 +675,8 @@ def bossing_checklist_popup():
     bc_seren_check = tk.Checkbutton(bc_win, text='Seren', **aesthetic_params, variable=cb_seren, command=lambda:updating_bossing_progress('Seren', cb_seren))
     bc_kaling_check = tk.Checkbutton(bc_win, text='Kaling', **aesthetic_params, variable=cb_kaling, command=lambda:updating_bossing_progress('Kaling', cb_kaling))
 
-    bc_close_btn = tk.Button(bc_win, text='Close', **aesthetic_params, width=15, command=bc_win.destroy)
+    bc_reset_btn = tk.Button(bc_win, text='Reset All', **aesthetic_params, command=reset_bosses)
+    bc_close_btn = tk.Button(bc_win, text='Close', **aesthetic_params, command=bc_win.destroy)
 
     # storing the checkstate values to circumvent python's garbage collection
     bc_cpb_check.var = cb_cpb
@@ -692,7 +729,8 @@ def bossing_checklist_popup():
     bc_seren_check.grid(row=11, column=1, sticky='w', padx=20)
     bc_kaling_check.grid(row=12, column=1, sticky='w', padx=20)
 
-    bc_close_btn.grid(row=13, columnspan=2)
+    bc_reset_btn.grid(row=13, column=0)
+    bc_close_btn.grid(row=13, column=1)
 
     bc_win.grid_rowconfigure(0, weight=1)
     bc_win.grid_rowconfigure(1, weight=1)
