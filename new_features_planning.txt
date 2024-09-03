@@ -1,0 +1,9 @@
+If going with the new design.
+
+Boss_Crystals_Used = 
+Boss_Crystals_Remaining =
+Mesos_Accumulated_From_Bossing =  
+
+Guild_Culvert_Status = 
+Guild_Flag_Status = 
+Guild_Weekly_Mission = 
