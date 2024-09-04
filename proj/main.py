@@ -16,6 +16,16 @@ characters = {}
 storage_filename = 'characters_save.json'
 usr_filename = 'usr_save.json'
 
+# load user
+user = {}
+
+def load_user():
+    if os.path.exists(usr_filename):
+        with open(usr_filename, 'r') as file:
+            usr_data = json.load(file)
+            for usr, usr_info in usr_data.items():
+                user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['boss_crystal_count'])
+
 # // json function //
 # custom json serializer
 def custom_serializer(obj):
@@ -749,6 +759,9 @@ update_utc()
 bonus_ursus_tracker()
 daily_reset()
 weekly_reset()
+
+# load in the user 
+load_user()
 
 # load save data to 'characters' dictionary
 load_characters()
