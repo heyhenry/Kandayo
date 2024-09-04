@@ -767,21 +767,32 @@ blue_frame.grid_columnconfigure(1, weight=1)
 
 # // purple // 
 # purple widgets
-mesos_balance_lbl = tk.Label(purple_frame, text=f'Mesos Balance: {user['usr'].mesos_balance}', font=('Kozuka Gothic Pro B', 12))
+mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+mesos_balance_display_lbl = tk.Label(purple_frame, text=f'{user['usr'].mesos_balance}', font=('Kozuka Gothic Pro B', 10), bg='magenta')
 add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10))
 remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10))
 
-mesos_balance_lbl.grid(row=0, columnspan=2)
-add_mesos_btn.grid(row=1, column=0)
-remove_mesos_btn.grid(row=1, column=1)
+bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
 
-bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining:')
-bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold:')
-wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained:')
+# purple_frame.grid_rowconfigure(0, weight=1)
+# purple_frame.grid_rowconfigure(1, weight=1)
+# purple_frame.grid_rowconfigure(2, weight=1)
+# purple_frame.grid_rowconfigure(3, weight=1)
+# purple_frame.grid_rowconfigure(4, weight=1)
+# purple_frame.grid_columnconfigure(0, weight=1)
+# purple_frame.grid_columnconfigure(1, weight=1)
 
-bc_remaining_lbl.grid(row=2, columnspan=2)
-bc_sold_lbl.grid(row=3, columnspan=2)
-wm_gained_lbl.grid(row=4, columnspan=2)
+mesos_balance_title_lbl.place(x=0, y=10, width=500, height=30)
+mesos_balance_display_lbl.place(x=0, y=30, width=500, height=30)
+add_mesos_btn.place(x=70, y=60, width=150, height=30)
+remove_mesos_btn.place(x=280, y=60, width=150, height=30)
+
+bc_remaining_lbl.place(x=25, y=110, width=250, height=30)
+bc_sold_lbl.place(x=0, y=155, width=250, height=30)
+wm_gained_lbl.place(x=15, y=200, width=250, height=30)
+
 
 # // orange //
 # orange widgets
