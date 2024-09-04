@@ -776,14 +776,6 @@ bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining:', font
 bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
 wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
 
-# purple_frame.grid_rowconfigure(0, weight=1)
-# purple_frame.grid_rowconfigure(1, weight=1)
-# purple_frame.grid_rowconfigure(2, weight=1)
-# purple_frame.grid_rowconfigure(3, weight=1)
-# purple_frame.grid_rowconfigure(4, weight=1)
-# purple_frame.grid_columnconfigure(0, weight=1)
-# purple_frame.grid_columnconfigure(1, weight=1)
-
 mesos_balance_title_lbl.place(x=0, y=10, width=500, height=30)
 mesos_balance_display_lbl.place(x=0, y=30, width=500, height=30)
 add_mesos_btn.place(x=70, y=60, width=150, height=30)
@@ -793,18 +785,23 @@ bc_remaining_lbl.place(x=25, y=110, width=250, height=30)
 bc_sold_lbl.place(x=0, y=155, width=250, height=30)
 wm_gained_lbl.place(x=15, y=200, width=250, height=30)
 
-
 # // orange //
 # orange widgets
-hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1')
-hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2')
-hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3')
-edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links')
+hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1', font=('Kozuka Gothic Pro B', 12))
+hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2', font=('Kozuka Gothic Pro B', 12))
+hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3', font=('Kozuka Gothic Pro B', 12))
+edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12))
 
 hotlink_one_btn.grid(row=0, column=0)
 hotlink_two_btn.grid(row=0, column=1)
 hotlink_three_btn.grid(row=0, column=2)
 edit_hotlinks_btn.grid(row=0, column=3)
+
+orange_frame.grid_rowconfigure(0, weight=1)
+orange_frame.grid_columnconfigure(0, weight=1)
+orange_frame.grid_columnconfigure(1, weight=1)
+orange_frame.grid_columnconfigure(2, weight=1)
+orange_frame.grid_columnconfigure(3, weight=1)
 
 # run on startup
 
