@@ -5,6 +5,7 @@ import datetime as dt
 import webbrowser
 from charinfo import CharInfo
 from bosslist import BossList
+from userinfo import UserInfo
 import json
 import os
 
@@ -51,6 +52,11 @@ def custom_serializer(obj):
            'Versus Hilla': obj.vhilla,
            'Seren': obj.seren,
            'Kaling': obj.kaling             
+        }
+    elif isinstance(obj, UserInfo):
+        return {
+            'mesos_balance': obj.mesos_balance,
+            'boss_crystal_count': obj.boss_crystal_count
         }
     return obj
 
