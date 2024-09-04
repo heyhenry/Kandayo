@@ -25,7 +25,8 @@ def load_user():
         with open(usr_filename, 'r') as file:
             usr_data = json.load(file)
             for usr, usr_info in usr_data.items():
-                user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['boss_crystal_count'], usr_info['hotlink_one'], usr_info['hotlink_two'], usr_info['hotlink_three'])
+                user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['weekly_mesos_gained'], usr_info['boss_crystal_count'], usr_info['boss_crystal_sold'],
+                                      usr_info['hotlink_one'], usr_info['hotlink_two'], usr_info['hotlink_three'])
 
 # // json function //
 # custom json serializer
@@ -67,7 +68,9 @@ def custom_serializer(obj):
     elif isinstance(obj, UserInfo):
         return {
             'mesos_balance': obj.mesos_balance,
+            'weekly_mesos_gained': obj.weekly_mesos_gained,
             'boss_crystal_count': obj.boss_crystal_count,
+            'boss_crystal_sold': obj.boss_crystal_sold,
             'hotlink_one': obj.hotlink_one,
             'hotlink_two': obj.hotlink_two,
             'hotlink_three': obj.hotlink_three
@@ -935,9 +938,9 @@ mesos_balance_display_lbl = tk.Label(purple_frame, text=f'{user['usr'].mesos_bal
 add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos)
 remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos)
 
-bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
-bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
-wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: {user['usr'].weekly_mesos_gained}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
 
 mesos_balance_title_lbl.place(x=0, y=10, width=500, height=30)
 mesos_balance_display_lbl.place(x=0, y=30, width=500, height=30)
