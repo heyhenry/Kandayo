@@ -24,8 +24,6 @@ def custom_serializer(obj):
             'ign': obj.ign,
             'job': obj.job,
             'level': obj.level,
-            'boss_crystal_count': obj.boss_crystal_count,
-            'weekly_mesos_gained': obj.weekly_mesos_gained,
             'boss_list': custom_serializer(obj.boss_list)
         }
     # BossList object
@@ -227,7 +225,7 @@ def create_character(ign, job, level):
                             )
     
     # create a new character object
-    new_char = CharInfo(ign, job, level, 180, 0, boss_list)
+    new_char = CharInfo(ign, job, level, boss_list)
 
     # add new character object to the 'characters' dictionary
     characters[new_char.ign] = new_char
@@ -257,8 +255,7 @@ def load_characters():
 
             # update the 'characters' dictionary with save data
             for char_ign, char_info in characters_data.items():
-                characters[char_ign] = CharInfo(char_ign, char_info['job'], char_info['level'], char_info['boss_crystal_count'], 
-                                                char_info['weekly_mesos_gained'], char_info['boss_list'])
+                characters[char_ign] = CharInfo(char_ign, char_info['job'], char_info['level'], char_info['boss_list'])
 
 # add a new character pop-up winow
 def add_character_popup():
