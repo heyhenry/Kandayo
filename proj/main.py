@@ -700,7 +700,7 @@ def add_mesos():
 
         if received_input.isdigit():
             # updates the mesos balance of the user
-            user['usr'].mesos_balance += int(mesos_amount.get())
+            user['usr'].mesos_balance += int(received_input)
 
             # update the user save file
             json_object = json.dumps(user, indent=4, default=custom_serializer)
@@ -736,6 +736,54 @@ def add_mesos():
     am_win.grid_rowconfigure(1, weight=1)
     am_win.grid_rowconfigure(2, weight=1)
     am_win.grid_columnconfigure(0, weight=1)
+
+# subtract mesos amount from balance
+def subtract_mesos():
+
+    mesos_amount = tk.StringVar()
+
+    def reduce_balance():
+
+        received_input = mesos_amount.get()
+
+        if received_input.isdigit():
+            # validation to ensure input amount is not larger than balance amount
+            if int(received_input) > user['usr'].mesos_balance:
+                messagebox.showerror('Invalid Input',
+                                     'Your amount exceeds your current mesos balance')
+                sm_win.lift()
+            else:
+                user['usr'].mesos_balance -= int(received_input)
+
+                json_object = json.dumps(user, indent=4, default=custom_serializer)
+
+                with open(usr_filename, 'w') as outfile:
+                    outfile.write(json_object)
+
+                mesos_balance_display_lbl.config(text=f'{user["usr"].mesos_balance}')
+
+                sm_win.destroy()
+        else:
+            messagebox.showerror('Invalid Input',
+                                 'Digits Only')
+            sm_win.lift()
+
+    # small popup window asking for user input
+    sm_win = tk.Toplevel(purple_frame)
+    sm_win.title('Subtract Mesos')
+    sm_win.geometry('200x110+900+350')
+    sm_prompt_lbl = tk.Label(sm_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12))
+    sm_amount_entry = tk.Entry(sm_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount)
+    sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=('Kozuka Gothic Pro B', 12), command=reduce_balance)
+
+    sm_prompt_lbl.grid(row=0, column=0)
+    sm_amount_entry.grid(row=1, column=0)
+    sm_submit_btn.grid(row=2, column=0)
+
+    sm_win.grid_rowconfigure(0, weight=1)
+    sm_win.grid_rowconfigure(1, weight=1)
+    sm_win.grid_rowconfigure(2, weight=1)
+    sm_win.grid_columnconfigure(0, weight=1)
 
 # load in the user 
 load_user()
@@ -820,7 +868,7 @@ blue_frame.grid_columnconfigure(1, weight=1)
 mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
 mesos_balance_display_lbl = tk.Label(purple_frame, text=f'{user['usr'].mesos_balance}', font=('Kozuka Gothic Pro B', 10), bg='magenta')
 add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos)
-remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10))
+remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos)
 
 bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
 bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
