@@ -981,3 +981,11 @@ load_characters()
 populate_entries()
 
 root.mainloop()
+
+
+# SELF-NOTES (What's on the agenda for next session):
+# Updating UI + functionality of bossing checklist
+# ----> dropdown to choose party size 1-6
+# ----> dropdown to choose difficulty level (easy, normal, hard, extreme)
+# ----> revamp UI to include boss img
+# ----> revamp UI to be less skinny, more full and wholesome
