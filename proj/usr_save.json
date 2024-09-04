@@ -1,6 +1,9 @@
 {
     "usr": {
         "mesos_balance": 0,
-        "boss_crystal_count": 0
+        "boss_crystal_count": 0,
+        "hotlink_one": "www.google.com",
+        "hotlink_two": "https://docs.google.com/spreadsheets/d/1l1ByO3pq1XC7bMUW5iINZpC6kiQH_cJ1MuSOQNrF7fc/edit?gid=0#gid=0",
+        "hotlink_three": "https://www.youtube.com/watch?v=Wnw-mQ54fhY"
     }
 }

@@ -25,7 +25,7 @@ def load_user():
         with open(usr_filename, 'r') as file:
             usr_data = json.load(file)
             for usr, usr_info in usr_data.items():
-                user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['boss_crystal_count'])
+                user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['boss_crystal_count'], usr_info['hotlink_one'], usr_info['hotlink_two'], usr_info['hotlink_three'])
 
 # // json function //
 # custom json serializer
@@ -67,7 +67,10 @@ def custom_serializer(obj):
     elif isinstance(obj, UserInfo):
         return {
             'mesos_balance': obj.mesos_balance,
-            'boss_crystal_count': obj.boss_crystal_count
+            'boss_crystal_count': obj.boss_crystal_count,
+            'hotlink_one': obj.hotlink_one,
+            'hotlink_two': obj.hotlink_two,
+            'hotlink_three': obj.hotlink_three
         }
     return obj
 
@@ -793,6 +796,26 @@ def open_hotlink(hotlink):
 # editing hotlinks
 def edit_hotlinks():
 
+    first_hotlink = tk.StringVar()
+    second_hotlink = tk.StringVar()
+    third_hotlink = tk.StringVar()
+
+    first_hotlink.set(user['usr'].hotlink_one)
+    second_hotlink.set(user['usr'].hotlink_two)
+    third_hotlink.set(user['usr'].hotlink_three)
+
+    def save_edit():
+        user['usr'].hotlink_one = first_hotlink.get()
+        user['usr'].hotlink_two = second_hotlink.get()
+        user['usr'].hotlink_three = third_hotlink.get()
+
+        json_object = json.dumps(user, indent=4, default=custom_serializer)
+
+        with open(usr_filename, 'w') as outfile:
+            outfile.write(json_object)
+        
+        ehl_win.destroy()
+
     ehl_win = tk.Toplevel(orange_frame)
     ehl_win.title('Edit Hotlinks')
     ehl_win.geometry('+600+150')
@@ -803,7 +826,7 @@ def edit_hotlinks():
     ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink)
     ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3')
     ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink)
-    ehl_edit_btn = tk.Button(ehl_win, text='Save Edit')
+    ehl_edit_btn = tk.Button(ehl_win, text='Save Edit', command=save_edit)
 
     ehl_first_hotlink_lbl.grid(row=0, column=0)
     ehl_first_hotlink_entry.grid(row=0, column=1)
@@ -913,9 +936,9 @@ wm_gained_lbl.place(x=15, y=200, width=250, height=30)
 
 # // orange //
 # orange widgets
-hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1', font=('Kozuka Gothic Pro B', 12))
-hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2', font=('Kozuka Gothic Pro B', 12))
-hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3', font=('Kozuka Gothic Pro B', 12))
+hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_one))
+hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_two))
+hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_three))
 edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), command=edit_hotlinks)
 
 hotlink_one_btn.grid(row=0, column=0)
