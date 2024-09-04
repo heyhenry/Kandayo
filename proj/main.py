@@ -232,7 +232,7 @@ def populate_entries():
     for character_ign in characters:
         chars_lb.insert('end', character_ign)
 
-# // blue function //
+# // blue functions //
 # create a new character
 def create_character(ign, job, level):
 
@@ -687,7 +687,7 @@ def bossing_checklist_popup():
     bc_win.grid_columnconfigure(0, weight=1)
     bc_win.grid_columnconfigure(1, weight=1)
 
-# // purple function //
+# // purple functions //
 # add mesos amount to balance
 def add_mesos():
     
@@ -784,6 +784,11 @@ def subtract_mesos():
     sm_win.grid_rowconfigure(1, weight=1)
     sm_win.grid_rowconfigure(2, weight=1)
     sm_win.grid_columnconfigure(0, weight=1)
+
+# // orange functions // 
+# open weblink
+def open_hotlink(hotlink):
+    webbrowser.open(hotlink)
 
 # load in the user 
 load_user()
