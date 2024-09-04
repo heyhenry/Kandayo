@@ -19,6 +19,7 @@ usr_filename = 'usr_save.json'
 # load user
 user = {}
 
+# load the user data
 def load_user():
     if os.path.exists(usr_filename):
         with open(usr_filename, 'r') as file:
@@ -686,15 +687,18 @@ def bossing_checklist_popup():
     bc_win.grid_columnconfigure(0, weight=1)
     bc_win.grid_columnconfigure(1, weight=1)
 
+# load in the user 
+load_user()
+
 root = tk.Tk()
-root.geometry('800x500+600+150')
+root.geometry('+600+150')
 # root.resizable(False, False)
 
 # // Setting up Frames //
 yellow_frame = tk.Frame(root, width=800, height=120, bg='yellow', highlightbackground='black', highlightthickness=2, borderwidth=1, padx=5, pady=5)
-red_frame = tk.Frame(root, width=400, height=300, bg='red', highlightbackground='black', highlightthickness=1)
-blue_frame = tk.Frame(root, width=400, height=100, bg='blue', highlightbackground='black', highlightthickness=1)
-purple_frame = tk.Frame(root, width=400, height=400, bg='magenta', highlightbackground='black', highlightthickness=1)
+red_frame = tk.Frame(root, width=300, height=300, bg='red', highlightbackground='black', highlightthickness=1)
+blue_frame = tk.Frame(root, width=300, height=100, bg='blue', highlightbackground='black', highlightthickness=1)
+purple_frame = tk.Frame(root, width=500, height=400, bg='magenta', highlightbackground='black', highlightthickness=1)
 
 yellow_frame.grid(row=0, columnspan=2, sticky='nswe')
 red_frame.grid(row=1, column=0, sticky='nswe')
@@ -706,6 +710,11 @@ root.grid_rowconfigure(1, weight=1)
 root.grid_rowconfigure(2, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
+
+yellow_frame.grid_propagate(False)
+purple_frame.grid_propagate(False)
+red_frame.grid_propagate(False)
+blue_frame.grid_propagate(False)
 
 # // yellow frame //
 # yellow widgets
@@ -752,6 +761,24 @@ blue_frame.grid_rowconfigure(1, weight=1)
 blue_frame.grid_columnconfigure(0, weight=1)
 blue_frame.grid_columnconfigure(1, weight=1)
 
+# // purple // 
+# purple widgets
+mesos_balance_lbl = tk.Label(purple_frame, text=f'Mesos Balance: {user['usr'].mesos_balance}', font=('Kozuka Gothic Pro B', 12))
+add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10))
+remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10))
+
+mesos_balance_lbl.grid(row=0, columnspan=2)
+add_mesos_btn.grid(row=1, column=0)
+remove_mesos_btn.grid(row=1, column=1)
+
+bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining:')
+bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold:')
+wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained:')
+
+bc_remaining_lbl.grid(row=2, columnspan=2)
+bc_sold_lbl.grid(row=3, columnspan=2)
+wm_gained_lbl.grid(row=4, columnspan=2)
+
 # run on startup
 
 # bootup timers
@@ -759,9 +786,6 @@ update_utc()
 bonus_ursus_tracker()
 daily_reset()
 weekly_reset()
-
-# load in the user 
-load_user()
 
 # load save data to 'characters' dictionary
 load_characters()
