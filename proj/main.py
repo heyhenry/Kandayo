@@ -790,6 +790,29 @@ def subtract_mesos():
 def open_hotlink(hotlink):
     webbrowser.open(hotlink)
 
+# editing hotlinks
+def edit_hotlinks():
+
+    ehl_win = tk.Toplevel(orange_frame)
+    ehl_win.title('Edit Hotlinks')
+    ehl_win.geometry('+600+150')
+
+    ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1')
+    ehl_first_hotlink_entry = tk.Entry(ehl_win, textvariable=first_hotlink)
+    ehl_second_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 2')
+    ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink)
+    ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3')
+    ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink)
+    ehl_edit_btn = tk.Button(ehl_win, text='Save Edit')
+
+    ehl_first_hotlink_lbl.grid(row=0, column=0)
+    ehl_first_hotlink_entry.grid(row=0, column=1)
+    ehl_second_hotlink_lbl.grid(row=1, column=0)
+    ehl_second_hotlink_entry.grid(row=1, column=1)
+    ehl_third_hotlink_lbl.grid(row=2, column=0)
+    ehl_third_hotlink_entry.grid(row=2, column=1)
+    ehl_edit_btn.grid(row=3, columnspan=2)
+
 # load in the user 
 load_user()
 
@@ -893,7 +916,7 @@ wm_gained_lbl.place(x=15, y=200, width=250, height=30)
 hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1', font=('Kozuka Gothic Pro B', 12))
 hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2', font=('Kozuka Gothic Pro B', 12))
 hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3', font=('Kozuka Gothic Pro B', 12))
-edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12))
+edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), command=edit_hotlinks)
 
 hotlink_one_btn.grid(row=0, column=0)
 hotlink_two_btn.grid(row=0, column=1)
