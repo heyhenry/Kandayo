@@ -800,41 +800,65 @@ def edit_hotlinks():
     second_hotlink = tk.StringVar()
     third_hotlink = tk.StringVar()
 
+    # set vars to save data
     first_hotlink.set(user['usr'].hotlink_one)
     second_hotlink.set(user['usr'].hotlink_two)
     third_hotlink.set(user['usr'].hotlink_three)
 
+    # update hotlink values
     def save_edit():
         user['usr'].hotlink_one = first_hotlink.get()
         user['usr'].hotlink_two = second_hotlink.get()
         user['usr'].hotlink_three = third_hotlink.get()
 
+        # save new hotlink data
         json_object = json.dumps(user, indent=4, default=custom_serializer)
 
         with open(usr_filename, 'w') as outfile:
             outfile.write(json_object)
         
+        # close popup
         ehl_win.destroy()
 
-    ehl_win = tk.Toplevel(orange_frame)
+    ehl_win = tk.Toplevel(orange_frame, bg='#fef2be')
     ehl_win.title('Edit Hotlinks')
-    ehl_win.geometry('+600+150')
+    ehl_win.geometry('500x200+900+350')
 
-    ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1')
-    ehl_first_hotlink_entry = tk.Entry(ehl_win, textvariable=first_hotlink)
-    ehl_second_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 2')
-    ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink)
-    ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3')
-    ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink)
-    ehl_edit_btn = tk.Button(ehl_win, text='Save Edit', command=save_edit)
+    ehl_hotlinks_title_lbl = tk.Label(ehl_win, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
+    ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1:', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
+    ehl_first_hotlink_entry = tk.Entry(ehl_win, textvariable=first_hotlink, font=('Kozuka Gothic Pro B', 12))
+    ehl_second_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 2:', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
+    ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink, font=('Kozuka Gothic Pro B', 12))
+    ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3:', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
+    ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink, font=('Kozuka Gothic Pro B', 12))
+    ehl_edit_btn = tk.Button(ehl_win, text='Save Edit', font=('Kozuka Gothic Pro B', 12), command=save_edit)
 
-    ehl_first_hotlink_lbl.grid(row=0, column=0)
-    ehl_first_hotlink_entry.grid(row=0, column=1)
-    ehl_second_hotlink_lbl.grid(row=1, column=0)
-    ehl_second_hotlink_entry.grid(row=1, column=1)
-    ehl_third_hotlink_lbl.grid(row=2, column=0)
-    ehl_third_hotlink_entry.grid(row=2, column=1)
-    ehl_edit_btn.grid(row=3, columnspan=2)
+    ehl_hotlinks_title_lbl.place(x=0, y=5, width=500, height=30)
+    ehl_first_hotlink_lbl.place(x=0, y=40, width=100, height=30)
+    ehl_first_hotlink_entry.place(x=100, y=40, width=385, height=30)
+    ehl_second_hotlink_lbl.place(x=0, y=80, width=100, height=30)
+    ehl_second_hotlink_entry.place(x=100, y=80, width=385, height=30)
+    ehl_third_hotlink_lbl.place(x=0, y=120, width=100, height=30)
+    ehl_third_hotlink_entry.place(x=100, y=120, width=385, height=30)
+    ehl_edit_btn.place(x=200, y=160, width=100, height=30)
+
+    # ehl_hotlinks_title_lbl.grid(row=0, columnspan=2)
+    # ehl_first_hotlink_lbl.grid(row=1, column=0)
+    # ehl_first_hotlink_entry.grid(row=1, column=1)
+    # ehl_second_hotlink_lbl.grid(row=2, column=0)
+    # ehl_second_hotlink_entry.grid(row=2, column=1)
+    # ehl_third_hotlink_lbl.grid(row=3, column=0)
+    # ehl_third_hotlink_entry.grid(row=3, column=1)
+    # ehl_edit_btn.grid(row=4, columnspan=2)
+
+    # ehl_win.grid_rowconfigure(0, weight=1)
+    # ehl_win.grid_rowconfigure(1, weight=1)
+    # ehl_win.grid_rowconfigure(2, weight=1)
+    # ehl_win.grid_rowconfigure(3, weight=1)
+    # ehl_win.grid_rowconfigure(4, weight=1)
+    # ehl_win.grid_columnconfigure(0, weight=1)
+    # ehl_win.grid_columnconfigure(0, weight=1)
+
 
 # load in the user 
 load_user()
