@@ -12,7 +12,8 @@ import os
 characters = {}
 
 # save file var
-storage_filename = 'kandayo_save.json'
+storage_filename = 'characters_save.json'
+usr_filename = 'usr_save.json'
 
 # // json function //
 # custom json serializer
@@ -92,10 +93,10 @@ def bonus_ursus_tracker():
 
     # check if the server time is currently within the bonus ursus time period
     if utc_time >= uto_start and utc_time <= uto_end:
-        ursus_time_lbl.config('Active Ursus 2x (Round One)')
+        ursus_time_lbl.config(text='Active Ursus 2x (Round One)')
         ursus_time_lbl.after(1000, bonus_ursus_tracker)
     elif utc_time >= utt_start and utc_time <= utt_end:
-        ursus_time_lbl.config('Active Ursus 2x (Round Two)')
+        ursus_time_lbl.config(text='Active Ursus 2x (Round Two)')
         ursus_time_lbl.after(1000, bonus_ursus_tracker)
     else:
         # determine when the next ursus bonus will occur
@@ -673,6 +674,7 @@ def bossing_checklist_popup():
     bc_win.grid_columnconfigure(1, weight=1)
 
 root = tk.Tk()
+root.geometry('800x500+600+150')
 # root.resizable(False, False)
 
 # // Setting up Frames //
