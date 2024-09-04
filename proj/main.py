@@ -691,19 +691,22 @@ def bossing_checklist_popup():
 load_user()
 
 root = tk.Tk()
+# position window display upon open
 root.geometry('+600+150')
-# root.resizable(False, False)
+root.resizable(False, False)
 
 # // Setting up Frames //
 yellow_frame = tk.Frame(root, width=800, height=120, bg='yellow', highlightbackground='black', highlightthickness=2, borderwidth=1, padx=5, pady=5)
 red_frame = tk.Frame(root, width=300, height=300, bg='red', highlightbackground='black', highlightthickness=1)
 blue_frame = tk.Frame(root, width=300, height=100, bg='blue', highlightbackground='black', highlightthickness=1)
 purple_frame = tk.Frame(root, width=500, height=400, bg='magenta', highlightbackground='black', highlightthickness=1)
+orange_frame = tk.Frame(root, width=500, height=100, bg='orange', highlightbackground='black', highlightthickness=1)
 
 yellow_frame.grid(row=0, columnspan=2, sticky='nswe')
 red_frame.grid(row=1, column=0, sticky='nswe')
 blue_frame.grid(row=2, column=0, sticky='nswe')
 purple_frame.grid(row=1, rowspan=2, column=1, sticky='nswe')
+orange_frame.grid(row=2, column=1, sticky='nswe')
 
 root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
@@ -715,6 +718,7 @@ yellow_frame.grid_propagate(False)
 purple_frame.grid_propagate(False)
 red_frame.grid_propagate(False)
 blue_frame.grid_propagate(False)
+orange_frame.grid_propagate(False)
 
 # // yellow frame //
 # yellow widgets
