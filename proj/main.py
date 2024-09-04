@@ -687,6 +687,56 @@ def bossing_checklist_popup():
     bc_win.grid_columnconfigure(0, weight=1)
     bc_win.grid_columnconfigure(1, weight=1)
 
+# // purple function //
+# add mesos amount to balance
+def add_mesos():
+    
+    mesos_amount = tk.StringVar()
+
+    def topup_balance():
+
+        # validate input
+        received_input = mesos_amount.get()
+
+        if received_input.isdigit():
+            # updates the mesos balance of the user
+            user['usr'].mesos_balance += int(mesos_amount.get())
+
+            # update the user save file
+            json_object = json.dumps(user, indent=4, default=custom_serializer)
+
+            with open(usr_filename, 'w') as outfile:
+                outfile.write(json_object)
+
+            # update the mesos balance label
+            mesos_balance_display_lbl.config(text=f'{user["usr"].mesos_balance}')
+
+            # close popup
+            am_win.destroy()
+        else:
+            # send error prompt
+            messagebox.showerror('Invalid Input', 
+                                 'Digits Only')
+            # present popup window post closure of error prompt
+            am_win.lift()
+
+    # small popup window asking for user input
+    am_win = tk.Toplevel(purple_frame)
+    am_win.title('Add Mesos')
+    am_win.geometry('200x110+900+350')
+    am_prompt_lbl = tk.Label(am_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12))
+    am_amount_entry = tk.Entry(am_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount)
+    am_submit_btn = tk.Button(am_win, text='Add to Balance', font=('Kozuka Gothic Pro B', 12), command=topup_balance)
+
+    am_prompt_lbl.grid(row=0, column=0)
+    am_amount_entry.grid(row=1, column=0)
+    am_submit_btn.grid(row=2, column=0)
+
+    am_win.grid_rowconfigure(0, weight=1)
+    am_win.grid_rowconfigure(1, weight=1)
+    am_win.grid_rowconfigure(2, weight=1)
+    am_win.grid_columnconfigure(0, weight=1)
+
 # load in the user 
 load_user()
 
@@ -769,7 +819,7 @@ blue_frame.grid_columnconfigure(1, weight=1)
 # purple widgets
 mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
 mesos_balance_display_lbl = tk.Label(purple_frame, text=f'{user['usr'].mesos_balance}', font=('Kozuka Gothic Pro B', 10), bg='magenta')
-add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10))
+add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos)
 remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10))
 
 bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
