@@ -783,6 +783,18 @@ bc_remaining_lbl.grid(row=2, columnspan=2)
 bc_sold_lbl.grid(row=3, columnspan=2)
 wm_gained_lbl.grid(row=4, columnspan=2)
 
+# // orange //
+# orange widgets
+hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1')
+hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2')
+hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3')
+edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links')
+
+hotlink_one_btn.grid(row=0, column=0)
+hotlink_two_btn.grid(row=0, column=1)
+hotlink_three_btn.grid(row=0, column=2)
+edit_hotlinks_btn.grid(row=0, column=3)
+
 # run on startup
 
 # bootup timers
