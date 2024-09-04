@@ -305,6 +305,7 @@ def add_character_popup():
     ac_win = tk.Toplevel(blue_frame)
     ac_win.title('Add New Character')
     ac_win.geometry('300x200+650+150')
+    ac_win.resizable(False, False)
 
     ac_title_lbl = tk.Label(ac_win, text='Add New Character', font=('Kozuka Gothic Pro B', 12))
     ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:', font=('Kozuka Gothic Pro B', 12))
@@ -391,6 +392,7 @@ def update_character_popup():
     uc_win = tk.Toplevel(blue_frame)
     uc_win.title('Update Character')
     uc_win.geometry('300x200+650+150')
+    uc_win.resizable(False, False)
 
     uc_title_lbl = tk.Label(uc_win, text='Update Character', font=('Kozuka Gothic Pro B', 12))
     uc_ign_lbl = tk.Label(uc_win, text='In-Game Name:', font=('Kozuka Gothic Pro B', 12))
@@ -586,7 +588,8 @@ def bossing_checklist_popup():
 
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title('Bossing Checklist')
-    bc_win.geometry('400x700')    
+    bc_win.geometry('400x700')   
+    bc_win.resizable(False, False) 
 
     bc_character_lbl = tk.Label(bc_win, text=f"{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}", font= ('Kozuka Gothic Pro B', 12))
 
@@ -727,6 +730,8 @@ def add_mesos():
     am_win = tk.Toplevel(purple_frame)
     am_win.title('Add Mesos')
     am_win.geometry('200x110+900+350')
+    am_win.resizable(False, False)
+
     am_prompt_lbl = tk.Label(am_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12))
     am_amount_entry = tk.Entry(am_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount)
     am_submit_btn = tk.Button(am_win, text='Add to Balance', font=('Kozuka Gothic Pro B', 12), command=topup_balance)
@@ -775,6 +780,8 @@ def subtract_mesos():
     sm_win = tk.Toplevel(purple_frame)
     sm_win.title('Subtract Mesos')
     sm_win.geometry('200x110+900+350')
+    sm_win.resizable(False, False)
+
     sm_prompt_lbl = tk.Label(sm_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12))
     sm_amount_entry = tk.Entry(sm_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount)
     sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=('Kozuka Gothic Pro B', 12), command=reduce_balance)
@@ -823,6 +830,7 @@ def edit_hotlinks():
     ehl_win = tk.Toplevel(orange_frame, bg='#fef2be')
     ehl_win.title('Edit Hotlinks')
     ehl_win.geometry('500x200+900+350')
+    ehl_win.resizable(False, False)
 
     ehl_hotlinks_title_lbl = tk.Label(ehl_win, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
     ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1:', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
@@ -841,24 +849,6 @@ def edit_hotlinks():
     ehl_third_hotlink_lbl.place(x=0, y=120, width=100, height=30)
     ehl_third_hotlink_entry.place(x=100, y=120, width=385, height=30)
     ehl_edit_btn.place(x=200, y=160, width=100, height=30)
-
-    # ehl_hotlinks_title_lbl.grid(row=0, columnspan=2)
-    # ehl_first_hotlink_lbl.grid(row=1, column=0)
-    # ehl_first_hotlink_entry.grid(row=1, column=1)
-    # ehl_second_hotlink_lbl.grid(row=2, column=0)
-    # ehl_second_hotlink_entry.grid(row=2, column=1)
-    # ehl_third_hotlink_lbl.grid(row=3, column=0)
-    # ehl_third_hotlink_entry.grid(row=3, column=1)
-    # ehl_edit_btn.grid(row=4, columnspan=2)
-
-    # ehl_win.grid_rowconfigure(0, weight=1)
-    # ehl_win.grid_rowconfigure(1, weight=1)
-    # ehl_win.grid_rowconfigure(2, weight=1)
-    # ehl_win.grid_rowconfigure(3, weight=1)
-    # ehl_win.grid_rowconfigure(4, weight=1)
-    # ehl_win.grid_columnconfigure(0, weight=1)
-    # ehl_win.grid_columnconfigure(0, weight=1)
-
 
 # load in the user 
 load_user()
