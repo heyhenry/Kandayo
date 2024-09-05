@@ -65,7 +65,7 @@ def custom_serializer(obj):
            'Versus Hilla': custom_serializer(obj.vhilla),
            'Seren': custom_serializer(obj.seren),
            'Kaling': custom_serializer(obj.kaling),
-           'Black Mage': custom_serializer(obj.bm)          
+           'Kalos': custom_serializer(obj.kalos)          
         }
     # Boss object
     elif isinstance(obj, Boss):
@@ -278,7 +278,7 @@ def create_character(ign, job, level):
         vhilla = Boss('Versus Hilla', False, 'Select Difficulty', 'Select Party Size'),
         seren = Boss('Seren', False, 'Select Difficulty', 'Select Party Size'),
         kaling = Boss('Kaling', False, 'Select Difficulty', 'Select Party Size'),
-        bm = Boss('Black Mage', False, 'Select Difficulty', 'Select Party Size')
+        kalos = Boss('Kalos', False, 'Select Difficulty', 'Select Party Size')
     )
     
     # create a new character object
@@ -553,7 +553,7 @@ def bossing_checklist_popup():
             'Versus Hilla': vhilla_difficulty_choice,
             'Seren': seren_difficulty_choice,
             'Kaling': kaling_difficulty_choice,
-            'Black Mage': bm_difficulty_choice
+            'Kalos': kalos_difficulty_choice
         }
 
         # loops through and updates each boss's difficulty
@@ -598,7 +598,7 @@ def bossing_checklist_popup():
             'Versus Hilla': vhilla_party_size_choice,
             'Seren': seren_party_size_choice,
             'Kaling': kaling_party_size_choice,
-            'Black Mage': bm_party_size_choice
+            'Kalos': kalos_party_size_choice
         }
 
         # loops through and updates each boss's party size
@@ -838,14 +838,14 @@ def bossing_checklist_popup():
     kaling_party_size_choice.set(characters[selected_ign].boss_list['Kaling']['party_size'])
     kaling_status.set(characters[selected_ign].boss_list['Kaling']['boss_clear'])
 
-    # Black Mage Vars
-    bm_difficulty_choice = tk.StringVar()
-    bm_party_size_choice = tk.StringVar()
-    bm_status = tk.IntVar()
+    # Kalos Vars
+    kalos_difficulty_choice = tk.StringVar()
+    kalos_party_size_choice = tk.StringVar()
+    kalos_status = tk.IntVar()
 
-    bm_difficulty_choice.set(characters[selected_ign].boss_list['Black Mage']['boss_difficulty'])
-    bm_party_size_choice.set(characters[selected_ign].boss_list['Black Mage']['party_size'])
-    bm_status.set(characters[selected_ign].boss_list['Black Mage']['boss_clear'])
+    kalos_difficulty_choice.set(characters[selected_ign].boss_list['Kalos']['boss_difficulty'])
+    kalos_party_size_choice.set(characters[selected_ign].boss_list['Kalos']['party_size'])
+    kalos_status.set(characters[selected_ign].boss_list['Kalos']['boss_clear'])
 
     # ---> Spacers <---
 
@@ -1007,12 +1007,12 @@ def bossing_checklist_popup():
     kaling_party_size = tk.OptionMenu(bc_win, kaling_party_size_choice, *party_size)
     kaling_clear_status = tk.Checkbutton(bc_win, variable=kaling_status, command=lambda:update_check_status('Kaling', kaling_status))
 
-    # Black Mage
-    bm_name = tk.Label(bc_win, text='Black Mage')
-    bm_img = tk.Label(bc_win, text='BOSS IMG HERE')
-    bm_difficulty = tk.OptionMenu(bc_win, bm_difficulty_choice, *difficulties)
-    bm_party_size = tk.OptionMenu(bc_win, bm_party_size_choice, *party_size)
-    bm_clear_status = tk.Checkbutton(bc_win, variable=bm_status, command=lambda:update_check_status('Black Mage', bm_status))
+    # Kalos
+    kalos_name = tk.Label(bc_win, text='Kalos')
+    kalos_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    kalos_difficulty = tk.OptionMenu(bc_win, kalos_difficulty_choice, *difficulties)
+    kalos_party_size = tk.OptionMenu(bc_win, kalos_party_size_choice, *party_size)
+    kalos_clear_status = tk.Checkbutton(bc_win, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status))
 
     # Buttons
     reset_clears = tk.Button(bc_win, text='Reset Clears Only')
@@ -1155,11 +1155,11 @@ def bossing_checklist_popup():
     kaling_party_size.grid(row=20, column=3, padx=10)
     kaling_clear_status.grid(row=21, column=3, pady=10, padx=10)
 
-    bm_name.grid(row=17, column=4, pady=10, padx=10)
-    bm_img.grid(row=18, column=4, padx=10)
-    bm_difficulty.grid(row=19, column=4, padx=10)
-    bm_party_size.grid(row=20, column=4, padx=10)
-    bm_clear_status.grid(row=21, column=4, pady=10, padx=10)
+    kalos_name.grid(row=17, column=4, pady=10, padx=10)
+    kalos_img.grid(row=18, column=4, padx=10)
+    kalos_difficulty.grid(row=19, column=4, padx=10)
+    kalos_party_size.grid(row=20, column=4, padx=10)
+    kalos_clear_status.grid(row=21, column=4, pady=10, padx=10)
 
     update_btn.grid(row=23, column=0)
     reset_clears.grid(row=23, column=1)
