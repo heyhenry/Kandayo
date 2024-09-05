@@ -19,7 +19,7 @@
             "Cygnus": {
                 "boss_name": "Cygnus",
                 "boss_clear": false,
-                "boss_difficulty": "Select Difficulty",
+                "boss_difficulty": "Easy",
                 "party_size": "Select Party Size"
             },
             "Chaos Zakum": {
@@ -97,7 +97,7 @@
             "Lucid": {
                 "boss_name": "Lucid",
                 "boss_clear": false,
-                "boss_difficulty": "Select Difficulty",
+                "boss_difficulty": "Normal",
                 "party_size": "Select Party Size"
             },
             "Will": {
@@ -133,7 +133,7 @@
             "Kaling": {
                 "boss_name": "Kaling",
                 "boss_clear": false,
-                "boss_difficulty": "Select Difficulty",
+                "boss_difficulty": "Extreme",
                 "party_size": "Select Party Size"
             },
             "Kalos": {
