@@ -7,20 +7,20 @@
             "Chaos Pink Bean": {
                 "boss_name": "Chaos Pink Bean",
                 "boss_clear": true,
-                "boss_difficulty": "Easy",
-                "party_size": 4
+                "boss_difficulty": "Normal",
+                "party_size": 3
             },
             "Hard Hilla": {
                 "boss_name": "Hard Hilla",
                 "boss_clear": true,
-                "boss_difficulty": "Normal",
-                "party_size": 4
+                "boss_difficulty": "Hard",
+                "party_size": 2
             },
             "Cygnus": {
                 "boss_name": "Cygnus",
                 "boss_clear": true,
-                "boss_difficulty": "Select Difficulty",
-                "party_size": 4
+                "boss_difficulty": "Normal",
+                "party_size": 3
             },
             "Chaos Zakum": {
                 "boss_name": "Chaos Zakum",

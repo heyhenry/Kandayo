@@ -525,31 +525,44 @@ def bossing_checklist_popup():
         with open(storage_filename, 'w') as outfile:
             outfile.write(json_object)
 
+    # updates the difficulty for each boss based on user input
     def update_bossing_difficulty():
-        # updates the bossing difficulty of all bosses
-        characters[selected_ign].boss_list['Chaos Pink Bean']['boss_difficulty'] = cpb_difficulty_choice.get()
-        characters[selected_ign].boss_list['Hard Hilla']['boss_difficulty'] = hh_difficulty_choice.get()
-        characters[selected_ign].boss_list['Cygnus']['boss_difficulty'] = cyg_difficulty_choice.get()
-        characters[selected_ign].boss_list['Chaos Zakum']['boss_difficulty'] = czak_difficulty_choice.get()
-        characters[selected_ign].boss_list['Princess No']['boss_difficulty'] = pno_difficulty_choice.get()
-        characters[selected_ign].boss_list['Chaos Queen']['boss_difficulty'] = cqueen_difficulty_choice.get()
-        characters[selected_ign].boss_list['Chaos Pierre']['boss_difficulty'] = cpierre_difficulty_choice.get()
-        characters[selected_ign].boss_list['Chaos Von Bon']['boss_difficulty'] = cvonbon_difficulty_choice.get()
-        characters[selected_ign].boss_list['Chaos Vellum']['boss_difficulty'] = cvell_difficulty_choice.get()
-        characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_difficulty'] = akechi_difficulty_choice.get()
-        characters[selected_ign].boss_list['Hard Magnus']['boss_difficulty'] = hmag_difficulty_choice.get()
-        characters[selected_ign].boss_list['Chaos Papulatus']['boss_difficulty'] = cpap_difficulty_choice.get()
-        characters[selected_ign].boss_list['Lotus']['boss_difficulty'] = lotus_difficulty_choice.get()
-        characters[selected_ign].boss_list['Damien']['boss_difficulty'] = damien_difficulty_choice.get()
-        characters[selected_ign].boss_list['Guardian Slime']['boss_difficulty'] = gslime_difficulty_choice.get()
-        characters[selected_ign].boss_list['Lucid']['boss_difficulty'] = lucid_difficulty_choice.get()
-        characters[selected_ign].boss_list['Will']['boss_difficulty'] = will_difficulty_choice.get()
-        characters[selected_ign].boss_list['Gloom']['boss_difficulty'] = gloom_difficulty_choice.get()
-        characters[selected_ign].boss_list['Darknell']['boss_difficulty'] = darknell_difficulty_choice.get()
-        characters[selected_ign].boss_list['Versus Hilla']['boss_difficulty'] = vhilla_difficulty_choice.get()
-        characters[selected_ign].boss_list['Seren']['boss_difficulty'] = seren_difficulty_choice.get()
-        characters[selected_ign].boss_list['Kaling']['boss_difficulty'] = kaling_difficulty_choice.get()
-        characters[selected_ign].boss_list['Black Mage']['boss_difficulty'] = bm_difficulty_choice.get()
+
+        # dictionary to hold each boss's difficulty value
+        boss_difficulty_vars = {
+            'Chaos Pink Bean': cpb_difficulty_choice,
+            'Hard Hilla': hh_difficulty_choice,
+            'Cygnus': cyg_difficulty_choice,
+            'Chaos Zakum': czak_difficulty_choice,
+            'Princess No': pno_difficulty_choice,
+            'Chaos Queen': cqueen_difficulty_choice,
+            'Chaos Pierre': cpierre_difficulty_choice,
+            'Chaos Von Bon': cvonbon_difficulty_choice,
+            'Chaos Vellum': cvell_difficulty_choice,
+            'Akechi Mitsuhide': akechi_difficulty_choice,
+            'Hard Magnus': hmag_difficulty_choice,
+            'Chaos Papulatus': cpap_difficulty_choice,
+            'Lotus': lotus_difficulty_choice,
+            'Damien': damien_difficulty_choice,
+            'Guardian Slime': gslime_difficulty_choice,
+            'Lucid': lucid_difficulty_choice,
+            'Will': will_difficulty_choice,
+            'Gloom': gloom_difficulty_choice,
+            'Darknell': darknell_difficulty_choice,
+            'Versus Hilla': vhilla_difficulty_choice,
+            'Seren': seren_difficulty_choice,
+            'Kaling': kaling_difficulty_choice,
+            'Black Mage': bm_difficulty_choice
+        }
+
+        # loops through and updates each boss's difficulty
+        for boss, difficulty_var in boss_difficulty_vars.items():
+            # retrieve boss difficulty value for each boss
+            difficulty_str = difficulty_var.get()
+            # check if the value is a valid digit 
+            difficulty = int(difficulty_str) if difficulty_str.isdigit() else difficulty_str
+            # update the boss's difficulty accordingly
+            characters[selected_ign].boss_list[boss]['boss_difficulty'] = difficulty
         
         # updates the save file
         json_object = json.dumps(characters, indent=4, default=custom_serializer)
@@ -557,33 +570,45 @@ def bossing_checklist_popup():
         with open(storage_filename, 'w') as outfile:
             outfile.write(json_object)
 
+    # updates the party size for each boss based on user's input
     def update_party_size():
-        # updates the party_size variable for each boss
-        # does a check to determine if a viable choice was selected, if so it will convert value to int for the save file
-        characters[selected_ign].boss_list['Chaos Pink Bean']['party_size'] = int(cpb_party_size_choice.get()) if cpb_party_size_choice.get().isdigit() else cpb_party_size_choice.get()
-        characters[selected_ign].boss_list['Hard Hilla']['party_size'] = int(hh_party_size_choice.get()) if hh_party_size_choice.get().isdigit() else hh_party_size_choice.get()
-        characters[selected_ign].boss_list['Cygnus']['party_size'] = int(cyg_party_size_choice.get()) if cyg_party_size_choice.get().isdigit() else cyg_party_size_choice.get()
-        characters[selected_ign].boss_list['Chaos Zakum']['party_size'] = int(czak_party_size_choice.get()) if czak_party_size_choice.get().isdigit() else czak_party_size_choice.get()
-        characters[selected_ign].boss_list['Princess No']['party_size'] = int(pno_party_size_choice.get()) if pno_party_size_choice.get().isdigit() else pno_party_size_choice.get()
-        characters[selected_ign].boss_list['Chaos Queen']['party_size'] = int(cqueen_party_size_choice.get()) if cqueen_party_size_choice.get().isdigit() else cqueen_party_size_choice.get()
-        characters[selected_ign].boss_list['Chaos Pierre']['party_size'] = int(cpierre_party_size_choice.get()) if cpierre_party_size_choice.get().isdigit() else cpierre_party_size_choice.get()
-        characters[selected_ign].boss_list['Chaos Von Bon']['party_size'] = int(cvonbon_party_size_choice.get()) if cvonbon_party_size_choice.get().isdigit() else cvonbon_party_size_choice.get()
-        characters[selected_ign].boss_list['Chaos Vellum']['party_size'] = int(cvell_party_size_choice.get()) if cvell_party_size_choice.get().isdigit() else cvell_party_size_choice.get()
-        characters[selected_ign].boss_list['Akechi Mitsuhide']['party_size'] = int(akechi_party_size_choice.get()) if akechi_party_size_choice.get().isdigit() else akechi_party_size_choice.get()
-        characters[selected_ign].boss_list['Hard Magnus']['party_size'] = int(hmag_party_size_choice.get()) if hmag_party_size_choice.get().isdigit() else hmag_party_size_choice.get()
-        characters[selected_ign].boss_list['Chaos Papulatus']['party_size'] = int(cpap_party_size_choice.get()) if cpap_party_size_choice.get().isdigit() else cpap_party_size_choice.get()
-        characters[selected_ign].boss_list['Lotus']['party_size'] = int(lotus_party_size_choice.get()) if lotus_party_size_choice.get().isdigit() else lotus_party_size_choice.get()
-        characters[selected_ign].boss_list['Damien']['party_size'] = int(damien_party_size_choice.get()) if damien_party_size_choice.get().isdigit() else damien_party_size_choice.get()
-        characters[selected_ign].boss_list['Guardian Slime']['party_size'] = int(gslime_party_size_choice.get()) if gslime_party_size_choice.get().isdigit() else gslime_party_size_choice.get()
-        characters[selected_ign].boss_list['Lucid']['party_size'] = int(lucid_party_size_choice.get()) if lucid_party_size_choice.get().isdigit() else lucid_party_size_choice.get()
-        characters[selected_ign].boss_list['Will']['party_size'] = int(will_party_size_choice.get()) if will_party_size_choice.get().isdigit() else will_party_size_choice.get()
-        characters[selected_ign].boss_list['Gloom']['party_size'] = int(gloom_party_size_choice.get()) if gloom_party_size_choice.get().isdigit() else gloom_party_size_choice.get()
-        characters[selected_ign].boss_list['Darknell']['party_size'] = int(darknell_party_size_choice.get()) if darknell_party_size_choice.get().isdigit() else darknell_party_size_choice.get()
-        characters[selected_ign].boss_list['Versus Hilla']['party_size'] = int(vhilla_party_size_choice.get()) if vhilla_party_size_choice.get().isdigit() else vhilla_party_size_choice.get()
-        characters[selected_ign].boss_list['Seren']['party_size'] = int(seren_party_size_choice.get()) if seren_party_size_choice.get().isdigit() else seren_party_size_choice.get()
-        characters[selected_ign].boss_list['Kaling']['party_size'] = int(kaling_party_size_choice.get()) if kaling_party_size_choice.get().isdigit() else kaling_party_size_choice.get()
-        characters[selected_ign].boss_list['Black Mage']['party_size'] = int(bm_party_size_choice.get()) if bm_party_size_choice.get().isdigit() else bm_party_size_choice.get()
-        
+
+        # dictionary to hold each boss's value for party size
+        boss_party_size_vars = {
+            'Chaos Pink Bean': cpb_party_size_choice,
+            'Hard Hilla': hh_party_size_choice,
+            'Cygnus': cyg_party_size_choice,
+            'Chaos Zakum': czak_party_size_choice,
+            'Princess No': pno_party_size_choice,
+            'Chaos Queen': cqueen_party_size_choice,
+            'Chaos Pierre': cpierre_party_size_choice,
+            'Chaos Von Bon': cvonbon_party_size_choice,
+            'Chaos Vellum': cvell_party_size_choice,
+            'Akechi Mitsuhide': akechi_party_size_choice,
+            'Hard Magnus': hmag_party_size_choice,
+            'Chaos Papulatus': cpap_party_size_choice,
+            'Lotus': lotus_party_size_choice,
+            'Damien': damien_party_size_choice,
+            'Guardian Slime': gslime_party_size_choice,
+            'Lucid': lucid_party_size_choice,
+            'Will': will_party_size_choice,
+            'Gloom': gloom_party_size_choice,
+            'Darknell': darknell_party_size_choice,
+            'Versus Hilla': vhilla_party_size_choice,
+            'Seren': seren_party_size_choice,
+            'Kaling': kaling_party_size_choice,
+            'Black Mage': bm_party_size_choice
+        }
+
+        # loops through and updates each boss's party size
+        for boss, party_var in boss_party_size_vars.items():
+            # retrieve party size value for each boss
+            size_str = party_var.get()
+            # check if the value is a valid digit 
+            size = int(size_str) if size_str.isdigit() else size_str
+            # update the boss's party size accordingly
+            characters[selected_ign].boss_list[boss]['party_size'] = size
+
         # updates the save file
         json_object = json.dumps(characters, indent=4, default=custom_serializer)
 
