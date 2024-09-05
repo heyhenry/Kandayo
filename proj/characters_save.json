@@ -4,12 +4,7 @@
         "job": "asdf",
         "level": "adsf",
         "boss_list": {
-            "Chaos Pink Bean": {
-                "boss_name": "Chaos Pink Bean",
-                "boss_clear": false,
-                "boss_difficulty": "",
-                "party_size": 1
-            },
+            "Chaos Pink Bean": true,
             "Hard Hilla": {
                 "boss_name": "Hard Hilla",
                 "boss_clear": false,
@@ -70,12 +65,7 @@
                 "boss_difficulty": "",
                 "party_size": 1
             },
-            "Chaos Papulatus": {
-                "boss_name": "Chaos Papulatus",
-                "boss_clear": false,
-                "boss_difficulty": "",
-                "party_size": 1
-            },
+            "Chaos Papulatus": true,
             "Lotus": {
                 "boss_name": "Lotus",
                 "boss_clear": false,
