@@ -1,5 +1,5 @@
 class BossList:
-    def __init__(self, cpb, hh, cyg, czak, pno, cqueen, cpierre, cvonbon, cvell, akechi, hmag, cpap, lotus, damien, gslime, lucid, will, gloom, darknell, vhilla, seren, kaling):
+    def __init__(self, cpb, hh, cyg, czak, pno, cqueen, cpierre, cvonbon, cvell, akechi, hmag, cpap, lotus, damien, gslime, lucid, will, gloom, darknell, vhilla, seren, kaling, bm):
         self.cpb = cpb
         self.hh = hh
         self.cyg = cyg
@@ -22,3 +22,4 @@ class BossList:
         self.vhilla = vhilla
         self.seren = seren
         self.kaling = kaling
+        self.bm = bm

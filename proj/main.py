@@ -6,6 +6,7 @@ import webbrowser
 from charinfo import CharInfo
 from bosslist import BossList
 from userinfo import UserInfo
+from boss import Boss
 import json
 import os
 
@@ -42,29 +43,39 @@ def custom_serializer(obj):
     # BossList object
     elif isinstance(obj, BossList):
         return {
-           'Chaos Pink Bean': obj.cpb,
-           'Hard Hilla': obj.hh,
-           'Cygnus': obj.cyg,
-           'Chaos Zakum': obj.czak,
-           'Princess No': obj.pno,
-           'Chaos Queen': obj.cqueen,
-           'Chaos Pierre': obj.cpierre,
-           'Chaos VonBon': obj.cvonbon,
-           'Chaos Vellum': obj.cvell,
-           'Akechi Mitsuhide': obj.akechi,
-           'Hard Magnus': obj.hmag,
-           'Chaos Papulatus': obj.cpap,
-           'Lotus': obj.lotus,
-           'Damien': obj.damien,
-           'Guardian Slime': obj.gslime,
-           'Lucid': obj.lucid,
-           'Will': obj.will,
-           'Gloom': obj.gloom,
-           'Darknell': obj.darknell,
-           'Versus Hilla': obj.vhilla,
-           'Seren': obj.seren,
-           'Kaling': obj.kaling             
+           'Chaos Pink Bean': custom_serializer(obj.cpb),
+           'Hard Hilla': custom_serializer(obj.hh),
+           'Cygnus': custom_serializer(obj.cyg),
+           'Chaos Zakum': custom_serializer(obj.czak),
+           'Princess No': custom_serializer(obj.pno),
+           'Chaos Queen': custom_serializer(obj.cqueen),
+           'Chaos Pierre': custom_serializer(obj.cpierre),
+           'Chaos Von Bon': custom_serializer(obj.cvonbon),
+           'Chaos Vellum': custom_serializer(obj.cvell),
+           'Akechi Mitsuhide': custom_serializer(obj.akechi),
+           'Hard Magnus': custom_serializer(obj.hmag),
+           'Chaos Papulatus': custom_serializer(obj.cpap),
+           'Lotus': custom_serializer(obj.lotus),
+           'Damien': custom_serializer(obj.damien),
+           'Guardian Slime': custom_serializer(obj.gslime),
+           'Lucid': custom_serializer(obj.lucid),
+           'Will': custom_serializer(obj.will),
+           'Gloom': custom_serializer(obj.gloom),
+           'Darknell': custom_serializer(obj.darknell),
+           'Versus Hilla': custom_serializer(obj.vhilla),
+           'Seren': custom_serializer(obj.seren),
+           'Kaling': custom_serializer(obj.kaling),
+           'Black Mage': custom_serializer(obj.bm)          
         }
+    # Boss object
+    elif isinstance(obj, Boss):
+        return {
+            'boss_name': obj.boss_name,
+            'boss_clear': obj.boss_clear,
+            'boss_difficulty': obj.boss_difficulty,
+            'party_size': obj.party_size
+        }
+    # User object
     elif isinstance(obj, UserInfo):
         return {
             'mesos_balance': obj.mesos_balance,
@@ -207,7 +218,7 @@ def weekly_reset():
 
     # check if today is the target day
     if utc_time.weekday() == 3:
-        weekly_reset_lbl.config(text='Today')
+        weekly_reset_lbl.config(text='Weekly Reset is Today')
         weekly_reset_lbl.after(1000, weekly_reset)
     # otherwise
     else:
@@ -243,9 +254,31 @@ def populate_entries():
 def create_character(ign, job, level):
 
     # create a default BossList object
-    boss_list = BossList(False, False, False, False, False, False, False, False, False, False, False,
-                            False, False, False, False, False, False, False, False, False, False, False
-                            )
+    boss_list = BossList(
+        cpb = Boss('Chaos Pink Bean', False, 'Select Difficulty', 'Select Party Size'),
+        hh = Boss('Hard Hilla', False, 'Select Difficulty', 'Select Party Size'),
+        cyg = Boss('Cygnus', False, 'Select Difficulty', 'Select Party Size'),
+        czak = Boss('Chaos Zakum', False, 'Select Difficulty', 'Select Party Size'),
+        pno = Boss('Princess No', False, 'Select Difficulty', 'Select Party Size'),
+        cqueen = Boss('Chaos Queen', False, 'Select Difficulty', 'Select Party Size'),
+        cpierre = Boss('Chaos Pierre', False, 'Select Difficulty', 'Select Party Size'),
+        cvonbon = Boss('Chaos Von Bon', False, 'Select Difficulty', 'Select Party Size'),
+        cvell = Boss('Chaos Vellum', False, 'Select Difficulty', 'Select Party Size'),
+        akechi = Boss('Akechi Mitsuhide', False, 'Select Difficulty', 'Select Party Size'),
+        hmag = Boss('Hard Magnus', False, 'Select Difficulty', 'Select Party Size'),
+        cpap = Boss('Chaos Papulatus', False, 'Select Difficulty', 'Select Party Size'),
+        lotus = Boss('Lotus', False, 'Select Difficulty', 'Select Party Size'),
+        damien = Boss('Damien', False, 'Select Difficulty', 'Select Party Size'),
+        gslime = Boss('Guardian Slime', False, 'Select Difficulty', 'Select Party Size'),
+        lucid = Boss('Lucid', False, 'Select Difficulty', 'Select Party Size'),
+        will = Boss('Will', False, 'Select Difficulty', 'Select Party Size'),
+        gloom = Boss('Gloom', False, 'Select Difficulty', 'Select Party Size'),
+        darknell = Boss('Darknell', False, 'Select Difficulty', 'Select Party Size'),
+        vhilla = Boss('Versus Hilla', False, 'Select Difficulty', 'Select Party Size'),
+        seren = Boss('Seren', False, 'Select Difficulty', 'Select Party Size'),
+        kaling = Boss('Kaling', False, 'Select Difficulty', 'Select Party Size'),
+        bm = Boss('Black Mage', False, 'Select Difficulty', 'Select Party Size')
+    )
     
     # create a new character object
     new_char = CharInfo(ign, job, level, boss_list)
@@ -265,6 +298,9 @@ def create_character(ign, job, level):
 
     # refill the characters list box with latest data
     populate_entries()
+
+    # update the save file in real-time
+    load_characters()
 
 # load save data
 def load_characters():
@@ -458,243 +494,651 @@ def delete_character():
         # update the listbox with latest characters data
         populate_entries()
 
-# bossing checklist popup
+# bossing checklist
 def bossing_checklist_popup():
-
-    # checkbutton vars
-    cb_cpb = tk.IntVar()
-    cb_hh = tk.IntVar()
-    cb_cyg = tk.IntVar()
-    cb_czak = tk.IntVar()
-    cb_pno = tk.IntVar()
-    cb_cqueen = tk.IntVar()
-    cb_cpierre = tk.IntVar()
-    cb_cvonbon = tk.IntVar()
-    cb_cvell = tk.IntVar()
-    cb_akechi = tk.IntVar()
-    cb_hmag = tk.IntVar()
-    cb_cpap = tk.IntVar()
-    cb_lotus = tk.IntVar()
-    cb_damien = tk.IntVar()
-    cb_gslime = tk.IntVar()
-    cb_lucid = tk.IntVar()
-    cb_will = tk.IntVar()
-    cb_gloom = tk.IntVar()
-    cb_darknell = tk.IntVar()
-    cb_vhilla = tk.IntVar()
-    cb_seren = tk.IntVar()
-    cb_kaling = tk.IntVar() 
 
     selected_ign = ''
 
-    # selected character from listbox gets stored in selected_ign
+    # store selected ign into var for reference 'selected_ign'
     for i in chars_lb.curselection():
         selected_ign = chars_lb.get(i)
 
-    # load the characters dictionary directly via parsing the json file into a python object
-    load_characters()
-
-    # validation check to see if a character has been stored in selected_ign
-    # if there is no character stored, then show error message and do not execute rest of the function's code
+    # validation check for valid selection
     if selected_ign == '':
         messagebox.showerror('Character Selection Error',
                              'A character has not been selected from the list.')
-        # a return statement is required here to let the program know to discontinue the rest of the code 
-        # note: unlike in the update_character_popup function, as the aforementioned prevents code execution via 
-        # the inability to set the tkinter variables, letting the program know to not run the rest of the function's code
+        # discontinue with popup
         return
 
-    # load the boss_list checkstates
-    cb_cpb.set(characters[selected_ign].boss_list['Chaos Pink Bean'])
-    cb_hh.set(characters[selected_ign].boss_list['Hard Hilla'])
-    cb_cyg.set(characters[selected_ign].boss_list['Cygnus'])
-    cb_czak.set(characters[selected_ign].boss_list['Chaos Zakum'])
-    cb_pno.set(characters[selected_ign].boss_list['Princess No'])
-    cb_cqueen.set(characters[selected_ign].boss_list['Chaos Queen'])
-    cb_cpierre.set(characters[selected_ign].boss_list['Chaos Pierre'])
-    cb_cvonbon.set(characters[selected_ign].boss_list['Chaos VonBon'])
-    cb_cvell.set(characters[selected_ign].boss_list['Chaos Vellum'])
-    cb_akechi.set(characters[selected_ign].boss_list['Akechi Mitsuhide'])
-    cb_hmag.set(characters[selected_ign].boss_list['Hard Magnus'])
-    cb_cpap.set(characters[selected_ign].boss_list['Chaos Papulatus'])
-    cb_lotus.set(characters[selected_ign].boss_list['Lotus'])
-    cb_damien.set(characters[selected_ign].boss_list['Damien'])
-    cb_gslime.set(characters[selected_ign].boss_list['Guardian Slime'])
-    cb_lucid.set(characters[selected_ign].boss_list['Lucid'])
-    cb_will.set(characters[selected_ign].boss_list['Will'])
-    cb_gloom.set(characters[selected_ign].boss_list['Gloom'])
-    cb_darknell.set(characters[selected_ign].boss_list['Darknell'])
-    cb_vhilla.set(characters[selected_ign].boss_list['Versus Hilla'])
-    cb_seren.set(characters[selected_ign].boss_list['Seren'])
-    cb_kaling.set(characters[selected_ign].boss_list['Kaling'])
+    # update bossing checklist
+    def update_check_status(boss_name, clicked_status):
 
-    # reset all boss status
-    def reset_boss_list():
+        # determines which value change is required based on checkbutton status
+        if clicked_status.get():
+            characters[selected_ign].boss_list[boss_name]['boss_clear'] = True
+        else:
+            characters[selected_ign].boss_list[boss_name]['boss_clear'] = False
 
-        # reset all checkbutton variables to False
-        cb_cpb.set(False)
-        cb_hh.set(False)
-        cb_cyg.set(False)
-        cb_czak.set(False)
-        cb_pno.set(False)
-        cb_cqueen.set(False)
-        cb_cpierre.set(False)
-        cb_cvonbon.set(False)
-        cb_cvell.set(False)
-        cb_akechi.set(False)
-        cb_hmag.set(False)
-        cb_cpap.set(False)
-        cb_lotus.set(False)
-        cb_damien.set(False)
-        cb_gslime.set(False)
-        cb_lucid.set(False)
-        cb_will.set(False)
-        cb_gloom.set(False)
-        cb_darknell.set(False)
-        cb_vhilla.set(False)
-        cb_seren.set(False)
-        cb_kaling.set(False)
-
-        # loop through all bosses in the selected character's boss_list object
-        for boss_name, boss_val in characters[selected_ign].boss_list.items():
-            # set boss values to false
-            characters[selected_ign].boss_list[boss_name] = False
-
-        # update save data
+        # updates the save file
         json_object = json.dumps(characters, indent=4, default=custom_serializer)
 
         with open(storage_filename, 'w') as outfile:
             outfile.write(json_object)
 
-    # updating the checkstate of bosses from the boss_list object of a character
-    def updating_bossing_progress(boss_name, cb_boss):
+    def update_bossing_difficulty():
+        # updates the bossing difficulty of all bosses
+        characters[selected_ign].boss_list['Chaos Pink Bean']['boss_difficulty'] = cpb_difficulty_choice.get()
+        characters[selected_ign].boss_list['Hard Hilla']['boss_difficulty'] = hh_difficulty_choice.get()
+        characters[selected_ign].boss_list['Cygnus']['boss_difficulty'] = cyg_difficulty_choice.get()
+        characters[selected_ign].boss_list['Chaos Zakum']['boss_difficulty'] = czak_difficulty_choice.get()
+        characters[selected_ign].boss_list['Princess No']['boss_difficulty'] = pno_difficulty_choice.get()
+        characters[selected_ign].boss_list['Chaos Queen']['boss_difficulty'] = cqueen_difficulty_choice.get()
+        characters[selected_ign].boss_list['Chaos Pierre']['boss_difficulty'] = cpierre_difficulty_choice.get()
+        characters[selected_ign].boss_list['Chaos Von Bon']['boss_difficulty'] = cvonbon_difficulty_choice.get()
+        characters[selected_ign].boss_list['Chaos Vellum']['boss_difficulty'] = cvell_difficulty_choice.get()
+        characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_difficulty'] = akechi_difficulty_choice.get()
+        characters[selected_ign].boss_list['Hard Magnus']['boss_difficulty'] = hmag_difficulty_choice.get()
+        characters[selected_ign].boss_list['Chaos Papulatus']['boss_difficulty'] = cpap_difficulty_choice.get()
+        characters[selected_ign].boss_list['Lotus']['boss_difficulty'] = lotus_difficulty_choice.get()
+        characters[selected_ign].boss_list['Damien']['boss_difficulty'] = damien_difficulty_choice.get()
+        characters[selected_ign].boss_list['Guardian Slime']['boss_difficulty'] = gslime_difficulty_choice.get()
+        characters[selected_ign].boss_list['Lucid']['boss_difficulty'] = lucid_difficulty_choice.get()
+        characters[selected_ign].boss_list['Will']['boss_difficulty'] = will_difficulty_choice.get()
+        characters[selected_ign].boss_list['Gloom']['boss_difficulty'] = gloom_difficulty_choice.get()
+        characters[selected_ign].boss_list['Darknell']['boss_difficulty'] = darknell_difficulty_choice.get()
+        characters[selected_ign].boss_list['Versus Hilla']['boss_difficulty'] = vhilla_difficulty_choice.get()
+        characters[selected_ign].boss_list['Seren']['boss_difficulty'] = seren_difficulty_choice.get()
+        characters[selected_ign].boss_list['Kaling']['boss_difficulty'] = kaling_difficulty_choice.get()
+        characters[selected_ign].boss_list['Black Mage']['boss_difficulty'] = bm_difficulty_choice.get()
         
-        # if user ticks
-        if cb_boss.get():
-            #change the value of the boss in the boss obj of the selected character
-            characters[selected_ign].boss_list[boss_name] = True
+        # updates the save file
+        json_object = json.dumps(characters, indent=4, default=custom_serializer)
 
-            # update the new change in the json save file
-            json_object = json.dumps(characters, indent=4, default=custom_serializer)
+        with open(storage_filename, 'w') as outfile:
+            outfile.write(json_object)
 
-            with open(storage_filename, 'w') as outfile:
-                outfile.write(json_object)
+    def update_party_size():
+        # updates the party_size variable for each boss
+        # does a check to determine if a viable choice was selected, if so it will convert value to int for the save file
+        characters[selected_ign].boss_list['Chaos Pink Bean']['party_size'] = int(cpb_party_size_choice.get()) if cpb_party_size_choice.get().isdigit() else cpb_party_size_choice.get()
+        characters[selected_ign].boss_list['Hard Hilla']['party_size'] = int(hh_party_size_choice.get()) if hh_party_size_choice.get().isdigit() else hh_party_size_choice.get()
+        characters[selected_ign].boss_list['Cygnus']['party_size'] = int(cyg_party_size_choice.get()) if cyg_party_size_choice.get().isdigit() else cyg_party_size_choice.get()
+        characters[selected_ign].boss_list['Chaos Zakum']['party_size'] = int(czak_party_size_choice.get()) if czak_party_size_choice.get().isdigit() else czak_party_size_choice.get()
+        characters[selected_ign].boss_list['Princess No']['party_size'] = int(pno_party_size_choice.get()) if pno_party_size_choice.get().isdigit() else pno_party_size_choice.get()
+        characters[selected_ign].boss_list['Chaos Queen']['party_size'] = int(cqueen_party_size_choice.get()) if cqueen_party_size_choice.get().isdigit() else cqueen_party_size_choice.get()
+        characters[selected_ign].boss_list['Chaos Pierre']['party_size'] = int(cpierre_party_size_choice.get()) if cpierre_party_size_choice.get().isdigit() else cpierre_party_size_choice.get()
+        characters[selected_ign].boss_list['Chaos Von Bon']['party_size'] = int(cvonbon_party_size_choice.get()) if cvonbon_party_size_choice.get().isdigit() else cvonbon_party_size_choice.get()
+        characters[selected_ign].boss_list['Chaos Vellum']['party_size'] = int(cvell_party_size_choice.get()) if cvell_party_size_choice.get().isdigit() else cvell_party_size_choice.get()
+        characters[selected_ign].boss_list['Akechi Mitsuhide']['party_size'] = int(akechi_party_size_choice.get()) if akechi_party_size_choice.get().isdigit() else akechi_party_size_choice.get()
+        characters[selected_ign].boss_list['Hard Magnus']['party_size'] = int(hmag_party_size_choice.get()) if hmag_party_size_choice.get().isdigit() else hmag_party_size_choice.get()
+        characters[selected_ign].boss_list['Chaos Papulatus']['party_size'] = int(cpap_party_size_choice.get()) if cpap_party_size_choice.get().isdigit() else cpap_party_size_choice.get()
+        characters[selected_ign].boss_list['Lotus']['party_size'] = int(lotus_party_size_choice.get()) if lotus_party_size_choice.get().isdigit() else lotus_party_size_choice.get()
+        characters[selected_ign].boss_list['Damien']['party_size'] = int(damien_party_size_choice.get()) if damien_party_size_choice.get().isdigit() else damien_party_size_choice.get()
+        characters[selected_ign].boss_list['Guardian Slime']['party_size'] = int(gslime_party_size_choice.get()) if gslime_party_size_choice.get().isdigit() else gslime_party_size_choice.get()
+        characters[selected_ign].boss_list['Lucid']['party_size'] = int(lucid_party_size_choice.get()) if lucid_party_size_choice.get().isdigit() else lucid_party_size_choice.get()
+        characters[selected_ign].boss_list['Will']['party_size'] = int(will_party_size_choice.get()) if will_party_size_choice.get().isdigit() else will_party_size_choice.get()
+        characters[selected_ign].boss_list['Gloom']['party_size'] = int(gloom_party_size_choice.get()) if gloom_party_size_choice.get().isdigit() else gloom_party_size_choice.get()
+        characters[selected_ign].boss_list['Darknell']['party_size'] = int(darknell_party_size_choice.get()) if darknell_party_size_choice.get().isdigit() else darknell_party_size_choice.get()
+        characters[selected_ign].boss_list['Versus Hilla']['party_size'] = int(vhilla_party_size_choice.get()) if vhilla_party_size_choice.get().isdigit() else vhilla_party_size_choice.get()
+        characters[selected_ign].boss_list['Seren']['party_size'] = int(seren_party_size_choice.get()) if seren_party_size_choice.get().isdigit() else seren_party_size_choice.get()
+        characters[selected_ign].boss_list['Kaling']['party_size'] = int(kaling_party_size_choice.get()) if kaling_party_size_choice.get().isdigit() else kaling_party_size_choice.get()
+        characters[selected_ign].boss_list['Black Mage']['party_size'] = int(bm_party_size_choice.get()) if bm_party_size_choice.get().isdigit() else bm_party_size_choice.get()
         
-        # if user unticks
-        else:
-            characters[selected_ign].boss_list[boss_name] = False
+        # updates the save file
+        json_object = json.dumps(characters, indent=4, default=custom_serializer)
 
-            json_object = json.dumps(characters, indent=4, default=custom_serializer)
+        with open(storage_filename, 'w') as outfile:
+            outfile.write(json_object)
 
-            with open(storage_filename, 'w') as outfile:
-                outfile.write(json_object)
+    # updates both boss_difficulty and party_size simultaneously
+    def update_difficulty_party_size():
+        update_bossing_difficulty()
+        update_party_size()
 
     bc_win = tk.Toplevel(blue_frame)
-    bc_win.title('Bossing Checklist')
-    bc_win.geometry('400x700')   
-    bc_win.resizable(False, False) 
+    bc_win.title("Bossing Checklist")
+    # bc_win.geometry()
 
-    bc_character_lbl = tk.Label(bc_win, text=f"{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}", font= ('Kozuka Gothic Pro B', 12))
+    difficulties = [
+        'Easy',
+        'Normal',
+        'Hard'
+    ]
 
-    # first column of boss_list
-    bc_cpb_check = tk.Checkbutton(bc_win, text='Chaos Pink Bean', font= ('Kozuka Gothic Pro B', 12), variable=cb_cpb, command=lambda:updating_bossing_progress('Chaos Pink Bean', cb_cpb))
-    bc_hh_check = tk.Checkbutton(bc_win, text='Hard Hilla', font= ('Kozuka Gothic Pro B', 12), variable=cb_hh, command=lambda:updating_bossing_progress('Hard Hilla', cb_hh))
-    bc_cyg_check = tk.Checkbutton(bc_win, text='Cygnus', font= ('Kozuka Gothic Pro B', 12), variable=cb_cyg, command=lambda:updating_bossing_progress('Cygnus', cb_cyg))
-    bc_czak_check = tk.Checkbutton(bc_win, text='Chaos Zakum', font= ('Kozuka Gothic Pro B', 12), variable=cb_czak, command=lambda:updating_bossing_progress('Chaos Zakum', cb_czak))
-    bc_pno_check = tk.Checkbutton(bc_win, text='Princess No', font= ('Kozuka Gothic Pro B', 12), variable=cb_pno, command=lambda:updating_bossing_progress('Princess No', cb_pno))
-    bc_cqueen_check = tk.Checkbutton(bc_win, text='Chaos Queen', font= ('Kozuka Gothic Pro B', 12), variable=cb_cqueen, command=lambda:updating_bossing_progress('Chaos Queen', cb_cqueen))
-    bc_cpierre_check = tk.Checkbutton(bc_win, text='Chaos Pierre', font= ('Kozuka Gothic Pro B', 12), variable=cb_cpierre, command=lambda:updating_bossing_progress('Chaos Pierre', cb_cpierre))
-    bc_cvonbon_check = tk.Checkbutton(bc_win, text='Chaos Von Bon', font= ('Kozuka Gothic Pro B', 12), variable=cb_cvonbon, command=lambda:updating_bossing_progress('Chaos VonBon', cb_cvonbon))
-    bc_cvell_check = tk.Checkbutton(bc_win, text='Chaos Vellum', font= ('Kozuka Gothic Pro B', 12), variable=cb_cvell, command=lambda:updating_bossing_progress('Chaos Vellum', cb_cvell))
-    bc_akechi_check = tk.Checkbutton(bc_win, text='Akechi Mitsuhide', font= ('Kozuka Gothic Pro B', 12), variable=cb_akechi, command=lambda:updating_bossing_progress('Akechi Mitsuhide', cb_akechi))
-    bc_hmag_check = tk.Checkbutton(bc_win, text='Hard Magnus', font= ('Kozuka Gothic Pro B', 12), variable=cb_hmag, command=lambda:updating_bossing_progress('Hard Magnus', cb_hmag))
+    party_size = [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+    ]
 
-    # second column of boss_list
-    bc_cpap_check = tk.Checkbutton(bc_win, text='Chaos Papulatus', font= ('Kozuka Gothic Pro B', 12), variable=cb_cpap, command=lambda:updating_bossing_progress('Chaos Papulatus', cb_cpap))
-    bc_lotus_check = tk.Checkbutton(bc_win, text='Lotus', font= ('Kozuka Gothic Pro B', 12), variable=cb_lotus, command=lambda:updating_bossing_progress('Lotus', cb_lotus))
-    bc_damien_check = tk.Checkbutton(bc_win, text='Damien', font= ('Kozuka Gothic Pro B', 12), variable=cb_damien, command=lambda:updating_bossing_progress('Damien', cb_damien))
-    bc_gslime_check = tk.Checkbutton(bc_win, text='Guardian Slime', font= ('Kozuka Gothic Pro B', 12), variable=cb_gslime, command=lambda:updating_bossing_progress('Guardian Slime', cb_gslime))
-    bc_lucid_check = tk.Checkbutton(bc_win, text='Lucid', font= ('Kozuka Gothic Pro B', 12), variable=cb_lucid, command=lambda:updating_bossing_progress('Lucid', cb_lucid))
-    bc_will_check = tk.Checkbutton(bc_win, text='Will', font= ('Kozuka Gothic Pro B', 12), variable=cb_will, command=lambda:updating_bossing_progress('Will', cb_will))
-    bc_gloom_check = tk.Checkbutton(bc_win, text='Gloom', font= ('Kozuka Gothic Pro B', 12), variable=cb_gloom, command=lambda:updating_bossing_progress('Gloom', cb_gloom))
-    bc_darknell_check = tk.Checkbutton(bc_win, text='Darknell', font= ('Kozuka Gothic Pro B', 12), variable=cb_darknell, command=lambda:updating_bossing_progress('Darknell', cb_darknell))
-    bc_vhilla_check = tk.Checkbutton(bc_win, text='Versus Hilla', font= ('Kozuka Gothic Pro B', 12), variable=cb_vhilla, command=lambda:updating_bossing_progress('Versus Hilla', cb_vhilla))
-    bc_seren_check = tk.Checkbutton(bc_win, text='Seren', font= ('Kozuka Gothic Pro B', 12), variable=cb_seren, command=lambda:updating_bossing_progress('Seren', cb_seren))
-    bc_kaling_check = tk.Checkbutton(bc_win, text='Kaling', font= ('Kozuka Gothic Pro B', 12), variable=cb_kaling, command=lambda:updating_bossing_progress('Kaling', cb_kaling))
+    # Chaos Pink Bean Vars
+    cpb_difficulty_choice = tk.StringVar()
+    cpb_party_size_choice = tk.StringVar()
+    cpb_status = tk.IntVar()
 
-    bc_reset_btn = tk.Button(bc_win, text='Reset All', font= ('Kozuka Gothic Pro B', 12), command=reset_boss_list)
-    bc_close_btn = tk.Button(bc_win, text='Close', font= ('Kozuka Gothic Pro B', 12), command=bc_win.destroy)
+    cpb_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Pink Bean']['boss_difficulty'])
+    cpb_party_size_choice.set(characters[selected_ign].boss_list['Chaos Pink Bean']['party_size'])
+    cpb_status.set(characters[selected_ign].boss_list['Chaos Pink Bean']['boss_clear'])
 
-    # storing the checkstate values to circumvent python's garbage collection
-    bc_cpb_check.var = cb_cpb
-    bc_hh_check.var = cb_hh
-    bc_cyg_check.var = cb_cyg
-    bc_czak_check.var = cb_czak
-    bc_pno_check.var = cb_pno
-    bc_cqueen_check.var = cb_cqueen
-    bc_cpierre_check.var = cb_cpierre
-    bc_cvonbon_check.var = cb_cvonbon
-    bc_cvell_check.var = cb_cvell
-    bc_akechi_check.var = cb_akechi
-    bc_hmag_check.var = cb_hmag
-    bc_cpap_check.var = cb_cpap
-    bc_lotus_check.var = cb_lotus
-    bc_damien_check.var = cb_damien
-    bc_gslime_check.var = cb_gslime
-    bc_lucid_check.var = cb_lucid
-    bc_will_check.var = cb_will
-    bc_gloom_check.var = cb_gloom
-    bc_darknell_check.var = cb_darknell
-    bc_vhilla_check.var = cb_vhilla
-    bc_seren_check.var = cb_seren
-    bc_kaling_check.var = cb_kaling
+    # Hard Hilla Vars
+    hh_difficulty_choice = tk.StringVar()
+    hh_party_size_choice = tk.StringVar()
+    hh_status = tk.IntVar()
 
-    # grid layout configurations
-    bc_character_lbl.grid(row=0, columnspan=2)
+    hh_difficulty_choice.set(characters[selected_ign].boss_list['Hard Hilla']['boss_difficulty'])
+    hh_party_size_choice.set(characters[selected_ign].boss_list['Hard Hilla']['party_size'])
+    hh_status.set(characters[selected_ign].boss_list['Hard Hilla']['boss_clear'])
 
-    bc_cpb_check.grid(row=2, column=0, sticky='w', padx=20)
-    bc_hh_check.grid(row=3, column=0, sticky='w', padx=20)
-    bc_cyg_check.grid(row=4, column=0, sticky='w', padx=20)
-    bc_czak_check.grid(row=5, column=0, sticky='w', padx=20)
-    bc_pno_check.grid(row=6, column=0, sticky='w', padx=20)
-    bc_cqueen_check.grid(row=7, column=0, sticky='w', padx=20)
-    bc_cpierre_check.grid(row=8, column=0, sticky='w', padx=20)
-    bc_cvonbon_check.grid(row=9, column=0, sticky='w', padx=20)
-    bc_cvell_check.grid(row=10, column=0, sticky='w', padx=20)
-    bc_akechi_check.grid(row=11, column=0, sticky='w', padx=20)
-    bc_hmag_check.grid(row=12, column=0, sticky='w', padx=20)
+    # Cygnus Vars
+    cyg_difficulty_choice = tk.StringVar()
+    cyg_party_size_choice = tk.StringVar()
+    cyg_status = tk.IntVar()
 
-    bc_cpap_check.grid(row=2, column=1, sticky='w', padx=20)
-    bc_lotus_check.grid(row=3, column=1, sticky='w', padx=20)
-    bc_damien_check.grid(row=4, column=1, sticky='w', padx=20)
-    bc_gslime_check.grid(row=5, column=1, sticky='w', padx=20)
-    bc_lucid_check.grid(row=6, column=1, sticky='w', padx=20)
-    bc_will_check.grid(row=7, column=1, sticky='w', padx=20)
-    bc_gloom_check.grid(row=8, column=1, sticky='w', padx=20)
-    bc_darknell_check.grid(row=9, column=1, sticky='w', padx=20)
-    bc_vhilla_check.grid(row=10, column=1, sticky='w', padx=20)
-    bc_seren_check.grid(row=11, column=1, sticky='w', padx=20)
-    bc_kaling_check.grid(row=12, column=1, sticky='w', padx=20)
+    cyg_difficulty_choice.set(characters[selected_ign].boss_list['Cygnus']['boss_difficulty'])
+    cyg_party_size_choice.set(characters[selected_ign].boss_list['Cygnus']['party_size'])
+    cyg_status.set(characters[selected_ign].boss_list['Cygnus']['boss_clear'])
 
-    bc_reset_btn.grid(row=13, column=0)
-    bc_close_btn.grid(row=13, column=1)
+    # Chaos Zakum Vars
+    czak_difficulty_choice = tk.StringVar()
+    czak_party_size_choice = tk.StringVar()
+    czak_status = tk.IntVar()
 
-    bc_win.grid_rowconfigure(0, weight=1)
-    bc_win.grid_rowconfigure(1, weight=1)
-    bc_win.grid_rowconfigure(2, weight=1)
-    bc_win.grid_rowconfigure(3, weight=1)
-    bc_win.grid_rowconfigure(4, weight=1)
-    bc_win.grid_rowconfigure(5, weight=1)
-    bc_win.grid_rowconfigure(6, weight=1)
-    bc_win.grid_rowconfigure(7, weight=1)
-    bc_win.grid_rowconfigure(8, weight=1)
-    bc_win.grid_rowconfigure(9, weight=1)
-    bc_win.grid_rowconfigure(10, weight=1)
-    bc_win.grid_rowconfigure(11, weight=1)
-    bc_win.grid_rowconfigure(12, weight=1)
-    bc_win.grid_rowconfigure(13, weight=1)
-    bc_win.grid_columnconfigure(0, weight=1)
-    bc_win.grid_columnconfigure(1, weight=1)
+    czak_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Zakum']['boss_difficulty'])
+    czak_party_size_choice.set(characters[selected_ign].boss_list['Chaos Zakum']['party_size'])
+    czak_status.set(characters[selected_ign].boss_list['Chaos Zakum']['boss_clear'])
+
+    # Princess No Vars
+    pno_difficulty_choice = tk.StringVar()
+    pno_party_size_choice = tk.StringVar()
+    pno_status = tk.IntVar()
+
+    pno_difficulty_choice.set(characters[selected_ign].boss_list['Princess No']['boss_difficulty'])
+    pno_party_size_choice.set(characters[selected_ign].boss_list['Princess No']['party_size'])
+    pno_status.set(characters[selected_ign].boss_list['Princess No']['boss_clear'])
+
+    # Chaos Queen Vars
+    cqueen_difficulty_choice = tk.StringVar()
+    cqueen_party_size_choice = tk.StringVar()
+    cqueen_status = tk.IntVar()
+
+    cqueen_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Queen']['boss_difficulty'])
+    cqueen_party_size_choice.set(characters[selected_ign].boss_list['Chaos Queen']['party_size'])
+    cqueen_status.set(characters[selected_ign].boss_list['Chaos Queen']['boss_clear'])
+
+    # Chaos Pierre Vars
+    cpierre_difficulty_choice = tk.StringVar()
+    cpierre_party_size_choice = tk.StringVar()
+    cpierre_status = tk.IntVar()
+
+    cpierre_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Pierre']['boss_difficulty'])
+    cpierre_party_size_choice.set(characters[selected_ign].boss_list['Chaos Pierre']['party_size'])
+    cpierre_status.set(characters[selected_ign].boss_list['Chaos Pierre']['boss_clear'])
+
+    # Chaos Von Bon Vars
+    cvonbon_difficulty_choice = tk.StringVar()
+    cvonbon_party_size_choice = tk.StringVar()
+    cvonbon_status = tk.IntVar()
+
+    cvonbon_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Von Bon']['boss_difficulty'])
+    cvonbon_party_size_choice.set(characters[selected_ign].boss_list['Chaos Von Bon']['party_size'])
+    cvonbon_status.set(characters[selected_ign].boss_list['Chaos Von Bon']['boss_clear'])
+
+    # Chaos Vellum Vars
+    cvell_difficulty_choice = tk.StringVar()
+    cvell_party_size_choice = tk.StringVar()
+    cvell_status = tk.IntVar()
+
+    cvell_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Vellum']['boss_difficulty'])
+    cvell_party_size_choice.set(characters[selected_ign].boss_list['Chaos Vellum']['party_size'])
+    cvell_status.set(characters[selected_ign].boss_list['Chaos Vellum']['boss_clear'])
+
+    # Akechi Mitsuhide Vars
+    akechi_difficulty_choice = tk.StringVar()
+    akechi_party_size_choice = tk.StringVar()
+    akechi_status = tk.IntVar()
+
+    akechi_difficulty_choice.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_difficulty'])
+    akechi_party_size_choice.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['party_size'])
+    akechi_status.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_clear'])
+
+    # Hard Magnus Vars
+    hmag_difficulty_choice = tk.StringVar()
+    hmag_party_size_choice = tk.StringVar()
+    hmag_status = tk.IntVar()
+
+    hmag_difficulty_choice.set(characters[selected_ign].boss_list['Hard Magnus']['boss_difficulty'])
+    hmag_party_size_choice.set(characters[selected_ign].boss_list['Hard Magnus']['party_size'])
+    hmag_status.set(characters[selected_ign].boss_list['Hard Magnus']['boss_clear'])
+
+    # Chaos Papulatus Vars
+    cpap_difficulty_choice = tk.StringVar()
+    cpap_party_size_choice = tk.StringVar()
+    cpap_status = tk.IntVar()
+
+    cpap_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Papulatus']['boss_difficulty'])
+    cpap_party_size_choice.set(characters[selected_ign].boss_list['Chaos Papulatus']['party_size'])
+    cpap_status.set(characters[selected_ign].boss_list['Chaos Papulatus']['boss_clear'])
+
+    # Lotus Vars
+    lotus_difficulty_choice = tk.StringVar()
+    lotus_party_size_choice = tk.StringVar()
+    lotus_status = tk.IntVar()
+
+    lotus_difficulty_choice.set(characters[selected_ign].boss_list['Lotus']['boss_difficulty'])
+    lotus_party_size_choice.set(characters[selected_ign].boss_list['Lotus']['party_size'])
+    lotus_status.set(characters[selected_ign].boss_list['Lotus']['boss_clear'])
+
+    # Damien Vars
+    damien_difficulty_choice = tk.StringVar()
+    damien_party_size_choice = tk.StringVar()
+    damien_status = tk.IntVar()
+
+    damien_difficulty_choice.set(characters[selected_ign].boss_list['Damien']['boss_difficulty'])
+    damien_party_size_choice.set(characters[selected_ign].boss_list['Damien']['party_size'])
+    damien_status.set(characters[selected_ign].boss_list['Damien']['boss_clear'])
+
+    # Guardian Slime Vars
+    gslime_difficulty_choice = tk.StringVar()
+    gslime_party_size_choice = tk.StringVar()
+    gslime_status = tk.IntVar()
+
+    gslime_difficulty_choice.set(characters[selected_ign].boss_list['Guardian Slime']['boss_difficulty'])
+    gslime_party_size_choice.set(characters[selected_ign].boss_list['Guardian Slime']['party_size'])
+    gslime_status.set(characters[selected_ign].boss_list['Guardian Slime']['boss_clear'])
+
+    # Lucid Vars
+    lucid_difficulty_choice = tk.StringVar()
+    lucid_party_size_choice = tk.StringVar()
+    lucid_status = tk.IntVar()
+
+    lucid_difficulty_choice.set(characters[selected_ign].boss_list['Lucid']['boss_difficulty'])
+    lucid_party_size_choice.set(characters[selected_ign].boss_list['Lucid']['party_size'])
+    lucid_status.set(characters[selected_ign].boss_list['Lucid']['boss_clear'])
+
+    # Will Vars
+    will_difficulty_choice = tk.StringVar()
+    will_party_size_choice = tk.StringVar()
+    will_status = tk.IntVar()
+
+    will_difficulty_choice.set(characters[selected_ign].boss_list['Will']['boss_difficulty'])
+    will_party_size_choice.set(characters[selected_ign].boss_list['Will']['party_size'])
+    will_status.set(characters[selected_ign].boss_list['Will']['boss_clear'])
+
+    # Gloom Vars
+    gloom_difficulty_choice = tk.StringVar()
+    gloom_party_size_choice = tk.StringVar()
+    gloom_status = tk.IntVar()
+
+    gloom_difficulty_choice.set(characters[selected_ign].boss_list['Gloom']['boss_difficulty'])
+    gloom_party_size_choice.set(characters[selected_ign].boss_list['Gloom']['party_size'])
+    gloom_status.set(characters[selected_ign].boss_list['Gloom']['boss_clear'])
+
+    # Darknell Vars
+    darknell_difficulty_choice = tk.StringVar()
+    darknell_party_size_choice = tk.StringVar()
+    darknell_status = tk.IntVar()
+
+    darknell_difficulty_choice.set(characters[selected_ign].boss_list['Darknell']['boss_difficulty'])
+    darknell_party_size_choice.set(characters[selected_ign].boss_list['Darknell']['party_size'])
+    darknell_status.set(characters[selected_ign].boss_list['Darknell']['boss_clear'])
+
+    # Versus Hilla Vars
+    vhilla_difficulty_choice = tk.StringVar()
+    vhilla_party_size_choice = tk.StringVar()
+    vhilla_status = tk.IntVar()
+
+    vhilla_difficulty_choice.set(characters[selected_ign].boss_list['Versus Hilla']['boss_difficulty'])
+    vhilla_party_size_choice.set(characters[selected_ign].boss_list['Versus Hilla']['party_size'])
+    vhilla_status.set(characters[selected_ign].boss_list['Versus Hilla']['boss_clear'])
+
+    # Seren Vars
+    seren_difficulty_choice = tk.StringVar()
+    seren_party_size_choice = tk.StringVar()
+    seren_status = tk.IntVar()
+
+    seren_difficulty_choice.set(characters[selected_ign].boss_list['Seren']['boss_difficulty'])
+    seren_party_size_choice.set(characters[selected_ign].boss_list['Seren']['party_size'])
+    seren_status.set(characters[selected_ign].boss_list['Seren']['boss_clear'])
+
+    # Kaling Vars
+    kaling_difficulty_choice = tk.StringVar()
+    kaling_party_size_choice = tk.StringVar()
+    kaling_status = tk.IntVar()
+
+    kaling_difficulty_choice.set(characters[selected_ign].boss_list['Kaling']['boss_difficulty'])
+    kaling_party_size_choice.set(characters[selected_ign].boss_list['Kaling']['party_size'])
+    kaling_status.set(characters[selected_ign].boss_list['Kaling']['boss_clear'])
+
+    # Black Mage Vars
+    bm_difficulty_choice = tk.StringVar()
+    bm_party_size_choice = tk.StringVar()
+    bm_status = tk.IntVar()
+
+    bm_difficulty_choice.set(characters[selected_ign].boss_list['Black Mage']['boss_difficulty'])
+    bm_party_size_choice.set(characters[selected_ign].boss_list['Black Mage']['party_size'])
+    bm_status.set(characters[selected_ign].boss_list['Black Mage']['boss_clear'])
+
+    # ---> Spacers <---
+
+    # Widgets
+    bossing_checklist_title = tk.Label(bc_win, text='Bossing Checklist')
+    character_details_lbl = tk.Label(bc_win, text=f'ign | job | Lv.')
+
+    # Chaos Pink Bean
+    cpb_name = tk.Label(bc_win, text='Chaos Pink Bean')
+    cpb_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cpb_difficulty = tk.OptionMenu(bc_win, cpb_difficulty_choice, *difficulties)
+    cpb_party_size = tk.OptionMenu(bc_win, cpb_party_size_choice, *party_size)
+    cpb_clear_status = tk.Checkbutton(bc_win, variable=cpb_status, command=lambda:update_check_status('Chaos Pink Bean', cpb_status))
+
+    # Hard Hilla
+    hh_name = tk.Label(bc_win, text='Hard Hilla')
+    hh_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    hh_difficulty = tk.OptionMenu(bc_win, hh_difficulty_choice, *difficulties)
+    hh_party_size = tk.OptionMenu(bc_win, hh_party_size_choice, *party_size)
+    hh_clear_status = tk.Checkbutton(bc_win, variable=hh_status, command=lambda:update_check_status('Hard Hilla', hh_status))
+
+    # Cygnus
+    cyg_name = tk.Label(bc_win, text='Cygnus')
+    cyg_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cyg_difficulty = tk.OptionMenu(bc_win, cyg_difficulty_choice, *difficulties)
+    cyg_party_size = tk.OptionMenu(bc_win, cyg_party_size_choice, *party_size)
+    cyg_clear_status = tk.Checkbutton(bc_win, variable=cyg_status, command=lambda:update_check_status('Cygnus', cyg_status))
+
+    # Chaos Zakum
+    czak_name = tk.Label(bc_win, text='Chaos Zakum')
+    czak_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    czak_difficulty = tk.OptionMenu(bc_win, czak_difficulty_choice, *difficulties)
+    czak_party_size = tk.OptionMenu(bc_win, czak_party_size_choice, *party_size)
+    czak_clear_status = tk.Checkbutton(bc_win, variable=czak_status, command=lambda:update_check_status('Chaos Zakum', czak_status))
+
+    # Princess No
+    pno_name = tk.Label(bc_win, text='Princess No')
+    pno_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    pno_difficulty = tk.OptionMenu(bc_win, pno_difficulty_choice, *difficulties)
+    pno_party_size = tk.OptionMenu(bc_win, pno_party_size_choice, *party_size)
+    pno_clear_status = tk.Checkbutton(bc_win, variable=pno_status, command=lambda:update_check_status('Princess No', pno_status))
+
+    # Chaos Queen
+    cqueen_name = tk.Label(bc_win, text='Chaos Queen')
+    cqueen_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cqueen_difficulty = tk.OptionMenu(bc_win, cqueen_difficulty_choice, *difficulties)
+    cqueen_party_size = tk.OptionMenu(bc_win, cqueen_party_size_choice, *party_size)
+    cqueen_clear_status = tk.Checkbutton(bc_win, variable=cqueen_status, command=lambda:update_check_status('Chaos Queen', cqueen_status))
+
+    # Chaos Pierre
+    cpierre_name = tk.Label(bc_win, text='Chaos Pierre')
+    cpierre_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cpierre_difficulty = tk.OptionMenu(bc_win, cpierre_difficulty_choice, *difficulties)
+    cpierre_party_size = tk.OptionMenu(bc_win, cpierre_party_size_choice, *party_size)
+    cpierre_clear_status = tk.Checkbutton(bc_win, variable=cpierre_status, command=lambda:update_check_status('Chaos Pierre', cpierre_status))
+
+    # Chaos Von Bon
+    cvonbon_name = tk.Label(bc_win, text='Chaos Von Bon')
+    cvonbon_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cvonbon_difficulty = tk.OptionMenu(bc_win, cvonbon_difficulty_choice, *difficulties)
+    cvonbon_party_size = tk.OptionMenu(bc_win, cvonbon_party_size_choice, *party_size)
+    cvonbon_clear_status = tk.Checkbutton(bc_win, variable=cvonbon_status, command=lambda:update_check_status('Chaos Von Bon', cvonbon_status))
+
+    # Chaos Vellum
+    cvell_name = tk.Label(bc_win, text='Chaos Vellum')
+    cvell_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cvell_difficulty = tk.OptionMenu(bc_win, cvell_difficulty_choice, *difficulties)
+    cvell_party_size = tk.OptionMenu(bc_win, cvell_party_size_choice, *party_size)
+    cvell_clear_status = tk.Checkbutton(bc_win, variable=cvell_status, command=lambda:update_check_status('Chaos Vellum', cvell_status))
+
+    # Akechi Mitsuhide
+    akechi_name = tk.Label(bc_win, text='Akechi Mitsuhide')
+    akechi_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    akechi_difficulty = tk.OptionMenu(bc_win, akechi_difficulty_choice, *difficulties)
+    akechi_party_size = tk.OptionMenu(bc_win, akechi_party_size_choice, *party_size)
+    akechi_clear_status = tk.Checkbutton(bc_win, variable=akechi_status, command=lambda:update_check_status('Akechi Mitsuhide', akechi_status))
+
+    # Hard Magnus
+    hmag_name = tk.Label(bc_win, text='Hard Magnus')
+    hmag_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    hmag_difficulty = tk.OptionMenu(bc_win, hmag_difficulty_choice, *difficulties)
+    hmag_party_size = tk.OptionMenu(bc_win, hmag_party_size_choice, *party_size)
+    hmag_clear_status = tk.Checkbutton(bc_win, variable=hmag_status, command=lambda:update_check_status('Hard Magnus', hmag_status))
+
+    # Chaos Papulatus
+    cpap_name = tk.Label(bc_win, text='Chaos Papulatus')
+    cpap_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cpap_difficulty = tk.OptionMenu(bc_win, cpap_difficulty_choice, *difficulties)
+    cpap_party_size = tk.OptionMenu(bc_win, cpap_party_size_choice, *party_size)
+    cpap_clear_status = tk.Checkbutton(bc_win, variable=cpap_status, command=lambda:update_check_status('Chaos Papulatus', cpap_status))
+
+    # Lotus
+    lotus_name = tk.Label(bc_win, text='Lotus')
+    lotus_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    lotus_difficulty = tk.OptionMenu(bc_win, lotus_difficulty_choice, *difficulties)
+    lotus_party_size = tk.OptionMenu(bc_win, lotus_party_size_choice, *party_size)
+    lotus_clear_status = tk.Checkbutton(bc_win, variable=lotus_status, command=lambda:update_check_status('Lotus', lotus_status))
+
+    # Damien
+    damien_name = tk.Label(bc_win, text='Damien')
+    damien_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    damien_difficulty = tk.OptionMenu(bc_win, damien_difficulty_choice, *difficulties)
+    damien_party_size = tk.OptionMenu(bc_win, damien_party_size_choice, *party_size)
+    damien_clear_status = tk.Checkbutton(bc_win, variable=damien_status, command=lambda:update_check_status('Damien', damien_status))
+
+    # Guardian Slime
+    gslime_name = tk.Label(bc_win, text='Guardian Slime')
+    gslime_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    gslime_difficulty = tk.OptionMenu(bc_win, gslime_difficulty_choice, *difficulties)
+    gslime_party_size = tk.OptionMenu(bc_win, gslime_party_size_choice, *party_size)
+    gslime_clear_status = tk.Checkbutton(bc_win, variable=gslime_status, command=lambda:update_check_status('Guardian Slime', gslime_status))
+
+    # Lucid
+    lucid_name = tk.Label(bc_win, text='Lucid')
+    lucid_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    lucid_difficulty = tk.OptionMenu(bc_win, lucid_difficulty_choice, *difficulties)
+    lucid_party_size = tk.OptionMenu(bc_win, lucid_party_size_choice, *party_size)
+    lucid_clear_status = tk.Checkbutton(bc_win, variable=lucid_status, command=lambda:update_check_status('Lucid', lucid_status))
+
+    # Will
+    will_name = tk.Label(bc_win, text='Will')
+    will_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    will_difficulty = tk.OptionMenu(bc_win, will_difficulty_choice, *difficulties)
+    will_party_size = tk.OptionMenu(bc_win, will_party_size_choice, *party_size)
+    will_clear_status = tk.Checkbutton(bc_win, variable=will_status, command=lambda:update_check_status('Will', will_status))
+
+    # Gloom
+    gloom_name = tk.Label(bc_win, text='Gloom')
+    gloom_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    gloom_difficulty = tk.OptionMenu(bc_win, gloom_difficulty_choice, *difficulties)
+    gloom_party_size = tk.OptionMenu(bc_win, gloom_party_size_choice, *party_size)
+    gloom_clear_status = tk.Checkbutton(bc_win, variable=gloom_status, command=lambda:update_check_status('Gloom', gloom_status))
+
+    # Darknell
+    darknell_name = tk.Label(bc_win, text='Darknell')
+    darknell_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    darknell_difficulty = tk.OptionMenu(bc_win, darknell_difficulty_choice, *difficulties)
+    darknell_party_size = tk.OptionMenu(bc_win, darknell_party_size_choice, *party_size)
+    darknell_clear_status = tk.Checkbutton(bc_win, variable=darknell_status, command=lambda:update_check_status('Darknell', darknell_status))
+
+    # Versus Hilla
+    vhilla_name = tk.Label(bc_win, text='Versus Hilla')
+    vhilla_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    vhilla_difficulty = tk.OptionMenu(bc_win, vhilla_difficulty_choice, *difficulties)
+    vhilla_party_size = tk.OptionMenu(bc_win, vhilla_party_size_choice, *party_size)
+    vhilla_clear_status = tk.Checkbutton(bc_win, variable=vhilla_status, command=lambda:update_check_status('Versus Hilla', vhilla_status))
+
+    # Seren
+    seren_name = tk.Label(bc_win, text='Seren')
+    seren_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    seren_difficulty = tk.OptionMenu(bc_win, seren_difficulty_choice, *difficulties)
+    seren_party_size = tk.OptionMenu(bc_win, seren_party_size_choice, *party_size)
+    seren_clear_status = tk.Checkbutton(bc_win, variable=seren_status, command=lambda:update_check_status('Seren', seren_status))
+
+    # Kaling
+    kaling_name = tk.Label(bc_win, text='Kaling')
+    kaling_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    kaling_difficulty = tk.OptionMenu(bc_win, kaling_difficulty_choice, *difficulties)
+    kaling_party_size = tk.OptionMenu(bc_win, kaling_party_size_choice, *party_size)
+    kaling_clear_status = tk.Checkbutton(bc_win, variable=kaling_status, command=lambda:update_check_status('Kaling', kaling_status))
+
+    # Black Mage
+    bm_name = tk.Label(bc_win, text='Black Mage')
+    bm_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    bm_difficulty = tk.OptionMenu(bc_win, bm_difficulty_choice, *difficulties)
+    bm_party_size = tk.OptionMenu(bc_win, bm_party_size_choice, *party_size)
+    bm_clear_status = tk.Checkbutton(bc_win, variable=bm_status, command=lambda:update_check_status('Black Mage', bm_status))
+
+    # Buttons
+    reset_clears = tk.Button(bc_win, text='Reset Clears Only')
+    reset_all = tk.Button(bc_win, text='Reset All')
+    update_btn = tk.Button(bc_win, text='Update', command=update_difficulty_party_size)
+    cancel_btn = tk.Button(bc_win, text='Cancel', command=bc_win.destroy)
+
+    bossing_checklist_title.grid(row=0, columnspan=6)
+    character_details_lbl.grid(row=1, columnspan=6)
+
+    cpb_name.grid(row=2, column=0, pady=10, padx=10)
+    cpb_img.grid(row=3, column=0, padx=10)
+    cpb_difficulty.grid(row=4, column=0, padx=10)
+    cpb_party_size.grid(row=5, column=0, padx=10)
+    cpb_clear_status.grid(row=6, column=0, pady=10, padx=10)
+
+    hh_name.grid(row=2, column=1, pady=10, padx=10)
+    hh_img.grid(row=3, column=1, padx=10)
+    hh_difficulty.grid(row=4, column=1, padx=10)
+    hh_party_size.grid(row=5, column=1, padx=10)
+    hh_clear_status.grid(row=6, column=1, pady=10, padx=10)
+
+    cyg_name.grid(row=2, column=2, pady=10, padx=10)
+    cyg_img.grid(row=3, column=2, padx=10)
+    cyg_difficulty.grid(row=4, column=2, padx=10)
+    cyg_party_size.grid(row=5, column=2, padx=10)
+    cyg_clear_status.grid(row=6, column=2, pady=10, padx=10)
+
+    czak_name.grid(row=2, column=3, pady=10, padx=10)
+    czak_img.grid(row=3, column=3, padx=10)
+    czak_difficulty.grid(row=4, column=3, padx=10)
+    czak_party_size.grid(row=5, column=3, padx=10)
+    czak_clear_status.grid(row=6, column=3, pady=10, padx=10)
+
+    pno_name.grid(row=2, column=4, pady=10, padx=10)
+    pno_img.grid(row=3, column=4, padx=10)
+    pno_difficulty.grid(row=4, column=4, padx=10)
+    pno_party_size.grid(row=5, column=4, padx=10)
+    pno_clear_status.grid(row=6, column=4, pady=10, padx=10)
+
+    cqueen_name.grid(row=2, column=5, pady=10, padx=10)
+    cqueen_img.grid(row=3, column=5, padx=10)
+    cqueen_difficulty.grid(row=4, column=5, padx=10)
+    cqueen_party_size.grid(row=5, column=5, padx=10)
+    cqueen_clear_status.grid(row=6, column=5, pady=10, padx=10)
+
+    cpierre_name.grid(row=7, column=0, pady=10, padx=10)
+    cpierre_img.grid(row=8, column=0, padx=10)
+    cpierre_difficulty.grid(row=9, column=0, padx=10)
+    cpierre_party_size.grid(row=10, column=0, padx=10)
+    cpierre_clear_status.grid(row=11, column=0, pady=10, padx=10)
+
+    cvonbon_name.grid(row=7, column=1, pady=10, padx=10)
+    cvonbon_img.grid(row=8, column=1, padx=10)
+    cvonbon_difficulty.grid(row=9, column=1, padx=10)
+    cvonbon_party_size.grid(row=10, column=1, padx=10)
+    cvonbon_clear_status.grid(row=11, column=1, pady=10, padx=10)
+
+    cvell_name.grid(row=7, column=2, pady=10, padx=10)
+    cvell_img.grid(row=8, column=2, padx=10)
+    cvell_difficulty.grid(row=9, column=2, padx=10)
+    cvell_party_size.grid(row=10, column=2, padx=10)
+    cvell_clear_status.grid(row=11, column=2, pady=10, padx=10)
+
+    akechi_name.grid(row=7, column=3, pady=10, padx=10)
+    akechi_img.grid(row=8, column=3, padx=10)
+    akechi_difficulty.grid(row=9, column=3, padx=10)
+    akechi_party_size.grid(row=10, column=3, padx=10)
+    akechi_clear_status.grid(row=11, column=3, pady=10, padx=10)
+
+    hmag_name.grid(row=7, column=4, pady=10, padx=10)
+    hmag_img.grid(row=8, column=4, padx=10)
+    hmag_difficulty.grid(row=9, column=4, padx=10)
+    hmag_party_size.grid(row=10, column=4, padx=10)
+    hmag_clear_status.grid(row=11, column=4, pady=10, padx=10)
+
+    cpap_name.grid(row=7, column=5, pady=10, padx=10)
+    cpap_img.grid(row=8, column=5, padx=10)
+    cpap_difficulty.grid(row=9, column=5, padx=10)
+    cpap_party_size.grid(row=10, column=5, padx=10)
+    cpap_clear_status.grid(row=11, column=5, pady=10, padx=10)
+
+    lotus_name.grid(row=12, column=0, pady=10, padx=10)
+    lotus_img.grid(row=13, column=0, padx=10)
+    lotus_difficulty.grid(row=14, column=0, padx=10)
+    lotus_party_size.grid(row=15, column=0, padx=10)
+    lotus_clear_status.grid(row=16, column=0, pady=10, padx=10)
+
+    damien_name.grid(row=12, column=1, pady=10, padx=10)
+    damien_img.grid(row=13, column=1, padx=10)
+    damien_difficulty.grid(row=14, column=1, padx=10)
+    damien_party_size.grid(row=15, column=1, padx=10)
+    damien_clear_status.grid(row=16, column=1, pady=10, padx=10)
+
+    gslime_name.grid(row=12, column=2, pady=10, padx=10)
+    gslime_img.grid(row=13, column=2, padx=10)
+    gslime_difficulty.grid(row=14, column=2, padx=10)
+    gslime_party_size.grid(row=15, column=2, padx=10)
+    gslime_clear_status.grid(row=16, column=2, pady=10, padx=10)
+
+    lucid_name.grid(row=12, column=3, pady=10, padx=10)
+    lucid_img.grid(row=13, column=3, padx=10)
+    lucid_difficulty.grid(row=14, column=3, padx=10)
+    lucid_party_size.grid(row=15, column=3, padx=10)
+    lucid_clear_status.grid(row=16, column=3, pady=10, padx=10)
+
+    will_name.grid(row=12, column=4, pady=10, padx=10)
+    will_img.grid(row=13, column=4, padx=10)
+    will_difficulty.grid(row=14, column=4, padx=10)
+    will_party_size.grid(row=15, column=4, padx=10)
+    will_clear_status.grid(row=16, column=4, pady=10, padx=10)
+
+    gloom_name.grid(row=12, column=5, pady=10, padx=10)
+    gloom_img.grid(row=13, column=5, padx=10)
+    gloom_difficulty.grid(row=14, column=5, padx=10)
+    gloom_party_size.grid(row=15, column=5, padx=10)
+    gloom_clear_status.grid(row=16, column=5, pady=10, padx=10)
+
+    darknell_name.grid(row=17, column=0, pady=10, padx=10)
+    darknell_img.grid(row=18, column=0, padx=10)
+    darknell_difficulty.grid(row=19, column=0, padx=10)
+    darknell_party_size.grid(row=20, column=0, padx=10)
+    darknell_clear_status.grid(row=21, column=0, pady=10, padx=10)
+
+    vhilla_name.grid(row=17, column=1, pady=10, padx=10)
+    vhilla_img.grid(row=18, column=1, padx=10)
+    vhilla_difficulty.grid(row=19, column=1, padx=10)
+    vhilla_party_size.grid(row=20, column=1, padx=10)
+    vhilla_clear_status.grid(row=21, column=1, pady=10, padx=10)
+
+    seren_name.grid(row=17, column=2, pady=10, padx=10)
+    seren_img.grid(row=18, column=2, padx=10)
+    seren_difficulty.grid(row=19, column=2, padx=10)
+    seren_party_size.grid(row=20, column=2, padx=10)
+    seren_clear_status.grid(row=21, column=2, pady=10, padx=10)
+
+    kaling_name.grid(row=17, column=3, pady=10, padx=10)
+    kaling_img.grid(row=18, column=3, padx=10)
+    kaling_difficulty.grid(row=19, column=3, padx=10)
+    kaling_party_size.grid(row=20, column=3, padx=10)
+    kaling_clear_status.grid(row=21, column=3, pady=10, padx=10)
+
+    bm_name.grid(row=17, column=4, pady=10, padx=10)
+    bm_img.grid(row=18, column=4, padx=10)
+    bm_difficulty.grid(row=19, column=4, padx=10)
+    bm_party_size.grid(row=20, column=4, padx=10)
+    bm_clear_status.grid(row=21, column=4, pady=10, padx=10)
+
+    update_btn.grid(row=23, column=0)
+    reset_clears.grid(row=23, column=1)
+    reset_all.grid(row=23, column=2)
+    cancel_btn.grid(row=23, column=3)
 
 # // purple functions //
 # add mesos amount to balance
