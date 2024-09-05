@@ -38,3 +38,4 @@ The following are the resources I have read, referred and learnt from to better 
 - Checkbutton saving the checkstatus in toplevel widgets and garbage collection (additional): https://stackoverflow.com/questions/65652146/checkbutton-status-check-in-toplevel
 - Place() method of tkinter: https://stackoverflow.com/questions/52472105/does-grid-has-a-fill-attribute-like-pack-in-tkinter
 - Scrollbar Tkinter: https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
+- Dropdown Menu Tkinter: https://www.geeksforgeeks.org/dropdown-menus-tkinter/

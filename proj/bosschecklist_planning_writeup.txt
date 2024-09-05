@@ -1,0 +1,24 @@
+Boss_Checklist_Design_WriteUp
+
+Bossing Checklist Popup:
+
+Bossing Checklist Title
+Character Details: ign | job | Lv.
+
+bosses showcase design: 
+row=0 boss_name
+row=1 boss_img
+row=3 boss_difficulty
+row=4 boss_party_size
+row=5 checkbox
+
+boss layout:
+O O O O O O 
+O O O O O O 
+O O O O O O 
+O O O O O
+
+final_row: buttons
+first_button = Reset Clear Status
+second_button = Full Reset bossing checklist
+third_button = Close window
