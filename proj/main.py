@@ -1271,14 +1271,17 @@ def subtract_mesos():
 # reset the boss crystals for the new week (thursdays)
 def reset_boss_crystals():
 
+    # retrieve the current date information
     utc_time = dt.datetime.now(timezone.utc)
     todays_date = utc_time.date().strftime('%d-%m-%Y')
 
+    # check if today is a thursday and if a reset has already occurred for this week
     if utc_time.weekday() == 3 and user['usr'].boss_crystal_reset != todays_date:
         user['usr'].boss_crystal_reset = todays_date
         user['usr'].boss_crystal_count = 180
         user['usr'].boss_crystal_sold = 0
 
+        # update user save file
         json_object = json.dumps(user, indent=4, default=custom_serializer)
 
         with open(usr_filename, 'w') as outfile:
