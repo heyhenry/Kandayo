@@ -4,6 +4,7 @@
 - Hard Hilla
 - Cygnus - Easy, Normal
 - Chaos Zakum
+- Princess No
 - Chaos Crimson Queen
 - Chaos Pierre
 - Chaos Von Bon

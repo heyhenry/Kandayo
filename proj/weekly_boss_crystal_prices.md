@@ -1,0 +1,45 @@
+# Weekly Boss Crystal Prices
+
+- Chaos Pink Bean : 64,000,000
+- Hard Hilla : 56,250,000
+- Princess No : 81,000,000
+- Chaos Zakum : 81,000,000
+- Cygnus [Easy] : 45,562,500
+- Cygnus [Normal] : 72,250,000
+- Chaos Crimson Queen : 81,000,000
+- Chaos Pierre : 81,000,000
+- Chaos Von Bon : 81,000,000
+- Chaos Vellum : 105,062,500
+- Akechi Mitsuhide : 144,000,000
+- Hard Magnus : 95,062,500
+- Chaos Papulatus : 132,250,000
+- Lotus [Normal] : 162,562,500
+- Lotus [Hard] : 370,562,500
+- Lotus [Extreme] : 1,075,000,000
+- Damien [Normal] : 169,000,000
+- Damien [Hard] : 351,562,500
+- Guardian Angel Slime [Normal] : 171,610,000
+- Guardian Angel Slime [Chaos] : 451,562,500
+- Lucid [Easy] : 175,562,500
+- Lucid [Normal] : 203,062,500
+- Lucid [Hard] : 400,000,000
+- Will [Easy] : 191,275,000
+- Will [Normal] : 232,562,500
+- Will [Hard] : 441,000,000
+- Gloom [Normal] : 248,062,500
+- Gloom [Chaos] : 462,250,000
+- Verus Hilla [Normal] : 447,600,000
+- Verus Hilla [Hard] : 552,250,000
+- Darknell [Normal] : 264,062,500
+- Darknell [Hard] : 484,000,000
+- Seren [Normal] : 668,437,500
+- Seren [Hard] : 756,250,000
+- Seren [Extreme] 3,025,000,000
+- Kaling [Easy] : 825,000,000
+- Kaling [Normal] : 1,150,000,000
+- Kaling [Hard] : 2,300,000,000
+- Kaling [Extreme] : 4,600,000,000
+- Kalos [Easy] : 750,000,000
+- Kalos [Normal] : 1,000,000,000
+- Kalos [Chaos] : 2,000,000,000
+- Kalos [Extreme] : 4,000,000,000
