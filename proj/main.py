@@ -43,28 +43,29 @@ def custom_serializer(obj):
     # BossList object
     elif isinstance(obj, BossList):
         return {
-           'Chaos Pink Bean': obj.cpb,
-           'Hard Hilla': obj.hh,
-           'Cygnus': obj.cyg,
-           'Chaos Zakum': obj.czak,
-           'Princess No': obj.pno,
-           'Chaos Queen': obj.cqueen,
-           'Chaos Pierre': obj.cpierre,
-           'Chaos VonBon': obj.cvonbon,
-           'Chaos Vellum': obj.cvell,
-           'Akechi Mitsuhide': obj.akechi,
-           'Hard Magnus': obj.hmag,
-           'Chaos Papulatus': obj.cpap,
-           'Lotus': obj.lotus,
-           'Damien': obj.damien,
-           'Guardian Slime': obj.gslime,
-           'Lucid': obj.lucid,
-           'Will': obj.will,
-           'Gloom': obj.gloom,
-           'Darknell': obj.darknell,
-           'Versus Hilla': obj.vhilla,
-           'Seren': obj.seren,
-           'Kaling': obj.kaling             
+           'Chaos Pink Bean': custom_serializer(obj.cpb),
+           'Hard Hilla': custom_serializer(obj.hh),
+           'Cygnus': custom_serializer(obj.cyg),
+           'Chaos Zakum': custom_serializer(obj.czak),
+           'Princess No': custom_serializer(obj.pno),
+           'Chaos Queen': custom_serializer(obj.cqueen),
+           'Chaos Pierre': custom_serializer(obj.cpierre),
+           'Chaos VonBon': custom_serializer(obj.cvonbon),
+           'Chaos Vellum': custom_serializer(obj.cvell),
+           'Akechi Mitsuhide': custom_serializer(obj.akechi),
+           'Hard Magnus': custom_serializer(obj.hmag),
+           'Chaos Papulatus': custom_serializer(obj.cpap),
+           'Lotus': custom_serializer(obj.lotus),
+           'Damien': custom_serializer(obj.damien),
+           'Guardian Slime': custom_serializer(obj.gslime),
+           'Lucid': custom_serializer(obj.lucid),
+           'Will': custom_serializer(obj.will),
+           'Gloom': custom_serializer(obj.gloom),
+           'Darknell': custom_serializer(obj.darknell),
+           'Versus Hilla': custom_serializer(obj.vhilla),
+           'Seren': custom_serializer(obj.seren),
+           'Kaling': custom_serializer(obj.kaling),
+           'Black Mage': custom_serializer(obj.bm)          
         }
     elif isinstance(obj, Boss):
         return {
@@ -215,7 +216,7 @@ def weekly_reset():
 
     # check if today is the target day
     if utc_time.weekday() == 3:
-        weekly_reset_lbl.config(text='Today')
+        weekly_reset_lbl.config(text='Weekly Reset is Today')
         weekly_reset_lbl.after(1000, weekly_reset)
     # otherwise
     else:
@@ -251,9 +252,31 @@ def populate_entries():
 def create_character(ign, job, level):
 
     # create a default BossList object
-    boss_list = BossList(False, False, False, False, False, False, False, False, False, False, False,
-                            False, False, False, False, False, False, False, False, False, False, False
-                            )
+    boss_list = BossList(
+        cpb = Boss('Chaos Pink Bean', False, '', 1),
+        hh = Boss('Hard Hilla', False, '', 1),
+        cyg = Boss('Cygnus', False, '', 1),
+        czak = Boss('Chaos Zakum', False, '', 1),
+        pno = Boss('Princess No', False, '', 1),
+        cqueen = Boss('Chaos Queen', False, '', 1),
+        cpierre = Boss('Chaos Pierre', False, '', 1),
+        cvonbon = Boss('Chaos Von Bon', False, '', 1),
+        cvell = Boss('Chaos Vellum', False, '', 1),
+        akechi = Boss('Akechi Mitsuhide', False, '', 1),
+        hmag = Boss('Hard Magnus', False, '', 1),
+        cpap = Boss('Chaos Papulatus', False, '', 1),
+        lotus = Boss('Lotus', False, '', 1),
+        damien = Boss('Damien', False, '', 1),
+        gslime = Boss('Guardian Slime', False, '', 1),
+        lucid = Boss('Lucid', False, '', 1),
+        will = Boss('Will', False, '', 1),
+        gloom = Boss('Gloom', False, '', 1),
+        darknell = Boss('Darknell', False, '', 1),
+        vhilla = Boss('Versus Hilla', False, '', 1),
+        seren = Boss('Seren', False, '', 1),
+        kaling = Boss('Kaling', False, '', 1),
+        bm = Boss('Black Mage', False, '', 1)
+    )
     
     # create a new character object
     new_char = CharInfo(ign, job, level, boss_list)
