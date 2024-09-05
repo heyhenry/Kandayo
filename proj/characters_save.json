@@ -48,7 +48,7 @@
             },
             "Chaos Von Bon": {
                 "boss_name": "Chaos Von Bon",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
@@ -126,7 +126,7 @@
             },
             "Seren": {
                 "boss_name": "Seren",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
