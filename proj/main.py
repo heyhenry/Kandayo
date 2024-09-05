@@ -503,6 +503,12 @@ def bossing_checklist_popup():
     for i in chars_lb.curselection():
         selected_ign = chars_lb.get(i)
 
+    # validation check for valid selection
+    if selected_ign == '':
+        messagebox.showerror('Character Selection Error',
+                             'A character has not been selected from the list.')
+        return
+
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
     # bc_win.geometry()
