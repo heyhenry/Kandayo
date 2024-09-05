@@ -26,7 +26,7 @@ def load_user():
         with open(usr_filename, 'r') as file:
             usr_data = json.load(file)
             for usr, usr_info in usr_data.items():
-                user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['weekly_mesos_gained'], usr_info['boss_crysal_reset'], usr_info['boss_crystal_count'], usr_info['boss_crystal_sold'],
+                user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['weekly_mesos_gained'], usr_info['boss_crystal_reset'], usr_info['boss_crystal_count'], usr_info['boss_crystal_sold'],
                                       usr_info['hotlink_one'], usr_info['hotlink_two'], usr_info['hotlink_three'])
 
 # // json function //
@@ -80,7 +80,7 @@ def custom_serializer(obj):
         return {
             'mesos_balance': obj.mesos_balance,
             'weekly_mesos_gained': obj.weekly_mesos_gained,
-            'boss_crysal_reset': obj.boss_crysal_reset,
+            'boss_crystal_reset': obj.boss_crystal_reset,
             'boss_crystal_count': obj.boss_crystal_count,
             'boss_crystal_sold': obj.boss_crystal_sold,
             'hotlink_one': obj.hotlink_one,
@@ -1272,15 +1272,17 @@ def subtract_mesos():
 def reset_boss_crystals():
 
     utc_time = dt.datetime.now(timezone.utc)
+    todays_date = utc_time.date().strftime('%d-%m-%Y')
 
-    if utc_time.weekday() == 3:
+    if utc_time.weekday() == 3 and user['usr'].boss_crystal_reset != todays_date:
+        user['usr'].boss_crystal_reset = todays_date
         user['usr'].boss_crystal_count = 180
         user['usr'].boss_crystal_sold = 0
 
-    json_object = json.dumps(user, indent=4, default=custom_serializer)
+        json_object = json.dumps(user, indent=4, default=custom_serializer)
 
-    with open(usr_filename, 'w') as outfile:
-        outfile.write(json_object)
+        with open(usr_filename, 'w') as outfile:
+            outfile.write(json_object)
 
 # // orange functions // 
 # open weblink

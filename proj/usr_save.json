@@ -2,6 +2,7 @@
     "usr": {
         "mesos_balance": 0,
         "weekly_mesos_gained": 0,
+        "boss_crystal_reset": "05-09-2024",
         "boss_crystal_count": 180,
         "boss_crystal_sold": 0,
         "hotlink_one": "www.google.com",
