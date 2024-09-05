@@ -1477,7 +1477,6 @@ populate_entries()
 
 root.mainloop()
 
-
 # SELF-NOTES (What's on the agenda for next session):
 # Updating UI + functionality of bossing checklist
 # ----> dropdown to choose party size 1-6
