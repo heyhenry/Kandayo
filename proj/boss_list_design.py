@@ -29,7 +29,7 @@ party_size_choice.set('Select Party Size')
 
 boss_name = tk.Label(root, text='Golden Circle')
 boss_img = tk.Label(root, text='IMG HERE')
-boss_difficulty = tk.OptionMenu(root, difficulty_choice, *difficulties, command=lambda prnt: prnt_difficulty(difficulty_choice.get()))
+boss_difficulty = tk.OptionMenu(root, variable=difficulty_choice, *difficulties, command=lambda: prnt_difficulty(difficulty_choice.get()))
 boss_party_size = tk.OptionMenu(root, party_size_choice, *party_size)
 boss_clear_status = tk.Checkbutton(root)
 
