@@ -41,7 +41,7 @@
                 "boss_difficulty": "",
                 "party_size": 1
             },
-            "Chaos VonBon": {
+            "Chaos Von Bon": {
                 "boss_name": "Chaos Von Bon",
                 "boss_clear": false,
                 "boss_difficulty": "",
@@ -141,7 +141,7 @@
         "boss_list": {
             "Chaos Pink Bean": {
                 "boss_name": "Chaos Pink Bean",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
@@ -181,7 +181,7 @@
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
-            "Chaos VonBon": {
+            "Chaos Von Bon": {
                 "boss_name": "Chaos Von Bon",
                 "boss_clear": false,
                 "boss_difficulty": "Select Difficulty",

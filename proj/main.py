@@ -50,7 +50,7 @@ def custom_serializer(obj):
            'Princess No': custom_serializer(obj.pno),
            'Chaos Queen': custom_serializer(obj.cqueen),
            'Chaos Pierre': custom_serializer(obj.cpierre),
-           'Chaos VonBon': custom_serializer(obj.cvonbon),
+           'Chaos Von Bon': custom_serializer(obj.cvonbon),
            'Chaos Vellum': custom_serializer(obj.cvell),
            'Akechi Mitsuhide': custom_serializer(obj.akechi),
            'Hard Magnus': custom_serializer(obj.hmag),
@@ -494,6 +494,8 @@ def delete_character():
 # bossing checklist
 def bossing_checklist_popup():
 
+    selected_ign = ''
+
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
     # bc_win.geometry()
@@ -518,118 +520,207 @@ def bossing_checklist_popup():
     cpb_party_size_choice = tk.StringVar()
     cpb_status = tk.IntVar()
 
-    cpb_difficulty_choice.set('Select Difficulty')
-    cpb_party_size_choice.set('Select Party Size')
+    cpb_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Pink Bean']['boss_difficulty'])
+    cpb_party_size_choice.set(characters[selected_ign].boss_list['Chaos Pink Bean']['party_size'])
+    cpb_status.set(characters[selected_ign].boss_list['Chaos Pink Bean']['boss_clear'])
 
     # Hard Hilla Vars
     hh_difficulty_choice = tk.StringVar()
     hh_party_size_choice = tk.StringVar()
     hh_status = tk.IntVar()
 
+    hh_difficulty_choice.set(characters[selected_ign].boss_list['Hard Hilla']['boss_difficulty'])
+    hh_party_size_choice.set(characters[selected_ign].boss_list['Hard Hilla']['party_size'])
+    hh_status.set(characters[selected_ign].boss_list['Hard Hilla']['boss_clear'])
+
     # Cygnus Vars
     cyg_difficulty_choice = tk.StringVar()
     cyg_party_size_choice = tk.StringVar()
     cyg_status = tk.IntVar()
+
+    cyg_difficulty_choice.set(characters[selected_ign].boss_list['Cygnus']['boss_difficulty'])
+    cyg_party_size_choice.set(characters[selected_ign].boss_list['Cygnus']['party_size'])
+    cyg_status.set(characters[selected_ign].boss_list['Cygnus']['boss_clear'])
 
     # Chaos Zakum Vars
     czak_difficulty_choice = tk.StringVar()
     czak_party_size_choice = tk.StringVar()
     czak_status = tk.IntVar()
 
+    czak_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Zakum']['boss_difficulty'])
+    czak_party_size_choice.set(characters[selected_ign].boss_list['Chaos Zakum']['party_size'])
+    czak_status.set(characters[selected_ign].boss_list['Chaos Zakum']['boss_clear'])
+
     # Princess No Vars
     pno_difficulty_choice = tk.StringVar()
     pno_party_size_choice = tk.StringVar()
     pno_status = tk.IntVar()
+
+    pno_difficulty_choice.set(characters[selected_ign].boss_list['Princess No']['boss_difficulty'])
+    pno_party_size_choice.set(characters[selected_ign].boss_list['Princess No']['party_size'])
+    pno_status.set(characters[selected_ign].boss_list['Princess No']['boss_clear'])
 
     # Chaos Queen Vars
     cqueen_difficulty_choice = tk.StringVar()
     cqueen_party_size_choice = tk.StringVar()
     cqueen_status = tk.IntVar()
 
+    cqueen_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Queen']['boss_difficulty'])
+    cqueen_party_size_choice.set(characters[selected_ign].boss_list['Chaos Queen']['party_size'])
+    cqueen_status.set(characters[selected_ign].boss_list['Chaos Queen']['boss_clear'])
+
     # Chaos Pierre Vars
     cpierre_difficulty_choice = tk.StringVar()
     cpierre_party_size_choice = tk.StringVar()
     cpierre_status = tk.IntVar()
+
+    cpierre_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Pierre']['boss_difficulty'])
+    cpierre_party_size_choice.set(characters[selected_ign].boss_list['Chaos Pierre']['party_size'])
+    cpierre_status.set(characters[selected_ign].boss_list['Chaos Pierre']['boss_clear'])
 
     # Chaos Von Bon Vars
     cvonbon_difficulty_choice = tk.StringVar()
     cvonbon_party_size_choice = tk.StringVar()
     cvonbon_status = tk.IntVar()
 
+    cvonbon_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Von Bon']['boss_difficulty'])
+    cvonbon_party_size_choice.set(characters[selected_ign].boss_list['Chaos Von Bon']['party_size'])
+    cvonbon_status.set(characters[selected_ign].boss_list['Chaos Von Bon']['boss_clear'])
+
     # Chaos Vellum Vars
     cvell_difficulty_choice = tk.StringVar()
     cvell_party_size_choice = tk.StringVar()
     cvell_status = tk.IntVar()
+
+    cvell_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Vellum']['boss_difficulty'])
+    cvell_party_size_choice.set(characters[selected_ign].boss_list['Chaos Vellum']['party_size'])
+    cvell_status.set(characters[selected_ign].boss_list['Chaos Vellum']['boss_clear'])
 
     # Akechi Mitsuhide Vars
     akechi_difficulty_choice = tk.StringVar()
     akechi_party_size_choice = tk.StringVar()
     akechi_status = tk.IntVar()
 
+    akechi_difficulty_choice.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_difficulty'])
+    akechi_party_size_choice.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['party_size'])
+    akechi_status.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_clear'])
+
     # Hard Magnus Vars
     hmag_difficulty_choice = tk.StringVar()
     hmag_party_size_choice = tk.StringVar()
     hmag_status = tk.IntVar()
+
+    hmag_difficulty_choice.set(characters[selected_ign].boss_list['Hard Magnus']['boss_difficulty'])
+    hmag_party_size_choice.set(characters[selected_ign].boss_list['Hard Magnus']['party_size'])
+    hmag_status.set(characters[selected_ign].boss_list['Hard Magnus']['boss_clear'])
 
     # Chaos Papulatus Vars
     cpap_difficulty_choice = tk.StringVar()
     cpap_party_size_choice = tk.StringVar()
     cpap_status = tk.IntVar()
 
+    cpap_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Papulatus']['boss_difficulty'])
+    cpap_party_size_choice.set(characters[selected_ign].boss_list['Chaos Papulatus']['party_size'])
+    cpap_status.set(characters[selected_ign].boss_list['Chaos Papulatus']['boss_clear'])
+
     # Lotus Vars
     lotus_difficulty_choice = tk.StringVar()
     lotus_party_size_choice = tk.StringVar()
     lotus_status = tk.IntVar()
+
+    lotus_difficulty_choice.set(characters[selected_ign].boss_list['Lotus']['boss_difficulty'])
+    lotus_party_size_choice.set(characters[selected_ign].boss_list['Lotus']['party_size'])
+    lotus_status.set(characters[selected_ign].boss_list['Lotus']['boss_clear'])
 
     # Damien Vars
     damien_difficulty_choice = tk.StringVar()
     damien_party_size_choice = tk.StringVar()
     damien_status = tk.IntVar()
 
+    damien_difficulty_choice.set(characters[selected_ign].boss_list['Damien']['boss_difficulty'])
+    damien_party_size_choice.set(characters[selected_ign].boss_list['Damien']['party_size'])
+    damien_status.set(characters[selected_ign].boss_list['Damien']['boss_clear'])
+
     # Guardian Slime Vars
     gslime_difficulty_choice = tk.StringVar()
     gslime_party_size_choice = tk.StringVar()
     gslime_status = tk.IntVar()
+
+    gslime_difficulty_choice.set(characters[selected_ign].boss_list['Guardian Slime']['boss_difficulty'])
+    gslime_party_size_choice.set(characters[selected_ign].boss_list['Guardian Slime']['party_size'])
+    gslime_status.set(characters[selected_ign].boss_list['Guardian Slime']['boss_clear'])
 
     # Lucid Vars
     lucid_difficulty_choice = tk.StringVar()
     lucid_party_size_choice = tk.StringVar()
     lucid_status = tk.IntVar()
 
+    lucid_difficulty_choice.set(characters[selected_ign].boss_list['Lucid']['boss_difficulty'])
+    lucid_party_size_choice.set(characters[selected_ign].boss_list['Lucid']['party_size'])
+    lucid_status.set(characters[selected_ign].boss_list['Lucid']['boss_clear'])
+
     # Will Vars
     will_difficulty_choice = tk.StringVar()
     will_party_size_choice = tk.StringVar()
     will_status = tk.IntVar()
+
+    will_difficulty_choice.set(characters[selected_ign].boss_list['Will']['boss_difficulty'])
+    will_party_size_choice.set(characters[selected_ign].boss_list['Will']['party_size'])
+    will_status.set(characters[selected_ign].boss_list['Will']['boss_clear'])
 
     # Gloom Vars
     gloom_difficulty_choice = tk.StringVar()
     gloom_party_size_choice = tk.StringVar()
     gloom_status = tk.IntVar()
 
+    gloom_difficulty_choice.set(characters[selected_ign].boss_list['Gloom']['boss_difficulty'])
+    gloom_party_size_choice.set(characters[selected_ign].boss_list['Gloom']['party_size'])
+    gloom_status.set(characters[selected_ign].boss_list['Gloom']['boss_clear'])
+
     # Darknell Vars
     darknell_difficulty_choice = tk.StringVar()
     darknell_party_size_choice = tk.StringVar()
     darknell_status = tk.IntVar()
+
+    darknell_difficulty_choice.set(characters[selected_ign].boss_list['Darknell']['boss_difficulty'])
+    darknell_party_size_choice.set(characters[selected_ign].boss_list['Darknell']['party_size'])
+    darknell_status.set(characters[selected_ign].boss_list['Darknell']['boss_clear'])
 
     # Versus Hilla Vars
     vhilla_difficulty_choice = tk.StringVar()
     vhilla_party_size_choice = tk.StringVar()
     vhilla_status = tk.IntVar()
 
+    vhilla_difficulty_choice.set(characters[selected_ign].boss_list['Versus Hilla']['boss_difficulty'])
+    vhilla_party_size_choice.set(characters[selected_ign].boss_list['Versus Hilla']['party_size'])
+    vhilla_status.set(characters[selected_ign].boss_list['Versus Hilla']['boss_clear'])
+
     # Seren Vars
     seren_difficulty_choice = tk.StringVar()
     seren_party_size_choice = tk.StringVar()
     seren_status = tk.IntVar()
+
+    seren_difficulty_choice.set(characters[selected_ign].boss_list['Seren']['boss_difficulty'])
+    seren_party_size_choice.set(characters[selected_ign].boss_list['Seren']['party_size'])
+    seren_status.set(characters[selected_ign].boss_list['Seren']['boss_clear'])
 
     # Kaling Vars
     kaling_difficulty_choice = tk.StringVar()
     kaling_party_size_choice = tk.StringVar()
     kaling_status = tk.IntVar()
 
+    kaling_difficulty_choice.set(characters[selected_ign].boss_list['Kaling']['boss_difficulty'])
+    kaling_party_size_choice.set(characters[selected_ign].boss_list['Kaling']['party_size'])
+    kaling_status.set(characters[selected_ign].boss_list['Kaling']['boss_clear'])
+
     # Black Mage Vars
     bm_difficulty_choice = tk.StringVar()
     bm_party_size_choice = tk.StringVar()
     bm_status = tk.IntVar()
+
+    bm_difficulty_choice.set(characters[selected_ign].boss_list['Black Mage']['boss_difficulty'])
+    bm_party_size_choice.set(characters[selected_ign].boss_list['Black Mage']['party_size'])
+    bm_status.set(characters[selected_ign].boss_list['Black Mage']['boss_clear'])
 
     # ---> Spacers <---
 
@@ -642,7 +733,7 @@ def bossing_checklist_popup():
     cpb_img = tk.Label(bc_win, text='BOSS IMG HERE')
     cpb_difficulty = tk.OptionMenu(bc_win, cpb_difficulty_choice, *difficulties)
     cpb_party_size = tk.OptionMenu(bc_win, cpb_party_size_choice, *party_size)
-    cpb_clear_status = tk.Checkbutton(bc_win)
+    cpb_clear_status = tk.Checkbutton(bc_win, variable=cpb_status)
 
     # Hard Hilla
     hh_name = tk.Label(bc_win, text='Hard Hilla')
