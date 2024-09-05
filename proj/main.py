@@ -634,7 +634,7 @@ def bossing_checklist_popup():
         'Normal'
     ]
     
-    # for: Lotus, Damien, Guardian Slime, Gloom, Verus Hilla, Darknell
+    # for: Damien, Guardian Slime, Gloom, Verus Hilla, Darknell
     difficulty_b = [
         'Normal',
         'Hard/Chaos'
@@ -647,7 +647,7 @@ def bossing_checklist_popup():
         'Hard/Chaos'
     ]
 
-    # for: Seren
+    # for: Seren, Lotus
     difficulty_d = [
         'Normal',
         'Hard/Chaos',
@@ -982,7 +982,7 @@ def bossing_checklist_popup():
     # Lotus
     lotus_name = tk.Label(bc_win, text='Lotus')
     lotus_img = tk.Label(bc_win, text='BOSS IMG HERE')
-    lotus_difficulty = tk.OptionMenu(bc_win, lotus_difficulty_choice, *difficulty_b)
+    lotus_difficulty = tk.OptionMenu(bc_win, lotus_difficulty_choice, *difficulty_d)
     lotus_party_size = tk.OptionMenu(bc_win, lotus_party_size_choice, *party_size)
     lotus_clear_status = tk.Checkbutton(bc_win, variable=lotus_status, command=lambda:update_check_status('Lotus', lotus_status))
 
