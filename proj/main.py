@@ -6,6 +6,7 @@ import webbrowser
 from charinfo import CharInfo
 from bosslist import BossList
 from userinfo import UserInfo
+from boss import Boss
 import json
 import os
 
@@ -64,6 +65,13 @@ def custom_serializer(obj):
            'Versus Hilla': obj.vhilla,
            'Seren': obj.seren,
            'Kaling': obj.kaling             
+        }
+    elif isinstance(obj, Boss):
+        return {
+            'boss_name': obj.boss_name,
+            'boss_clear': obj.boss_clear,
+            'boss_difficulty': obj.boss_difficulty,
+            'party_size': obj.party_size
         }
     elif isinstance(obj, UserInfo):
         return {
