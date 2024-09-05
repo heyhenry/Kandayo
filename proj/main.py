@@ -1484,3 +1484,16 @@ root.mainloop()
 # ----> dropdown to choose difficulty level (easy, normal, hard, extreme)
 # ----> revamp UI to include boss img
 # ----> revamp UI to be less skinny, more full and wholesome
+
+# UPDATED NOTES FOR NEXT SESSION (prev left, cos could be useful)
+# 1. obtain boss images with transparent backgrounds
+# 2. implement weekly mesos gained counter
+# 2.1 implement reset validation and feature for weekly mesos gained 
+# 2.1.1 this could potentially be achieved by utilising the weekly_boss_crystal_reset function... 
+#       - just clear the weekly_mesos_gained value if its a new thursday (weekly reset)
+# 3. update bosses difficulties
+# 3.1 those with multiple difficulties that are viable as weekly clears
+# 3.2 those with singular difficulty that are viable as weekly clears
+# 3.3 create relevant dictionary/list of difficulties to attach to relevant boss (i.e singulars wont have a dropdown, some will have easy to hard, some will have easy to extreme)
+# 4. find out and attach prices to each bosses incl difficulty price adjustments
+# 5. do the maths for different received boss crystal price based on party size
