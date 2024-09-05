@@ -496,6 +496,10 @@ def bossing_checklist_popup():
 
     selected_ign = ''
 
+    # store selected ign into var for reference 'selected_ign'
+    for i in chars_lb.curselection():
+        selected_ign = chars_lb.get(i)
+
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
     # bc_win.geometry()
