@@ -30,7 +30,7 @@
             },
             "Princess No": {
                 "boss_name": "Princess No",
-                "boss_clear": true,
+                "boss_clear": false,
                 "boss_difficulty": "Normal",
                 "party_size": 4
             },
@@ -68,7 +68,7 @@
                 "boss_name": "Hard Magnus",
                 "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": 4
+                "party_size": 3
             },
             "Chaos Papulatus": {
                 "boss_name": "Chaos Papulatus",
@@ -80,7 +80,7 @@
                 "boss_name": "Lotus",
                 "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": 4
+                "party_size": 3
             },
             "Damien": {
                 "boss_name": "Damien",
@@ -98,7 +98,7 @@
                 "boss_name": "Lucid",
                 "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": 4
+                "party_size": 5
             },
             "Will": {
                 "boss_name": "Will",
@@ -140,7 +140,7 @@
                 "boss_name": "Black Mage",
                 "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": 4
+                "party_size": 3
             }
         }
     },

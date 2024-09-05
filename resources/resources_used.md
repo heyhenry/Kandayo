@@ -39,3 +39,6 @@ The following are the resources I have read, referred and learnt from to better 
 - Place() method of tkinter: https://stackoverflow.com/questions/52472105/does-grid-has-a-fill-attribute-like-pack-in-tkinter
 - Scrollbar Tkinter: https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
 - Dropdown Menu Tkinter: https://www.geeksforgeeks.org/dropdown-menus-tkinter/
+- Updating local git repository with branch/merge changes in Visual Studio: https://stackoverflow.com/questions/51851449/in-visual-studio-code-for-windows-the-git-branch-doesnt-show-and-cant-create
+- Using ternary operators: https://www.geeksforgeeks.org/ternary-operator-in-python/
+- Accessing/Configuring value from optionmenu (dropdown): https://www.tutorialspoint.com/a-concise-way-to-configure-tkinter-option-menu
