@@ -26,7 +26,7 @@ def load_user():
         with open(usr_filename, 'r') as file:
             usr_data = json.load(file)
             for usr, usr_info in usr_data.items():
-                user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['weekly_mesos_gained'], usr_info['boss_crystal_count'], usr_info['boss_crystal_sold'],
+                user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['weekly_mesos_gained'], usr_info['boss_crysal_reset'], usr_info['boss_crystal_count'], usr_info['boss_crystal_sold'],
                                       usr_info['hotlink_one'], usr_info['hotlink_two'], usr_info['hotlink_three'])
 
 # // json function //
@@ -80,6 +80,7 @@ def custom_serializer(obj):
         return {
             'mesos_balance': obj.mesos_balance,
             'weekly_mesos_gained': obj.weekly_mesos_gained,
+            'boss_crysal_reset': obj.boss_crysal_reset,
             'boss_crystal_count': obj.boss_crystal_count,
             'boss_crystal_sold': obj.boss_crystal_sold,
             'hotlink_one': obj.hotlink_one,
@@ -570,7 +571,7 @@ def bossing_checklist_popup():
         with open(storage_filename, 'w') as outfile:
             outfile.write(json_object)
 
-    # updates the party size for each boss based on user's input
+    # updates the party size for each boss based on user's 
     def update_party_size():
 
         # dictionary to hold each boss's value for party size
@@ -1267,6 +1268,20 @@ def subtract_mesos():
     sm_win.grid_rowconfigure(2, weight=1)
     sm_win.grid_columnconfigure(0, weight=1)
 
+# reset the boss crystals for the new week (thursdays)
+def reset_boss_crystals():
+
+    utc_time = dt.datetime.now(timezone.utc)
+
+    if utc_time.weekday() == 3:
+        user['usr'].boss_crystal_count = 180
+        user['usr'].boss_crystal_sold = 0
+
+    json_object = json.dumps(user, indent=4, default=custom_serializer)
+
+    with open(usr_filename, 'w') as outfile:
+        outfile.write(json_object)
+
 # // orange functions // 
 # open weblink
 def open_hotlink(hotlink):
@@ -1324,6 +1339,9 @@ def edit_hotlinks():
 
 # load in the user 
 load_user()
+
+# if weekly reset, reset boss crystals
+reset_boss_crystals()
 
 root = tk.Tk()
 # position window display upon open
