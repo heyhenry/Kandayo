@@ -298,6 +298,7 @@ def create_character(ign, job, level):
 
     # refill the characters list box with latest data
     populate_entries()
+    load_characters()
 
 # load save data
 def load_characters():
