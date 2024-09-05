@@ -8,7 +8,7 @@
                 "boss_name": "Chaos Pink Bean",
                 "boss_clear": false,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "party_size": 2
             },
             "Hard Hilla": {
                 "boss_name": "Hard Hilla",

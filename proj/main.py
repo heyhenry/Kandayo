@@ -620,6 +620,7 @@ def bossing_checklist_popup():
     def update_difficulty_party_size():
         update_bossing_difficulty()
         update_party_size()
+        bc_win.destroy()
 
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
