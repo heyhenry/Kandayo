@@ -516,6 +516,12 @@ def bossing_checklist_popup():
     # update bossing checklist
     def update_check_status(boss_name, clicked_status):
 
+        complete_status_icon = Image.open('./img/complete_status.png')
+        max_width, max_height = 50,50
+        complete_status_icon.thumbnail((max_width, max_height))
+        complete_status_icon = ImageTk.PhotoImage(complete_status_icon)
+        
+
         # determines which value change is required based on checkbutton status
         if clicked_status.get():
             characters[selected_ign].boss_list[boss_name]['boss_clear'] = True
