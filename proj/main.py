@@ -1586,7 +1586,7 @@ def add_mesos():
                 outfile.write(json_object)
 
             # update the mesos balance label
-            mesos_balance_display_lbl.config(text=f'{user["usr"].mesos_balance}')
+            mesos_balance_display_lbl.config(text=f'${user["usr"].mesos_balance:,.0f}')
 
             # close popup
             am_win.destroy()
@@ -1639,7 +1639,7 @@ def subtract_mesos():
                 with open(usr_filename, 'w') as outfile:
                     outfile.write(json_object)
 
-                mesos_balance_display_lbl.config(text=f'{user["usr"].mesos_balance}')
+                mesos_balance_display_lbl.config(text=f'${user["usr"].mesos_balance:,.0f}')
 
                 sm_win.destroy()
         else:
@@ -1828,7 +1828,7 @@ blue_frame.grid_columnconfigure(1, weight=1)
 # // purple // 
 # purple widgets
 mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
-mesos_balance_display_lbl = tk.Label(purple_frame, text=f'{user['usr'].mesos_balance}', font=('Kozuka Gothic Pro B', 10), bg='magenta')
+mesos_balance_display_lbl = tk.Label(purple_frame, text=f'${user['usr'].mesos_balance:,.0f}', font=('Kozuka Gothic Pro B', 10), bg='magenta')
 add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos)
 remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos)
 
