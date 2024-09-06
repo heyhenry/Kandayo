@@ -761,7 +761,6 @@ def bossing_checklist_popup():
     # bc_win.geometry()
 
     # difficulty variations
-    
     # for: Cygnus
     difficulty_a = [
         'Easy',
@@ -1454,8 +1453,12 @@ def reset_boss_crystals():
     # check if today is a thursday and if a reset has already occurred for this week
     if utc_time.weekday() == 3 and user['usr'].boss_crystal_reset != todays_date:
         user['usr'].boss_crystal_reset = todays_date
+        # resets weekly boss crystal count
         user['usr'].boss_crystal_count = 180
+        # resets boss crystals sold
         user['usr'].boss_crystal_sold = 0
+        # resets weekly mesos gained
+        user['usr'].weekly_mesos_gained = 0
 
         # update user save file
         json_object = json.dumps(user, indent=4, default=custom_serializer)
@@ -1662,13 +1665,3 @@ root.mainloop()
 
 # UPDATED NOTES FOR NEXT SESSION (prev left, cos could be useful)
 # 1. obtain boss images with transparent backgrounds
-# 2. implement weekly mesos gained counter
-# 2.1 implement reset validation and feature for weekly mesos gained 
-# 2.1.1 this could potentially be achieved by utilising the weekly_boss_crystal_reset function... 
-#       - just clear the weekly_mesos_gained value if its a new thursday (weekly reset)
-# 3. update bosses difficulties
-# 3.1 those with multiple difficulties that are viable as weekly clears
-# 3.2 those with singular difficulty that are viable as weekly clears
-# 3.3 create relevant dictionary/list of difficulties to attach to relevant boss (i.e singulars wont have a dropdown, some will have easy to hard, some will have easy to extreme)
-# 4. find out and attach prices to each bosses incl difficulty price adjustments
-# 5. do the maths for different received boss crystal price based on party size
