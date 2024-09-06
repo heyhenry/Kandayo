@@ -9,6 +9,7 @@ from userinfo import UserInfo
 from boss import Boss
 import json
 import os
+from PIL import Image, ImageTk
 
 # list of character (CharInfo) objects
 characters = {}
@@ -1015,11 +1016,107 @@ def bossing_checklist_popup():
 
     # Widgets
     bossing_checklist_title = tk.Label(bc_win, text='Bossing Checklist')
-    character_details_lbl = tk.Label(bc_win, text=f'ign | job | Lv.')
+    character_details_lbl = tk.Label(bc_win, text=f'{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}')
+
+    # Render Images
+    max_width, max_height = 100, 100
+
+    # opening images
+    cpb_icon = Image.open('./img/Chaos_Pink_Bean.webp')
+    cpb_icon.thumbnail((max_width, max_height))
+    cpb_icon = ImageTk.PhotoImage(cpb_icon)
+
+    hh_icon = Image.open('./img/Hard_Hilla.webp')
+    hh_icon.thumbnail((max_width, max_height))
+    hh_icon = ImageTk.PhotoImage(hh_icon)
+
+    cyg_icon = Image.open('./img/Cygnus.webp')
+    cyg_icon.thumbnail((max_width, max_height))
+    cyg_icon = ImageTk.PhotoImage(cyg_icon)
+
+    czak_icon = Image.open('./img/Chaos_Zakum.webp')
+    czak_icon.thumbnail((max_width, max_height))
+    czak_icon = ImageTk.PhotoImage(czak_icon)
+
+    pno_icon = Image.open('./img/Princess_No.webp')
+    pno_icon.thumbnail((max_width, max_height))
+    pno_icon = ImageTk.PhotoImage(pno_icon)
+
+    cqueen_icon = Image.open('./img/Chaos_Crimson_Queen.webp')
+    cqueen_icon.thumbnail((max_width, max_height))
+    cqueen_icon = ImageTk.PhotoImage(cqueen_icon)
+
+    cpierre_icon = Image.open('./img/Chaos_Pierre.webp')
+    cpierre_icon.thumbnail((max_width, max_height))
+    cpierre_icon = ImageTk.PhotoImage(cpierre_icon)
+
+    cvonbon_icon = Image.open('./img/Chaos_Von_Bon.webp')
+    cvonbon_icon.thumbnail((max_width, max_height))
+    cvonbon_icon = ImageTk.PhotoImage(cvonbon_icon)
+
+    cvell_icon = Image.open('./img/Chaos_Vellum.webp')
+    cvell_icon.thumbnail((max_width, max_height))
+    cvell_icon = ImageTk.PhotoImage(cvell_icon)
+
+    akechi_icon = Image.open('./img/Akechi_Mitsuhide.webp')
+    akechi_icon.thumbnail((max_width, max_height))
+    akechi_icon = ImageTk.PhotoImage(akechi_icon)
+
+    hmag_icon = Image.open('./img/Hard_Magnus.webp')
+    hmag_icon.thumbnail((max_width, max_height))
+    hmag_icon = ImageTk.PhotoImage(hmag_icon)
+
+    cpap_icon = Image.open('./img/Chaos_Papulatus.webp')
+    cpap_icon.thumbnail((max_width, max_height))
+    cpap_icon = ImageTk.PhotoImage(cpap_icon)
+
+    lotus_icon = Image.open('./img/Lotus.webp')
+    lotus_icon.thumbnail((max_width, max_height))
+    lotus_icon = ImageTk.PhotoImage(lotus_icon)
+
+    damien_icon = Image.open('./img/Damien.webp')
+    damien_icon.thumbnail((max_width, max_height))
+    damien_icon = ImageTk.PhotoImage(damien_icon)
+
+    gslime_icon = Image.open('./img/Guardian_Slime.webp')
+    gslime_icon.thumbnail((max_width, max_height))
+    gslime_icon = ImageTk.PhotoImage(gslime_icon)
+
+    lucid_icon = Image.open('./img/Lucid.webp')
+    lucid_icon.thumbnail((max_width, max_height))
+    lucid_icon = ImageTk.PhotoImage(lucid_icon)
+
+    will_icon = Image.open('./img/Will.webp')
+    will_icon.thumbnail((max_width, max_height))
+    will_icon = ImageTk.PhotoImage(will_icon)
+
+    gloom_icon = Image.open('./img/Gloom.webp')
+    gloom_icon.thumbnail((max_width, max_height))
+    gloom_icon = ImageTk.PhotoImage(gloom_icon)
+
+    darknell_icon = Image.open('./img/Darknell.webp')
+    darknell_icon.thumbnail((max_width, max_height))
+    darknell_icon = ImageTk.PhotoImage(darknell_icon)
+
+    vhilla_icon = Image.open('./img/Verus_Hilla.webp')
+    vhilla_icon.thumbnail((max_width, max_height))
+    vhilla_icon = ImageTk.PhotoImage(vhilla_icon)
+
+    seren_icon = Image.open('./img/Seren.webp')
+    seren_icon.thumbnail((max_width, max_height))
+    seren_icon = ImageTk.PhotoImage(seren_icon)
+
+    kaling_icon = Image.open('./img/Kaling.webp')
+    kaling_icon.thumbnail((max_width, max_height))
+    kaling_icon = ImageTk.PhotoImage(kaling_icon)
+
+    kalos_icon = Image.open('./img/Kalos.webp')
+    kalos_icon.thumbnail((max_width, max_height))
+    kalos_icon = ImageTk.PhotoImage(kalos_icon)
 
     # Chaos Pink Bean
     cpb_name = tk.Label(bc_win, text='Chaos Pink Bean')
-    cpb_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cpb_img = tk.Label(bc_win, image=cpb_icon)
     cpb_difficulty = tk.OptionMenu(bc_win, cpb_difficulty_choice, *difficulty_a) 
     cpb_difficulty.config(state='disabled')
     cpb_party_size = tk.OptionMenu(bc_win, cpb_party_size_choice, *party_size)
@@ -1027,7 +1124,7 @@ def bossing_checklist_popup():
 
     # Hard Hilla
     hh_name = tk.Label(bc_win, text='Hard Hilla')
-    hh_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    hh_img = tk.Label(bc_win, image=hh_icon)
     hh_difficulty = tk.OptionMenu(bc_win, hh_difficulty_choice, *difficulty_a) 
     hh_difficulty.config(state='disabled')
     hh_party_size = tk.OptionMenu(bc_win, hh_party_size_choice, *party_size)
@@ -1035,14 +1132,14 @@ def bossing_checklist_popup():
 
     # Cygnus
     cyg_name = tk.Label(bc_win, text='Cygnus')
-    cyg_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cyg_img = tk.Label(bc_win, image=cyg_icon)
     cyg_difficulty = tk.OptionMenu(bc_win, cyg_difficulty_choice, *difficulty_a)
     cyg_party_size = tk.OptionMenu(bc_win, cyg_party_size_choice, *party_size)
     cyg_clear_status = tk.Checkbutton(bc_win, variable=cyg_status, command=lambda:update_check_status('Cygnus', cyg_status))
 
     # Chaos Zakum
     czak_name = tk.Label(bc_win, text='Chaos Zakum')
-    czak_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    czak_img = tk.Label(bc_win, image=czak_icon)
     czak_difficulty = tk.OptionMenu(bc_win, czak_difficulty_choice, *difficulty_a) 
     czak_difficulty.config(state='disabled')
     czak_party_size = tk.OptionMenu(bc_win, czak_party_size_choice, *party_size)
@@ -1050,7 +1147,7 @@ def bossing_checklist_popup():
 
     # Princess No
     pno_name = tk.Label(bc_win, text='Princess No')
-    pno_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    pno_img = tk.Label(bc_win, image=pno_icon)
     pno_difficulty = tk.OptionMenu(bc_win, pno_difficulty_choice, *difficulty_a) 
     pno_difficulty.config(state='disabled')
     pno_party_size = tk.OptionMenu(bc_win, pno_party_size_choice, *party_size)
@@ -1058,7 +1155,7 @@ def bossing_checklist_popup():
 
     # Chaos Queen
     cqueen_name = tk.Label(bc_win, text='Chaos Queen')
-    cqueen_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cqueen_img = tk.Label(bc_win, image=cqueen_icon)
     cqueen_difficulty = tk.OptionMenu(bc_win, cqueen_difficulty_choice, *difficulty_a) 
     cqueen_difficulty.config(state='disabled')
     cqueen_party_size = tk.OptionMenu(bc_win, cqueen_party_size_choice, *party_size)
@@ -1066,7 +1163,7 @@ def bossing_checklist_popup():
 
     # Chaos Pierre
     cpierre_name = tk.Label(bc_win, text='Chaos Pierre')
-    cpierre_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cpierre_img = tk.Label(bc_win, image=cpierre_icon)
     cpierre_difficulty = tk.OptionMenu(bc_win, cpierre_difficulty_choice, *difficulty_a) 
     cpierre_difficulty.config(state='disabled')
     cpierre_party_size = tk.OptionMenu(bc_win, cpierre_party_size_choice, *party_size)
@@ -1074,7 +1171,7 @@ def bossing_checklist_popup():
 
     # Chaos Von Bon
     cvonbon_name = tk.Label(bc_win, text='Chaos Von Bon')
-    cvonbon_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cvonbon_img = tk.Label(bc_win, image=cvonbon_icon)
     cvonbon_difficulty = tk.OptionMenu(bc_win, cvonbon_difficulty_choice, *difficulty_a) 
     cvonbon_difficulty.config(state='disabled')
     cvonbon_party_size = tk.OptionMenu(bc_win, cvonbon_party_size_choice, *party_size)
@@ -1082,7 +1179,7 @@ def bossing_checklist_popup():
 
     # Chaos Vellum
     cvell_name = tk.Label(bc_win, text='Chaos Vellum')
-    cvell_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cvell_img = tk.Label(bc_win, image=cvell_icon)
     cvell_difficulty = tk.OptionMenu(bc_win, cvell_difficulty_choice, *difficulty_a) 
     cvell_difficulty.config(state='disabled')
     cvell_party_size = tk.OptionMenu(bc_win, cvell_party_size_choice, *party_size)
@@ -1090,7 +1187,7 @@ def bossing_checklist_popup():
 
     # Akechi Mitsuhide
     akechi_name = tk.Label(bc_win, text='Akechi Mitsuhide')
-    akechi_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    akechi_img = tk.Label(bc_win, image=akechi_icon)
     akechi_difficulty = tk.OptionMenu(bc_win, akechi_difficulty_choice, *difficulty_a) 
     akechi_difficulty.config(state='disabled')
     akechi_party_size = tk.OptionMenu(bc_win, akechi_party_size_choice, *party_size)
@@ -1098,7 +1195,7 @@ def bossing_checklist_popup():
 
     # Hard Magnus
     hmag_name = tk.Label(bc_win, text='Hard Magnus')
-    hmag_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    hmag_img = tk.Label(bc_win, image=hmag_icon)
     hmag_difficulty = tk.OptionMenu(bc_win, hmag_difficulty_choice, *difficulty_a) 
     hmag_difficulty.config(state='disabled')
     hmag_party_size = tk.OptionMenu(bc_win, hmag_party_size_choice, *party_size)
@@ -1106,7 +1203,7 @@ def bossing_checklist_popup():
 
     # Chaos Papulatus
     cpap_name = tk.Label(bc_win, text='Chaos Papulatus')
-    cpap_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    cpap_img = tk.Label(bc_win, image=cpap_icon)
     cpap_difficulty = tk.OptionMenu(bc_win, cpap_difficulty_choice, *difficulty_a) 
     cpap_difficulty.config(state='disabled')
     cpap_party_size = tk.OptionMenu(bc_win, cpap_party_size_choice, *party_size)
@@ -1114,77 +1211,77 @@ def bossing_checklist_popup():
 
     # Lotus
     lotus_name = tk.Label(bc_win, text='Lotus')
-    lotus_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    lotus_img = tk.Label(bc_win, image=lotus_icon)
     lotus_difficulty = tk.OptionMenu(bc_win, lotus_difficulty_choice, *difficulty_d)
     lotus_party_size = tk.OptionMenu(bc_win, lotus_party_size_choice, *party_size)
     lotus_clear_status = tk.Checkbutton(bc_win, variable=lotus_status, command=lambda:update_check_status('Lotus', lotus_status))
 
     # Damien
     damien_name = tk.Label(bc_win, text='Damien')
-    damien_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    damien_img = tk.Label(bc_win, image=damien_icon)
     damien_difficulty = tk.OptionMenu(bc_win, damien_difficulty_choice, *difficulty_b)
     damien_party_size = tk.OptionMenu(bc_win, damien_party_size_choice, *party_size)
     damien_clear_status = tk.Checkbutton(bc_win, variable=damien_status, command=lambda:update_check_status('Damien', damien_status))
 
     # Guardian Slime
     gslime_name = tk.Label(bc_win, text='Guardian Slime')
-    gslime_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    gslime_img = tk.Label(bc_win, image=gslime_icon)
     gslime_difficulty = tk.OptionMenu(bc_win, gslime_difficulty_choice, *difficulty_b)
     gslime_party_size = tk.OptionMenu(bc_win, gslime_party_size_choice, *party_size)
     gslime_clear_status = tk.Checkbutton(bc_win, variable=gslime_status, command=lambda:update_check_status('Guardian Slime', gslime_status))
 
     # Lucid
     lucid_name = tk.Label(bc_win, text='Lucid')
-    lucid_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    lucid_img = tk.Label(bc_win, image=lucid_icon)
     lucid_difficulty = tk.OptionMenu(bc_win, lucid_difficulty_choice, *difficulty_c)
     lucid_party_size = tk.OptionMenu(bc_win, lucid_party_size_choice, *party_size)
     lucid_clear_status = tk.Checkbutton(bc_win, variable=lucid_status, command=lambda:update_check_status('Lucid', lucid_status))
 
     # Will
     will_name = tk.Label(bc_win, text='Will')
-    will_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    will_img = tk.Label(bc_win, image=will_icon)
     will_difficulty = tk.OptionMenu(bc_win, will_difficulty_choice, *difficulty_c)
     will_party_size = tk.OptionMenu(bc_win, will_party_size_choice, *party_size)
     will_clear_status = tk.Checkbutton(bc_win, variable=will_status, command=lambda:update_check_status('Will', will_status))
 
     # Gloom
     gloom_name = tk.Label(bc_win, text='Gloom')
-    gloom_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    gloom_img = tk.Label(bc_win, image=gloom_icon)
     gloom_difficulty = tk.OptionMenu(bc_win, gloom_difficulty_choice, *difficulty_b)
     gloom_party_size = tk.OptionMenu(bc_win, gloom_party_size_choice, *party_size)
     gloom_clear_status = tk.Checkbutton(bc_win, variable=gloom_status, command=lambda:update_check_status('Gloom', gloom_status))
 
     # Darknell
     darknell_name = tk.Label(bc_win, text='Darknell')
-    darknell_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    darknell_img = tk.Label(bc_win, image=darknell_icon)
     darknell_difficulty = tk.OptionMenu(bc_win, darknell_difficulty_choice, *difficulty_b)
     darknell_party_size = tk.OptionMenu(bc_win, darknell_party_size_choice, *party_size)
     darknell_clear_status = tk.Checkbutton(bc_win, variable=darknell_status, command=lambda:update_check_status('Darknell', darknell_status))
 
     # Versus Hilla
     vhilla_name = tk.Label(bc_win, text='Versus Hilla')
-    vhilla_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    vhilla_img = tk.Label(bc_win, image=vhilla_icon)
     vhilla_difficulty = tk.OptionMenu(bc_win, vhilla_difficulty_choice, *difficulty_b)
     vhilla_party_size = tk.OptionMenu(bc_win, vhilla_party_size_choice, *party_size)
     vhilla_clear_status = tk.Checkbutton(bc_win, variable=vhilla_status, command=lambda:update_check_status('Versus Hilla', vhilla_status))
 
     # Seren
     seren_name = tk.Label(bc_win, text='Seren')
-    seren_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    seren_img = tk.Label(bc_win, image=seren_icon)
     seren_difficulty = tk.OptionMenu(bc_win, seren_difficulty_choice, *difficulty_d)
     seren_party_size = tk.OptionMenu(bc_win, seren_party_size_choice, *party_size)
     seren_clear_status = tk.Checkbutton(bc_win, variable=seren_status, command=lambda:update_check_status('Seren', seren_status))
 
     # Kaling
     kaling_name = tk.Label(bc_win, text='Kaling')
-    kaling_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    kaling_img = tk.Label(bc_win, image=kaling_icon)
     kaling_difficulty = tk.OptionMenu(bc_win, kaling_difficulty_choice, *difficulty_e)
     kaling_party_size = tk.OptionMenu(bc_win, kaling_party_size_choice, *party_size)
     kaling_clear_status = tk.Checkbutton(bc_win, variable=kaling_status, command=lambda:update_check_status('Kaling', kaling_status))
 
     # Kalos
     kalos_name = tk.Label(bc_win, text='Kalos')
-    kalos_img = tk.Label(bc_win, text='BOSS IMG HERE')
+    kalos_img = tk.Label(bc_win, image=kalos_icon)
     kalos_difficulty = tk.OptionMenu(bc_win, kalos_difficulty_choice, *difficulty_e)
     kalos_party_size = tk.OptionMenu(bc_win, kalos_party_size_choice, *party_size)
     kalos_clear_status = tk.Checkbutton(bc_win, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status))
@@ -1270,76 +1367,101 @@ def bossing_checklist_popup():
     cpap_party_size.grid(row=10, column=5, padx=10)
     cpap_clear_status.grid(row=11, column=5, pady=10, padx=10)
 
-    lotus_name.grid(row=12, column=0, pady=10, padx=10)
-    lotus_img.grid(row=13, column=0, padx=10)
-    lotus_difficulty.grid(row=14, column=0, padx=10)
-    lotus_party_size.grid(row=15, column=0, padx=10)
-    lotus_clear_status.grid(row=16, column=0, pady=10, padx=10)
+    lotus_name.grid(row=2, column=6, pady=10, padx=10)
+    lotus_img.grid(row=3, column=6, padx=10)
+    lotus_difficulty.grid(row=4, column=6, padx=10)
+    lotus_party_size.grid(row=5, column=6, padx=10)
+    lotus_clear_status.grid(row=6, column=6, pady=10, padx=10)
 
-    damien_name.grid(row=12, column=1, pady=10, padx=10)
-    damien_img.grid(row=13, column=1, padx=10)
-    damien_difficulty.grid(row=14, column=1, padx=10)
-    damien_party_size.grid(row=15, column=1, padx=10)
-    damien_clear_status.grid(row=16, column=1, pady=10, padx=10)
+    damien_name.grid(row=2, column=7, pady=10, padx=10)
+    damien_img.grid(row=3, column=7, padx=10)
+    damien_difficulty.grid(row=4, column=7, padx=10)
+    damien_party_size.grid(row=5, column=7, padx=10)
+    damien_clear_status.grid(row=6, column=7, pady=10, padx=10)
 
-    gslime_name.grid(row=12, column=2, pady=10, padx=10)
-    gslime_img.grid(row=13, column=2, padx=10)
-    gslime_difficulty.grid(row=14, column=2, padx=10)
-    gslime_party_size.grid(row=15, column=2, padx=10)
-    gslime_clear_status.grid(row=16, column=2, pady=10, padx=10)
+    gslime_name.grid(row=2, column=8, pady=10, padx=10)
+    gslime_img.grid(row=3, column=8, padx=10)
+    gslime_difficulty.grid(row=4, column=8, padx=10)
+    gslime_party_size.grid(row=5, column=8, padx=10)
+    gslime_clear_status.grid(row=6, column=8, pady=10, padx=10)
 
-    lucid_name.grid(row=12, column=3, pady=10, padx=10)
-    lucid_img.grid(row=13, column=3, padx=10)
-    lucid_difficulty.grid(row=14, column=3, padx=10)
-    lucid_party_size.grid(row=15, column=3, padx=10)
-    lucid_clear_status.grid(row=16, column=3, pady=10, padx=10)
+    lucid_name.grid(row=7, column=6, pady=10, padx=10)
+    lucid_img.grid(row=8, column=6, padx=10)
+    lucid_difficulty.grid(row=9, column=6, padx=10)
+    lucid_party_size.grid(row=10, column=6, padx=10)
+    lucid_clear_status.grid(row=11, column=6, pady=10, padx=10)
 
-    will_name.grid(row=12, column=4, pady=10, padx=10)
-    will_img.grid(row=13, column=4, padx=10)
-    will_difficulty.grid(row=14, column=4, padx=10)
-    will_party_size.grid(row=15, column=4, padx=10)
-    will_clear_status.grid(row=16, column=4, pady=10, padx=10)
+    will_name.grid(row=7, column=7, pady=10, padx=10)
+    will_img.grid(row=8, column=7, padx=10)
+    will_difficulty.grid(row=9, column=7, padx=10)
+    will_party_size.grid(row=10, column=7, padx=10)
+    will_clear_status.grid(row=11, column=7, pady=10, padx=10)
 
-    gloom_name.grid(row=12, column=5, pady=10, padx=10)
-    gloom_img.grid(row=13, column=5, padx=10)
-    gloom_difficulty.grid(row=14, column=5, padx=10)
-    gloom_party_size.grid(row=15, column=5, padx=10)
-    gloom_clear_status.grid(row=16, column=5, pady=10, padx=10)
+    gloom_name.grid(row=7, column=8, pady=10, padx=10)
+    gloom_img.grid(row=8, column=8, padx=10)
+    gloom_difficulty.grid(row=9, column=8, padx=10)
+    gloom_party_size.grid(row=10, column=8, padx=10)
+    gloom_clear_status.grid(row=11, column=8, pady=10, padx=10)
+    # # #
+    darknell_name.grid(row=12, column=0, pady=10, padx=10)
+    darknell_img.grid(row=13, column=0, padx=10)
+    darknell_difficulty.grid(row=14, column=0, padx=10)
+    darknell_party_size.grid(row=15, column=0, padx=10)
+    darknell_clear_status.grid(row=16, column=0, pady=10, padx=10)
 
-    darknell_name.grid(row=17, column=0, pady=10, padx=10)
-    darknell_img.grid(row=18, column=0, padx=10)
-    darknell_difficulty.grid(row=19, column=0, padx=10)
-    darknell_party_size.grid(row=20, column=0, padx=10)
-    darknell_clear_status.grid(row=21, column=0, pady=10, padx=10)
+    vhilla_name.grid(row=12, column=1, pady=10, padx=10)
+    vhilla_img.grid(row=13, column=1, padx=10)
+    vhilla_difficulty.grid(row=14, column=1, padx=10)
+    vhilla_party_size.grid(row=15, column=1, padx=10)
+    vhilla_clear_status.grid(row=16, column=1, pady=10, padx=10)
 
-    vhilla_name.grid(row=17, column=1, pady=10, padx=10)
-    vhilla_img.grid(row=18, column=1, padx=10)
-    vhilla_difficulty.grid(row=19, column=1, padx=10)
-    vhilla_party_size.grid(row=20, column=1, padx=10)
-    vhilla_clear_status.grid(row=21, column=1, pady=10, padx=10)
+    seren_name.grid(row=12, column=2, pady=10, padx=10)
+    seren_img.grid(row=13, column=2, padx=10)
+    seren_difficulty.grid(row=14, column=2, padx=10)
+    seren_party_size.grid(row=15, column=2, padx=10)
+    seren_clear_status.grid(row=16, column=2, pady=10, padx=10)
 
-    seren_name.grid(row=17, column=2, pady=10, padx=10)
-    seren_img.grid(row=18, column=2, padx=10)
-    seren_difficulty.grid(row=19, column=2, padx=10)
-    seren_party_size.grid(row=20, column=2, padx=10)
-    seren_clear_status.grid(row=21, column=2, pady=10, padx=10)
+    kaling_name.grid(row=12, column=3, pady=10, padx=10)
+    kaling_img.grid(row=13, column=3, padx=10)
+    kaling_difficulty.grid(row=14, column=3, padx=10)
+    kaling_party_size.grid(row=15, column=3, padx=10)
+    kaling_clear_status.grid(row=16, column=3, pady=10, padx=10)
 
-    kaling_name.grid(row=17, column=3, pady=10, padx=10)
-    kaling_img.grid(row=18, column=3, padx=10)
-    kaling_difficulty.grid(row=19, column=3, padx=10)
-    kaling_party_size.grid(row=20, column=3, padx=10)
-    kaling_clear_status.grid(row=21, column=3, pady=10, padx=10)
-
-    kalos_name.grid(row=17, column=4, pady=10, padx=10)
-    kalos_img.grid(row=18, column=4, padx=10)
-    kalos_difficulty.grid(row=19, column=4, padx=10)
-    kalos_party_size.grid(row=20, column=4, padx=10)
-    kalos_clear_status.grid(row=21, column=4, pady=10, padx=10)
+    kalos_name.grid(row=12, column=4, pady=10, padx=10)
+    kalos_img.grid(row=13, column=4, padx=10)
+    kalos_difficulty.grid(row=14, column=4, padx=10)
+    kalos_party_size.grid(row=15, column=4, padx=10)
+    kalos_clear_status.grid(row=16, column=4, pady=10, padx=10)
 
     update_btn.grid(row=23, column=0)
     reset_clears.grid(row=23, column=1)
     reset_all.grid(row=23, column=2)
     cancel_btn.grid(row=23, column=3)
+
+    # save image reference to avoid garbage collection
+    cpb_img.image = cpb_icon
+    hh_img.image = hh_icon
+    cyg_img.image = cyg_icon
+    czak_img.image = czak_icon
+    pno_img.image = pno_icon
+    cqueen_img.image = cqueen_icon
+    cpierre_img.image = cpierre_icon
+    cvonbon_img.image = cvonbon_icon
+    cvell_img.image = cvell_icon
+    akechi_img.image = akechi_icon
+    hmag_img.image = hmag_icon
+    cpap_img.image = cpap_icon
+    lotus_img.image = lotus_icon
+    damien_img.image = damien_icon
+    gslime_img.image = gslime_icon
+    lucid_img.image = lucid_icon
+    will_img.image = will_icon
+    gloom_img.image = gloom_icon
+    darknell_img.image = darknell_icon
+    vhilla_img.image = vhilla_icon
+    seren_img.image = seren_icon
+    kaling_img.image = kaling_icon
+    kalos_img.image = kalos_icon
 
 # // purple functions //
 # add mesos amount to balance
