@@ -1593,18 +1593,18 @@ mesos_balance_display_lbl = tk.Label(purple_frame, text=f'{user['usr'].mesos_bal
 add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos)
 remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos)
 
-bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12))
-bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12))
-wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained}', font=('Kozuka Gothic Pro B', 12))
+bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
 
 mesos_balance_title_lbl.place(x=0, y=10, width=500, height=30)
 mesos_balance_display_lbl.place(x=0, y=30, width=500, height=30)
 add_mesos_btn.place(x=70, y=60, width=150, height=30)
 remove_mesos_btn.place(x=280, y=60, width=150, height=30)
 
-bc_remaining_lbl.place(x=25, y=110, width=500, height=30)
+bc_remaining_lbl.place(x=0, y=110, width=500, height=30)
 bc_sold_lbl.place(x=0, y=155, width=500, height=30)
-wm_gained_lbl.place(x=15, y=200, width=500, height=30)
+wm_gained_lbl.place(x=0, y=200, width=500, height=30)
 
 # // orange //
 # orange widgets
