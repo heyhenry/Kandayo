@@ -623,6 +623,7 @@ def bossing_checklist_popup():
         update_weekly_mesos_earned()
         bc_win.destroy()
 
+    # data set for all boss prices based on difficulties
     crystal_data = {
         'Chaos Pink Bean': {
             'Select Difficulty': 64000000
@@ -715,29 +716,41 @@ def bossing_checklist_popup():
         }
     }
 
+    # updates the weekly mesos earned/gained
     def update_weekly_mesos_earned():
+        # variables
         total_earnings = 0
         character = characters[selected_ign]
 
+        # loop through character, specifically boss_list object
         for boss_name, boss_details in character.boss_list.items():
+            # establish variable references
             boss_difficulty = boss_details['boss_difficulty']
             boss_party_size = boss_details['party_size']
             boss_clear = boss_details['boss_clear']
 
+            # add checks
+            # if boss status isn't cleared
             if boss_clear == False:
                 continue
+            # if the boss party size hasnt been selected (i.e not a number)
             elif isinstance(boss_party_size, str):
                 continue
+            # otherwise.. 
             else:
                 # check if the boss_name and difficulty_level are in the crystal_data dictionary
                 if boss_name in crystal_data and boss_difficulty in crystal_data[boss_name]:
+                    # formula: mesos earned based on boss, bosses difficulty and size of the party
                     mesos_earned = crystal_data[boss_name][boss_difficulty] / boss_party_size
                     total_earnings += mesos_earned
+                # logge check for error in rendering code, temporary else statement, removed prior finalisation
                 else:
                     print(f'Warning: Missing data for {boss_name} with difficulty {boss_difficulty}')
 
+        # update the weekly_mesos_gained variable with latest data 
         user['usr'].weekly_mesos_gained = total_earnings
 
+        # update the user save file
         json_object = json.dumps(user, indent=4, default=custom_serializer)
 
         with open(usr_filename, 'w') as outfile:

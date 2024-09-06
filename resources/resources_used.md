@@ -42,3 +42,7 @@ The following are the resources I have read, referred and learnt from to better 
 - Updating local git repository with branch/merge changes in Visual Studio: https://stackoverflow.com/questions/51851449/in-visual-studio-code-for-windows-the-git-branch-doesnt-show-and-cant-create
 - Using ternary operators: https://www.geeksforgeeks.org/ternary-operator-in-python/
 - Accessing/Configuring value from optionmenu (dropdown): https://www.tutorialspoint.com/a-concise-way-to-configure-tkinter-option-menu
+- Merging main branch to sub brach in github via vscode: https://medium.com/@euricopaes/how-to-update-a-branch-with-master-on-github-81f9a1baeb4b
+- String formatting examples and explanation: https://mkaz.blog/working-with-python/string-formatting
+- String formatting examples: https://stackoverflow.com/questions/5180365/add-commas-into-number-string
+- String formatting (variable placements and more): https://www.pythoncheatsheet.org/cheatsheet/string-formatting

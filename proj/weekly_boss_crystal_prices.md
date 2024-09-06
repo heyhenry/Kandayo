@@ -1,6 +1,6 @@
 # Weekly Boss Crystal Prices
 
-- Chaos Pink Bean : 64,000,000                   cpb1 64,000,000  + hh3 18,750,000 + cgloom2 231,125,000 + ekaling4 287,500,000
+- Chaos Pink Bean : 64,000,000
 - Hard Hilla : 56,250,000
 - Princess No : 81,000,000
 - Chaos Zakum : 81,000,000
