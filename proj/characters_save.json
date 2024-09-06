@@ -6,7 +6,7 @@
         "boss_list": {
             "Chaos Pink Bean": {
                 "boss_name": "Chaos Pink Bean",
-                "boss_clear": true,
+                "boss_clear": false,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": 1
             },
@@ -24,7 +24,7 @@
             },
             "Chaos Zakum": {
                 "boss_name": "Chaos Zakum",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
@@ -132,7 +132,7 @@
             },
             "Kaling": {
                 "boss_name": "Kaling",
-                "boss_clear": true,
+                "boss_clear": false,
                 "boss_difficulty": "Normal",
                 "party_size": 4
             },

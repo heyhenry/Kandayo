@@ -4,11 +4,11 @@ from PIL import Image, ImageTk
 root = tk.Tk()
 
 img = Image.open('incomplete_status.png')
-img.thumbnail((100,100), Image.Resampling.LANCZOS)
+img.thumbnail((100,100))
 img = ImageTk.PhotoImage(img)
 
 img2 = Image.open('complete_status.png')
-img2.thumbnail((100, 100), Image.Resampling.LANCZOS)
+img2.thumbnail((100, 100))
 img2 = ImageTk.PhotoImage(img2)
 
 cb_one_check = tk.IntVar()
