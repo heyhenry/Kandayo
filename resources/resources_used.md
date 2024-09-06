@@ -46,3 +46,5 @@ The following are the resources I have read, referred and learnt from to better 
 - String formatting examples and explanation: https://mkaz.blog/working-with-python/string-formatting
 - String formatting examples: https://stackoverflow.com/questions/5180365/add-commas-into-number-string
 - String formatting (variable placements and more): https://www.pythoncheatsheet.org/cheatsheet/string-formatting
+- Free icon download site: https://icons8.com/icons
+- How to hide checkbutton tick display: https://stackoverflow.com/questions/62191810/how-to-hide-simple-checkbutton-from-screen-when-using-selectimage-in-tkinter
