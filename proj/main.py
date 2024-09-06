@@ -769,7 +769,7 @@ def bossing_checklist_popup():
                     mesos_earned = crystal_data[boss_name][boss_difficulty] / boss_party_size
                     total_earnings += mesos_earned
 
-                    # counter crystals sold
+                    # count crystals sold based on each time mesos is earned
                     total_crystals_sold += 1
                 # logge check for error in rendering code, temporary else statement, removed prior finalisation
                 else:
@@ -787,6 +787,7 @@ def bossing_checklist_popup():
         with open(usr_filename, 'w') as outfile:
             outfile.write(json_object)
 
+        # update the label text displays, based on latest save file data
         bc_remaining_lbl.config(text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}')
         bc_sold_lbl.config(text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}')
         wm_gained_lbl.config(text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}')
