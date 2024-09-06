@@ -738,7 +738,14 @@ def bossing_checklist_popup():
     def update_weekly_mesos_earned():
         # variables
         total_earnings = 0
+        total_crystals_sold = 0
         character = characters[selected_ign]
+
+        # clean slate value that will gain latest value post function execution
+        user['usr'].boss_crystal_sold = 0
+
+        # safety net for glitches or if someone changes the save file default value
+        user['usr'].boss_crystal_count = 180
 
         # loop through character, specifically boss_list object
         for boss_name, boss_details in character.boss_list.items():
@@ -761,6 +768,9 @@ def bossing_checklist_popup():
                     # formula: mesos earned based on boss, bosses difficulty and size of the party
                     mesos_earned = crystal_data[boss_name][boss_difficulty] / boss_party_size
                     total_earnings += mesos_earned
+
+                    # counter crystals sold
+                    total_crystals_sold += 1
                 # logge check for error in rendering code, temporary else statement, removed prior finalisation
                 else:
                     print(f'Warning: Missing data for {boss_name} with difficulty {boss_difficulty}')
@@ -768,14 +778,18 @@ def bossing_checklist_popup():
         # update the weekly_mesos_gained variable with latest data 
         user['usr'].weekly_mesos_gained = total_earnings
 
+        # update the amount of boss crystals sold value
+        user['usr'].boss_crystal_sold = total_crystals_sold
+
         # update the user save file
         json_object = json.dumps(user, indent=4, default=custom_serializer)
 
         with open(usr_filename, 'w') as outfile:
             outfile.write(json_object)
 
+        bc_remaining_lbl.config(text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}')
+        bc_sold_lbl.config(text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}')
         wm_gained_lbl.config(text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}')
-
 
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")

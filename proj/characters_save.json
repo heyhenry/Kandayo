@@ -18,27 +18,27 @@
             },
             "Cygnus": {
                 "boss_name": "Cygnus",
-                "boss_clear": true,
-                "boss_difficulty": "Select Difficulty",
+                "boss_clear": false,
+                "boss_difficulty": "Easy",
                 "party_size": "Select Party Size"
             },
             "Chaos Zakum": {
                 "boss_name": "Chaos Zakum",
                 "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "party_size": 1
             },
             "Princess No": {
                 "boss_name": "Princess No",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "party_size": 1
             },
             "Chaos Queen": {
                 "boss_name": "Chaos Queen",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "party_size": 1
             },
             "Chaos Pierre": {
                 "boss_name": "Chaos Pierre",
@@ -66,9 +66,9 @@
             },
             "Hard Magnus": {
                 "boss_name": "Hard Magnus",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "party_size": 3
             },
             "Chaos Papulatus": {
                 "boss_name": "Chaos Papulatus",
@@ -98,7 +98,7 @@
                 "boss_name": "Lucid",
                 "boss_clear": true,
                 "boss_difficulty": "Easy",
-                "party_size": 2
+                "party_size": "Select Party Size"
             },
             "Will": {
                 "boss_name": "Will",
