@@ -774,6 +774,7 @@ def bossing_checklist_popup():
         with open(usr_filename, 'w') as outfile:
             outfile.write(json_object)
 
+
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
     # bc_win.geometry()
@@ -1028,6 +1029,18 @@ def bossing_checklist_popup():
     kalos_difficulty_choice.set(characters[selected_ign].boss_list['Kalos']['boss_difficulty'])
     kalos_party_size_choice.set(characters[selected_ign].boss_list['Kalos']['party_size'])
     kalos_status.set(characters[selected_ign].boss_list['Kalos']['boss_clear'])
+
+    # load the boss_clear values to determine which status icon it should display upon opening the popup
+    def load_clear_statuses():
+        character = characters[selected_ign]
+
+        for boss_name, boss_details in character.boss_list.items():
+            boss_clear_status = boss_details['boss_clear']
+            # determines which status icon to display
+            if boss_clear_status == True:
+                boss_status_ids[boss_name].config(image=complete_status_icon)
+            else:
+                boss_status_ids[boss_name].config(image=incomplete_status_icon)
 
     # ---> Spacers <---
 
@@ -1325,6 +1338,36 @@ def bossing_checklist_popup():
     kalos_party_size = tk.OptionMenu(bc_win, kalos_party_size_choice, *party_size)
     kalos_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status, kalos_clear_status))
     kalos_clear_status.config(indicatoron=False, borderwidth=0)
+
+    # dictionary listing boss names to their respective checkbutton widget
+    boss_status_ids = {
+        'Chaos Pink Bean': cpb_clear_status,
+        'Hard Hilla': hh_clear_status,
+        'Princess No': pno_clear_status,
+        'Chaos Zakum': czak_clear_status,
+        'Cygnus': cyg_clear_status,
+        'Chaos Queen': cqueen_clear_status,
+        'Chaos Pierre': cpierre_clear_status,
+        'Chaos Von Bon': cvonbon_clear_status,
+        'Chaos Vellum': cvell_clear_status,
+        'Akechi Mitsuhide': akechi_clear_status,
+        'Hard Magnus': hmag_clear_status,
+        'Chaos Papulatus': cpap_clear_status,
+        'Lotus': lotus_clear_status,
+        'Damien': damien_clear_status,
+        'Guardian Slime': gslime_clear_status,
+        'Lucid': lucid_clear_status,
+        'Will': will_clear_status,
+        'Gloom': gloom_clear_status,
+        'Versus Hilla': vhilla_clear_status,
+        'Darknell': darknell_clear_status,
+        'Seren': seren_clear_status,
+        'Kaling': kaling_clear_status,
+        'Kalos': kalos_clear_status
+    }
+
+    # load the saved checkbutton status with relevant status icons upon popup's opening
+    load_clear_statuses()
 
     # Buttons
     reset_clears = tk.Button(bc_win, text='Reset Clears Only', **font_preset)
