@@ -8,23 +8,23 @@
                 "boss_name": "Chaos Pink Bean",
                 "boss_clear": false,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": 1
+                "party_size": "Select Party Size"
             },
             "Hard Hilla": {
                 "boss_name": "Hard Hilla",
                 "boss_clear": false,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": 3
+                "party_size": "Select Party Size"
             },
             "Cygnus": {
                 "boss_name": "Cygnus",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Chaos Zakum": {
                 "boss_name": "Chaos Zakum",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
@@ -96,9 +96,9 @@
             },
             "Lucid": {
                 "boss_name": "Lucid",
-                "boss_clear": false,
-                "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "boss_clear": true,
+                "boss_difficulty": "Easy",
+                "party_size": 2
             },
             "Will": {
                 "boss_name": "Will",

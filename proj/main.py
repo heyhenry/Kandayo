@@ -774,6 +774,8 @@ def bossing_checklist_popup():
         with open(usr_filename, 'w') as outfile:
             outfile.write(json_object)
 
+        wm_gained_lbl.config(text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}')
+
 
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
@@ -815,6 +817,7 @@ def bossing_checklist_popup():
     ]
 
     party_size = [
+        'Select Party Size',
         1,
         2,
         3,
