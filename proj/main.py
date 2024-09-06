@@ -620,7 +620,128 @@ def bossing_checklist_popup():
     def update_difficulty_party_size():
         update_bossing_difficulty()
         update_party_size()
+        update_weekly_mesos_earned()
         bc_win.destroy()
+
+    crystal_data = {
+        'Chaos Pink Bean': {
+            'Select Difficulty': 64000000
+        },
+        'Hard Hilla': {
+            'Select Difficulty': 56250000
+        },
+        'Princess No': {
+            'Select Difficulty': 81000000
+        },
+        'Chaos Zakum': {
+            'Select Difficulty': 81000000
+        },
+        'Cygnus': {
+            'Easy': 45562500,
+            'Normal': 72250000
+        },
+        'Chaos Queen': {
+            'Select Difficulty': 81000000
+        },
+        'Chaos Pierre': {
+            'Select Difficulty': 81000000
+        },
+        'Chaos Von Bon': {
+            'Select Difficulty': 81000000
+        },
+        'Chaos Vellum': {
+            'Select Difficulty': 105062500
+        },
+        'Akechi Mitsuhide': {
+            'Select Difficulty': 144000000
+        },
+        'Hard Magnus': {
+            'Select Difficulty': 95062500
+        },
+        'Chaos Papulatus': {
+            'Select Difficulty': 132250000
+        },
+        'Lotus': {
+            'Normal': 162562500,
+            'Hard/Chaos': 370562500,
+            'Extreme': 1075000000
+        },
+        'Damien': {
+            'Normal': 169000000,
+            'Hard/Chaos': 351562500
+        },
+        'Guardian Slime': {
+            'Normal': 171610000,
+            'Hard/Chaos': 451562500
+        },
+        'Lucid': {
+            'Easy': 175562500,
+            'Normal': 203062500,
+            'Hard/Chaos': 400000000
+        },
+        'Will': {
+            'Easy': 191275000,
+            'Normal': 232562500,
+            'Hard/Chaos': 441000000
+        },
+        'Gloom': {
+            'Normal': 248062500,
+            'Hard/Chaos': 462250000
+        },
+        'Versus Hilla': {
+            'Normal': 447600000,
+            'Hard/Chaos': 552250000
+        },
+        'Darknell': {
+            'Normal': 264062500,
+            'Hard/Chaos': 484000000
+        },
+        'Seren': {
+            'Normal': 668437500,
+            'Hard/Chaos': 756250000,
+            'Extreme': 3025000000
+        },
+        'Kaling': {
+            'Easy':  825000000,
+            'Normal': 1150000000,
+            'Hard/Chaos': 2300000000,
+            'Extreme': 4600000000
+        },
+        'Kalos': {
+            'Easy': 750000000,
+            'Normal': 1000000000,
+            'Hard/Chaos': 2000000000,
+            'Extreme': 4000000000
+        }
+    }
+
+    def update_weekly_mesos_earned():
+        total_earnings = 0
+        character = characters[selected_ign]
+
+        for boss_name, boss_details in character.boss_list.items():
+            boss_difficulty = boss_details['boss_difficulty']
+            boss_party_size = boss_details['party_size']
+            boss_clear = boss_details['boss_clear']
+
+            if boss_clear == False:
+                continue
+            elif isinstance(boss_party_size, str):
+                continue
+            else:
+                # check if the boss_name and difficulty_level are in the crystal_data dictionary
+                if boss_name in crystal_data and boss_difficulty in crystal_data[boss_name]:
+                    mesos_earned = crystal_data[boss_name][boss_difficulty] / boss_party_size
+                    total_earnings += mesos_earned
+                else:
+                    print(f'Warning: Missing data for {boss_name} with difficulty {boss_difficulty}')
+
+        user['usr'].weekly_mesos_gained = total_earnings
+
+        json_object = json.dumps(user, indent=4, default=custom_serializer)
+
+        with open(usr_filename, 'w') as outfile:
+            outfile.write(json_object)
 
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
@@ -1472,18 +1593,18 @@ mesos_balance_display_lbl = tk.Label(purple_frame, text=f'{user['usr'].mesos_bal
 add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos)
 remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos)
 
-bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
-bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
-wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: {user['usr'].weekly_mesos_gained}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12))
+bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12))
+wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained}', font=('Kozuka Gothic Pro B', 12))
 
 mesos_balance_title_lbl.place(x=0, y=10, width=500, height=30)
 mesos_balance_display_lbl.place(x=0, y=30, width=500, height=30)
 add_mesos_btn.place(x=70, y=60, width=150, height=30)
 remove_mesos_btn.place(x=280, y=60, width=150, height=30)
 
-bc_remaining_lbl.place(x=25, y=110, width=250, height=30)
-bc_sold_lbl.place(x=0, y=155, width=250, height=30)
-wm_gained_lbl.place(x=15, y=200, width=250, height=30)
+bc_remaining_lbl.place(x=25, y=110, width=500, height=30)
+bc_sold_lbl.place(x=0, y=155, width=500, height=30)
+wm_gained_lbl.place(x=15, y=200, width=500, height=30)
 
 # // orange //
 # orange widgets

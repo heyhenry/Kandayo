@@ -1,25 +1,25 @@
 {
-    "Kratos": {
-        "ign": "Kratos",
-        "job": "Fighter",
-        "level": "102",
+    "Dummie": {
+        "ign": "Dummie",
+        "job": "Mage",
+        "level": "921",
         "boss_list": {
             "Chaos Pink Bean": {
                 "boss_name": "Chaos Pink Bean",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": 2
+                "party_size": 1
             },
             "Hard Hilla": {
                 "boss_name": "Hard Hilla",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "party_size": 3
             },
             "Cygnus": {
                 "boss_name": "Cygnus",
                 "boss_clear": false,
-                "boss_difficulty": "Easy",
+                "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Chaos Zakum": {
@@ -97,7 +97,7 @@
             "Lucid": {
                 "boss_name": "Lucid",
                 "boss_clear": false,
-                "boss_difficulty": "Normal",
+                "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Will": {
@@ -108,9 +108,9 @@
             },
             "Gloom": {
                 "boss_name": "Gloom",
-                "boss_clear": false,
-                "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "boss_clear": true,
+                "boss_difficulty": "Hard/Chaos",
+                "party_size": 2
             },
             "Darknell": {
                 "boss_name": "Darknell",
@@ -132,15 +132,15 @@
             },
             "Kaling": {
                 "boss_name": "Kaling",
-                "boss_clear": false,
-                "boss_difficulty": "Extreme",
-                "party_size": "Select Party Size"
+                "boss_clear": true,
+                "boss_difficulty": "Normal",
+                "party_size": 4
             },
             "Kalos": {
                 "boss_name": "Kalos",
-                "boss_clear": true,
-                "boss_difficulty": "Normal",
-                "party_size": 2
+                "boss_clear": false,
+                "boss_difficulty": "Select Difficulty",
+                "party_size": "Select Party Size"
             }
         }
     }
