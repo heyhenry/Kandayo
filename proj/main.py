@@ -806,6 +806,85 @@ def bossing_checklist_popup():
 
         load_clear_statuses()
 
+    # resets all boss custom presets
+    def reset_all():
+
+        # dictionary to hold each boss's value for party size
+        boss_party_size_vars = {
+            'Chaos Pink Bean': cpb_party_size_choice,
+            'Hard Hilla': hh_party_size_choice,
+            'Cygnus': cyg_party_size_choice,
+            'Chaos Zakum': czak_party_size_choice,
+            'Princess No': pno_party_size_choice,
+            'Chaos Queen': cqueen_party_size_choice,
+            'Chaos Pierre': cpierre_party_size_choice,
+            'Chaos Von Bon': cvonbon_party_size_choice,
+            'Chaos Vellum': cvell_party_size_choice,
+            'Akechi Mitsuhide': akechi_party_size_choice,
+            'Hard Magnus': hmag_party_size_choice,
+            'Chaos Papulatus': cpap_party_size_choice,
+            'Lotus': lotus_party_size_choice,
+            'Damien': damien_party_size_choice,
+            'Guardian Slime': gslime_party_size_choice,
+            'Lucid': lucid_party_size_choice,
+            'Will': will_party_size_choice,
+            'Gloom': gloom_party_size_choice,
+            'Darknell': darknell_party_size_choice,
+            'Versus Hilla': vhilla_party_size_choice,
+            'Seren': seren_party_size_choice,
+            'Kaling': kaling_party_size_choice,
+            'Kalos': kalos_party_size_choice
+        }
+
+        # dictionary to hold each boss's difficulty value
+        boss_difficulty_vars = {
+            'Chaos Pink Bean': cpb_difficulty_choice,
+            'Hard Hilla': hh_difficulty_choice,
+            'Cygnus': cyg_difficulty_choice,
+            'Chaos Zakum': czak_difficulty_choice,
+            'Princess No': pno_difficulty_choice,
+            'Chaos Queen': cqueen_difficulty_choice,
+            'Chaos Pierre': cpierre_difficulty_choice,
+            'Chaos Von Bon': cvonbon_difficulty_choice,
+            'Chaos Vellum': cvell_difficulty_choice,
+            'Akechi Mitsuhide': akechi_difficulty_choice,
+            'Hard Magnus': hmag_difficulty_choice,
+            'Chaos Papulatus': cpap_difficulty_choice,
+            'Lotus': lotus_difficulty_choice,
+            'Damien': damien_difficulty_choice,
+            'Guardian Slime': gslime_difficulty_choice,
+            'Lucid': lucid_difficulty_choice,
+            'Will': will_difficulty_choice,
+            'Gloom': gloom_difficulty_choice,
+            'Darknell': darknell_difficulty_choice,
+            'Versus Hilla': vhilla_difficulty_choice,
+            'Seren': seren_difficulty_choice,
+            'Kaling': kaling_difficulty_choice,
+            'Kalos': kalos_difficulty_choice
+        }
+
+        character = characters[selected_ign]
+
+        # loop through all the boss's variables and set them to default
+        for boss_name in character.boss_list.keys():
+            character.boss_list[boss_name]['boss_clear'] = False
+            character.boss_list[boss_name]['boss_difficulty'] = 'Select Difficulty'
+            character.boss_list[boss_name]['party_size'] = 'Select Party Size' 
+
+        # loops through all the variables for party size and difficulty that are used in the widgets for reference
+        # and sets them to default for display
+        for party_var in boss_party_size_vars.values():
+            party_var.set('Select Party Size')
+
+        for difficulty_var in boss_difficulty_vars.values():
+            difficulty_var.set('Select Difficulty')
+
+        # updates the save file
+        json_object = json.dumps(characters, indent=4, default=custom_serializer)
+
+        with open(storage_filename, 'w') as outfile:
+            outfile.write(json_object)
+
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
     # bc_win.geometry()
@@ -1075,7 +1154,6 @@ def bossing_checklist_popup():
                 boss_status_ids[boss_name].config(image=complete_status_icon)
             else:
                 boss_status_ids[boss_name].config(image=incomplete_status_icon)
-
 
     # title and character detail
     bossing_checklist_title = tk.Label(bc_win, text='Bossing Checklist', **font_preset)
@@ -1403,12 +1481,67 @@ def bossing_checklist_popup():
         'Kalos': kalos_clear_status
     }
 
+    # dictionary listing boss names to their respective optionmenu widget for difficulty
+    boss_difficulty_choice_ids = {
+        'Chaos Pink Bean': cpb_difficulty_choice,
+        'Hard Hilla': hh_difficulty,
+        'Princess No': pno_difficulty,
+        'Chaos Zakum': czak_difficulty,
+        'Cygnus': cyg_difficulty,
+        'Chaos Queen': cqueen_difficulty,
+        'Chaos Pierre': cpierre_difficulty,
+        'Chaos Von Bon': cvonbon_difficulty,
+        'Chaos Vellum': cvell_difficulty,
+        'Akechi Mitsuhide': akechi_difficulty,
+        'Hard Magnus': hmag_difficulty,
+        'Chaos Papulatus': cpap_difficulty,
+        'Lotus': lotus_difficulty,
+        'Damien': damien_difficulty,
+        'Guardian Slime': gslime_difficulty,
+        'Lucid': lucid_difficulty,
+        'Will': will_difficulty,
+        'Gloom': gloom_difficulty,
+        'Versus Hilla': vhilla_difficulty,
+        'Darknell': darknell_difficulty,
+        'Seren': seren_difficulty,
+        'Kaling': kaling_difficulty,
+        'Kalos': kalos_difficulty
+    }
+
+    # dictionary listing boss names to their respective optionmenu widget for party size
+    boss_party_size_choice_ids = {
+        'Chaos Pink Bean': cpb_party_size,
+        'Hard Hilla': hh_party_size,
+        'Princess No': pno_party_size,
+        'Chaos Zakum': czak_party_size,
+        'Cygnus': cyg_party_size,
+        'Chaos Queen': cqueen_party_size,
+        'Chaos Pierre': cpierre_party_size,
+        'Chaos Von Bon': cvonbon_party_size,
+        'Chaos Vellum': cvell_party_size,
+        'Akechi Mitsuhide': akechi_party_size,
+        'Hard Magnus': hmag_party_size,
+        'Chaos Papulatus': cpap_party_size,
+        'Lotus': lotus_party_size,
+        'Damien': damien_party_size,
+        'Guardian Slime': gslime_party_size,
+        'Lucid': lucid_party_size,
+        'Will': will_party_size,
+        'Gloom': gloom_party_size,
+        'Versus Hilla': vhilla_party_size,
+        'Darknell': darknell_party_size,
+        'Seren': seren_party_size,
+        'Kaling': kaling_party_size,
+        'Kalos': kalos_party_size
+    }
+
+
     # load the saved checkbutton status with relevant status icons upon popup's opening
     load_clear_statuses()
 
     # button widgets 
     reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, command=reset_clears_only)
-    reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset)
+    reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset, command=reset_all)
     update_btn = tk.Button(bc_win, text='Update', **font_preset, command=update_difficulty_party_size)
     cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, command=bc_win.destroy)
 
