@@ -795,9 +795,10 @@ def bossing_checklist_popup():
     # reset all boss clears
     def reset_clears_only():
         character = characters[selected_ign]
-        for boss_name, boss_details in character.boss_list.items():
-            character.boss_list[boss_name]['boss_clear'] = False
         
+        for boss_name in character.boss_list.keys():
+            character.boss_list[boss_name]['boss_clear'] = False
+
         json_object = json.dumps(characters, indent=4, default=custom_serializer)
 
         with open(storage_filename, 'w') as outfile:
