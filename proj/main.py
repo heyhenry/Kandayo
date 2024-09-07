@@ -885,6 +885,46 @@ def bossing_checklist_popup():
         with open(storage_filename, 'w') as outfile:
             outfile.write(json_object)
 
+    # load the boss_clear values to determine which status icon it should display upon opening the popup
+    def load_clear_statuses():
+
+        # dictionary listing boss names to their respective checkbutton widget
+        boss_status_ids = {
+            'Chaos Pink Bean': cpb_clear_status,
+            'Hard Hilla': hh_clear_status,
+            'Princess No': pno_clear_status,
+            'Chaos Zakum': czak_clear_status,
+            'Cygnus': cyg_clear_status,
+            'Chaos Queen': cqueen_clear_status,
+            'Chaos Pierre': cpierre_clear_status,
+            'Chaos Von Bon': cvonbon_clear_status,
+            'Chaos Vellum': cvell_clear_status,
+            'Akechi Mitsuhide': akechi_clear_status,
+            'Hard Magnus': hmag_clear_status,
+            'Chaos Papulatus': cpap_clear_status,
+            'Lotus': lotus_clear_status,
+            'Damien': damien_clear_status,
+            'Guardian Slime': gslime_clear_status,
+            'Lucid': lucid_clear_status,
+            'Will': will_clear_status,
+            'Gloom': gloom_clear_status,
+            'Versus Hilla': vhilla_clear_status,
+            'Darknell': darknell_clear_status,
+            'Seren': seren_clear_status,
+            'Kaling': kaling_clear_status,
+            'Kalos': kalos_clear_status
+        }
+
+        character = characters[selected_ign]
+
+        for boss_name, boss_details in character.boss_list.items():
+            boss_clear_status = boss_details['boss_clear']
+            # determines which status icon to display
+            if boss_clear_status == True:
+                boss_status_ids[boss_name].config(image=complete_status_icon)
+            else:
+                boss_status_ids[boss_name].config(image=incomplete_status_icon)
+
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
     # bc_win.geometry()
@@ -1142,18 +1182,6 @@ def bossing_checklist_popup():
     kalos_party_size_choice.set(characters[selected_ign].boss_list['Kalos']['party_size'])
     kalos_status.set(characters[selected_ign].boss_list['Kalos']['boss_clear'])
     # endregion
-
-    # load the boss_clear values to determine which status icon it should display upon opening the popup
-    def load_clear_statuses():
-        character = characters[selected_ign]
-
-        for boss_name, boss_details in character.boss_list.items():
-            boss_clear_status = boss_details['boss_clear']
-            # determines which status icon to display
-            if boss_clear_status == True:
-                boss_status_ids[boss_name].config(image=complete_status_icon)
-            else:
-                boss_status_ids[boss_name].config(image=incomplete_status_icon)
 
     # title and character detail
     bossing_checklist_title = tk.Label(bc_win, text='Bossing Checklist', **font_preset)
@@ -1454,96 +1482,14 @@ def bossing_checklist_popup():
     kalos_clear_status.config(indicatoron=False, borderwidth=0)
     # endregion
 
-    # dictionary listing boss names to their respective checkbutton widget
-    boss_status_ids = {
-        'Chaos Pink Bean': cpb_clear_status,
-        'Hard Hilla': hh_clear_status,
-        'Princess No': pno_clear_status,
-        'Chaos Zakum': czak_clear_status,
-        'Cygnus': cyg_clear_status,
-        'Chaos Queen': cqueen_clear_status,
-        'Chaos Pierre': cpierre_clear_status,
-        'Chaos Von Bon': cvonbon_clear_status,
-        'Chaos Vellum': cvell_clear_status,
-        'Akechi Mitsuhide': akechi_clear_status,
-        'Hard Magnus': hmag_clear_status,
-        'Chaos Papulatus': cpap_clear_status,
-        'Lotus': lotus_clear_status,
-        'Damien': damien_clear_status,
-        'Guardian Slime': gslime_clear_status,
-        'Lucid': lucid_clear_status,
-        'Will': will_clear_status,
-        'Gloom': gloom_clear_status,
-        'Versus Hilla': vhilla_clear_status,
-        'Darknell': darknell_clear_status,
-        'Seren': seren_clear_status,
-        'Kaling': kaling_clear_status,
-        'Kalos': kalos_clear_status
-    }
-
-    # dictionary listing boss names to their respective optionmenu widget for difficulty
-    boss_difficulty_choice_ids = {
-        'Chaos Pink Bean': cpb_difficulty_choice,
-        'Hard Hilla': hh_difficulty,
-        'Princess No': pno_difficulty,
-        'Chaos Zakum': czak_difficulty,
-        'Cygnus': cyg_difficulty,
-        'Chaos Queen': cqueen_difficulty,
-        'Chaos Pierre': cpierre_difficulty,
-        'Chaos Von Bon': cvonbon_difficulty,
-        'Chaos Vellum': cvell_difficulty,
-        'Akechi Mitsuhide': akechi_difficulty,
-        'Hard Magnus': hmag_difficulty,
-        'Chaos Papulatus': cpap_difficulty,
-        'Lotus': lotus_difficulty,
-        'Damien': damien_difficulty,
-        'Guardian Slime': gslime_difficulty,
-        'Lucid': lucid_difficulty,
-        'Will': will_difficulty,
-        'Gloom': gloom_difficulty,
-        'Versus Hilla': vhilla_difficulty,
-        'Darknell': darknell_difficulty,
-        'Seren': seren_difficulty,
-        'Kaling': kaling_difficulty,
-        'Kalos': kalos_difficulty
-    }
-
-    # dictionary listing boss names to their respective optionmenu widget for party size
-    boss_party_size_choice_ids = {
-        'Chaos Pink Bean': cpb_party_size,
-        'Hard Hilla': hh_party_size,
-        'Princess No': pno_party_size,
-        'Chaos Zakum': czak_party_size,
-        'Cygnus': cyg_party_size,
-        'Chaos Queen': cqueen_party_size,
-        'Chaos Pierre': cpierre_party_size,
-        'Chaos Von Bon': cvonbon_party_size,
-        'Chaos Vellum': cvell_party_size,
-        'Akechi Mitsuhide': akechi_party_size,
-        'Hard Magnus': hmag_party_size,
-        'Chaos Papulatus': cpap_party_size,
-        'Lotus': lotus_party_size,
-        'Damien': damien_party_size,
-        'Guardian Slime': gslime_party_size,
-        'Lucid': lucid_party_size,
-        'Will': will_party_size,
-        'Gloom': gloom_party_size,
-        'Versus Hilla': vhilla_party_size,
-        'Darknell': darknell_party_size,
-        'Seren': seren_party_size,
-        'Kaling': kaling_party_size,
-        'Kalos': kalos_party_size
-    }
-
-
-    # load the saved checkbutton status with relevant status icons upon popup's opening
-    load_clear_statuses()
-
     # button widgets 
     reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, command=reset_clears_only)
     reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset, command=reset_all)
     update_btn = tk.Button(bc_win, text='Update', **font_preset, command=update_difficulty_party_size)
     cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, command=bc_win.destroy)
+
+    # load the saved checkbutton status with relevant status icons upon popup's opening
+    load_clear_statuses()
 
     # region - grid layout
     bossing_checklist_title.grid(row=0, columnspan=9)
