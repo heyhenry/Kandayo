@@ -792,6 +792,19 @@ def bossing_checklist_popup():
         bc_sold_lbl.config(text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}')
         wm_gained_lbl.config(text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}')
 
+    # reset all boss clears
+    def reset_clears_only():
+        character = characters[selected_ign]
+        for boss_name, boss_details in character.boss_list.items():
+            character.boss_list[boss_name]['boss_clear'] = False
+        
+        json_object = json.dumps(characters, indent=4, default=custom_serializer)
+
+        with open(storage_filename, 'w') as outfile:
+            outfile.write(json_object)
+
+        load_clear_statuses()
+
     bc_win = tk.Toplevel(blue_frame)
     bc_win.title("Bossing Checklist")
     # bc_win.geometry()
@@ -1393,8 +1406,8 @@ def bossing_checklist_popup():
     load_clear_statuses()
 
     # button widgets 
-    reset_clears = tk.Button(bc_win, text='Reset Clears Only', **font_preset)
-    reset_all = tk.Button(bc_win, text='Reset All', **font_preset)
+    reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, command=reset_clears_only)
+    reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset)
     update_btn = tk.Button(bc_win, text='Update', **font_preset, command=update_difficulty_party_size)
     cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, command=bc_win.destroy)
 
@@ -1541,8 +1554,8 @@ def bossing_checklist_popup():
     kalos_clear_status.grid(row=16, column=4, pady=10, padx=10)
 
     update_btn.grid(row=23, column=2, pady=(20, 30))
-    reset_clears.grid(row=23, column=3, pady=(20, 30))
-    reset_all.grid(row=23, column=4, pady=(20, 30))
+    reset_clears_btn.grid(row=23, column=3, pady=(20, 30))
+    reset_all_btn.grid(row=23, column=4, pady=(20, 30))
     cancel_btn.grid(row=23, column=5, pady=(20, 30))
 
     # endregion
