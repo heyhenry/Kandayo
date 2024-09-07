@@ -841,6 +841,7 @@ def bossing_checklist_popup():
         6
     ]
 
+    # region - boss variables
     # Chaos Pink Bean Vars
     cpb_difficulty_choice = tk.StringVar()
     cpb_party_size_choice = tk.StringVar()
@@ -1047,6 +1048,7 @@ def bossing_checklist_popup():
     kalos_difficulty_choice.set(characters[selected_ign].boss_list['Kalos']['boss_difficulty'])
     kalos_party_size_choice.set(characters[selected_ign].boss_list['Kalos']['party_size'])
     kalos_status.set(characters[selected_ign].boss_list['Kalos']['boss_clear'])
+    # endregion
 
     # load the boss_clear values to determine which status icon it should display upon opening the popup
     def load_clear_statuses():
@@ -1060,12 +1062,12 @@ def bossing_checklist_popup():
             else:
                 boss_status_ids[boss_name].config(image=incomplete_status_icon)
 
-    # ---> Spacers <---
 
-    # Widgets
+    # title and character detail
     bossing_checklist_title = tk.Label(bc_win, text='Bossing Checklist', **font_preset)
     character_details_lbl = tk.Label(bc_win, text=f'{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}', **font_preset)
 
+    # region - open images
     # Render Images
     max_width, max_height = 100, 100
 
@@ -1161,7 +1163,9 @@ def bossing_checklist_popup():
     kalos_icon = Image.open('./img/Kalos.webp')
     kalos_icon.thumbnail((max_width, max_height))
     kalos_icon = ImageTk.PhotoImage(kalos_icon)
+    # endregion
 
+    # region - boss widgets
     # Chaos Pink Bean
     cpb_name = tk.Label(bc_win, text='Chaos Pink Bean', **font_preset)
     cpb_img = tk.Label(bc_win, image=cpb_icon)
@@ -1356,6 +1360,7 @@ def bossing_checklist_popup():
     kalos_party_size = tk.OptionMenu(bc_win, kalos_party_size_choice, *party_size)
     kalos_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status, kalos_clear_status))
     kalos_clear_status.config(indicatoron=False, borderwidth=0)
+    # endregion
 
     # dictionary listing boss names to their respective checkbutton widget
     boss_status_ids = {
@@ -1387,12 +1392,13 @@ def bossing_checklist_popup():
     # load the saved checkbutton status with relevant status icons upon popup's opening
     load_clear_statuses()
 
-    # Buttons
+    # button widgets 
     reset_clears = tk.Button(bc_win, text='Reset Clears Only', **font_preset)
     reset_all = tk.Button(bc_win, text='Reset All', **font_preset)
     update_btn = tk.Button(bc_win, text='Update', **font_preset, command=update_difficulty_party_size)
     cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, command=bc_win.destroy)
 
+    # region - grid layout
     bossing_checklist_title.grid(row=0, columnspan=9)
     character_details_lbl.grid(row=1, columnspan=9)
 
@@ -1539,6 +1545,9 @@ def bossing_checklist_popup():
     reset_all.grid(row=23, column=4, pady=(20, 30))
     cancel_btn.grid(row=23, column=5, pady=(20, 30))
 
+    # endregion
+
+    # region - reference vars
     # save image reference to avoid garbage collection
     cpb_img.image = cpb_icon
     hh_img.image = hh_icon
@@ -1563,6 +1572,7 @@ def bossing_checklist_popup():
     seren_img.image = seren_icon
     kaling_img.image = kaling_icon
     kalos_img.image = kalos_icon
+    # endregion
 
 # // purple functions //
 # add mesos amount to balance

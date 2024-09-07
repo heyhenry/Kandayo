@@ -13,3 +13,4 @@ mesos balance value.
 5. create function for bossing_checklist_popup's reset_all button
 6. create function for bossing_checklist_popup's reset_clears_only button
 7. implement and create a reset mesos balance function
+8. reset boss clears on thursday?
