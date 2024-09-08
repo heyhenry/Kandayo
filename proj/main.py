@@ -1870,11 +1870,11 @@ root.geometry('+600+150')
 root.resizable(False, False)
 
 # // Setting up Frames //
-yellow_frame = tk.Frame(root, width=800, height=120, bg='yellow', highlightbackground='black', highlightthickness=2, borderwidth=1, padx=5, pady=5)
-red_frame = tk.Frame(root, width=300, height=300, bg='red', highlightbackground='black', highlightthickness=1)
-blue_frame = tk.Frame(root, width=300, height=100, bg='blue', highlightbackground='black', highlightthickness=1)
-purple_frame = tk.Frame(root, width=500, height=400, bg='magenta', highlightbackground='black', highlightthickness=1)
-orange_frame = tk.Frame(root, width=500, height=100, bg='orange', highlightbackground='black', highlightthickness=1)
+yellow_frame = tk.Frame(root, width=800, height=120, bg='#2D2D2D', borderwidth=1, padx=5, pady=5, highlightcolor='#333333', highlightthickness=1)
+red_frame = tk.Frame(root, width=300, height=300, bg='#2D2D2D', highlightcolor='#333333', highlightthickness=1)
+blue_frame = tk.Frame(root, width=300, height=100, bg='#2D2D2D', highlightcolor='#333333', highlightthickness=1)
+purple_frame = tk.Frame(root, width=500, height=400, bg='#2D2D2D', highlightcolor='#333333', highlightthickness=1)
+orange_frame = tk.Frame(root, width=500, height=100, bg='#2D2D2D', highlightcolor='#333333', highlightthickness=1)
 
 yellow_frame.grid(row=0, columnspan=2, sticky='nswe')
 red_frame.grid(row=1, column=0, sticky='nswe')
@@ -1896,15 +1896,16 @@ orange_frame.grid_propagate(False)
 
 # // yellow frame //
 # yellow widgets
-utc_livetime_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), background='yellow')
-ursus_time_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), background='yellow')
-daily_reset_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), background='yellow')
-weekly_reset_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), background='yellow')
+utc_livetime_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), bg='#2D2D2D', fg='#FFFFFF')
+ursus_time_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), bg='#2D2D2D', fg='#FFFFFF')
+daily_reset_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), bg='#2D2D2D', fg='#FFFFFF')
+weekly_reset_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), bg='#2D2D2D', fg='#FFFFFF')
 
 utc_livetime_lbl.grid(row=0, column=0)
 ursus_time_lbl.grid(row=1, column=0)
 daily_reset_lbl.grid(row=0, column=1)
 weekly_reset_lbl.grid(row=1, column=1)
+
 
 yellow_frame.grid_rowconfigure(0, weight=1)
 yellow_frame.grid_rowconfigure(1, weight=1)
@@ -1913,7 +1914,7 @@ yellow_frame.grid_columnconfigure(1, weight=1)
 
 # // red frame // 
 # red widgets
-chars_lb = tk.Listbox(red_frame, font=('Kozuka Gothic Pro B', 12))
+chars_lb = tk.Listbox(red_frame, font=('Kozuka Gothic Pro B', 12), bg='#D2D2D2', fg='#2D2D2D')
 clb_scrollbar = tk.Scrollbar(red_frame)
 
 chars_lb.pack(side='left', fill='both', expand=True, padx=(20, 0), pady=20)
@@ -1924,10 +1925,10 @@ clb_scrollbar.config(command=chars_lb.yview)
 
 # // blue frame // 
 # blue widgets
-addchar_btn = tk.Button(blue_frame, text='Add Character', font=('Kozuka Gothic Pro B', 10), command=add_character_popup)
-updchar_btn = tk.Button(blue_frame, text='Update Character', font=('Kozuka Gothic Pro B', 10), command=update_character_popup)
-delchar_btn = tk.Button(blue_frame, text='Delete Character', font=('Kozuka Gothic Pro B', 10), command=delete_character)
-bossing_checklist_btn = tk.Button(blue_frame, text='Bossing Checklist', font=('Kozuka Gothic Pro B', 10), command=bossing_checklist_popup)
+addchar_btn = tk.Button(blue_frame, text='Add Character', font=('Kozuka Gothic Pro B', 10), bg='#4A4A4A', fg='#FFFFFF', command=add_character_popup)
+updchar_btn = tk.Button(blue_frame, text='Update Character', font=('Kozuka Gothic Pro B', 10), bg='#4A4A4A', fg='#FFFFFF', command=update_character_popup)
+delchar_btn = tk.Button(blue_frame, text='Delete Character', font=('Kozuka Gothic Pro B', 10), bg='#4A4A4A', fg='#FFFFFF', command=delete_character)
+bossing_checklist_btn = tk.Button(blue_frame, text='Bossing Checklist', font=('Kozuka Gothic Pro B', 10), bg='#4A4A4A', fg='#FFFFFF', command=bossing_checklist_popup)
 
 addchar_btn.grid(row=0, column=0)
 updchar_btn.grid(row=0, column=1)
@@ -1941,32 +1942,32 @@ blue_frame.grid_columnconfigure(1, weight=1)
 
 # // purple // 
 # purple widgets
-mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=('Kozuka Gothic Pro B', 12), bg='magenta')
-mesos_balance_display_lbl = tk.Label(purple_frame, text=f'${user['usr'].mesos_balance:,.0f}', font=('Kozuka Gothic Pro B', 10), bg='magenta')
-add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos)
-remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos)
-reset_balance_btn = tk.Button(purple_frame, text='Reset Balance', font=('Kozuka Gothic Pro B', 10), command=reset_mesos)
+mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=('Kozuka Gothic Pro B', 12), bg='#2D2D2D', fg='#FFFFFF')
+mesos_balance_display_lbl = tk.Label(purple_frame, text=f'${user['usr'].mesos_balance:,.0f}', font=('Kozuka Gothic Pro B', 10), bg='#2D2D2D', fg='#FFFFFF')
+add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos, bg='#4A4A4A', fg='#FFFFFF')
+remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos, bg='#4A4A4A', fg='#FFFFFF')
+reset_balance_btn = tk.Button(purple_frame, text='Reset Balance', font=('Kozuka Gothic Pro B', 10), command=reset_mesos, bg='#4A4A4A', fg='#FFFFFF')
 
-bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
-bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
-wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}', font=('Kozuka Gothic Pro B', 12), bg='magenta')
+bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='#2D2D2D', fg='#FFFFFF')
+bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='#2D2D2D', fg='#FFFFFF')
+wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}', font=('Kozuka Gothic Pro B', 12), bg='#2D2D2D', fg='#FFFFFF')
 
-mesos_balance_title_lbl.place(x=0, y=10, width=500, height=30)
-mesos_balance_display_lbl.place(x=0, y=30, width=500, height=30)
+mesos_balance_title_lbl.place(x=0, y=10, width=490, height=30)
+mesos_balance_display_lbl.place(x=0, y=30, width=490, height=30)
 add_mesos_btn.place(x=60, y=60, width=100, height=30)
 remove_mesos_btn.place(x=200, y=60, width=100, height=30)
 reset_balance_btn.place(x=340, y=60, width=100, height=30)
 
-bc_remaining_lbl.place(x=0, y=110, width=500, height=30)
-bc_sold_lbl.place(x=0, y=155, width=500, height=30)
-wm_gained_lbl.place(x=0, y=200, width=500, height=30)
+bc_remaining_lbl.place(x=0, y=110, width=490, height=30)
+bc_sold_lbl.place(x=0, y=155, width=490, height=30)
+wm_gained_lbl.place(x=0, y=200, width=490, height=30)
 
 # // orange //
 # orange widgets
-hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_one))
-hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_two))
-hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_three))
-edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), command=edit_hotlinks)
+hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_one), bg='#4A4A4A', fg='#FFFFFF')
+hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_two), bg='#4A4A4A', fg='#FFFFFF')
+hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_three), bg='#4A4A4A', fg='#FFFFFF')
+edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), command=edit_hotlinks, bg='#4A4A4A', fg='#FFFFFF')
 
 hotlink_one_btn.grid(row=0, column=0)
 hotlink_two_btn.grid(row=0, column=1)
