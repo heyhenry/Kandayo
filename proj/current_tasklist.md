@@ -10,7 +10,7 @@
 4. *maybe* Mesos Balance should automatically add the weekly_mesos_gained value but have it dynamic, 
 in the sense that if a player decides to unclear a boss prior to next weekly reset, let the number change and be reduced in the 
 mesos balance value.
-5. create function for bossing_checklist_popup's reset_all button
-6. create function for bossing_checklist_popup's reset_clears_only button
+5. create function for bossing_checklist_popup's reset_all button x
+6. create function for bossing_checklist_popup's reset_clears_only button x
 7. implement and create a reset mesos balance function
 8. reset boss clears on thursday?
