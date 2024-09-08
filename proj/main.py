@@ -1874,16 +1874,16 @@ root.geometry('+600+150')
 root.resizable(False, False)
 
 # // Setting up Frames //
-yellow_frame = tk.Frame(root, width=800, height=120, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=1)
-red_frame = tk.Frame(root, width=300, height=300, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=1)
-blue_frame = tk.Frame(root, width=300, height=100, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=1)
-purple_frame = tk.Frame(root, width=500, height=300, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=1)
-orange_frame = tk.Frame(root, width=500, height=100, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=1)
+yellow_frame = tk.Frame(root, width=800, height=120, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=2)
+red_frame = tk.Frame(root, width=300, height=300, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=2)
+blue_frame = tk.Frame(root, width=300, height=100, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=2)
+purple_frame = tk.Frame(root, width=500, height=300, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=2)
+orange_frame = tk.Frame(root, width=500, height=100, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=2)
 
 yellow_frame.grid(row=0, columnspan=2, sticky='nswe', padx=10, pady=(10, 0))
 red_frame.grid(row=1, column=0, sticky='nswe', padx=(10, 0), pady=(10, 0))
 blue_frame.grid(row=2, column=0, sticky='nswe', padx=(10, 0), pady=10)
-purple_frame.grid(row=1, column=1, sticky='nswe', padx=(10, 0), pady=10)
+purple_frame.grid(row=1, column=1, sticky='nswe', padx=10, pady=10)
 orange_frame.grid(row=2, column=1, sticky='nswe', padx=10, pady=(0, 10))
 
 root.grid_rowconfigure(0, weight=1)
