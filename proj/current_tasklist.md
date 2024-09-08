@@ -12,5 +12,5 @@ in the sense that if a player decides to unclear a boss prior to next weekly res
 mesos balance value.
 5. create function for bossing_checklist_popup's reset_all button x
 6. create function for bossing_checklist_popup's reset_clears_only button x
-7. implement and create a reset mesos balance function
-8. reset boss clears on thursday?
+7. implement and create a reset mesos balance function x 
+8. reset boss clears on thursday? (nah.. tbd if requested. current implementations make it so they can reset all information if wanted. leave for now so they can keep their presets.)

@@ -1780,8 +1780,8 @@ def reset_mesos():
 
     mesos_balance_display_lbl.config(text=f'${user["usr"].mesos_balance:,.0f}')
 
-# reset the boss crystals for the new week (thursdays)
-def reset_boss_crystals():
+# reset the boss stats for the new week (thursdays)
+def reset_boss_stats():
 
     # retrieve the current date information
     utc_time = dt.datetime.now(timezone.utc)
@@ -1862,7 +1862,7 @@ def edit_hotlinks():
 load_user()
 
 # if weekly reset, reset boss crystals
-reset_boss_crystals()
+reset_boss_stats()
 
 root = tk.Tk()
 # position window display upon open
