@@ -14,3 +14,22 @@ mesos balance value.
 6. create function for bossing_checklist_popup's reset_clears_only button x
 7. implement and create a reset mesos balance function x 
 8. reset boss clears on thursday? (nah.. tbd if requested. current implementations make it so they can reset all information if wanted. leave for now so they can keep their presets.)
+
+
+
+
+# Focus on this list
+1. Change the 'edit hot links' button to a cog image 
+1.1 Include a showinfo hoverable feature for the cog image with the text 'Edit Hot Links'
+2. Add extra column in the 'yellow' section that contains the app's image + name (i.e. row=0, img | col=0, Kandayo)
+3. Move the timer/countdown/clock labels one column to the right
+4. Move all the content in the 'purple' section down by alittle... i.e. y=current_val+20
+5. Make all buttons in the 'blue' section have the same width
+6. Update the UI for the 'Add Mesos' button 
+7. Update the UI for the 'Remove Mesos' button
+8. Update the UI for the 'Reset Balance' button
+9. Update the UI for the 'Add Character' button
+10. Update the UI for the 'Update Character' button
+11. Update the UI for the 'Bossing Checklist' button
+12. Update the UI for the 'Edit Hot Links' button
+13. Find a better way to create a natural separator between the sections in terms of UI
