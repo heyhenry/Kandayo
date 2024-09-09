@@ -164,7 +164,7 @@ def bonus_ursus_tracker():
         seconds = (seconds % 4600) % 60
 
         # format the result for the time remaining
-        time_remaining_str = f'{hours}:{minutes}:{seconds}'
+        time_remaining_str = f'{hours:02}:{minutes:02}:{seconds:02}'
 
         # update the ursus_time_lbl with relevant real time data
         ursus_time_lbl.config(text=f'Next Bonus Ursus: {time_remaining_str}')
@@ -194,7 +194,7 @@ def daily_reset():
     seconds = (seconds % 3600) % 60
 
     # create string format for time remaining
-    time_remaining_str = f'Daily Reset: {hours}:{minutes}:{seconds}'
+    time_remaining_str = f'Daily Reset: {hours:02}:{minutes:02}:{seconds:02}'
 
     # update the label responsible for displaying the daily reset timer
     daily_reset_lbl.config(text=time_remaining_str)
@@ -247,7 +247,7 @@ def weekly_reset():
         seconds = (seconds % 3600) % 60
 
         # string format of the time_remaining data
-        time_remaining_str = f'Weekly Reset: {days}:{hours}:{minutes}:{seconds}'
+        time_remaining_str = f'Weekly Reset: {days:02}:{hours:02}:{minutes:02}:{seconds:02}'
 
         # update weekly_reset label
         weekly_reset_lbl.config(text=time_remaining_str)
@@ -1879,6 +1879,7 @@ reset_boss_stats()
 root = tk.Tk()
 # position window display upon open
 root.geometry('+600+150')
+root.title('Kandayo - Maplestory Weekly Bossing Assistant')
 root.resizable(False, False)
 root.iconbitmap('./img/kandayo_icon.ico')
 
@@ -2013,8 +2014,8 @@ edit_hotlinks_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, stat
 edit_hotlinks_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
 
 # // grey //
-status_bar_lbl = tk.Label(grey_frame, text='', anchor='e')
-status_bar_lbl.pack(fill='x', side='bottom')
+status_bar_lbl = tk.Label(grey_frame, text='', anchor='e', bg='#dbedf3')
+status_bar_lbl.pack(fill='x', side='bottom', padx=10)
 
 # run on startup
 
