@@ -10,6 +10,7 @@ from boss import Boss
 import json
 import os
 from PIL import Image, ImageTk
+import ctypes
 
 # colour palette that looks decent and tried
 # preset 1 (dark theme style) - button_bg='#dbedf3', text_fg='#283149', main_bg='#dbedf3'
@@ -1876,12 +1877,21 @@ load_user()
 # if weekly reset, reset boss crystals
 reset_boss_stats()
 
+
+
 root = tk.Tk()
+myappid = 'poop'
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+# create tkinter compatible image reference
+icon_ico = Image.open('./img/kandayo_icon_opaque.ico')
+icon_ico.thumbnail((50, 50))
+icon_ico = ImageTk.PhotoImage(icon_ico)
+
 # position window display upon open
 root.geometry('+600+150')
 root.title('Kandayo - Maplestory Weekly Bossing Assistant')
 root.resizable(False, False)
-root.iconbitmap('./img/kandayo_icon.ico')
+root.iconphoto(False, icon_ico)
 
 # // Setting up Frames //
 yellow_frame = tk.Frame(root, width=800, height=120, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=2)
