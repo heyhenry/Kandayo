@@ -35,13 +35,11 @@ def load_user():
                                       usr_info['hotlink_one'], usr_info['hotlink_two'], usr_info['hotlink_three'])
 
 # execute message action/display on mouse hover over widget
-def on_hover(mouse_event, widget_name, status_bar, info_message):
-    widget_name['bg'] = 'red'
+def on_hover(mouse_event, status_bar, info_message):
     status_bar.config(text=info_message)
-    
+
 # execute message action/display on mouse hover completion over widget
-def on_hover_leave(mouse_event, widget_name, status_bar):
-    widget_name['bg'] = 'orange'
+def on_hover_leave(mouse_event, status_bar):
     status_bar.config(text='')
 
 # // json function //
@@ -2003,6 +2001,13 @@ orange_frame.grid_columnconfigure(0, weight=1)
 orange_frame.grid_columnconfigure(1, weight=1)
 orange_frame.grid_columnconfigure(2, weight=1)
 orange_frame.grid_columnconfigure(3, weight=1)
+
+edit_hotlinks_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Edit Customised Hot Links'))
+edit_hotlinks_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+# // grey //
+status_bar_lbl = tk.Label(grey_frame, text='', anchor='e')
+status_bar_lbl.pack(fill='x', side='bottom')
 
 # run on startup
 
