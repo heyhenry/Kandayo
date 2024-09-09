@@ -2020,7 +2020,7 @@ app_icon_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, sta
 
 # // red frame // 
 # red widgets
-chars_lb = tk.Listbox(red_frame, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', fg='#283149', selectbackground='#b4dae6')
+chars_lb = tk.Listbox(red_frame, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', fg='#283149', selectbackground='#b4dae6', justify='center')
 clb_scrollbar = tk.Scrollbar(red_frame)
 
 chars_lb.pack(side='left', fill='both', expand=True, padx=(10, 0), pady=10)
