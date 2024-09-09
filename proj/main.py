@@ -1959,10 +1959,10 @@ clb_scrollbar.config(command=chars_lb.yview)
 
 # // blue frame // 
 # blue widgets
-addchar_btn = tk.Button(blue_frame, text='Add Character', font=('Kozuka Gothic Pro B', 10), bg='#b5dae6', fg='#283149', command=add_character_popup)
-updchar_btn = tk.Button(blue_frame, text='Update Character', font=('Kozuka Gothic Pro B', 10), bg='#b5dae6', fg='#283149', command=update_character_popup)
-delchar_btn = tk.Button(blue_frame, text='Delete Character', font=('Kozuka Gothic Pro B', 10), bg='#b5dae6', fg='#283149', command=delete_character)
-bossing_checklist_btn = tk.Button(blue_frame, text='Bossing Checklist', font=('Kozuka Gothic Pro B', 10), bg='#b5dae6', fg='#283149', command=bossing_checklist_popup)
+addchar_btn = tk.Button(blue_frame, text='Add Character', font=('Kozuka Gothic Pro B', 10), bg='#b5dae6', fg='#283149', width=15, command=add_character_popup)
+updchar_btn = tk.Button(blue_frame, text='Update Character', font=('Kozuka Gothic Pro B', 10), bg='#b5dae6', fg='#283149', width=15, command=update_character_popup)
+delchar_btn = tk.Button(blue_frame, text='Delete Character', font=('Kozuka Gothic Pro B', 10), bg='#b5dae6', fg='#283149', width=15, command=delete_character)
+bossing_checklist_btn = tk.Button(blue_frame, text='Bossing Checklist', font=('Kozuka Gothic Pro B', 10), bg='#b5dae6', fg='#283149', width=15, command=bossing_checklist_popup)
 
 addchar_btn.grid(row=0, column=0)
 updchar_btn.grid(row=0, column=1)
@@ -1978,23 +1978,23 @@ blue_frame.grid_columnconfigure(1, weight=1)
 # purple widgets
 mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
 mesos_balance_display_lbl = tk.Label(purple_frame, text=f'${user['usr'].mesos_balance:,.0f}', font=('Kozuka Gothic Pro B', 10), bg='#dbedf3', fg='#283149')
-add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos, bg='#b5dae6', fg='#283149')
-remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos, bg='#b5dae6', fg='#283149')
-reset_balance_btn = tk.Button(purple_frame, text='Reset Balance', font=('Kozuka Gothic Pro B', 10), command=reset_mesos, bg='#b5dae6', fg='#283149')
+add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos, bg='#b5dae6', fg='#283149', width=15)
+remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos, bg='#b5dae6', fg='#283149', width=15)
+reset_balance_btn = tk.Button(purple_frame, text='Reset Balance', font=('Kozuka Gothic Pro B', 10), command=reset_mesos, bg='#b5dae6', fg='#283149', width=15)
 
 bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
 bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
 wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}', font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
 
-mesos_balance_title_lbl.place(x=0, y=10, width=490, height=30)
-mesos_balance_display_lbl.place(x=0, y=30, width=490, height=30)
-add_mesos_btn.place(x=60, y=60, width=100, height=30)
-remove_mesos_btn.place(x=200, y=60, width=100, height=30)
-reset_balance_btn.place(x=340, y=60, width=100, height=30)
+mesos_balance_title_lbl.place(x=0, y=30, width=490, height=30)
+mesos_balance_display_lbl.place(x=0, y=50, width=490, height=30)
+add_mesos_btn.place(x=60, y=80, width=100, height=30)
+remove_mesos_btn.place(x=200, y=80, width=100, height=30)
+reset_balance_btn.place(x=340, y=80, width=100, height=30)
 
-bc_remaining_lbl.place(x=0, y=110, width=490, height=30)
-bc_sold_lbl.place(x=0, y=155, width=490, height=30)
-wm_gained_lbl.place(x=0, y=200, width=490, height=30)
+bc_remaining_lbl.place(x=0, y=130, width=490, height=30)
+bc_sold_lbl.place(x=0, y=175, width=490, height=30)
+wm_gained_lbl.place(x=0, y=220, width=490, height=30)
 
 # // orange //
 # orange widgets
