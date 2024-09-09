@@ -1714,18 +1714,18 @@ def add_mesos():
             am_win.lift()
 
     # small popup window asking for user input
-    am_win = tk.Toplevel(purple_frame)
+    am_win = tk.Toplevel(purple_frame, bg='#DBEDF3')
     am_win.title('Add Mesos')
-    am_win.geometry('200x110+900+350')
+    am_win.geometry('250x150+900+350')
     am_win.resizable(False, False)
 
-    am_prompt_lbl = tk.Label(am_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12))
-    am_amount_entry = tk.Entry(am_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount)
-    am_submit_btn = tk.Button(am_win, text='Add to Balance', font=('Kozuka Gothic Pro B', 12), command=topup_balance)
+    am_prompt_lbl = tk.Label(am_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+    am_amount_entry = tk.Entry(am_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightthickness=2)
+    am_submit_btn = tk.Button(am_win, text='Add to Balance', font=('Kozuka Gothic Pro B', 12), command=topup_balance, bg='#B5DAE6')
 
     am_prompt_lbl.grid(row=0, column=0)
     am_amount_entry.grid(row=1, column=0)
-    am_submit_btn.grid(row=2, column=0)
+    am_submit_btn.grid(row=2, column=0, pady=(0, 10))
 
     am_win.grid_rowconfigure(0, weight=1)
     am_win.grid_rowconfigure(1, weight=1)
@@ -1764,18 +1764,18 @@ def subtract_mesos():
             sm_win.lift()
 
     # small popup window asking for user input
-    sm_win = tk.Toplevel(purple_frame)
+    sm_win = tk.Toplevel(purple_frame, bg='#DBEDF3')
     sm_win.title('Subtract Mesos')
-    sm_win.geometry('200x110+900+350')
+    sm_win.geometry('250x150+900+350')
     sm_win.resizable(False, False)
 
-    sm_prompt_lbl = tk.Label(sm_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12))
-    sm_amount_entry = tk.Entry(sm_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount)
-    sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=('Kozuka Gothic Pro B', 12), command=reduce_balance)
+    sm_prompt_lbl = tk.Label(sm_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+    sm_amount_entry = tk.Entry(sm_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightthickness=2)
+    sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=('Kozuka Gothic Pro B', 12), command=reduce_balance, bg='#B5DAE6')
 
     sm_prompt_lbl.grid(row=0, column=0)
     sm_amount_entry.grid(row=1, column=0)
-    sm_submit_btn.grid(row=2, column=0)
+    sm_submit_btn.grid(row=2, column=0, pady=(0, 10))
 
     sm_win.grid_rowconfigure(0, weight=1)
     sm_win.grid_rowconfigure(1, weight=1)

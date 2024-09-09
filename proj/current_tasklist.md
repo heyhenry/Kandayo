@@ -34,5 +34,6 @@ mesos balance value.
 10. Update the UI for the 'Update Character' button
 11. Update the UI for the 'Bossing Checklist' button
 12. Update the UI for the 'Edit Hot Links' button
-13. Find a better way to create a natural separator between the sections in terms of UI
-14. Add widget info upon hover
+13. Find a better way to create a natural separator between the sections in terms of UI ?
+14. Add widget info upon hover on main window x
+
