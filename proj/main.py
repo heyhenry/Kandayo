@@ -337,6 +337,7 @@ def load_characters():
 def add_character_popup():
 
     ac_ign = tk.StringVar()
+    ac_maple_job_choice = tk.StringVar()
     ac_level = tk.StringVar()
 
     # check to see if character already exists
@@ -347,12 +348,12 @@ def add_character_popup():
             messagebox.showerror('Invalid IGN (Player Name)',
                                  'The IGN (Character Name) has already been registered.')
         # if use has not filled all input fields
-        elif ac_ign.get() == '' or maple_job_choice.get() == '' or ac_level.get() == '':
+        elif ac_ign.get() == '' or ac_maple_job_choice.get() == '' or ac_level.get() == '':
             ac_win.destroy()
             messagebox.showerror('Missing Information',
                                  'All input fields are not filled.')
         # ensure user doesn't attemp to leave field as default
-        elif maple_job_choice.get() == 'Select a Job/Class':
+        elif ac_maple_job_choice.get() == 'Select a Job/Class':
             ac_win.destroy()
             messagebox.showerror('Invalid Choice',
                                  'You must choose a Job/Class.')
@@ -363,7 +364,7 @@ def add_character_popup():
                                  'You must enter a valid level.') 
         else:
             # otherwise, update 'characters' dictionary with new entry and close pop-up
-            create_character(ac_ign.get(), maple_job_choice.get(), ac_level.get())
+            create_character(ac_ign.get(), ac_maple_job_choice.get(), ac_level.get())
             ac_win.destroy()
 
     # ac short for add_character
@@ -372,18 +373,16 @@ def add_character_popup():
     ac_win.geometry('400x250+850+300')
     ac_win.resizable(False, False)
 
-    maple_job_choice = tk.StringVar()
-
     ac_title_lbl = tk.Label(ac_win, text='Add New Character', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
     ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
     ac_ign_entry = tk.Entry(ac_win, textvariable=ac_ign, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
     ac_job_lbl = tk.Label(ac_win, text='Job (Class):', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ac_job_dropdown = ttk.Combobox(ac_win, width=28, textvariable=maple_job_choice)
+    ac_job_dropdown = ttk.Combobox(ac_win, width=24, textvariable=ac_maple_job_choice)
     ac_job_dropdown['values'] = ( 
         'Select a Job/Class',
         'Night Lord',
         'Shadower',
-        'Marksman'
+        'Marksman',
         'Bowmaster',
         'Buccaneer',
         'Corsair',
@@ -431,6 +430,7 @@ def add_character_popup():
         'Hayato',
         'Kanna'
     )
+    ac_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10))
     ac_job_dropdown.current(0)
     ac_level_lbl = tk.Label(ac_win, text='Level:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
     ac_level_entry = tk.Entry(ac_win, textvariable=ac_level, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
@@ -459,7 +459,7 @@ def add_character_popup():
 def update_character_popup():
 
     uc_ign = tk.StringVar()
-    uc_job = tk.StringVar()
+    uc_maple_job_choice = tk.StringVar()
     uc_level = tk.StringVar()
 
     selected_ign = ''
@@ -473,6 +473,7 @@ def update_character_popup():
     if selected_ign == '':
         messagebox.showerror('Character Selection Error', 
                              'A character has not been selected from the list.')
+        return
         
     # check if the updated ign is already registered for another character
     def validate_updated_entry():
@@ -493,20 +494,33 @@ def update_character_popup():
             # error message prompt if that is the case
             messagebox.showerror('IGN Error',
                                  'The new IGN already exists for another character in the registered list.')
+        # if use has not filled all input fields
+        elif uc_ign.get() == '' or uc_maple_job_choice.get() == '' or uc_level.get() == '':
+            uc_win.destroy()
+            messagebox.showerror('Missing Information',
+                                 'All input fields are not filled.')
+        # ensure user doesn't attemp to leave field as default
+        elif uc_maple_job_choice.get() == 'Select a Job/Class':
+            uc_win.destroy()
+            messagebox.showerror('Invalid Choice',
+                                 'You must choose a Job/Class.')
+        # ensure user enters a valid number between 1 and 300
+        elif int(uc_level.get()) > 300 or int(uc_level.get()) < 1:
+            uc_win.destroy()
+            messagebox.showerror('Invalid Level',
+                                 'You must enter a valid level.') 
         else:
-
             # deletes the old character entry in characters dictionary
             del characters[selected_ign]
             
             # create a new character entry with updated details into the characters dictionary
-            create_character(uc_ign.get(), uc_job.get(), uc_level.get())
+            create_character(uc_ign.get(), uc_maple_job_choice.get(), uc_level.get())
 
             # closes the popup window
             uc_win.destroy()
 
     # set the input fields with existing character data
     uc_ign.set(characters[selected_ign].ign)
-    uc_job.set(characters[selected_ign].job)
     uc_level.set(characters[selected_ign].level)
 
     uc_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
@@ -518,7 +532,60 @@ def update_character_popup():
     uc_ign_lbl = tk.Label(uc_win, text='In-Game Name:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
     uc_ign_entry = tk.Entry(uc_win, textvariable=uc_ign, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
     uc_job_lbl = tk.Label(uc_win, text='Job (Class):', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    uc_job_entry = tk.Entry(uc_win, textvariable=uc_job, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+    uc_job_dropdown = ttk.Combobox(uc_win, width=24, textvariable=uc_maple_job_choice)
+    uc_job_dropdown['values'] = ( 
+        'Night Lord',
+        'Shadower',
+        'Marksman',
+        'Bowmaster',
+        'Buccaneer',
+        'Corsair',
+        'Fire/Poison Archmage',
+        'Ice/Lightning Archmage',
+        'Bishop',
+        'Dark Knight',
+        'Paladin',
+        'Hero'
+        'Angelic Buster',
+        'Lynn',
+        'Khali',
+        'Dawn Warrior',
+        'Night Walker',
+        'Blaze Wizard',
+        'Thunder Breaker',
+        'Wind Acher',
+        'Mihile',
+        'Dual Blade',
+        'Cannoneer',
+        'Lara',
+        'Kain',
+        'Adele',
+        'Hoyoung',
+        'Pathfinder',
+        'Ark',
+        'Illium',
+        'Cadena',
+        'Aran',
+        'Evan',
+        'Mercedes',
+        'Phantom',
+        'Luminous',
+        'Shade',
+        'Mechanic',
+        'Wild Hunter',
+        'Battle Mage',
+        'Blaster',
+        'Demon Slayer',
+        'Demon Avenger',
+        'Xenon',
+        'Kaiser',
+        'Kinesis',
+        'Zero',
+        'Hayato',
+        'Kanna'
+    )
+    uc_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10))
+    uc_job_dropdown.set(characters[selected_ign].job)
     uc_level_lbl = tk.Label(uc_win, text='Level:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
     uc_level_entry = tk.Entry(uc_win, textvariable=uc_level, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
     uc_submit_btn = tk.Button(uc_win, text='Update Roster', font=('Kozuka Gothic Pro B', 12), width=15, command=validate_updated_entry, bg='#B5DAE6', activebackground='#DBEDF3')
@@ -528,7 +595,7 @@ def update_character_popup():
     uc_ign_lbl.grid(row=1, column=0, sticky='w', padx=(20, 0))
     uc_ign_entry.grid(row=1, column=1)
     uc_job_lbl.grid(row=2, column=0, sticky='w', padx=(20, 0))
-    uc_job_entry.grid(row=2, column=1)
+    uc_job_dropdown.grid(row=2, column=1)
     uc_level_lbl.grid(row=3, column=0, sticky='w', padx=(20, 0))
     uc_level_entry.grid(row=3, column=1)
     uc_submit_btn.grid(row=4, column=0, pady=(0, 10))
