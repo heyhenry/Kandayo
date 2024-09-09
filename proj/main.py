@@ -14,7 +14,8 @@ import ctypes
 
 # colour palette that looks decent and tried
 # preset 1 (dark theme style) - button_bg='#dbedf3', text_fg='#283149', main_bg='#dbedf3'
-# preset 2 (light blue style) - button_fg = '#283149', button_bg = '#b5dae6', main_bg = '#dbedf3', separator_colour(highlight background) = '#161b28', listbox_bg = '#ffffff', listbox_fg = '#283149', selectbackground='#b4dae6'
+# preset 2 (light blue style) - button_fg = '#283149', button_bg = '#b5dae6', main_bg = '#dbedf3', 
+# separator_colour(highlight background) = '#161b28', listbox_bg = '#ffffff', listbox_fg = '#283149', selectbackground='#b4dae6', entry_highlight_colour: '#6F85B6'
 
 # list of character (CharInfo) objects
 characters = {}
@@ -1720,8 +1721,8 @@ def add_mesos():
     am_win.resizable(False, False)
 
     am_prompt_lbl = tk.Label(am_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    am_amount_entry = tk.Entry(am_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightthickness=2)
-    am_submit_btn = tk.Button(am_win, text='Add to Balance', font=('Kozuka Gothic Pro B', 12), command=topup_balance, bg='#B5DAE6')
+    am_amount_entry = tk.Entry(am_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+    am_submit_btn = tk.Button(am_win, text='Add to Balance', font=('Kozuka Gothic Pro B', 12), command=topup_balance, bg='#B5DAE6', activebackground='#DBEDF3')
 
     am_prompt_lbl.grid(row=0, column=0)
     am_amount_entry.grid(row=1, column=0)
@@ -1770,8 +1771,8 @@ def subtract_mesos():
     sm_win.resizable(False, False)
 
     sm_prompt_lbl = tk.Label(sm_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    sm_amount_entry = tk.Entry(sm_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightthickness=2)
-    sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=('Kozuka Gothic Pro B', 12), command=reduce_balance, bg='#B5DAE6')
+    sm_amount_entry = tk.Entry(sm_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+    sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=('Kozuka Gothic Pro B', 12), command=reduce_balance, bg='#B5DAE6', activebackground='#DBEDF3')
 
     sm_prompt_lbl.grid(row=0, column=0)
     sm_amount_entry.grid(row=1, column=0)
@@ -1848,19 +1849,19 @@ def edit_hotlinks():
         # close popup
         ehl_win.destroy()
 
-    ehl_win = tk.Toplevel(orange_frame, bg='#fef2be')
+    ehl_win = tk.Toplevel(orange_frame, bg='#DBEDF3')
     ehl_win.title('Edit Hotlinks')
-    ehl_win.geometry('500x200+900+350')
+    ehl_win.geometry('500x200+750+350')
     ehl_win.resizable(False, False)
 
-    ehl_hotlinks_title_lbl = tk.Label(ehl_win, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
-    ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1:', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
-    ehl_first_hotlink_entry = tk.Entry(ehl_win, textvariable=first_hotlink, font=('Kozuka Gothic Pro B', 12))
-    ehl_second_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 2:', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
-    ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink, font=('Kozuka Gothic Pro B', 12))
-    ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3:', font=('Kozuka Gothic Pro B', 12), bg='#fef2be')
-    ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink, font=('Kozuka Gothic Pro B', 12))
-    ehl_edit_btn = tk.Button(ehl_win, text='Save Edit', font=('Kozuka Gothic Pro B', 12), command=save_edit)
+    ehl_hotlinks_title_lbl = tk.Label(ehl_win, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+    ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+    ehl_first_hotlink_entry = tk.Entry(ehl_win, textvariable=first_hotlink, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+    ehl_second_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 2:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+    ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+    ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+    ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+    ehl_edit_btn = tk.Button(ehl_win, text='Save Edit', font=('Kozuka Gothic Pro B', 12), command=save_edit, bg='#B5DAE6', activebackground='#DBEDF3')
 
     ehl_hotlinks_title_lbl.place(x=0, y=5, width=500, height=30)
     ehl_first_hotlink_lbl.place(x=0, y=40, width=100, height=30)
