@@ -2005,25 +2005,25 @@ bossing_checklist_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_e
 
 # // purple // 
 # purple widgets
-mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
-mesos_balance_display_lbl = tk.Label(purple_frame, text=f'${user['usr'].mesos_balance:,.0f}', font=('Kozuka Gothic Pro B', 10), bg='#dbedf3', fg='#283149')
+mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=('Kozuka Gothic Pro B', 16), bg='#dbedf3', fg='#283149')
+mesos_balance_display_lbl = tk.Label(purple_frame, text=f'${user['usr'].mesos_balance:,.0f}', font=('Kozuka Gothic Pro B', 14), bg='#dbedf3', fg='#283149')
 add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic Pro B', 10), command=add_mesos, bg='#b5dae6', fg='#283149', width=15)
 remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos, bg='#b5dae6', fg='#283149', width=15)
 reset_balance_btn = tk.Button(purple_frame, text='Reset Balance', font=('Kozuka Gothic Pro B', 10), command=reset_mesos, bg='#b5dae6', fg='#283149', width=15)
 
-bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
-bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
-wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}', font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
+bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 16), bg='#dbedf3', fg='#283149')
+bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 16), bg='#dbedf3', fg='#283149')
+wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}', font=('Kozuka Gothic Pro B', 16), bg='#dbedf3', fg='#283149')
 
-mesos_balance_title_lbl.place(x=0, y=30, width=490, height=30)
+mesos_balance_title_lbl.place(x=0, y=20, width=490, height=30)
 mesos_balance_display_lbl.place(x=0, y=50, width=490, height=30)
 add_mesos_btn.place(x=60, y=80, width=100, height=30)
 remove_mesos_btn.place(x=200, y=80, width=100, height=30)
 reset_balance_btn.place(x=340, y=80, width=100, height=30)
 
-bc_remaining_lbl.place(x=0, y=130, width=490, height=30)
-bc_sold_lbl.place(x=0, y=175, width=490, height=30)
-wm_gained_lbl.place(x=0, y=220, width=490, height=30)
+bc_remaining_lbl.place(x=0, y=140, width=490, height=30)
+bc_sold_lbl.place(x=0, y=185, width=490, height=30)
+wm_gained_lbl.place(x=0, y=230, width=490, height=30)
 
 mesos_balance_title_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Current Mesos Balance'))
 mesos_balance_title_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
@@ -2073,6 +2073,12 @@ orange_frame.grid_columnconfigure(2, weight=1)
 orange_frame.grid_columnconfigure(3, weight=1)
 
 # tooltip info
+hotlink_one_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'First Customised Hot Link (Redirects To The Web)'))
+
+hotlink_two_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Second Customised Hot Link (Redirects To The Web)'))
+
+hotlink_three_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Three Customised Hot Link (Redirects To The Web)'))
+
 edit_hotlinks_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Edit Customised Hot Links'))
 edit_hotlinks_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
 
