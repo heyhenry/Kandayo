@@ -55,3 +55,5 @@ The following are the resources I have read, referred and learnt from to better 
 - Creating personal tool tip feature: https://www.youtube.com/watch?v=o_YumT2iWBc
 - Adding icon to tkinter top menu using PIL: https://www.tutorialspoint.com/how-to-change-tkinter-window-icon
 - Implementing custom image for taskbar: https://www.youtube.com/watch?v=pHpI8g0COZw
+- Combobox dropdown setups: https://www.geeksforgeeks.org/combobox-widget-in-tkinter-python/
+- Combobox setting: https://www.tutorialspoint.com/how-to-clear-the-text-field-part-of-ttk-combobox-in-tkinter
