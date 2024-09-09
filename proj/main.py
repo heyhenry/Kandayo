@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import ttk
 from datetime import timezone, timedelta
 import datetime as dt
 import webbrowser
@@ -336,7 +337,6 @@ def load_characters():
 def add_character_popup():
 
     ac_ign = tk.StringVar()
-    ac_job = tk.StringVar()
     ac_level = tk.StringVar()
 
     # check to see if character already exists
@@ -347,13 +347,23 @@ def add_character_popup():
             messagebox.showerror('Invalid IGN (Player Name)',
                                  'The IGN (Character Name) has already been registered.')
         # if use has not filled all input fields
-        elif ac_ign.get() == '' or ac_job.get() == '' or ac_level.get() == '':
+        elif ac_ign.get() == '' or maple_job_choice.get() == '' or ac_level.get() == '':
             ac_win.destroy()
             messagebox.showerror('Missing Information',
-                                 'All input fields are not filled')
+                                 'All input fields are not filled.')
+        # ensure user doesn't attemp to leave field as default
+        elif maple_job_choice.get() == 'Select a Job/Class':
+            ac_win.destroy()
+            messagebox.showerror('Invalid Choice',
+                                 'You must choose a Job/Class.')
+        # ensure user enters a valid number between 1 and 300
+        elif int(ac_level.get()) > 300 or int(ac_level.get()) < 1:
+            ac_win.destroy()
+            messagebox.showerror('Invalid Level',
+                                 'You must enter a valid level.') 
         else:
             # otherwise, update 'characters' dictionary with new entry and close pop-up
-            create_character(ac_ign.get(), ac_job.get(), ac_level.get())
+            create_character(ac_ign.get(), maple_job_choice.get(), ac_level.get())
             ac_win.destroy()
 
     # ac short for add_character
@@ -362,11 +372,66 @@ def add_character_popup():
     ac_win.geometry('400x250+850+300')
     ac_win.resizable(False, False)
 
+    maple_job_choice = tk.StringVar()
+
     ac_title_lbl = tk.Label(ac_win, text='Add New Character', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
     ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
     ac_ign_entry = tk.Entry(ac_win, textvariable=ac_ign, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
     ac_job_lbl = tk.Label(ac_win, text='Job (Class):', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ac_job_entry = tk.Entry(ac_win, textvariable=ac_job, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+    ac_job_dropdown = ttk.Combobox(ac_win, width=28, textvariable=maple_job_choice)
+    ac_job_dropdown['values'] = ( 
+        'Select a Job/Class',
+        'Night Lord',
+        'Shadower',
+        'Marksman'
+        'Bowmaster',
+        'Buccaneer',
+        'Corsair',
+        'Fire/Poison Archmage',
+        'Ice/Lightning Archmage',
+        'Bishop',
+        'Dark Knight',
+        'Paladin',
+        'Hero'
+        'Angelic Buster',
+        'Lynn',
+        'Khali',
+        'Dawn Warrior',
+        'Night Walker',
+        'Blaze Wizard',
+        'Thunder Breaker',
+        'Wind Acher',
+        'Mihile',
+        'Dual Blade',
+        'Cannoneer',
+        'Lara',
+        'Kain',
+        'Adele',
+        'Hoyoung',
+        'Pathfinder',
+        'Ark',
+        'Illium',
+        'Cadena',
+        'Aran',
+        'Evan',
+        'Mercedes',
+        'Phantom',
+        'Luminous',
+        'Shade',
+        'Mechanic',
+        'Wild Hunter',
+        'Battle Mage',
+        'Blaster',
+        'Demon Slayer',
+        'Demon Avenger',
+        'Xenon',
+        'Kaiser',
+        'Kinesis',
+        'Zero',
+        'Hayato',
+        'Kanna'
+    )
+    ac_job_dropdown.current(0)
     ac_level_lbl = tk.Label(ac_win, text='Level:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
     ac_level_entry = tk.Entry(ac_win, textvariable=ac_level, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
     ac_submit_btn = tk.Button(ac_win, text='Add to Roster', font=('Kozuka Gothic Pro B', 10), width=15, command=lambda:validate_character_entry(ac_ign.get()), bg='#B5DAE6', activebackground='#DBEDF3')
@@ -376,7 +441,7 @@ def add_character_popup():
     ac_ign_lbl.grid(row=1, column=0, sticky='w', padx=(20, 0))
     ac_ign_entry.grid(row=1, column=1)
     ac_job_lbl.grid(row=2, column=0, sticky='w', padx=(20, 0))
-    ac_job_entry.grid(row=2, column=1)
+    ac_job_dropdown.grid(row=2, column=1)
     ac_level_lbl.grid(row=3, column=0, sticky='w', padx=(20, 0))
     ac_level_entry.grid(row=3, column=1)
     ac_submit_btn.grid(row=4, column=0, pady=(0, 10))
