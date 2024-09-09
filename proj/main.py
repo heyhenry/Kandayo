@@ -1877,8 +1877,6 @@ load_user()
 # if weekly reset, reset boss crystals
 reset_boss_stats()
 
-
-
 root = tk.Tk()
 myappid = 'kandayo.kandayo.maplestory.bossing' # arbitrary string
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
@@ -1946,6 +1944,22 @@ yellow_frame.grid_columnconfigure(0, weight=1)
 yellow_frame.grid_columnconfigure(1, weight=1)
 yellow_frame.grid_columnconfigure(2, weight=1)
 
+# tooltips for yellow frame
+utc_livetime_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Current Server Time (Timezone: UTC)'))
+utc_livetime_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+ursus_time_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Time Remaining Until Next Ursus 2x Bonus Rewards'))
+ursus_time_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+daily_reset_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Time Remaining Until Daily Reset'))
+daily_reset_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+weekly_reset_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Time Remaining Until Weekly Reset'))
+weekly_reset_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+app_icon_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, "It's Kandayo's Official Mascot!"))
+app_icon_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
 # // red frame // 
 # red widgets
 chars_lb = tk.Listbox(red_frame, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', fg='#283149', selectbackground='#b4dae6')
@@ -1956,6 +1970,9 @@ clb_scrollbar.pack(side='right', fill='both', padx=(0, 10), pady=10)
 
 chars_lb.config(yscrollcommand=clb_scrollbar.set)
 clb_scrollbar.config(command=chars_lb.yview)
+
+chars_lb.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'A List of Registered Characters For Weekly Bossing'))
+chars_lb.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
 
 # // blue frame // 
 # blue widgets
@@ -1973,6 +1990,18 @@ blue_frame.grid_rowconfigure(0, weight=1)
 blue_frame.grid_rowconfigure(1, weight=1)
 blue_frame.grid_columnconfigure(0, weight=1)
 blue_frame.grid_columnconfigure(1, weight=1)
+
+addchar_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Add A New Character To The Registered List To Track Weekly Bossing'))
+addchar_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+updchar_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, "Update A Selected Character's Details"))
+updchar_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+delchar_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Delete A Character From The Registered List'))
+delchar_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+bossing_checklist_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Manage Weekly Bossing For A Selected Character'))
+bossing_checklist_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
 
 # // purple // 
 # purple widgets
@@ -1995,6 +2024,30 @@ reset_balance_btn.place(x=340, y=80, width=100, height=30)
 bc_remaining_lbl.place(x=0, y=130, width=490, height=30)
 bc_sold_lbl.place(x=0, y=175, width=490, height=30)
 wm_gained_lbl.place(x=0, y=220, width=490, height=30)
+
+mesos_balance_title_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Current Mesos Balance'))
+mesos_balance_title_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+mesos_balance_display_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Current Mesos Balance'))
+mesos_balance_display_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+add_mesos_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Add Mesos To The Mesos Balance'))
+add_mesos_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+remove_mesos_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Remove Mesos From The Mesos Balance'))
+remove_mesos_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+reset_balance_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Reset Mesos Balance to $0'))
+reset_balance_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+bc_remaining_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Boss Crystals Remaining To Be Sold Before Weekly Reset'))
+bc_remaining_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+bc_sold_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Boss Crystals Sold This Current Week'))
+bc_sold_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
+
+wm_gained_lbl.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Amount Of Mesos Gained For The Week From Bossing'))
+wm_gained_lbl.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
 
 # // orange //
 # orange widgets
