@@ -34,8 +34,15 @@ def load_user():
                 user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['weekly_mesos_gained'], usr_info['boss_crystal_reset'], usr_info['boss_crystal_count'], usr_info['boss_crystal_sold'],
                                       usr_info['hotlink_one'], usr_info['hotlink_two'], usr_info['hotlink_three'])
 
-def on_hover(mouse_event, widget, info_text):
-
+# execute message action/display on mouse hover over widget
+def on_hover(mouse_event, widget_name, status_bar, info_message):
+    widget_name['bg'] = 'red'
+    status_bar.config(text=info_message)
+    
+# execute message action/display on mouse hover completion over widget
+def on_hover_leave(mouse_event, widget_name, status_bar):
+    widget_name['bg'] = 'orange'
+    status_bar.config(text='')
 
 # // json function //
 # custom json serializer
