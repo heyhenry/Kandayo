@@ -34,6 +34,7 @@ def load_user():
                 user[usr] = UserInfo(usr_info['mesos_balance'], usr_info['weekly_mesos_gained'], usr_info['boss_crystal_reset'], usr_info['boss_crystal_count'], usr_info['boss_crystal_sold'],
                                       usr_info['hotlink_one'], usr_info['hotlink_two'], usr_info['hotlink_three'])
 
+def on_hover(mouse_event, widget, info_text):
 
 
 # // json function //
@@ -1875,7 +1876,6 @@ root = tk.Tk()
 root.geometry('+600+150')
 root.resizable(False, False)
 root.iconbitmap('./img/kandayo_icon.ico')
-
 
 # // Setting up Frames //
 yellow_frame = tk.Frame(root, width=800, height=120, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=2)
