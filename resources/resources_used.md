@@ -54,3 +54,4 @@ The following are the resources I have read, referred and learnt from to better 
 - Adding icon to tkinter top menu bar: https://stackoverflow.com/questions/33137829/how-to-replace-the-icon-in-a-tkinter-app
 - Creating personal tool tip feature: https://www.youtube.com/watch?v=o_YumT2iWBc
 - Adding icon to tkinter top menu using PIL: https://www.tutorialspoint.com/how-to-change-tkinter-window-icon
+- Implementing custom image for taskbar: https://www.youtube.com/watch?v=pHpI8g0COZw

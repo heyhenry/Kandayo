@@ -1880,7 +1880,7 @@ reset_boss_stats()
 
 
 root = tk.Tk()
-myappid = 'poop'
+myappid = 'kandayo.kandayo.maplestory.bossing' # arbitrary string
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 # create tkinter compatible image reference
 icon_ico = Image.open('./img/kandayo_icon_opaque.ico')
