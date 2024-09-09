@@ -1872,6 +1872,8 @@ root = tk.Tk()
 # position window display upon open
 root.geometry('+600+150')
 root.resizable(False, False)
+root.iconbitmap('./img/kandayo_icon.ico')
+
 
 # // Setting up Frames //
 yellow_frame = tk.Frame(root, width=800, height=120, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=2)
