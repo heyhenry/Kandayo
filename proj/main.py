@@ -529,7 +529,7 @@ def bossing_checklist_popup():
 
     # check status icons image rendering
     # complete status
-    complete_status_icon = Image.open('./img/just_work.png')
+    complete_status_icon = Image.open('./img/complete_status.png')
     max_width, max_height = 50,50
     complete_status_icon.thumbnail((max_width, max_height))
     complete_status_icon = ImageTk.PhotoImage(complete_status_icon)
@@ -1199,8 +1199,8 @@ def bossing_checklist_popup():
     # endregion
 
     # title and character detail
-    bossing_checklist_title = tk.Label(bc_win, text='Bossing Checklist', **font_preset)
-    character_details_lbl = tk.Label(bc_win, text=f'{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}', **font_preset)
+    bossing_checklist_title = tk.Label(bc_win, text='Bossing Checklist', **font_preset, bg='#dbedf3')
+    character_details_lbl = tk.Label(bc_win, text=f'{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}', **font_preset, bg='#dbedf3')
 
     # region - open images
     # Render Images
@@ -1307,8 +1307,7 @@ def bossing_checklist_popup():
     cpb_difficulty = tk.OptionMenu(bc_win, cpb_difficulty_choice, *difficulty_a) 
     cpb_difficulty.config(state='disabled')
     cpb_party_size = tk.OptionMenu(bc_win, cpb_party_size_choice, *party_size)
-    cpb_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpb_status, command=lambda:update_check_status('Chaos Pink Bean', cpb_status, cpb_clear_status), bg='#dbedf3')
-    cpb_clear_status.config(indicatoron=False, borderwidth=0)
+    cpb_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpb_status, command=lambda:update_check_status('Chaos Pink Bean', cpb_status, cpb_clear_status), bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
 
     # Hard Hilla
     hh_name = tk.Label(bc_win, text='Hard Hilla', **font_preset, bg='#DBEDF3')
@@ -1316,7 +1315,8 @@ def bossing_checklist_popup():
     hh_difficulty = tk.OptionMenu(bc_win, hh_difficulty_choice, *difficulty_a) 
     hh_difficulty.config(state='disabled')
     hh_party_size = tk.OptionMenu(bc_win, hh_party_size_choice, *party_size)
-    hh_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hh_status, command=lambda:update_check_status('Hard Hilla', hh_status, hh_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    hh_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hh_status, command=lambda:update_check_status('Hard Hilla', hh_status, hh_clear_status), 
+                                     bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     hh_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Cygnus
@@ -1324,7 +1324,8 @@ def bossing_checklist_popup():
     cyg_img = tk.Label(bc_win, image=cyg_icon, bg='#DBEDF3')
     cyg_difficulty = tk.OptionMenu(bc_win, cyg_difficulty_choice, *difficulty_a)
     cyg_party_size = tk.OptionMenu(bc_win, cyg_party_size_choice, *party_size)
-    cyg_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cyg_status, command=lambda:update_check_status('Cygnus', cyg_status, cyg_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    cyg_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cyg_status, command=lambda:update_check_status('Cygnus', cyg_status, cyg_clear_status), 
+                                      bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     cyg_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Zakum
@@ -1333,7 +1334,8 @@ def bossing_checklist_popup():
     czak_difficulty = tk.OptionMenu(bc_win, czak_difficulty_choice, *difficulty_a) 
     czak_difficulty.config(state='disabled')
     czak_party_size = tk.OptionMenu(bc_win, czak_party_size_choice, *party_size)
-    czak_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=czak_status, command=lambda:update_check_status('Chaos Zakum', czak_status, czak_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    czak_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=czak_status, command=lambda:update_check_status('Chaos Zakum', czak_status, czak_clear_status), 
+                                       bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     czak_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Princess No
@@ -1342,7 +1344,8 @@ def bossing_checklist_popup():
     pno_difficulty = tk.OptionMenu(bc_win, pno_difficulty_choice, *difficulty_a) 
     pno_difficulty.config(state='disabled')
     pno_party_size = tk.OptionMenu(bc_win, pno_party_size_choice, *party_size)
-    pno_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=pno_status, command=lambda:update_check_status('Princess No', pno_status, pno_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    pno_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=pno_status, command=lambda:update_check_status('Princess No', pno_status, pno_clear_status), 
+                                      bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     pno_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Queen
@@ -1351,7 +1354,8 @@ def bossing_checklist_popup():
     cqueen_difficulty = tk.OptionMenu(bc_win, cqueen_difficulty_choice, *difficulty_a) 
     cqueen_difficulty.config(state='disabled')
     cqueen_party_size = tk.OptionMenu(bc_win, cqueen_party_size_choice, *party_size)
-    cqueen_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cqueen_status, command=lambda:update_check_status('Chaos Queen', cqueen_status, cqueen_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    cqueen_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cqueen_status, command=lambda:update_check_status('Chaos Queen', cqueen_status, cqueen_clear_status), 
+                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     cqueen_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Pierre
@@ -1360,7 +1364,8 @@ def bossing_checklist_popup():
     cpierre_difficulty = tk.OptionMenu(bc_win, cpierre_difficulty_choice, *difficulty_a) 
     cpierre_difficulty.config(state='disabled')
     cpierre_party_size = tk.OptionMenu(bc_win, cpierre_party_size_choice, *party_size)
-    cpierre_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpierre_status, command=lambda:update_check_status('Chaos Pierre', cpierre_status, cpierre_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    cpierre_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpierre_status, command=lambda:update_check_status('Chaos Pierre', cpierre_status, cpierre_clear_status), 
+                                          bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     cpierre_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Von Bon
@@ -1369,7 +1374,8 @@ def bossing_checklist_popup():
     cvonbon_difficulty = tk.OptionMenu(bc_win, cvonbon_difficulty_choice, *difficulty_a) 
     cvonbon_difficulty.config(state='disabled')
     cvonbon_party_size = tk.OptionMenu(bc_win, cvonbon_party_size_choice, *party_size)
-    cvonbon_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvonbon_status, command=lambda:update_check_status('Chaos Von Bon', cvonbon_status, cvonbon_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    cvonbon_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvonbon_status, command=lambda:update_check_status('Chaos Von Bon', cvonbon_status, cvonbon_clear_status), 
+                                          bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     cvonbon_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Vellum
@@ -1378,7 +1384,8 @@ def bossing_checklist_popup():
     cvell_difficulty = tk.OptionMenu(bc_win, cvell_difficulty_choice, *difficulty_a) 
     cvell_difficulty.config(state='disabled')
     cvell_party_size = tk.OptionMenu(bc_win, cvell_party_size_choice, *party_size)
-    cvell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvell_status, command=lambda:update_check_status('Chaos Vellum', cvell_status, cvell_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    cvell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvell_status, command=lambda:update_check_status('Chaos Vellum', cvell_status, cvell_clear_status), 
+                                        bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     cvell_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Akechi Mitsuhide
@@ -1387,7 +1394,8 @@ def bossing_checklist_popup():
     akechi_difficulty = tk.OptionMenu(bc_win, akechi_difficulty_choice, *difficulty_a) 
     akechi_difficulty.config(state='disabled')
     akechi_party_size = tk.OptionMenu(bc_win, akechi_party_size_choice, *party_size)
-    akechi_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=akechi_status, command=lambda:update_check_status('Akechi Mitsuhide', akechi_status, akechi_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    akechi_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=akechi_status, command=lambda:update_check_status('Akechi Mitsuhide', akechi_status, akechi_clear_status), 
+                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     akechi_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Hard Magnus
@@ -1396,7 +1404,8 @@ def bossing_checklist_popup():
     hmag_difficulty = tk.OptionMenu(bc_win, hmag_difficulty_choice, *difficulty_a) 
     hmag_difficulty.config(state='disabled')
     hmag_party_size = tk.OptionMenu(bc_win, hmag_party_size_choice, *party_size)
-    hmag_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hmag_status, command=lambda:update_check_status('Hard Magnus', hmag_status, hmag_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    hmag_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hmag_status, command=lambda:update_check_status('Hard Magnus', hmag_status, hmag_clear_status), 
+                                       bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     hmag_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Papulatus
@@ -1405,7 +1414,8 @@ def bossing_checklist_popup():
     cpap_difficulty = tk.OptionMenu(bc_win, cpap_difficulty_choice, *difficulty_a) 
     cpap_difficulty.config(state='disabled')
     cpap_party_size = tk.OptionMenu(bc_win, cpap_party_size_choice, *party_size)
-    cpap_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpap_status, command=lambda:update_check_status('Chaos Papulatus', cpap_status, cpap_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    cpap_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpap_status, command=lambda:update_check_status('Chaos Papulatus', cpap_status, cpap_clear_status), 
+                                       bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     cpap_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Lotus
@@ -1413,7 +1423,8 @@ def bossing_checklist_popup():
     lotus_img = tk.Label(bc_win, image=lotus_icon, bg='#DBEDF3')
     lotus_difficulty = tk.OptionMenu(bc_win, lotus_difficulty_choice, *difficulty_d)
     lotus_party_size = tk.OptionMenu(bc_win, lotus_party_size_choice, *party_size)
-    lotus_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lotus_status, command=lambda:update_check_status('Lotus', lotus_status, lotus_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    lotus_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lotus_status, command=lambda:update_check_status('Lotus', lotus_status, lotus_clear_status), 
+                                        bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     lotus_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Damien
@@ -1421,7 +1432,8 @@ def bossing_checklist_popup():
     damien_img = tk.Label(bc_win, image=damien_icon, bg='#DBEDF3')
     damien_difficulty = tk.OptionMenu(bc_win, damien_difficulty_choice, *difficulty_b)
     damien_party_size = tk.OptionMenu(bc_win, damien_party_size_choice, *party_size)
-    damien_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=damien_status, command=lambda:update_check_status('Damien', damien_status, damien_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    damien_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=damien_status, command=lambda:update_check_status('Damien', damien_status, damien_clear_status), 
+                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     damien_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Guardian Slime
@@ -1429,7 +1441,8 @@ def bossing_checklist_popup():
     gslime_img = tk.Label(bc_win, image=gslime_icon, bg='#DBEDF3')
     gslime_difficulty = tk.OptionMenu(bc_win, gslime_difficulty_choice, *difficulty_b)
     gslime_party_size = tk.OptionMenu(bc_win, gslime_party_size_choice, *party_size)
-    gslime_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gslime_status, command=lambda:update_check_status('Guardian Slime', gslime_status, gslime_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    gslime_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gslime_status, command=lambda:update_check_status('Guardian Slime', gslime_status, gslime_clear_status), 
+                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     gslime_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Lucid
@@ -1437,7 +1450,8 @@ def bossing_checklist_popup():
     lucid_img = tk.Label(bc_win, image=lucid_icon, bg='#DBEDF3')
     lucid_difficulty = tk.OptionMenu(bc_win, lucid_difficulty_choice, *difficulty_c)
     lucid_party_size = tk.OptionMenu(bc_win, lucid_party_size_choice, *party_size)
-    lucid_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lucid_status, command=lambda:update_check_status('Lucid', lucid_status, lucid_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    lucid_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lucid_status, command=lambda:update_check_status('Lucid', lucid_status, lucid_clear_status), 
+                                        bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     lucid_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Will
@@ -1445,7 +1459,8 @@ def bossing_checklist_popup():
     will_img = tk.Label(bc_win, image=will_icon, bg='#DBEDF3')
     will_difficulty = tk.OptionMenu(bc_win, will_difficulty_choice, *difficulty_c)
     will_party_size = tk.OptionMenu(bc_win, will_party_size_choice, *party_size)
-    will_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=will_status, command=lambda:update_check_status('Will', will_status, will_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    will_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=will_status, command=lambda:update_check_status('Will', will_status, will_clear_status), 
+                                       bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     will_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Gloom
@@ -1453,7 +1468,8 @@ def bossing_checklist_popup():
     gloom_img = tk.Label(bc_win, image=gloom_icon, bg='#DBEDF3')
     gloom_difficulty = tk.OptionMenu(bc_win, gloom_difficulty_choice, *difficulty_b)
     gloom_party_size = tk.OptionMenu(bc_win, gloom_party_size_choice, *party_size)
-    gloom_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gloom_status, command=lambda:update_check_status('Gloom', gloom_status, gloom_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    gloom_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gloom_status, command=lambda:update_check_status('Gloom', gloom_status, gloom_clear_status), 
+                                        bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     gloom_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Darknell
@@ -1461,7 +1477,8 @@ def bossing_checklist_popup():
     darknell_img = tk.Label(bc_win, image=darknell_icon, bg='#DBEDF3')
     darknell_difficulty = tk.OptionMenu(bc_win, darknell_difficulty_choice, *difficulty_b)
     darknell_party_size = tk.OptionMenu(bc_win, darknell_party_size_choice, *party_size)
-    darknell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=darknell_status, command=lambda:update_check_status('Darknell', darknell_status, darknell_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    darknell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=darknell_status, command=lambda:update_check_status('Darknell', darknell_status, darknell_clear_status), 
+                                           bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     darknell_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Versus Hilla
@@ -1469,7 +1486,8 @@ def bossing_checklist_popup():
     vhilla_img = tk.Label(bc_win, image=vhilla_icon, bg='#DBEDF3')
     vhilla_difficulty = tk.OptionMenu(bc_win, vhilla_difficulty_choice, *difficulty_b)
     vhilla_party_size = tk.OptionMenu(bc_win, vhilla_party_size_choice, *party_size)
-    vhilla_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=vhilla_status, command=lambda:update_check_status('Versus Hilla', vhilla_status, vhilla_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    vhilla_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=vhilla_status, command=lambda:update_check_status('Versus Hilla', vhilla_status, vhilla_clear_status), 
+                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     vhilla_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Seren
@@ -1477,7 +1495,8 @@ def bossing_checklist_popup():
     seren_img = tk.Label(bc_win, image=seren_icon, bg='#DBEDF3')
     seren_difficulty = tk.OptionMenu(bc_win, seren_difficulty_choice, *difficulty_d)
     seren_party_size = tk.OptionMenu(bc_win, seren_party_size_choice, *party_size)
-    seren_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=seren_status, command=lambda:update_check_status('Seren', seren_status, seren_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    seren_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=seren_status, command=lambda:update_check_status('Seren', seren_status, seren_clear_status), 
+                                        bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     seren_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Kaling
@@ -1485,7 +1504,8 @@ def bossing_checklist_popup():
     kaling_img = tk.Label(bc_win, image=kaling_icon, bg='#DBEDF3')
     kaling_difficulty = tk.OptionMenu(bc_win, kaling_difficulty_choice, *difficulty_e)
     kaling_party_size = tk.OptionMenu(bc_win, kaling_party_size_choice, *party_size)
-    kaling_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kaling_status, command=lambda:update_check_status('Kaling', kaling_status, kaling_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    kaling_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kaling_status, command=lambda:update_check_status('Kaling', kaling_status, kaling_clear_status), 
+                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     kaling_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Kalos
@@ -1493,7 +1513,8 @@ def bossing_checklist_popup():
     kalos_img = tk.Label(bc_win, image=kalos_icon, bg='#DBEDF3')
     kalos_difficulty = tk.OptionMenu(bc_win, kalos_difficulty_choice, *difficulty_e)
     kalos_party_size = tk.OptionMenu(bc_win, kalos_party_size_choice, *party_size)
-    kalos_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status, kalos_clear_status), bg='#dbedf3', activebackground='#dbedf3')
+    kalos_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status, kalos_clear_status), 
+                                        bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
     kalos_clear_status.config(indicatoron=False, borderwidth=0)
     # endregion
 

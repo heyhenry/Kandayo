@@ -8,7 +8,7 @@
                 "boss_name": "Chaos Pink Bean",
                 "boss_clear": false,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "party_size": 2
             },
             "Hard Hilla": {
                 "boss_name": "Hard Hilla",
@@ -18,7 +18,7 @@
             },
             "Cygnus": {
                 "boss_name": "Cygnus",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
@@ -30,13 +30,13 @@
             },
             "Princess No": {
                 "boss_name": "Princess No",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Chaos Queen": {
                 "boss_name": "Chaos Queen",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
@@ -48,43 +48,43 @@
             },
             "Chaos Von Bon": {
                 "boss_name": "Chaos Von Bon",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Chaos Vellum": {
                 "boss_name": "Chaos Vellum",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Akechi Mitsuhide": {
                 "boss_name": "Akechi Mitsuhide",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Hard Magnus": {
                 "boss_name": "Hard Magnus",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Chaos Papulatus": {
                 "boss_name": "Chaos Papulatus",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Lotus": {
                 "boss_name": "Lotus",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Damien": {
                 "boss_name": "Damien",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
@@ -102,13 +102,13 @@
             },
             "Will": {
                 "boss_name": "Will",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Gloom": {
                 "boss_name": "Gloom",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
