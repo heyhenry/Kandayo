@@ -50,3 +50,4 @@ The following are the resources I have read, referred and learnt from to better 
 - How to hide checkbutton tick display: https://stackoverflow.com/questions/62191810/how-to-hide-simple-checkbutton-from-screen-when-using-selectimage-in-tkinter
 - Folding sections in vscode: https://burkeholland.gitbook.io/vs-code-can-do-that/exercise-3-navigation-and-refactoring/folding-sections
 - Adding icon to tkinter top menu bar: https://stackoverflow.com/questions/33137829/how-to-replace-the-icon-in-a-tkinter-app
+- Creating personal tool tip feature: https://www.youtube.com/watch?v=o_YumT2iWBc

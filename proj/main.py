@@ -1913,21 +1913,27 @@ grey_frame.grid_propagate(False)
 
 # // yellow frame //
 # yellow widgets
+app_icon_name_img = Image.open('./img/app_icon_name_transparent.png')
+app_icon_name_img.thumbnail((200, 200))
+app_icon_name_img = ImageTk.PhotoImage(app_icon_name_img)
+
 utc_livetime_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
 ursus_time_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
 daily_reset_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
 weekly_reset_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149')
+app_icon_lbl = tk.Label(yellow_frame, font=('Kozuka Gothic Pro B', 12), bg='#dbedf3', fg='#283149', image=app_icon_name_img)
 
-utc_livetime_lbl.grid(row=0, column=0)
-ursus_time_lbl.grid(row=1, column=0)
-daily_reset_lbl.grid(row=0, column=1)
-weekly_reset_lbl.grid(row=1, column=1)
-
+utc_livetime_lbl.grid(row=0, column=0, sticky='w', padx=10)
+ursus_time_lbl.grid(row=1, column=0, sticky='w', padx=10)
+daily_reset_lbl.grid(row=0, column=1, sticky='w', padx=10)
+weekly_reset_lbl.grid(row=1, column=1, sticky='w', padx=10)
+app_icon_lbl.grid(row=0, rowspan=2, column=2)
 
 yellow_frame.grid_rowconfigure(0, weight=1)
 yellow_frame.grid_rowconfigure(1, weight=1)
 yellow_frame.grid_columnconfigure(0, weight=1)
 yellow_frame.grid_columnconfigure(1, weight=1)
+yellow_frame.grid_columnconfigure(2, weight=1)
 
 # // red frame // 
 # red widgets
@@ -2002,6 +2008,7 @@ orange_frame.grid_columnconfigure(1, weight=1)
 orange_frame.grid_columnconfigure(2, weight=1)
 orange_frame.grid_columnconfigure(3, weight=1)
 
+# tooltip info
 edit_hotlinks_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, status_bar_lbl, 'Edit Customised Hot Links'))
 edit_hotlinks_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
 
