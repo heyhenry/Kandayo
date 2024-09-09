@@ -1947,7 +1947,7 @@ icon_ico = ImageTk.PhotoImage(icon_ico)
 root.geometry('+600+150')
 root.title('Kandayo - Maplestory Weekly Bossing Assistant')
 root.resizable(False, False)
-root.iconphoto(False, icon_ico)
+root.iconphoto(True, icon_ico)
 
 # // Setting up Frames //
 yellow_frame = tk.Frame(root, width=800, height=120, bg='#dbedf3', highlightbackground='#161b28', highlightthickness=2)
