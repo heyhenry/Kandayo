@@ -529,7 +529,7 @@ def bossing_checklist_popup():
 
     # check status icons image rendering
     # complete status
-    complete_status_icon = Image.open('./img/complete_status.png')
+    complete_status_icon = Image.open('./img/just_work.png')
     max_width, max_height = 50,50
     complete_status_icon.thumbnail((max_width, max_height))
     complete_status_icon = ImageTk.PhotoImage(complete_status_icon)
@@ -939,9 +939,10 @@ def bossing_checklist_popup():
             else:
                 boss_status_ids[boss_name].config(image=incomplete_status_icon)
 
-    bc_win = tk.Toplevel(blue_frame)
+    bc_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
     bc_win.title("Bossing Checklist")
-    # bc_win.geometry()
+    bc_win.geometry('1400x1010+250+10')
+    bc_win.resizable(False, False)
 
     # difficulty variations
     # for: Cygnus
@@ -1301,206 +1302,206 @@ def bossing_checklist_popup():
 
     # region - boss widgets
     # Chaos Pink Bean
-    cpb_name = tk.Label(bc_win, text='Chaos Pink Bean', **font_preset)
-    cpb_img = tk.Label(bc_win, image=cpb_icon)
+    cpb_name = tk.Label(bc_win, text='Chaos Pink Bean', **font_preset, bg='#DBEDF3')
+    cpb_img = tk.Label(bc_win, image=cpb_icon, bg='#DBEDF3')
     cpb_difficulty = tk.OptionMenu(bc_win, cpb_difficulty_choice, *difficulty_a) 
     cpb_difficulty.config(state='disabled')
     cpb_party_size = tk.OptionMenu(bc_win, cpb_party_size_choice, *party_size)
-    cpb_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpb_status, command=lambda:update_check_status('Chaos Pink Bean', cpb_status, cpb_clear_status))
+    cpb_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpb_status, command=lambda:update_check_status('Chaos Pink Bean', cpb_status, cpb_clear_status), bg='#dbedf3')
     cpb_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Hard Hilla
-    hh_name = tk.Label(bc_win, text='Hard Hilla', **font_preset)
-    hh_img = tk.Label(bc_win, image=hh_icon)
+    hh_name = tk.Label(bc_win, text='Hard Hilla', **font_preset, bg='#DBEDF3')
+    hh_img = tk.Label(bc_win, image=hh_icon, bg='#DBEDF3')
     hh_difficulty = tk.OptionMenu(bc_win, hh_difficulty_choice, *difficulty_a) 
     hh_difficulty.config(state='disabled')
     hh_party_size = tk.OptionMenu(bc_win, hh_party_size_choice, *party_size)
-    hh_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hh_status, command=lambda:update_check_status('Hard Hilla', hh_status, hh_clear_status))
+    hh_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hh_status, command=lambda:update_check_status('Hard Hilla', hh_status, hh_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     hh_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Cygnus
-    cyg_name = tk.Label(bc_win, text='Cygnus', **font_preset)
-    cyg_img = tk.Label(bc_win, image=cyg_icon)
+    cyg_name = tk.Label(bc_win, text='Cygnus', **font_preset, bg='#DBEDF3')
+    cyg_img = tk.Label(bc_win, image=cyg_icon, bg='#DBEDF3')
     cyg_difficulty = tk.OptionMenu(bc_win, cyg_difficulty_choice, *difficulty_a)
     cyg_party_size = tk.OptionMenu(bc_win, cyg_party_size_choice, *party_size)
-    cyg_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cyg_status, command=lambda:update_check_status('Cygnus', cyg_status, cyg_clear_status))
+    cyg_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cyg_status, command=lambda:update_check_status('Cygnus', cyg_status, cyg_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     cyg_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Zakum
-    czak_name = tk.Label(bc_win, text='Chaos Zakum', **font_preset)
-    czak_img = tk.Label(bc_win, image=czak_icon)
+    czak_name = tk.Label(bc_win, text='Chaos Zakum', **font_preset, bg='#DBEDF3')
+    czak_img = tk.Label(bc_win, image=czak_icon, bg='#DBEDF3')
     czak_difficulty = tk.OptionMenu(bc_win, czak_difficulty_choice, *difficulty_a) 
     czak_difficulty.config(state='disabled')
     czak_party_size = tk.OptionMenu(bc_win, czak_party_size_choice, *party_size)
-    czak_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=czak_status, command=lambda:update_check_status('Chaos Zakum', czak_status, czak_clear_status))
+    czak_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=czak_status, command=lambda:update_check_status('Chaos Zakum', czak_status, czak_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     czak_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Princess No
-    pno_name = tk.Label(bc_win, text='Princess No', **font_preset)
-    pno_img = tk.Label(bc_win, image=pno_icon)
+    pno_name = tk.Label(bc_win, text='Princess No', **font_preset, bg='#DBEDF3')
+    pno_img = tk.Label(bc_win, image=pno_icon, bg='#DBEDF3')
     pno_difficulty = tk.OptionMenu(bc_win, pno_difficulty_choice, *difficulty_a) 
     pno_difficulty.config(state='disabled')
     pno_party_size = tk.OptionMenu(bc_win, pno_party_size_choice, *party_size)
-    pno_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=pno_status, command=lambda:update_check_status('Princess No', pno_status, pno_clear_status))
+    pno_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=pno_status, command=lambda:update_check_status('Princess No', pno_status, pno_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     pno_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Queen
-    cqueen_name = tk.Label(bc_win, text='Chaos Queen', **font_preset)
-    cqueen_img = tk.Label(bc_win, image=cqueen_icon)
+    cqueen_name = tk.Label(bc_win, text='Chaos Queen', **font_preset, bg='#DBEDF3')
+    cqueen_img = tk.Label(bc_win, image=cqueen_icon, bg='#DBEDF3')
     cqueen_difficulty = tk.OptionMenu(bc_win, cqueen_difficulty_choice, *difficulty_a) 
     cqueen_difficulty.config(state='disabled')
     cqueen_party_size = tk.OptionMenu(bc_win, cqueen_party_size_choice, *party_size)
-    cqueen_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cqueen_status, command=lambda:update_check_status('Chaos Queen', cqueen_status, cqueen_clear_status))
+    cqueen_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cqueen_status, command=lambda:update_check_status('Chaos Queen', cqueen_status, cqueen_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     cqueen_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Pierre
-    cpierre_name = tk.Label(bc_win, text='Chaos Pierre', **font_preset)
-    cpierre_img = tk.Label(bc_win, image=cpierre_icon)
+    cpierre_name = tk.Label(bc_win, text='Chaos Pierre', **font_preset, bg='#DBEDF3')
+    cpierre_img = tk.Label(bc_win, image=cpierre_icon, bg='#DBEDF3')
     cpierre_difficulty = tk.OptionMenu(bc_win, cpierre_difficulty_choice, *difficulty_a) 
     cpierre_difficulty.config(state='disabled')
     cpierre_party_size = tk.OptionMenu(bc_win, cpierre_party_size_choice, *party_size)
-    cpierre_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpierre_status, command=lambda:update_check_status('Chaos Pierre', cpierre_status, cpierre_clear_status))
+    cpierre_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpierre_status, command=lambda:update_check_status('Chaos Pierre', cpierre_status, cpierre_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     cpierre_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Von Bon
-    cvonbon_name = tk.Label(bc_win, text='Chaos Von Bon', **font_preset)
-    cvonbon_img = tk.Label(bc_win, image=cvonbon_icon)
+    cvonbon_name = tk.Label(bc_win, text='Chaos Von Bon', **font_preset, bg='#DBEDF3')
+    cvonbon_img = tk.Label(bc_win, image=cvonbon_icon, bg='#DBEDF3')
     cvonbon_difficulty = tk.OptionMenu(bc_win, cvonbon_difficulty_choice, *difficulty_a) 
     cvonbon_difficulty.config(state='disabled')
     cvonbon_party_size = tk.OptionMenu(bc_win, cvonbon_party_size_choice, *party_size)
-    cvonbon_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvonbon_status, command=lambda:update_check_status('Chaos Von Bon', cvonbon_status, cvonbon_clear_status))
+    cvonbon_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvonbon_status, command=lambda:update_check_status('Chaos Von Bon', cvonbon_status, cvonbon_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     cvonbon_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Vellum
-    cvell_name = tk.Label(bc_win, text='Chaos Vellum', **font_preset)
-    cvell_img = tk.Label(bc_win, image=cvell_icon)
+    cvell_name = tk.Label(bc_win, text='Chaos Vellum', **font_preset, bg='#DBEDF3')
+    cvell_img = tk.Label(bc_win, image=cvell_icon, bg='#DBEDF3')
     cvell_difficulty = tk.OptionMenu(bc_win, cvell_difficulty_choice, *difficulty_a) 
     cvell_difficulty.config(state='disabled')
     cvell_party_size = tk.OptionMenu(bc_win, cvell_party_size_choice, *party_size)
-    cvell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvell_status, command=lambda:update_check_status('Chaos Vellum', cvell_status, cvell_clear_status))
+    cvell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvell_status, command=lambda:update_check_status('Chaos Vellum', cvell_status, cvell_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     cvell_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Akechi Mitsuhide
-    akechi_name = tk.Label(bc_win, text='Akechi Mitsuhide', **font_preset)
-    akechi_img = tk.Label(bc_win, image=akechi_icon)
+    akechi_name = tk.Label(bc_win, text='Akechi Mitsuhide', **font_preset, bg='#DBEDF3')
+    akechi_img = tk.Label(bc_win, image=akechi_icon, bg='#DBEDF3')
     akechi_difficulty = tk.OptionMenu(bc_win, akechi_difficulty_choice, *difficulty_a) 
     akechi_difficulty.config(state='disabled')
     akechi_party_size = tk.OptionMenu(bc_win, akechi_party_size_choice, *party_size)
-    akechi_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=akechi_status, command=lambda:update_check_status('Akechi Mitsuhide', akechi_status, akechi_clear_status))
+    akechi_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=akechi_status, command=lambda:update_check_status('Akechi Mitsuhide', akechi_status, akechi_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     akechi_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Hard Magnus
-    hmag_name = tk.Label(bc_win, text='Hard Magnus', **font_preset)
-    hmag_img = tk.Label(bc_win, image=hmag_icon)
+    hmag_name = tk.Label(bc_win, text='Hard Magnus', **font_preset, bg='#DBEDF3')
+    hmag_img = tk.Label(bc_win, image=hmag_icon, bg='#DBEDF3')
     hmag_difficulty = tk.OptionMenu(bc_win, hmag_difficulty_choice, *difficulty_a) 
     hmag_difficulty.config(state='disabled')
     hmag_party_size = tk.OptionMenu(bc_win, hmag_party_size_choice, *party_size)
-    hmag_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hmag_status, command=lambda:update_check_status('Hard Magnus', hmag_status, hmag_clear_status))
+    hmag_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hmag_status, command=lambda:update_check_status('Hard Magnus', hmag_status, hmag_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     hmag_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Chaos Papulatus
-    cpap_name = tk.Label(bc_win, text='Chaos Papulatus', **font_preset)
-    cpap_img = tk.Label(bc_win, image=cpap_icon)
+    cpap_name = tk.Label(bc_win, text='Chaos Papulatus', **font_preset, bg='#DBEDF3')
+    cpap_img = tk.Label(bc_win, image=cpap_icon, bg='#DBEDF3')
     cpap_difficulty = tk.OptionMenu(bc_win, cpap_difficulty_choice, *difficulty_a) 
     cpap_difficulty.config(state='disabled')
     cpap_party_size = tk.OptionMenu(bc_win, cpap_party_size_choice, *party_size)
-    cpap_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpap_status, command=lambda:update_check_status('Chaos Papulatus', cpap_status, cpap_clear_status))
+    cpap_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpap_status, command=lambda:update_check_status('Chaos Papulatus', cpap_status, cpap_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     cpap_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Lotus
-    lotus_name = tk.Label(bc_win, text='Lotus', **font_preset)
-    lotus_img = tk.Label(bc_win, image=lotus_icon)
+    lotus_name = tk.Label(bc_win, text='Lotus', **font_preset, bg='#DBEDF3')
+    lotus_img = tk.Label(bc_win, image=lotus_icon, bg='#DBEDF3')
     lotus_difficulty = tk.OptionMenu(bc_win, lotus_difficulty_choice, *difficulty_d)
     lotus_party_size = tk.OptionMenu(bc_win, lotus_party_size_choice, *party_size)
-    lotus_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lotus_status, command=lambda:update_check_status('Lotus', lotus_status, lotus_clear_status))
+    lotus_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lotus_status, command=lambda:update_check_status('Lotus', lotus_status, lotus_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     lotus_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Damien
-    damien_name = tk.Label(bc_win, text='Damien', **font_preset)
-    damien_img = tk.Label(bc_win, image=damien_icon)
+    damien_name = tk.Label(bc_win, text='Damien', **font_preset, bg='#DBEDF3')
+    damien_img = tk.Label(bc_win, image=damien_icon, bg='#DBEDF3')
     damien_difficulty = tk.OptionMenu(bc_win, damien_difficulty_choice, *difficulty_b)
     damien_party_size = tk.OptionMenu(bc_win, damien_party_size_choice, *party_size)
-    damien_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=damien_status, command=lambda:update_check_status('Damien', damien_status, damien_clear_status))
+    damien_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=damien_status, command=lambda:update_check_status('Damien', damien_status, damien_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     damien_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Guardian Slime
-    gslime_name = tk.Label(bc_win, text='Guardian Slime', **font_preset)
-    gslime_img = tk.Label(bc_win, image=gslime_icon)
+    gslime_name = tk.Label(bc_win, text='Guardian Slime', **font_preset, bg='#DBEDF3')
+    gslime_img = tk.Label(bc_win, image=gslime_icon, bg='#DBEDF3')
     gslime_difficulty = tk.OptionMenu(bc_win, gslime_difficulty_choice, *difficulty_b)
     gslime_party_size = tk.OptionMenu(bc_win, gslime_party_size_choice, *party_size)
-    gslime_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gslime_status, command=lambda:update_check_status('Guardian Slime', gslime_status, gslime_clear_status))
+    gslime_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gslime_status, command=lambda:update_check_status('Guardian Slime', gslime_status, gslime_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     gslime_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Lucid
-    lucid_name = tk.Label(bc_win, text='Lucid', **font_preset)
-    lucid_img = tk.Label(bc_win, image=lucid_icon)
+    lucid_name = tk.Label(bc_win, text='Lucid', **font_preset, bg='#DBEDF3')
+    lucid_img = tk.Label(bc_win, image=lucid_icon, bg='#DBEDF3')
     lucid_difficulty = tk.OptionMenu(bc_win, lucid_difficulty_choice, *difficulty_c)
     lucid_party_size = tk.OptionMenu(bc_win, lucid_party_size_choice, *party_size)
-    lucid_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lucid_status, command=lambda:update_check_status('Lucid', lucid_status, lucid_clear_status))
+    lucid_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lucid_status, command=lambda:update_check_status('Lucid', lucid_status, lucid_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     lucid_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Will
-    will_name = tk.Label(bc_win, text='Will', **font_preset)
-    will_img = tk.Label(bc_win, image=will_icon)
+    will_name = tk.Label(bc_win, text='Will', **font_preset, bg='#DBEDF3')
+    will_img = tk.Label(bc_win, image=will_icon, bg='#DBEDF3')
     will_difficulty = tk.OptionMenu(bc_win, will_difficulty_choice, *difficulty_c)
     will_party_size = tk.OptionMenu(bc_win, will_party_size_choice, *party_size)
-    will_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=will_status, command=lambda:update_check_status('Will', will_status, will_clear_status))
+    will_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=will_status, command=lambda:update_check_status('Will', will_status, will_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     will_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Gloom
-    gloom_name = tk.Label(bc_win, text='Gloom', **font_preset)
-    gloom_img = tk.Label(bc_win, image=gloom_icon)
+    gloom_name = tk.Label(bc_win, text='Gloom', **font_preset, bg='#DBEDF3')
+    gloom_img = tk.Label(bc_win, image=gloom_icon, bg='#DBEDF3')
     gloom_difficulty = tk.OptionMenu(bc_win, gloom_difficulty_choice, *difficulty_b)
     gloom_party_size = tk.OptionMenu(bc_win, gloom_party_size_choice, *party_size)
-    gloom_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gloom_status, command=lambda:update_check_status('Gloom', gloom_status, gloom_clear_status))
+    gloom_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gloom_status, command=lambda:update_check_status('Gloom', gloom_status, gloom_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     gloom_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Darknell
-    darknell_name = tk.Label(bc_win, text='Darknell', **font_preset)
-    darknell_img = tk.Label(bc_win, image=darknell_icon)
+    darknell_name = tk.Label(bc_win, text='Darknell', **font_preset, bg='#DBEDF3')
+    darknell_img = tk.Label(bc_win, image=darknell_icon, bg='#DBEDF3')
     darknell_difficulty = tk.OptionMenu(bc_win, darknell_difficulty_choice, *difficulty_b)
     darknell_party_size = tk.OptionMenu(bc_win, darknell_party_size_choice, *party_size)
-    darknell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=darknell_status, command=lambda:update_check_status('Darknell', darknell_status, darknell_clear_status))
+    darknell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=darknell_status, command=lambda:update_check_status('Darknell', darknell_status, darknell_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     darknell_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Versus Hilla
-    vhilla_name = tk.Label(bc_win, text='Versus Hilla', **font_preset)
-    vhilla_img = tk.Label(bc_win, image=vhilla_icon)
+    vhilla_name = tk.Label(bc_win, text='Versus Hilla', **font_preset, bg='#DBEDF3')
+    vhilla_img = tk.Label(bc_win, image=vhilla_icon, bg='#DBEDF3')
     vhilla_difficulty = tk.OptionMenu(bc_win, vhilla_difficulty_choice, *difficulty_b)
     vhilla_party_size = tk.OptionMenu(bc_win, vhilla_party_size_choice, *party_size)
-    vhilla_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=vhilla_status, command=lambda:update_check_status('Versus Hilla', vhilla_status, vhilla_clear_status))
+    vhilla_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=vhilla_status, command=lambda:update_check_status('Versus Hilla', vhilla_status, vhilla_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     vhilla_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Seren
-    seren_name = tk.Label(bc_win, text='Seren', **font_preset)
-    seren_img = tk.Label(bc_win, image=seren_icon)
+    seren_name = tk.Label(bc_win, text='Seren', **font_preset, bg='#DBEDF3')
+    seren_img = tk.Label(bc_win, image=seren_icon, bg='#DBEDF3')
     seren_difficulty = tk.OptionMenu(bc_win, seren_difficulty_choice, *difficulty_d)
     seren_party_size = tk.OptionMenu(bc_win, seren_party_size_choice, *party_size)
-    seren_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=seren_status, command=lambda:update_check_status('Seren', seren_status, seren_clear_status))
+    seren_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=seren_status, command=lambda:update_check_status('Seren', seren_status, seren_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     seren_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Kaling
-    kaling_name = tk.Label(bc_win, text='Kaling', **font_preset)
-    kaling_img = tk.Label(bc_win, image=kaling_icon)
+    kaling_name = tk.Label(bc_win, text='Kaling', **font_preset, bg='#DBEDF3')
+    kaling_img = tk.Label(bc_win, image=kaling_icon, bg='#DBEDF3')
     kaling_difficulty = tk.OptionMenu(bc_win, kaling_difficulty_choice, *difficulty_e)
     kaling_party_size = tk.OptionMenu(bc_win, kaling_party_size_choice, *party_size)
-    kaling_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kaling_status, command=lambda:update_check_status('Kaling', kaling_status, kaling_clear_status))
+    kaling_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kaling_status, command=lambda:update_check_status('Kaling', kaling_status, kaling_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     kaling_clear_status.config(indicatoron=False, borderwidth=0)
 
     # Kalos
-    kalos_name = tk.Label(bc_win, text='Kalos', **font_preset)
-    kalos_img = tk.Label(bc_win, image=kalos_icon)
+    kalos_name = tk.Label(bc_win, text='Kalos', **font_preset, bg='#DBEDF3')
+    kalos_img = tk.Label(bc_win, image=kalos_icon, bg='#DBEDF3')
     kalos_difficulty = tk.OptionMenu(bc_win, kalos_difficulty_choice, *difficulty_e)
     kalos_party_size = tk.OptionMenu(bc_win, kalos_party_size_choice, *party_size)
-    kalos_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status, kalos_clear_status))
+    kalos_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status, kalos_clear_status), bg='#dbedf3', activebackground='#dbedf3')
     kalos_clear_status.config(indicatoron=False, borderwidth=0)
     # endregion
 
     # button widgets 
-    reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, command=reset_clears_only)
-    reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset, command=reset_all)
-    update_btn = tk.Button(bc_win, text='Update', **font_preset, command=update_difficulty_party_size)
-    cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, command=bc_win.destroy)
+    reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, width=15, command=reset_clears_only, bg='#B5DAE6', activebackground='#DBEDF3')
+    reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset, width=15, command=reset_all, bg='#B5DAE6', activebackground='#DBEDF3')
+    update_btn = tk.Button(bc_win, text='Update', **font_preset, width=15, command=update_difficulty_party_size, bg='#B5DAE6', activebackground='#DBEDF3')
+    cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, width=15, command=bc_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
 
     # load the saved checkbutton status with relevant status icons upon popup's opening
     load_clear_statuses()
