@@ -2066,6 +2066,11 @@ def reset_boss_stats():
 # // orange functions // 
 # open weblink
 def open_hotlink(hotlink):
+    if hotlink == '':
+        messagebox.showerror('No Link Found',
+                             'No link was saved this hotlink.')
+        return
+
     webbrowser.open(hotlink)
 
 # editing hotlinks
@@ -2315,7 +2320,7 @@ edit_cog_img = ImageTk.PhotoImage(edit_cog_img)
 hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_one), bg='#b5dae6', fg='#283149')
 hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_two), bg='#b5dae6', fg='#283149')
 hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3', font=('Kozuka Gothic Pro B', 12), command=lambda:open_hotlink(user['usr'].hotlink_three), bg='#b5dae6', fg='#283149')
-edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12),borderwidth=0, image=edit_cog_img, command=edit_hotlinks, bg='#dbedf3', activebackground='#dbedf3')
+edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), borderwidth=0, image=edit_cog_img, command=edit_hotlinks, bg='#dbedf3', activebackground='#dbedf3')
 
 hotlink_one_btn.grid(row=0, column=0)
 hotlink_two_btn.grid(row=0, column=1)
