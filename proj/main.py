@@ -25,8 +25,8 @@ characters = {}
 current_popup = None
 
 # save file var
-storage_filename = 'characters_save.json'
-usr_filename = 'usr_save.json'
+storage_filename = './savefiles/characters_save.json'
+usr_filename = './savefiles/usr_save.json'
 
 # load user
 user = {}
@@ -355,24 +355,24 @@ def add_character_popup():
     def validate_character_entry(check_ign):
         # if character already exists in 'characters' dictionary, give error message and close window
         if check_ign in characters.keys():
-            ac_win.destroy()
             messagebox.showerror('Invalid IGN (Player Name)',
                                  'The IGN (Character Name) has already been registered.')
+            ac_win.lift()
         # if use has not filled all input fields
         elif ac_ign.get() == '' or ac_maple_job_choice.get() == '' or ac_level.get() == '':
-            ac_win.destroy()
             messagebox.showerror('Missing Information',
                                  'All input fields are not filled.')
+            ac_win.lift()
         # ensure user doesn't attemp to leave field as default
         elif ac_maple_job_choice.get() == 'Select a Job/Class':
-            ac_win.destroy()
             messagebox.showerror('Invalid Choice',
                                  'You must choose a Job/Class.')
+            ac_win.lift()
         # ensure user enters a valid number between 1 and 300
         elif not ac_level.get().isdigit() or int(ac_level.get()) > 300 or int(ac_level.get()) < 1:
-            ac_win.destroy()
             messagebox.showerror('Invalid Level',
                                  'You must enter a valid level.') 
+            ac_win.lift()
         else:
             # otherwise, update 'characters' dictionary with new entry and close pop-up
             create_character(ac_ign.get(), ac_maple_job_choice.get(), ac_level.get())
@@ -510,25 +510,25 @@ def update_character_popup():
 
         # checking if the newly proposed ign update is already registered for another character in the established list
         if uc_ign.get() in temp.keys():
-            uc_win.destroy()
             # error message prompt if that is the case
             messagebox.showerror('IGN Error',
                                  'The new IGN already exists for another character in the registered list.')
+            uc_win.lift()
         # if use has not filled all input fields
         elif uc_ign.get() == '' or uc_maple_job_choice.get() == '' or uc_level.get() == '':
-            uc_win.destroy()
             messagebox.showerror('Missing Information',
                                  'All input fields are not filled.')
+            uc_win.lift()
         # ensure user doesn't attemp to leave field as default
         elif uc_maple_job_choice.get() == 'Select a Job/Class':
-            uc_win.destroy()
             messagebox.showerror('Invalid Choice',
                                  'You must choose a Job/Class.')
+            uc_win.lift()
         # ensure user enters a valid number between 1 and 300
         elif not uc_level.get().isdigit() or int(uc_level.get()) > 300 or int(uc_level.get()) < 1:
-            uc_win.destroy()
             messagebox.showerror('Invalid Level',
                                  'You must enter a valid level.') 
+            uc_win.lift()
         else:
             # deletes the old character entry in characters dictionary
             del characters[selected_ign]
