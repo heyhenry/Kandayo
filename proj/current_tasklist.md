@@ -1,5 +1,5 @@
 ## Tasklist:
 
-1. Prevent the ability to spam buttons to open multiple popup duplicates or just another popup when 1 is already active
-1.1 ^ Refer to tested code 'toplevel_prevention_testing' and implement 
+1. (?) - Potentially, flip the mechanics around for lifting the existing popup post error message
+1.1 Achieve this by pushing the root window behind the existing popup. 
  
