@@ -369,7 +369,7 @@ def add_character_popup():
             messagebox.showerror('Invalid Choice',
                                  'You must choose a Job/Class.')
         # ensure user enters a valid number between 1 and 300
-        elif int(ac_level.get()) > 300 or int(ac_level.get()) < 1:
+        elif not ac_level.get().isdigit() or int(ac_level.get()) > 300 or int(ac_level.get()) < 1:
             ac_win.destroy()
             messagebox.showerror('Invalid Level',
                                  'You must enter a valid level.') 
