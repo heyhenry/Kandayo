@@ -2066,6 +2066,7 @@ def reset_boss_stats():
 # // orange functions // 
 # open weblink
 def open_hotlink(hotlink):
+    # check for empty hotlinks
     if hotlink == '':
         messagebox.showerror('No Link Found',
                              'No link was saved this hotlink.')
