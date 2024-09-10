@@ -21,12 +21,21 @@ import ctypes
 # list of character (CharInfo) objects
 characters = {}
 
+# checker to ensure only one toplevel widget (popup) is open at a time
+current_popup = None
+
 # save file var
 storage_filename = 'characters_save.json'
 usr_filename = 'usr_save.json'
 
 # load user
 user = {}
+
+# checks to see if a popup is currntly open
+def is_popup_open():
+    if current_popup is not None and current_popup.winfo_exists():
+        return current_popup
+    return None
 
 # load the user data
 def load_user():
@@ -336,6 +345,8 @@ def load_characters():
 # add a new character pop-up winow
 def add_character_popup():
 
+    global ac_win
+    global current_popup
     ac_ign = tk.StringVar()
     ac_maple_job_choice = tk.StringVar()
     ac_level = tk.StringVar()
@@ -367,97 +378,106 @@ def add_character_popup():
             create_character(ac_ign.get(), ac_maple_job_choice.get(), ac_level.get())
             ac_win.destroy()
 
-    # ac short for add_character
-    ac_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
-    ac_win.title('Add New Character')
-    ac_win.geometry('400x250+850+300')
-    ac_win.resizable(False, False)
+    # check to see if a popup is currently opened
+    if is_popup_open():
+        messagebox.showerror('Active Popup Detected.',
+                             'There is already a Popup opened.')
+        ac_win.lift()
+    else:
+        # ac short for add_character
+        ac_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
+        current_popup = ac_win
+        ac_win.title('Add New Character')
+        ac_win.geometry('400x250+850+300')
+        ac_win.resizable(False, False)
 
-    ac_title_lbl = tk.Label(ac_win, text='Add New Character', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ac_ign_entry = tk.Entry(ac_win, textvariable=ac_ign, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-    ac_job_lbl = tk.Label(ac_win, text='Job (Class):', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ac_job_dropdown = ttk.Combobox(ac_win, width=24, textvariable=ac_maple_job_choice)
-    ac_job_dropdown['values'] = ( 
-        'Select a Job/Class',
-        'Night Lord',
-        'Shadower',
-        'Marksman',
-        'Bowmaster',
-        'Buccaneer',
-        'Corsair',
-        'Fire/Poison Archmage',
-        'Ice/Lightning Archmage',
-        'Bishop',
-        'Dark Knight',
-        'Paladin',
-        'Hero'
-        'Angelic Buster',
-        'Lynn',
-        'Khali',
-        'Dawn Warrior',
-        'Night Walker',
-        'Blaze Wizard',
-        'Thunder Breaker',
-        'Wind Acher',
-        'Mihile',
-        'Dual Blade',
-        'Cannoneer',
-        'Lara',
-        'Kain',
-        'Adele',
-        'Hoyoung',
-        'Pathfinder',
-        'Ark',
-        'Illium',
-        'Cadena',
-        'Aran',
-        'Evan',
-        'Mercedes',
-        'Phantom',
-        'Luminous',
-        'Shade',
-        'Mechanic',
-        'Wild Hunter',
-        'Battle Mage',
-        'Blaster',
-        'Demon Slayer',
-        'Demon Avenger',
-        'Xenon',
-        'Kaiser',
-        'Kinesis',
-        'Zero',
-        'Hayato',
-        'Kanna'
-    )
-    ac_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10))
-    ac_job_dropdown.current(0)
-    ac_level_lbl = tk.Label(ac_win, text='Level:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ac_level_entry = tk.Entry(ac_win, textvariable=ac_level, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-    ac_submit_btn = tk.Button(ac_win, text='Add to Roster', font=('Kozuka Gothic Pro B', 10), width=15, command=lambda:validate_character_entry(ac_ign.get()), bg='#B5DAE6', activebackground='#DBEDF3')
-    ac_cancel_btn = tk.Button(ac_win, text='Cancel', font=('Kozuka Gothic Pro B', 10), width=15, command=ac_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
+        ac_title_lbl = tk.Label(ac_win, text='Add New Character', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        ac_ign_entry = tk.Entry(ac_win, textvariable=ac_ign, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+        ac_job_lbl = tk.Label(ac_win, text='Job (Class):', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        ac_job_dropdown = ttk.Combobox(ac_win, width=24, textvariable=ac_maple_job_choice)
+        ac_job_dropdown['values'] = ( 
+            'Select a Job/Class',
+            'Night Lord',
+            'Shadower',
+            'Marksman',
+            'Bowmaster',
+            'Buccaneer',
+            'Corsair',
+            'Fire/Poison Archmage',
+            'Ice/Lightning Archmage',
+            'Bishop',
+            'Dark Knight',
+            'Paladin',
+            'Hero'
+            'Angelic Buster',
+            'Lynn',
+            'Khali',
+            'Dawn Warrior',
+            'Night Walker',
+            'Blaze Wizard',
+            'Thunder Breaker',
+            'Wind Acher',
+            'Mihile',
+            'Dual Blade',
+            'Cannoneer',
+            'Lara',
+            'Kain',
+            'Adele',
+            'Hoyoung',
+            'Pathfinder',
+            'Ark',
+            'Illium',
+            'Cadena',
+            'Aran',
+            'Evan',
+            'Mercedes',
+            'Phantom',
+            'Luminous',
+            'Shade',
+            'Mechanic',
+            'Wild Hunter',
+            'Battle Mage',
+            'Blaster',
+            'Demon Slayer',
+            'Demon Avenger',
+            'Xenon',
+            'Kaiser',
+            'Kinesis',
+            'Zero',
+            'Hayato',
+            'Kanna'
+        )
+        ac_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10))
+        ac_job_dropdown.current(0)
+        ac_level_lbl = tk.Label(ac_win, text='Level:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        ac_level_entry = tk.Entry(ac_win, textvariable=ac_level, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+        ac_submit_btn = tk.Button(ac_win, text='Add to Roster', font=('Kozuka Gothic Pro B', 10), width=15, command=lambda:validate_character_entry(ac_ign.get()), bg='#B5DAE6', activebackground='#DBEDF3')
+        ac_cancel_btn = tk.Button(ac_win, text='Cancel', font=('Kozuka Gothic Pro B', 10), width=15, command=ac_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
 
-    ac_title_lbl.grid(row=0, columnspan=2)
-    ac_ign_lbl.grid(row=1, column=0, sticky='w', padx=(20, 0))
-    ac_ign_entry.grid(row=1, column=1)
-    ac_job_lbl.grid(row=2, column=0, sticky='w', padx=(20, 0))
-    ac_job_dropdown.grid(row=2, column=1)
-    ac_level_lbl.grid(row=3, column=0, sticky='w', padx=(20, 0))
-    ac_level_entry.grid(row=3, column=1)
-    ac_submit_btn.grid(row=4, column=0, pady=(0, 10))
-    ac_cancel_btn.grid(row=4, column=1, pady=(0, 10))
+        ac_title_lbl.grid(row=0, columnspan=2)
+        ac_ign_lbl.grid(row=1, column=0, sticky='w', padx=(20, 0))
+        ac_ign_entry.grid(row=1, column=1)
+        ac_job_lbl.grid(row=2, column=0, sticky='w', padx=(20, 0))
+        ac_job_dropdown.grid(row=2, column=1)
+        ac_level_lbl.grid(row=3, column=0, sticky='w', padx=(20, 0))
+        ac_level_entry.grid(row=3, column=1)
+        ac_submit_btn.grid(row=4, column=0, pady=(0, 10))
+        ac_cancel_btn.grid(row=4, column=1, pady=(0, 10))
 
-    ac_win.rowconfigure(0, weight=1)
-    ac_win.rowconfigure(1, weight=1)
-    ac_win.rowconfigure(2, weight=1)
-    ac_win.rowconfigure(3, weight=1)
-    ac_win.rowconfigure(4, weight=1)
-    ac_win.columnconfigure(0, weight=1)
-    ac_win.columnconfigure(1, weight=1)
+        ac_win.rowconfigure(0, weight=1)
+        ac_win.rowconfigure(1, weight=1)
+        ac_win.rowconfigure(2, weight=1)
+        ac_win.rowconfigure(3, weight=1)
+        ac_win.rowconfigure(4, weight=1)
+        ac_win.columnconfigure(0, weight=1)
+        ac_win.columnconfigure(1, weight=1)
 
 # update an existing character's details pop-up window
 def update_character_popup():
 
+    global uc_win
+    global current_popup
     uc_ign = tk.StringVar()
     uc_maple_job_choice = tk.StringVar()
     uc_level = tk.StringVar()
@@ -523,91 +543,98 @@ def update_character_popup():
     uc_ign.set(characters[selected_ign].ign)
     uc_level.set(characters[selected_ign].level)
 
-    uc_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
-    uc_win.title('Update Character')
-    uc_win.geometry('400x250+850+300')
-    uc_win.resizable(False, False)
+    # check to see if a popup is currently opened
+    if is_popup_open():
+        messagebox.showerror('Active Popup Detected.',
+                             'There is already a Popup opened.')
+        uc_win.lift()
+    else:
+        uc_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
+        uc_win.title('Update Character')
+        uc_win.geometry('400x250+850+300')
+        uc_win.resizable(False, False)
+        current_popup = uc_win
 
-    uc_title_lbl = tk.Label(uc_win, text='Update Character', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    uc_ign_lbl = tk.Label(uc_win, text='In-Game Name:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    uc_ign_entry = tk.Entry(uc_win, textvariable=uc_ign, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-    uc_job_lbl = tk.Label(uc_win, text='Job (Class):', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    uc_job_dropdown = ttk.Combobox(uc_win, width=24, textvariable=uc_maple_job_choice)
-    uc_job_dropdown['values'] = ( 
-        'Night Lord',
-        'Shadower',
-        'Marksman',
-        'Bowmaster',
-        'Buccaneer',
-        'Corsair',
-        'Fire/Poison Archmage',
-        'Ice/Lightning Archmage',
-        'Bishop',
-        'Dark Knight',
-        'Paladin',
-        'Hero'
-        'Angelic Buster',
-        'Lynn',
-        'Khali',
-        'Dawn Warrior',
-        'Night Walker',
-        'Blaze Wizard',
-        'Thunder Breaker',
-        'Wind Acher',
-        'Mihile',
-        'Dual Blade',
-        'Cannoneer',
-        'Lara',
-        'Kain',
-        'Adele',
-        'Hoyoung',
-        'Pathfinder',
-        'Ark',
-        'Illium',
-        'Cadena',
-        'Aran',
-        'Evan',
-        'Mercedes',
-        'Phantom',
-        'Luminous',
-        'Shade',
-        'Mechanic',
-        'Wild Hunter',
-        'Battle Mage',
-        'Blaster',
-        'Demon Slayer',
-        'Demon Avenger',
-        'Xenon',
-        'Kaiser',
-        'Kinesis',
-        'Zero',
-        'Hayato',
-        'Kanna'
-    )
-    uc_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10))
-    uc_job_dropdown.set(characters[selected_ign].job)
-    uc_level_lbl = tk.Label(uc_win, text='Level:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    uc_level_entry = tk.Entry(uc_win, textvariable=uc_level, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-    uc_submit_btn = tk.Button(uc_win, text='Update Roster', font=('Kozuka Gothic Pro B', 12), width=15, command=validate_updated_entry, bg='#B5DAE6', activebackground='#DBEDF3')
-    uc_cancel_btn = tk.Button(uc_win, text='Cancel', font=('Kozuka Gothic Pro B', 12), width=15, command=uc_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
+        uc_title_lbl = tk.Label(uc_win, text='Update Character', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        uc_ign_lbl = tk.Label(uc_win, text='In-Game Name:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        uc_ign_entry = tk.Entry(uc_win, textvariable=uc_ign, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+        uc_job_lbl = tk.Label(uc_win, text='Job (Class):', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        uc_job_dropdown = ttk.Combobox(uc_win, width=24, textvariable=uc_maple_job_choice)
+        uc_job_dropdown['values'] = ( 
+            'Night Lord',
+            'Shadower',
+            'Marksman',
+            'Bowmaster',
+            'Buccaneer',
+            'Corsair',
+            'Fire/Poison Archmage',
+            'Ice/Lightning Archmage',
+            'Bishop',
+            'Dark Knight',
+            'Paladin',
+            'Hero'
+            'Angelic Buster',
+            'Lynn',
+            'Khali',
+            'Dawn Warrior',
+            'Night Walker',
+            'Blaze Wizard',
+            'Thunder Breaker',
+            'Wind Acher',
+            'Mihile',
+            'Dual Blade',
+            'Cannoneer',
+            'Lara',
+            'Kain',
+            'Adele',
+            'Hoyoung',
+            'Pathfinder',
+            'Ark',
+            'Illium',
+            'Cadena',
+            'Aran',
+            'Evan',
+            'Mercedes',
+            'Phantom',
+            'Luminous',
+            'Shade',
+            'Mechanic',
+            'Wild Hunter',
+            'Battle Mage',
+            'Blaster',
+            'Demon Slayer',
+            'Demon Avenger',
+            'Xenon',
+            'Kaiser',
+            'Kinesis',
+            'Zero',
+            'Hayato',
+            'Kanna'
+        )
+        uc_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10))
+        uc_job_dropdown.set(characters[selected_ign].job)
+        uc_level_lbl = tk.Label(uc_win, text='Level:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        uc_level_entry = tk.Entry(uc_win, textvariable=uc_level, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+        uc_submit_btn = tk.Button(uc_win, text='Update Roster', font=('Kozuka Gothic Pro B', 12), width=15, command=validate_updated_entry, bg='#B5DAE6', activebackground='#DBEDF3')
+        uc_cancel_btn = tk.Button(uc_win, text='Cancel', font=('Kozuka Gothic Pro B', 12), width=15, command=uc_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
 
-    uc_title_lbl.grid(row=0, columnspan=2)
-    uc_ign_lbl.grid(row=1, column=0, sticky='w', padx=(20, 0))
-    uc_ign_entry.grid(row=1, column=1)
-    uc_job_lbl.grid(row=2, column=0, sticky='w', padx=(20, 0))
-    uc_job_dropdown.grid(row=2, column=1)
-    uc_level_lbl.grid(row=3, column=0, sticky='w', padx=(20, 0))
-    uc_level_entry.grid(row=3, column=1)
-    uc_submit_btn.grid(row=4, column=0, pady=(0, 10))
-    uc_cancel_btn.grid(row=4, column=1, pady=(0, 10))
+        uc_title_lbl.grid(row=0, columnspan=2)
+        uc_ign_lbl.grid(row=1, column=0, sticky='w', padx=(20, 0))
+        uc_ign_entry.grid(row=1, column=1)
+        uc_job_lbl.grid(row=2, column=0, sticky='w', padx=(20, 0))
+        uc_job_dropdown.grid(row=2, column=1)
+        uc_level_lbl.grid(row=3, column=0, sticky='w', padx=(20, 0))
+        uc_level_entry.grid(row=3, column=1)
+        uc_submit_btn.grid(row=4, column=0, pady=(0, 10))
+        uc_cancel_btn.grid(row=4, column=1, pady=(0, 10))
 
-    uc_win.grid_rowconfigure(0, weight=1)
-    uc_win.grid_rowconfigure(1, weight=1)
-    uc_win.grid_rowconfigure(2, weight=1)
-    uc_win.grid_rowconfigure(3, weight=1)
-    uc_win.grid_rowconfigure(4, weight=1)
-    uc_win.grid_columnconfigure(0, weight=1)
-    uc_win.grid_columnconfigure(1, weight=1)
+        uc_win.grid_rowconfigure(0, weight=1)
+        uc_win.grid_rowconfigure(1, weight=1)
+        uc_win.grid_rowconfigure(2, weight=1)
+        uc_win.grid_rowconfigure(3, weight=1)
+        uc_win.grid_rowconfigure(4, weight=1)
+        uc_win.grid_columnconfigure(0, weight=1)
+        uc_win.grid_columnconfigure(1, weight=1)
 
 # delete an existing character
 def delete_character():
@@ -644,6 +671,9 @@ def delete_character():
 
 # bossing checklist
 def bossing_checklist_popup():
+
+    global current_popup
+    global bc_win
 
     font_preset = {'font':('Kozuka Gothic Pro B', 12)}
     selected_ign = ''
@@ -1071,809 +1101,819 @@ def bossing_checklist_popup():
             else:
                 boss_status_ids[boss_name].config(image=incomplete_status_icon)
 
-    bc_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
-    bc_win.title("Bossing Checklist")
-    bc_win.geometry('1400x1010+250+10')
-    bc_win.resizable(False, False)
-
-    # difficulty variations
-    # for: Cygnus
-    difficulty_a = [
-        'Easy',
-        'Normal'
-    ]
-    
-    # for: Damien, Guardian Slime, Gloom, Verus Hilla, Darknell
-    difficulty_b = [
-        'Normal',
-        'Hard/Chaos'
-    ]
-
-    # for: Lucid, Will
-    difficulty_c = [
-        'Easy',
-        'Normal',
-        'Hard/Chaos'
-    ]
-
-    # for: Seren, Lotus
-    difficulty_d = [
-        'Normal',
-        'Hard/Chaos',
-        'Extreme'
-    ]
-
-    # for: Kaling, Kalos
-    difficulty_e = [
-        'Easy',
-        'Normal',
-        'Hard/Chaos',
-        'Extreme'
-    ]
-
-    party_size = [
-        'Select Party Size',
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
-    ]
-
-    # region - boss variables
-    # Chaos Pink Bean Vars
-    cpb_difficulty_choice = tk.StringVar()
-    cpb_party_size_choice = tk.StringVar()
-    cpb_status = tk.IntVar()
-
-    cpb_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Pink Bean']['boss_difficulty'])
-    cpb_party_size_choice.set(characters[selected_ign].boss_list['Chaos Pink Bean']['party_size'])
-    cpb_status.set(characters[selected_ign].boss_list['Chaos Pink Bean']['boss_clear'])
-
-    # Hard Hilla Vars
-    hh_difficulty_choice = tk.StringVar()
-    hh_party_size_choice = tk.StringVar()
-    hh_status = tk.IntVar()
-
-    hh_difficulty_choice.set(characters[selected_ign].boss_list['Hard Hilla']['boss_difficulty'])
-    hh_party_size_choice.set(characters[selected_ign].boss_list['Hard Hilla']['party_size'])
-    hh_status.set(characters[selected_ign].boss_list['Hard Hilla']['boss_clear'])
-
-    # Cygnus Vars
-    cyg_difficulty_choice = tk.StringVar()
-    cyg_party_size_choice = tk.StringVar()
-    cyg_status = tk.IntVar()
-
-    cyg_difficulty_choice.set(characters[selected_ign].boss_list['Cygnus']['boss_difficulty'])
-    cyg_party_size_choice.set(characters[selected_ign].boss_list['Cygnus']['party_size'])
-    cyg_status.set(characters[selected_ign].boss_list['Cygnus']['boss_clear'])
-
-    # Chaos Zakum Vars
-    czak_difficulty_choice = tk.StringVar()
-    czak_party_size_choice = tk.StringVar()
-    czak_status = tk.IntVar()
-
-    czak_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Zakum']['boss_difficulty'])
-    czak_party_size_choice.set(characters[selected_ign].boss_list['Chaos Zakum']['party_size'])
-    czak_status.set(characters[selected_ign].boss_list['Chaos Zakum']['boss_clear'])
-
-    # Princess No Vars
-    pno_difficulty_choice = tk.StringVar()
-    pno_party_size_choice = tk.StringVar()
-    pno_status = tk.IntVar()
-
-    pno_difficulty_choice.set(characters[selected_ign].boss_list['Princess No']['boss_difficulty'])
-    pno_party_size_choice.set(characters[selected_ign].boss_list['Princess No']['party_size'])
-    pno_status.set(characters[selected_ign].boss_list['Princess No']['boss_clear'])
-
-    # Chaos Queen Vars
-    cqueen_difficulty_choice = tk.StringVar()
-    cqueen_party_size_choice = tk.StringVar()
-    cqueen_status = tk.IntVar()
-
-    cqueen_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Queen']['boss_difficulty'])
-    cqueen_party_size_choice.set(characters[selected_ign].boss_list['Chaos Queen']['party_size'])
-    cqueen_status.set(characters[selected_ign].boss_list['Chaos Queen']['boss_clear'])
-
-    # Chaos Pierre Vars
-    cpierre_difficulty_choice = tk.StringVar()
-    cpierre_party_size_choice = tk.StringVar()
-    cpierre_status = tk.IntVar()
-
-    cpierre_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Pierre']['boss_difficulty'])
-    cpierre_party_size_choice.set(characters[selected_ign].boss_list['Chaos Pierre']['party_size'])
-    cpierre_status.set(characters[selected_ign].boss_list['Chaos Pierre']['boss_clear'])
-
-    # Chaos Von Bon Vars
-    cvonbon_difficulty_choice = tk.StringVar()
-    cvonbon_party_size_choice = tk.StringVar()
-    cvonbon_status = tk.IntVar()
-
-    cvonbon_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Von Bon']['boss_difficulty'])
-    cvonbon_party_size_choice.set(characters[selected_ign].boss_list['Chaos Von Bon']['party_size'])
-    cvonbon_status.set(characters[selected_ign].boss_list['Chaos Von Bon']['boss_clear'])
-
-    # Chaos Vellum Vars
-    cvell_difficulty_choice = tk.StringVar()
-    cvell_party_size_choice = tk.StringVar()
-    cvell_status = tk.IntVar()
-
-    cvell_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Vellum']['boss_difficulty'])
-    cvell_party_size_choice.set(characters[selected_ign].boss_list['Chaos Vellum']['party_size'])
-    cvell_status.set(characters[selected_ign].boss_list['Chaos Vellum']['boss_clear'])
-
-    # Akechi Mitsuhide Vars
-    akechi_difficulty_choice = tk.StringVar()
-    akechi_party_size_choice = tk.StringVar()
-    akechi_status = tk.IntVar()
-
-    akechi_difficulty_choice.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_difficulty'])
-    akechi_party_size_choice.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['party_size'])
-    akechi_status.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_clear'])
-
-    # Hard Magnus Vars
-    hmag_difficulty_choice = tk.StringVar()
-    hmag_party_size_choice = tk.StringVar()
-    hmag_status = tk.IntVar()
-
-    hmag_difficulty_choice.set(characters[selected_ign].boss_list['Hard Magnus']['boss_difficulty'])
-    hmag_party_size_choice.set(characters[selected_ign].boss_list['Hard Magnus']['party_size'])
-    hmag_status.set(characters[selected_ign].boss_list['Hard Magnus']['boss_clear'])
-
-    # Chaos Papulatus Vars
-    cpap_difficulty_choice = tk.StringVar()
-    cpap_party_size_choice = tk.StringVar()
-    cpap_status = tk.IntVar()
-
-    cpap_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Papulatus']['boss_difficulty'])
-    cpap_party_size_choice.set(characters[selected_ign].boss_list['Chaos Papulatus']['party_size'])
-    cpap_status.set(characters[selected_ign].boss_list['Chaos Papulatus']['boss_clear'])
-
-    # Lotus Vars
-    lotus_difficulty_choice = tk.StringVar()
-    lotus_party_size_choice = tk.StringVar()
-    lotus_status = tk.IntVar()
-
-    lotus_difficulty_choice.set(characters[selected_ign].boss_list['Lotus']['boss_difficulty'])
-    lotus_party_size_choice.set(characters[selected_ign].boss_list['Lotus']['party_size'])
-    lotus_status.set(characters[selected_ign].boss_list['Lotus']['boss_clear'])
-
-    # Damien Vars
-    damien_difficulty_choice = tk.StringVar()
-    damien_party_size_choice = tk.StringVar()
-    damien_status = tk.IntVar()
-
-    damien_difficulty_choice.set(characters[selected_ign].boss_list['Damien']['boss_difficulty'])
-    damien_party_size_choice.set(characters[selected_ign].boss_list['Damien']['party_size'])
-    damien_status.set(characters[selected_ign].boss_list['Damien']['boss_clear'])
-
-    # Guardian Slime Vars
-    gslime_difficulty_choice = tk.StringVar()
-    gslime_party_size_choice = tk.StringVar()
-    gslime_status = tk.IntVar()
-
-    gslime_difficulty_choice.set(characters[selected_ign].boss_list['Guardian Slime']['boss_difficulty'])
-    gslime_party_size_choice.set(characters[selected_ign].boss_list['Guardian Slime']['party_size'])
-    gslime_status.set(characters[selected_ign].boss_list['Guardian Slime']['boss_clear'])
-
-    # Lucid Vars
-    lucid_difficulty_choice = tk.StringVar()
-    lucid_party_size_choice = tk.StringVar()
-    lucid_status = tk.IntVar()
-
-    lucid_difficulty_choice.set(characters[selected_ign].boss_list['Lucid']['boss_difficulty'])
-    lucid_party_size_choice.set(characters[selected_ign].boss_list['Lucid']['party_size'])
-    lucid_status.set(characters[selected_ign].boss_list['Lucid']['boss_clear'])
-
-    # Will Vars
-    will_difficulty_choice = tk.StringVar()
-    will_party_size_choice = tk.StringVar()
-    will_status = tk.IntVar()
-
-    will_difficulty_choice.set(characters[selected_ign].boss_list['Will']['boss_difficulty'])
-    will_party_size_choice.set(characters[selected_ign].boss_list['Will']['party_size'])
-    will_status.set(characters[selected_ign].boss_list['Will']['boss_clear'])
-
-    # Gloom Vars
-    gloom_difficulty_choice = tk.StringVar()
-    gloom_party_size_choice = tk.StringVar()
-    gloom_status = tk.IntVar()
-
-    gloom_difficulty_choice.set(characters[selected_ign].boss_list['Gloom']['boss_difficulty'])
-    gloom_party_size_choice.set(characters[selected_ign].boss_list['Gloom']['party_size'])
-    gloom_status.set(characters[selected_ign].boss_list['Gloom']['boss_clear'])
-
-    # Darknell Vars
-    darknell_difficulty_choice = tk.StringVar()
-    darknell_party_size_choice = tk.StringVar()
-    darknell_status = tk.IntVar()
-
-    darknell_difficulty_choice.set(characters[selected_ign].boss_list['Darknell']['boss_difficulty'])
-    darknell_party_size_choice.set(characters[selected_ign].boss_list['Darknell']['party_size'])
-    darknell_status.set(characters[selected_ign].boss_list['Darknell']['boss_clear'])
-
-    # Versus Hilla Vars
-    vhilla_difficulty_choice = tk.StringVar()
-    vhilla_party_size_choice = tk.StringVar()
-    vhilla_status = tk.IntVar()
-
-    vhilla_difficulty_choice.set(characters[selected_ign].boss_list['Versus Hilla']['boss_difficulty'])
-    vhilla_party_size_choice.set(characters[selected_ign].boss_list['Versus Hilla']['party_size'])
-    vhilla_status.set(characters[selected_ign].boss_list['Versus Hilla']['boss_clear'])
-
-    # Seren Vars
-    seren_difficulty_choice = tk.StringVar()
-    seren_party_size_choice = tk.StringVar()
-    seren_status = tk.IntVar()
-
-    seren_difficulty_choice.set(characters[selected_ign].boss_list['Seren']['boss_difficulty'])
-    seren_party_size_choice.set(characters[selected_ign].boss_list['Seren']['party_size'])
-    seren_status.set(characters[selected_ign].boss_list['Seren']['boss_clear'])
-
-    # Kaling Vars
-    kaling_difficulty_choice = tk.StringVar()
-    kaling_party_size_choice = tk.StringVar()
-    kaling_status = tk.IntVar()
-
-    kaling_difficulty_choice.set(characters[selected_ign].boss_list['Kaling']['boss_difficulty'])
-    kaling_party_size_choice.set(characters[selected_ign].boss_list['Kaling']['party_size'])
-    kaling_status.set(characters[selected_ign].boss_list['Kaling']['boss_clear'])
-
-    # Kalos Vars
-    kalos_difficulty_choice = tk.StringVar()
-    kalos_party_size_choice = tk.StringVar()
-    kalos_status = tk.IntVar()
-
-    kalos_difficulty_choice.set(characters[selected_ign].boss_list['Kalos']['boss_difficulty'])
-    kalos_party_size_choice.set(characters[selected_ign].boss_list['Kalos']['party_size'])
-    kalos_status.set(characters[selected_ign].boss_list['Kalos']['boss_clear'])
-    # endregion
-
-    # title and character detail
-    bossing_checklist_title = tk.Label(bc_win, text='Bossing Checklist', **font_preset, bg='#dbedf3')
-    character_details_lbl = tk.Label(bc_win, text=f'{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}', **font_preset, bg='#dbedf3')
-
-    # region - open images
-    # Render Images
-    max_width, max_height = 100, 100
-
-    # opening images
-    cpb_icon = Image.open('./img/Chaos_Pink_Bean.webp')
-    cpb_icon.thumbnail((max_width, max_height))
-    cpb_icon = ImageTk.PhotoImage(cpb_icon)
-
-    hh_icon = Image.open('./img/Hard_Hilla.webp')
-    hh_icon.thumbnail((max_width, max_height))
-    hh_icon = ImageTk.PhotoImage(hh_icon)
-
-    cyg_icon = Image.open('./img/Cygnus.webp')
-    cyg_icon.thumbnail((max_width, max_height))
-    cyg_icon = ImageTk.PhotoImage(cyg_icon)
-
-    czak_icon = Image.open('./img/Chaos_Zakum.webp')
-    czak_icon.thumbnail((max_width, max_height))
-    czak_icon = ImageTk.PhotoImage(czak_icon)
-
-    pno_icon = Image.open('./img/Princess_No.webp')
-    pno_icon.thumbnail((max_width, max_height))
-    pno_icon = ImageTk.PhotoImage(pno_icon)
-
-    cqueen_icon = Image.open('./img/Chaos_Crimson_Queen.webp')
-    cqueen_icon.thumbnail((max_width, max_height))
-    cqueen_icon = ImageTk.PhotoImage(cqueen_icon)
-
-    cpierre_icon = Image.open('./img/Chaos_Pierre.webp')
-    cpierre_icon.thumbnail((max_width, max_height))
-    cpierre_icon = ImageTk.PhotoImage(cpierre_icon)
-
-    cvonbon_icon = Image.open('./img/Chaos_Von_Bon.webp')
-    cvonbon_icon.thumbnail((max_width, max_height))
-    cvonbon_icon = ImageTk.PhotoImage(cvonbon_icon)
-
-    cvell_icon = Image.open('./img/Chaos_Vellum.webp')
-    cvell_icon.thumbnail((max_width, max_height))
-    cvell_icon = ImageTk.PhotoImage(cvell_icon)
-
-    akechi_icon = Image.open('./img/Akechi_Mitsuhide.webp')
-    akechi_icon.thumbnail((max_width, max_height))
-    akechi_icon = ImageTk.PhotoImage(akechi_icon)
-
-    hmag_icon = Image.open('./img/Hard_Magnus.webp')
-    hmag_icon.thumbnail((max_width, max_height))
-    hmag_icon = ImageTk.PhotoImage(hmag_icon)
-
-    cpap_icon = Image.open('./img/Chaos_Papulatus.webp')
-    cpap_icon.thumbnail((max_width, max_height))
-    cpap_icon = ImageTk.PhotoImage(cpap_icon)
-
-    lotus_icon = Image.open('./img/Lotus.webp')
-    lotus_icon.thumbnail((max_width, max_height))
-    lotus_icon = ImageTk.PhotoImage(lotus_icon)
-
-    damien_icon = Image.open('./img/Damien.webp')
-    damien_icon.thumbnail((max_width, max_height))
-    damien_icon = ImageTk.PhotoImage(damien_icon)
-
-    gslime_icon = Image.open('./img/Guardian_Slime.webp')
-    gslime_icon.thumbnail((max_width, max_height))
-    gslime_icon = ImageTk.PhotoImage(gslime_icon)
-
-    lucid_icon = Image.open('./img/Lucid.webp')
-    lucid_icon.thumbnail((max_width, max_height))
-    lucid_icon = ImageTk.PhotoImage(lucid_icon)
-
-    will_icon = Image.open('./img/Will.webp')
-    will_icon.thumbnail((max_width, max_height))
-    will_icon = ImageTk.PhotoImage(will_icon)
-
-    gloom_icon = Image.open('./img/Gloom.webp')
-    gloom_icon.thumbnail((max_width, max_height))
-    gloom_icon = ImageTk.PhotoImage(gloom_icon)
-
-    darknell_icon = Image.open('./img/Darknell.webp')
-    darknell_icon.thumbnail((max_width, max_height))
-    darknell_icon = ImageTk.PhotoImage(darknell_icon)
-
-    vhilla_icon = Image.open('./img/Verus_Hilla.webp')
-    vhilla_icon.thumbnail((max_width, max_height))
-    vhilla_icon = ImageTk.PhotoImage(vhilla_icon)
-
-    seren_icon = Image.open('./img/Seren.webp')
-    seren_icon.thumbnail((max_width, max_height))
-    seren_icon = ImageTk.PhotoImage(seren_icon)
-
-    kaling_icon = Image.open('./img/Kaling.webp')
-    kaling_icon.thumbnail((max_width, max_height))
-    kaling_icon = ImageTk.PhotoImage(kaling_icon)
-
-    kalos_icon = Image.open('./img/Kalos.webp')
-    kalos_icon.thumbnail((max_width, max_height))
-    kalos_icon = ImageTk.PhotoImage(kalos_icon)
-    # endregion
-
-    # region - boss widgets
-    # Chaos Pink Bean
-    cpb_name = tk.Label(bc_win, text='Chaos Pink Bean', **font_preset, bg='#DBEDF3')
-    cpb_img = tk.Label(bc_win, image=cpb_icon, bg='#DBEDF3')
-    cpb_difficulty = tk.OptionMenu(bc_win, cpb_difficulty_choice, *difficulty_a)
-    cpb_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    cpb_party_size = tk.OptionMenu(bc_win, cpb_party_size_choice, *party_size)
-    cpb_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    cpb_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpb_status, command=lambda:update_check_status('Chaos Pink Bean', cpb_status, cpb_clear_status), bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-
-    # Hard Hilla
-    hh_name = tk.Label(bc_win, text='Hard Hilla', **font_preset, bg='#DBEDF3')
-    hh_img = tk.Label(bc_win, image=hh_icon, bg='#DBEDF3')
-    hh_difficulty = tk.OptionMenu(bc_win, hh_difficulty_choice, *difficulty_a) 
-    hh_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    hh_party_size = tk.OptionMenu(bc_win, hh_party_size_choice, *party_size)
-    hh_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    hh_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hh_status, command=lambda:update_check_status('Hard Hilla', hh_status, hh_clear_status), 
-                                     bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    hh_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Cygnus
-    cyg_name = tk.Label(bc_win, text='Cygnus', **font_preset, bg='#DBEDF3')
-    cyg_img = tk.Label(bc_win, image=cyg_icon, bg='#DBEDF3')
-    cyg_difficulty = tk.OptionMenu(bc_win, cyg_difficulty_choice, *difficulty_a)
-    cyg_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    cyg_party_size = tk.OptionMenu(bc_win, cyg_party_size_choice, *party_size)
-    cyg_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    cyg_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cyg_status, command=lambda:update_check_status('Cygnus', cyg_status, cyg_clear_status), 
-                                      bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    cyg_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Chaos Zakum
-    czak_name = tk.Label(bc_win, text='Chaos Zakum', **font_preset, bg='#DBEDF3')
-    czak_img = tk.Label(bc_win, image=czak_icon, bg='#DBEDF3')
-    czak_difficulty = tk.OptionMenu(bc_win, czak_difficulty_choice, *difficulty_a) 
-    czak_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    czak_party_size = tk.OptionMenu(bc_win, czak_party_size_choice, *party_size)
-    czak_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    czak_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=czak_status, command=lambda:update_check_status('Chaos Zakum', czak_status, czak_clear_status), 
-                                       bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    czak_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Princess No
-    pno_name = tk.Label(bc_win, text='Princess No', **font_preset, bg='#DBEDF3')
-    pno_img = tk.Label(bc_win, image=pno_icon, bg='#DBEDF3')
-    pno_difficulty = tk.OptionMenu(bc_win, pno_difficulty_choice, *difficulty_a) 
-    pno_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    pno_party_size = tk.OptionMenu(bc_win, pno_party_size_choice, *party_size)
-    pno_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    pno_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=pno_status, command=lambda:update_check_status('Princess No', pno_status, pno_clear_status), 
-                                      bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    pno_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Chaos Queen
-    cqueen_name = tk.Label(bc_win, text='Chaos Queen', **font_preset, bg='#DBEDF3')
-    cqueen_img = tk.Label(bc_win, image=cqueen_icon, bg='#DBEDF3')
-    cqueen_difficulty = tk.OptionMenu(bc_win, cqueen_difficulty_choice, *difficulty_a) 
-    cqueen_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    cqueen_party_size = tk.OptionMenu(bc_win, cqueen_party_size_choice, *party_size)
-    cqueen_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    cqueen_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cqueen_status, command=lambda:update_check_status('Chaos Queen', cqueen_status, cqueen_clear_status), 
-                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    cqueen_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Chaos Pierre
-    cpierre_name = tk.Label(bc_win, text='Chaos Pierre', **font_preset, bg='#DBEDF3')
-    cpierre_img = tk.Label(bc_win, image=cpierre_icon, bg='#DBEDF3')
-    cpierre_difficulty = tk.OptionMenu(bc_win, cpierre_difficulty_choice, *difficulty_a) 
-    cpierre_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    cpierre_party_size = tk.OptionMenu(bc_win, cpierre_party_size_choice, *party_size)
-    cpierre_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    cpierre_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpierre_status, command=lambda:update_check_status('Chaos Pierre', cpierre_status, cpierre_clear_status), 
-                                          bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    cpierre_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Chaos Von Bon
-    cvonbon_name = tk.Label(bc_win, text='Chaos Von Bon', **font_preset, bg='#DBEDF3')
-    cvonbon_img = tk.Label(bc_win, image=cvonbon_icon, bg='#DBEDF3')
-    cvonbon_difficulty = tk.OptionMenu(bc_win, cvonbon_difficulty_choice, *difficulty_a) 
-    cvonbon_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    cvonbon_party_size = tk.OptionMenu(bc_win, cvonbon_party_size_choice, *party_size)
-    cvonbon_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    cvonbon_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvonbon_status, command=lambda:update_check_status('Chaos Von Bon', cvonbon_status, cvonbon_clear_status), 
-                                          bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    cvonbon_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Chaos Vellum
-    cvell_name = tk.Label(bc_win, text='Chaos Vellum', **font_preset, bg='#DBEDF3')
-    cvell_img = tk.Label(bc_win, image=cvell_icon, bg='#DBEDF3')
-    cvell_difficulty = tk.OptionMenu(bc_win, cvell_difficulty_choice, *difficulty_a) 
-    cvell_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    cvell_party_size = tk.OptionMenu(bc_win, cvell_party_size_choice, *party_size)
-    cvell_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    cvell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvell_status, command=lambda:update_check_status('Chaos Vellum', cvell_status, cvell_clear_status), 
+    # check to see if a popup is currently opened
+    if is_popup_open():
+        messagebox.showerror('Active Popup Detected.',
+                             'There is already a Popup opened.')
+        bc_win.lift()
+    else:
+        bc_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
+        bc_win.title("Bossing Checklist")
+        bc_win.geometry('1400x1010+250+10')
+        bc_win.resizable(False, False)
+        current_popup = bc_win
+
+        # difficulty variations
+        # for: Cygnus
+        difficulty_a = [
+            'Easy',
+            'Normal'
+        ]
+        
+        # for: Damien, Guardian Slime, Gloom, Verus Hilla, Darknell
+        difficulty_b = [
+            'Normal',
+            'Hard/Chaos'
+        ]
+
+        # for: Lucid, Will
+        difficulty_c = [
+            'Easy',
+            'Normal',
+            'Hard/Chaos'
+        ]
+
+        # for: Seren, Lotus
+        difficulty_d = [
+            'Normal',
+            'Hard/Chaos',
+            'Extreme'
+        ]
+
+        # for: Kaling, Kalos
+        difficulty_e = [
+            'Easy',
+            'Normal',
+            'Hard/Chaos',
+            'Extreme'
+        ]
+
+        party_size = [
+            'Select Party Size',
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+        ]
+
+        # region - boss variables
+        # Chaos Pink Bean Vars
+        cpb_difficulty_choice = tk.StringVar()
+        cpb_party_size_choice = tk.StringVar()
+        cpb_status = tk.IntVar()
+
+        cpb_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Pink Bean']['boss_difficulty'])
+        cpb_party_size_choice.set(characters[selected_ign].boss_list['Chaos Pink Bean']['party_size'])
+        cpb_status.set(characters[selected_ign].boss_list['Chaos Pink Bean']['boss_clear'])
+
+        # Hard Hilla Vars
+        hh_difficulty_choice = tk.StringVar()
+        hh_party_size_choice = tk.StringVar()
+        hh_status = tk.IntVar()
+
+        hh_difficulty_choice.set(characters[selected_ign].boss_list['Hard Hilla']['boss_difficulty'])
+        hh_party_size_choice.set(characters[selected_ign].boss_list['Hard Hilla']['party_size'])
+        hh_status.set(characters[selected_ign].boss_list['Hard Hilla']['boss_clear'])
+
+        # Cygnus Vars
+        cyg_difficulty_choice = tk.StringVar()
+        cyg_party_size_choice = tk.StringVar()
+        cyg_status = tk.IntVar()
+
+        cyg_difficulty_choice.set(characters[selected_ign].boss_list['Cygnus']['boss_difficulty'])
+        cyg_party_size_choice.set(characters[selected_ign].boss_list['Cygnus']['party_size'])
+        cyg_status.set(characters[selected_ign].boss_list['Cygnus']['boss_clear'])
+
+        # Chaos Zakum Vars
+        czak_difficulty_choice = tk.StringVar()
+        czak_party_size_choice = tk.StringVar()
+        czak_status = tk.IntVar()
+
+        czak_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Zakum']['boss_difficulty'])
+        czak_party_size_choice.set(characters[selected_ign].boss_list['Chaos Zakum']['party_size'])
+        czak_status.set(characters[selected_ign].boss_list['Chaos Zakum']['boss_clear'])
+
+        # Princess No Vars
+        pno_difficulty_choice = tk.StringVar()
+        pno_party_size_choice = tk.StringVar()
+        pno_status = tk.IntVar()
+
+        pno_difficulty_choice.set(characters[selected_ign].boss_list['Princess No']['boss_difficulty'])
+        pno_party_size_choice.set(characters[selected_ign].boss_list['Princess No']['party_size'])
+        pno_status.set(characters[selected_ign].boss_list['Princess No']['boss_clear'])
+
+        # Chaos Queen Vars
+        cqueen_difficulty_choice = tk.StringVar()
+        cqueen_party_size_choice = tk.StringVar()
+        cqueen_status = tk.IntVar()
+
+        cqueen_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Queen']['boss_difficulty'])
+        cqueen_party_size_choice.set(characters[selected_ign].boss_list['Chaos Queen']['party_size'])
+        cqueen_status.set(characters[selected_ign].boss_list['Chaos Queen']['boss_clear'])
+
+        # Chaos Pierre Vars
+        cpierre_difficulty_choice = tk.StringVar()
+        cpierre_party_size_choice = tk.StringVar()
+        cpierre_status = tk.IntVar()
+
+        cpierre_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Pierre']['boss_difficulty'])
+        cpierre_party_size_choice.set(characters[selected_ign].boss_list['Chaos Pierre']['party_size'])
+        cpierre_status.set(characters[selected_ign].boss_list['Chaos Pierre']['boss_clear'])
+
+        # Chaos Von Bon Vars
+        cvonbon_difficulty_choice = tk.StringVar()
+        cvonbon_party_size_choice = tk.StringVar()
+        cvonbon_status = tk.IntVar()
+
+        cvonbon_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Von Bon']['boss_difficulty'])
+        cvonbon_party_size_choice.set(characters[selected_ign].boss_list['Chaos Von Bon']['party_size'])
+        cvonbon_status.set(characters[selected_ign].boss_list['Chaos Von Bon']['boss_clear'])
+
+        # Chaos Vellum Vars
+        cvell_difficulty_choice = tk.StringVar()
+        cvell_party_size_choice = tk.StringVar()
+        cvell_status = tk.IntVar()
+
+        cvell_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Vellum']['boss_difficulty'])
+        cvell_party_size_choice.set(characters[selected_ign].boss_list['Chaos Vellum']['party_size'])
+        cvell_status.set(characters[selected_ign].boss_list['Chaos Vellum']['boss_clear'])
+
+        # Akechi Mitsuhide Vars
+        akechi_difficulty_choice = tk.StringVar()
+        akechi_party_size_choice = tk.StringVar()
+        akechi_status = tk.IntVar()
+
+        akechi_difficulty_choice.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_difficulty'])
+        akechi_party_size_choice.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['party_size'])
+        akechi_status.set(characters[selected_ign].boss_list['Akechi Mitsuhide']['boss_clear'])
+
+        # Hard Magnus Vars
+        hmag_difficulty_choice = tk.StringVar()
+        hmag_party_size_choice = tk.StringVar()
+        hmag_status = tk.IntVar()
+
+        hmag_difficulty_choice.set(characters[selected_ign].boss_list['Hard Magnus']['boss_difficulty'])
+        hmag_party_size_choice.set(characters[selected_ign].boss_list['Hard Magnus']['party_size'])
+        hmag_status.set(characters[selected_ign].boss_list['Hard Magnus']['boss_clear'])
+
+        # Chaos Papulatus Vars
+        cpap_difficulty_choice = tk.StringVar()
+        cpap_party_size_choice = tk.StringVar()
+        cpap_status = tk.IntVar()
+
+        cpap_difficulty_choice.set(characters[selected_ign].boss_list['Chaos Papulatus']['boss_difficulty'])
+        cpap_party_size_choice.set(characters[selected_ign].boss_list['Chaos Papulatus']['party_size'])
+        cpap_status.set(characters[selected_ign].boss_list['Chaos Papulatus']['boss_clear'])
+
+        # Lotus Vars
+        lotus_difficulty_choice = tk.StringVar()
+        lotus_party_size_choice = tk.StringVar()
+        lotus_status = tk.IntVar()
+
+        lotus_difficulty_choice.set(characters[selected_ign].boss_list['Lotus']['boss_difficulty'])
+        lotus_party_size_choice.set(characters[selected_ign].boss_list['Lotus']['party_size'])
+        lotus_status.set(characters[selected_ign].boss_list['Lotus']['boss_clear'])
+
+        # Damien Vars
+        damien_difficulty_choice = tk.StringVar()
+        damien_party_size_choice = tk.StringVar()
+        damien_status = tk.IntVar()
+
+        damien_difficulty_choice.set(characters[selected_ign].boss_list['Damien']['boss_difficulty'])
+        damien_party_size_choice.set(characters[selected_ign].boss_list['Damien']['party_size'])
+        damien_status.set(characters[selected_ign].boss_list['Damien']['boss_clear'])
+
+        # Guardian Slime Vars
+        gslime_difficulty_choice = tk.StringVar()
+        gslime_party_size_choice = tk.StringVar()
+        gslime_status = tk.IntVar()
+
+        gslime_difficulty_choice.set(characters[selected_ign].boss_list['Guardian Slime']['boss_difficulty'])
+        gslime_party_size_choice.set(characters[selected_ign].boss_list['Guardian Slime']['party_size'])
+        gslime_status.set(characters[selected_ign].boss_list['Guardian Slime']['boss_clear'])
+
+        # Lucid Vars
+        lucid_difficulty_choice = tk.StringVar()
+        lucid_party_size_choice = tk.StringVar()
+        lucid_status = tk.IntVar()
+
+        lucid_difficulty_choice.set(characters[selected_ign].boss_list['Lucid']['boss_difficulty'])
+        lucid_party_size_choice.set(characters[selected_ign].boss_list['Lucid']['party_size'])
+        lucid_status.set(characters[selected_ign].boss_list['Lucid']['boss_clear'])
+
+        # Will Vars
+        will_difficulty_choice = tk.StringVar()
+        will_party_size_choice = tk.StringVar()
+        will_status = tk.IntVar()
+
+        will_difficulty_choice.set(characters[selected_ign].boss_list['Will']['boss_difficulty'])
+        will_party_size_choice.set(characters[selected_ign].boss_list['Will']['party_size'])
+        will_status.set(characters[selected_ign].boss_list['Will']['boss_clear'])
+
+        # Gloom Vars
+        gloom_difficulty_choice = tk.StringVar()
+        gloom_party_size_choice = tk.StringVar()
+        gloom_status = tk.IntVar()
+
+        gloom_difficulty_choice.set(characters[selected_ign].boss_list['Gloom']['boss_difficulty'])
+        gloom_party_size_choice.set(characters[selected_ign].boss_list['Gloom']['party_size'])
+        gloom_status.set(characters[selected_ign].boss_list['Gloom']['boss_clear'])
+
+        # Darknell Vars
+        darknell_difficulty_choice = tk.StringVar()
+        darknell_party_size_choice = tk.StringVar()
+        darknell_status = tk.IntVar()
+
+        darknell_difficulty_choice.set(characters[selected_ign].boss_list['Darknell']['boss_difficulty'])
+        darknell_party_size_choice.set(characters[selected_ign].boss_list['Darknell']['party_size'])
+        darknell_status.set(characters[selected_ign].boss_list['Darknell']['boss_clear'])
+
+        # Versus Hilla Vars
+        vhilla_difficulty_choice = tk.StringVar()
+        vhilla_party_size_choice = tk.StringVar()
+        vhilla_status = tk.IntVar()
+
+        vhilla_difficulty_choice.set(characters[selected_ign].boss_list['Versus Hilla']['boss_difficulty'])
+        vhilla_party_size_choice.set(characters[selected_ign].boss_list['Versus Hilla']['party_size'])
+        vhilla_status.set(characters[selected_ign].boss_list['Versus Hilla']['boss_clear'])
+
+        # Seren Vars
+        seren_difficulty_choice = tk.StringVar()
+        seren_party_size_choice = tk.StringVar()
+        seren_status = tk.IntVar()
+
+        seren_difficulty_choice.set(characters[selected_ign].boss_list['Seren']['boss_difficulty'])
+        seren_party_size_choice.set(characters[selected_ign].boss_list['Seren']['party_size'])
+        seren_status.set(characters[selected_ign].boss_list['Seren']['boss_clear'])
+
+        # Kaling Vars
+        kaling_difficulty_choice = tk.StringVar()
+        kaling_party_size_choice = tk.StringVar()
+        kaling_status = tk.IntVar()
+
+        kaling_difficulty_choice.set(characters[selected_ign].boss_list['Kaling']['boss_difficulty'])
+        kaling_party_size_choice.set(characters[selected_ign].boss_list['Kaling']['party_size'])
+        kaling_status.set(characters[selected_ign].boss_list['Kaling']['boss_clear'])
+
+        # Kalos Vars
+        kalos_difficulty_choice = tk.StringVar()
+        kalos_party_size_choice = tk.StringVar()
+        kalos_status = tk.IntVar()
+
+        kalos_difficulty_choice.set(characters[selected_ign].boss_list['Kalos']['boss_difficulty'])
+        kalos_party_size_choice.set(characters[selected_ign].boss_list['Kalos']['party_size'])
+        kalos_status.set(characters[selected_ign].boss_list['Kalos']['boss_clear'])
+        # endregion
+
+        # title and character detail
+        bossing_checklist_title = tk.Label(bc_win, text='Bossing Checklist', **font_preset, bg='#dbedf3')
+        character_details_lbl = tk.Label(bc_win, text=f'{characters[selected_ign].ign} | {characters[selected_ign].job} | Lv.{characters[selected_ign].level}', **font_preset, bg='#dbedf3')
+
+        # region - open images
+        # Render Images
+        max_width, max_height = 100, 100
+
+        # opening images
+        cpb_icon = Image.open('./img/Chaos_Pink_Bean.webp')
+        cpb_icon.thumbnail((max_width, max_height))
+        cpb_icon = ImageTk.PhotoImage(cpb_icon)
+
+        hh_icon = Image.open('./img/Hard_Hilla.webp')
+        hh_icon.thumbnail((max_width, max_height))
+        hh_icon = ImageTk.PhotoImage(hh_icon)
+
+        cyg_icon = Image.open('./img/Cygnus.webp')
+        cyg_icon.thumbnail((max_width, max_height))
+        cyg_icon = ImageTk.PhotoImage(cyg_icon)
+
+        czak_icon = Image.open('./img/Chaos_Zakum.webp')
+        czak_icon.thumbnail((max_width, max_height))
+        czak_icon = ImageTk.PhotoImage(czak_icon)
+
+        pno_icon = Image.open('./img/Princess_No.webp')
+        pno_icon.thumbnail((max_width, max_height))
+        pno_icon = ImageTk.PhotoImage(pno_icon)
+
+        cqueen_icon = Image.open('./img/Chaos_Crimson_Queen.webp')
+        cqueen_icon.thumbnail((max_width, max_height))
+        cqueen_icon = ImageTk.PhotoImage(cqueen_icon)
+
+        cpierre_icon = Image.open('./img/Chaos_Pierre.webp')
+        cpierre_icon.thumbnail((max_width, max_height))
+        cpierre_icon = ImageTk.PhotoImage(cpierre_icon)
+
+        cvonbon_icon = Image.open('./img/Chaos_Von_Bon.webp')
+        cvonbon_icon.thumbnail((max_width, max_height))
+        cvonbon_icon = ImageTk.PhotoImage(cvonbon_icon)
+
+        cvell_icon = Image.open('./img/Chaos_Vellum.webp')
+        cvell_icon.thumbnail((max_width, max_height))
+        cvell_icon = ImageTk.PhotoImage(cvell_icon)
+
+        akechi_icon = Image.open('./img/Akechi_Mitsuhide.webp')
+        akechi_icon.thumbnail((max_width, max_height))
+        akechi_icon = ImageTk.PhotoImage(akechi_icon)
+
+        hmag_icon = Image.open('./img/Hard_Magnus.webp')
+        hmag_icon.thumbnail((max_width, max_height))
+        hmag_icon = ImageTk.PhotoImage(hmag_icon)
+
+        cpap_icon = Image.open('./img/Chaos_Papulatus.webp')
+        cpap_icon.thumbnail((max_width, max_height))
+        cpap_icon = ImageTk.PhotoImage(cpap_icon)
+
+        lotus_icon = Image.open('./img/Lotus.webp')
+        lotus_icon.thumbnail((max_width, max_height))
+        lotus_icon = ImageTk.PhotoImage(lotus_icon)
+
+        damien_icon = Image.open('./img/Damien.webp')
+        damien_icon.thumbnail((max_width, max_height))
+        damien_icon = ImageTk.PhotoImage(damien_icon)
+
+        gslime_icon = Image.open('./img/Guardian_Slime.webp')
+        gslime_icon.thumbnail((max_width, max_height))
+        gslime_icon = ImageTk.PhotoImage(gslime_icon)
+
+        lucid_icon = Image.open('./img/Lucid.webp')
+        lucid_icon.thumbnail((max_width, max_height))
+        lucid_icon = ImageTk.PhotoImage(lucid_icon)
+
+        will_icon = Image.open('./img/Will.webp')
+        will_icon.thumbnail((max_width, max_height))
+        will_icon = ImageTk.PhotoImage(will_icon)
+
+        gloom_icon = Image.open('./img/Gloom.webp')
+        gloom_icon.thumbnail((max_width, max_height))
+        gloom_icon = ImageTk.PhotoImage(gloom_icon)
+
+        darknell_icon = Image.open('./img/Darknell.webp')
+        darknell_icon.thumbnail((max_width, max_height))
+        darknell_icon = ImageTk.PhotoImage(darknell_icon)
+
+        vhilla_icon = Image.open('./img/Verus_Hilla.webp')
+        vhilla_icon.thumbnail((max_width, max_height))
+        vhilla_icon = ImageTk.PhotoImage(vhilla_icon)
+
+        seren_icon = Image.open('./img/Seren.webp')
+        seren_icon.thumbnail((max_width, max_height))
+        seren_icon = ImageTk.PhotoImage(seren_icon)
+
+        kaling_icon = Image.open('./img/Kaling.webp')
+        kaling_icon.thumbnail((max_width, max_height))
+        kaling_icon = ImageTk.PhotoImage(kaling_icon)
+
+        kalos_icon = Image.open('./img/Kalos.webp')
+        kalos_icon.thumbnail((max_width, max_height))
+        kalos_icon = ImageTk.PhotoImage(kalos_icon)
+        # endregion
+
+        # region - boss widgets
+        # Chaos Pink Bean
+        cpb_name = tk.Label(bc_win, text='Chaos Pink Bean', **font_preset, bg='#DBEDF3')
+        cpb_img = tk.Label(bc_win, image=cpb_icon, bg='#DBEDF3')
+        cpb_difficulty = tk.OptionMenu(bc_win, cpb_difficulty_choice, *difficulty_a)
+        cpb_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        cpb_party_size = tk.OptionMenu(bc_win, cpb_party_size_choice, *party_size)
+        cpb_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        cpb_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpb_status, command=lambda:update_check_status('Chaos Pink Bean', cpb_status, cpb_clear_status), bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+
+        # Hard Hilla
+        hh_name = tk.Label(bc_win, text='Hard Hilla', **font_preset, bg='#DBEDF3')
+        hh_img = tk.Label(bc_win, image=hh_icon, bg='#DBEDF3')
+        hh_difficulty = tk.OptionMenu(bc_win, hh_difficulty_choice, *difficulty_a) 
+        hh_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        hh_party_size = tk.OptionMenu(bc_win, hh_party_size_choice, *party_size)
+        hh_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        hh_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hh_status, command=lambda:update_check_status('Hard Hilla', hh_status, hh_clear_status), 
                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    cvell_clear_status.config(indicatoron=False, borderwidth=0)
+        hh_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # Akechi Mitsuhide
-    akechi_name = tk.Label(bc_win, text='Akechi Mitsuhide', **font_preset, bg='#DBEDF3')
-    akechi_img = tk.Label(bc_win, image=akechi_icon, bg='#DBEDF3')
-    akechi_difficulty = tk.OptionMenu(bc_win, akechi_difficulty_choice, *difficulty_a) 
-    akechi_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    akechi_party_size = tk.OptionMenu(bc_win, akechi_party_size_choice, *party_size)
-    akechi_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    akechi_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=akechi_status, command=lambda:update_check_status('Akechi Mitsuhide', akechi_status, akechi_clear_status), 
-                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    akechi_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Hard Magnus
-    hmag_name = tk.Label(bc_win, text='Hard Magnus', **font_preset, bg='#DBEDF3')
-    hmag_img = tk.Label(bc_win, image=hmag_icon, bg='#DBEDF3')
-    hmag_difficulty = tk.OptionMenu(bc_win, hmag_difficulty_choice, *difficulty_a) 
-    hmag_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    hmag_party_size = tk.OptionMenu(bc_win, hmag_party_size_choice, *party_size)
-    hmag_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    hmag_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hmag_status, command=lambda:update_check_status('Hard Magnus', hmag_status, hmag_clear_status), 
-                                       bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    hmag_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Chaos Papulatus
-    cpap_name = tk.Label(bc_win, text='Chaos Papulatus', **font_preset, bg='#DBEDF3')
-    cpap_img = tk.Label(bc_win, image=cpap_icon, bg='#DBEDF3')
-    cpap_difficulty = tk.OptionMenu(bc_win, cpap_difficulty_choice, *difficulty_a) 
-    cpap_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
-    cpap_party_size = tk.OptionMenu(bc_win, cpap_party_size_choice, *party_size)
-    cpap_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    cpap_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpap_status, command=lambda:update_check_status('Chaos Papulatus', cpap_status, cpap_clear_status), 
-                                       bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    cpap_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Lotus
-    lotus_name = tk.Label(bc_win, text='Lotus', **font_preset, bg='#DBEDF3')
-    lotus_img = tk.Label(bc_win, image=lotus_icon, bg='#DBEDF3')
-    lotus_difficulty = tk.OptionMenu(bc_win, lotus_difficulty_choice, *difficulty_d)
-    lotus_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    lotus_party_size = tk.OptionMenu(bc_win, lotus_party_size_choice, *party_size)
-    lotus_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    lotus_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lotus_status, command=lambda:update_check_status('Lotus', lotus_status, lotus_clear_status), 
+        # Cygnus
+        cyg_name = tk.Label(bc_win, text='Cygnus', **font_preset, bg='#DBEDF3')
+        cyg_img = tk.Label(bc_win, image=cyg_icon, bg='#DBEDF3')
+        cyg_difficulty = tk.OptionMenu(bc_win, cyg_difficulty_choice, *difficulty_a)
+        cyg_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        cyg_party_size = tk.OptionMenu(bc_win, cyg_party_size_choice, *party_size)
+        cyg_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        cyg_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cyg_status, command=lambda:update_check_status('Cygnus', cyg_status, cyg_clear_status), 
                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    lotus_clear_status.config(indicatoron=False, borderwidth=0)
+        cyg_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # Damien
-    damien_name = tk.Label(bc_win, text='Damien', **font_preset, bg='#DBEDF3')
-    damien_img = tk.Label(bc_win, image=damien_icon, bg='#DBEDF3')
-    damien_difficulty = tk.OptionMenu(bc_win, damien_difficulty_choice, *difficulty_b)
-    damien_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    damien_party_size = tk.OptionMenu(bc_win, damien_party_size_choice, *party_size)
-    damien_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    damien_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=damien_status, command=lambda:update_check_status('Damien', damien_status, damien_clear_status), 
-                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    damien_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Guardian Slime
-    gslime_name = tk.Label(bc_win, text='Guardian Slime', **font_preset, bg='#DBEDF3')
-    gslime_img = tk.Label(bc_win, image=gslime_icon, bg='#DBEDF3')
-    gslime_difficulty = tk.OptionMenu(bc_win, gslime_difficulty_choice, *difficulty_b)
-    gslime_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    gslime_party_size = tk.OptionMenu(bc_win, gslime_party_size_choice, *party_size)
-    gslime_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    gslime_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gslime_status, command=lambda:update_check_status('Guardian Slime', gslime_status, gslime_clear_status), 
-                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    gslime_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Lucid
-    lucid_name = tk.Label(bc_win, text='Lucid', **font_preset, bg='#DBEDF3')
-    lucid_img = tk.Label(bc_win, image=lucid_icon, bg='#DBEDF3')
-    lucid_difficulty = tk.OptionMenu(bc_win, lucid_difficulty_choice, *difficulty_c)
-    lucid_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    lucid_party_size = tk.OptionMenu(bc_win, lucid_party_size_choice, *party_size)
-    lucid_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    lucid_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lucid_status, command=lambda:update_check_status('Lucid', lucid_status, lucid_clear_status), 
+        # Chaos Zakum
+        czak_name = tk.Label(bc_win, text='Chaos Zakum', **font_preset, bg='#DBEDF3')
+        czak_img = tk.Label(bc_win, image=czak_icon, bg='#DBEDF3')
+        czak_difficulty = tk.OptionMenu(bc_win, czak_difficulty_choice, *difficulty_a) 
+        czak_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        czak_party_size = tk.OptionMenu(bc_win, czak_party_size_choice, *party_size)
+        czak_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        czak_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=czak_status, command=lambda:update_check_status('Chaos Zakum', czak_status, czak_clear_status), 
                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    lucid_clear_status.config(indicatoron=False, borderwidth=0)
+        czak_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # Will
-    will_name = tk.Label(bc_win, text='Will', **font_preset, bg='#DBEDF3')
-    will_img = tk.Label(bc_win, image=will_icon, bg='#DBEDF3')
-    will_difficulty = tk.OptionMenu(bc_win, will_difficulty_choice, *difficulty_c)
-    will_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    will_party_size = tk.OptionMenu(bc_win, will_party_size_choice, *party_size)
-    will_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    will_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=will_status, command=lambda:update_check_status('Will', will_status, will_clear_status), 
-                                       bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    will_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Gloom
-    gloom_name = tk.Label(bc_win, text='Gloom', **font_preset, bg='#DBEDF3')
-    gloom_img = tk.Label(bc_win, image=gloom_icon, bg='#DBEDF3')
-    gloom_difficulty = tk.OptionMenu(bc_win, gloom_difficulty_choice, *difficulty_b)
-    gloom_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    gloom_party_size = tk.OptionMenu(bc_win, gloom_party_size_choice, *party_size)
-    gloom_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    gloom_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gloom_status, command=lambda:update_check_status('Gloom', gloom_status, gloom_clear_status), 
+        # Princess No
+        pno_name = tk.Label(bc_win, text='Princess No', **font_preset, bg='#DBEDF3')
+        pno_img = tk.Label(bc_win, image=pno_icon, bg='#DBEDF3')
+        pno_difficulty = tk.OptionMenu(bc_win, pno_difficulty_choice, *difficulty_a) 
+        pno_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        pno_party_size = tk.OptionMenu(bc_win, pno_party_size_choice, *party_size)
+        pno_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        pno_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=pno_status, command=lambda:update_check_status('Princess No', pno_status, pno_clear_status), 
                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    gloom_clear_status.config(indicatoron=False, borderwidth=0)
+        pno_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # Darknell
-    darknell_name = tk.Label(bc_win, text='Darknell', **font_preset, bg='#DBEDF3')
-    darknell_img = tk.Label(bc_win, image=darknell_icon, bg='#DBEDF3')
-    darknell_difficulty = tk.OptionMenu(bc_win, darknell_difficulty_choice, *difficulty_b)
-    darknell_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    darknell_party_size = tk.OptionMenu(bc_win, darknell_party_size_choice, *party_size)
-    darknell_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    darknell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=darknell_status, command=lambda:update_check_status('Darknell', darknell_status, darknell_clear_status), 
-                                           bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    darknell_clear_status.config(indicatoron=False, borderwidth=0)
+        # Chaos Queen
+        cqueen_name = tk.Label(bc_win, text='Chaos Queen', **font_preset, bg='#DBEDF3')
+        cqueen_img = tk.Label(bc_win, image=cqueen_icon, bg='#DBEDF3')
+        cqueen_difficulty = tk.OptionMenu(bc_win, cqueen_difficulty_choice, *difficulty_a) 
+        cqueen_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        cqueen_party_size = tk.OptionMenu(bc_win, cqueen_party_size_choice, *party_size)
+        cqueen_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        cqueen_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cqueen_status, command=lambda:update_check_status('Chaos Queen', cqueen_status, cqueen_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        cqueen_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # Versus Hilla
-    vhilla_name = tk.Label(bc_win, text='Versus Hilla', **font_preset, bg='#DBEDF3')
-    vhilla_img = tk.Label(bc_win, image=vhilla_icon, bg='#DBEDF3')
-    vhilla_difficulty = tk.OptionMenu(bc_win, vhilla_difficulty_choice, *difficulty_b)
-    vhilla_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    vhilla_party_size = tk.OptionMenu(bc_win, vhilla_party_size_choice, *party_size)
-    vhilla_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    vhilla_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=vhilla_status, command=lambda:update_check_status('Versus Hilla', vhilla_status, vhilla_clear_status), 
-                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    vhilla_clear_status.config(indicatoron=False, borderwidth=0)
+        # Chaos Pierre
+        cpierre_name = tk.Label(bc_win, text='Chaos Pierre', **font_preset, bg='#DBEDF3')
+        cpierre_img = tk.Label(bc_win, image=cpierre_icon, bg='#DBEDF3')
+        cpierre_difficulty = tk.OptionMenu(bc_win, cpierre_difficulty_choice, *difficulty_a) 
+        cpierre_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        cpierre_party_size = tk.OptionMenu(bc_win, cpierre_party_size_choice, *party_size)
+        cpierre_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        cpierre_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpierre_status, command=lambda:update_check_status('Chaos Pierre', cpierre_status, cpierre_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        cpierre_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # Seren
-    seren_name = tk.Label(bc_win, text='Seren', **font_preset, bg='#DBEDF3')
-    seren_img = tk.Label(bc_win, image=seren_icon, bg='#DBEDF3')
-    seren_difficulty = tk.OptionMenu(bc_win, seren_difficulty_choice, *difficulty_d)
-    seren_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    seren_party_size = tk.OptionMenu(bc_win, seren_party_size_choice, *party_size)
-    seren_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    seren_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=seren_status, command=lambda:update_check_status('Seren', seren_status, seren_clear_status), 
+        # Chaos Von Bon
+        cvonbon_name = tk.Label(bc_win, text='Chaos Von Bon', **font_preset, bg='#DBEDF3')
+        cvonbon_img = tk.Label(bc_win, image=cvonbon_icon, bg='#DBEDF3')
+        cvonbon_difficulty = tk.OptionMenu(bc_win, cvonbon_difficulty_choice, *difficulty_a) 
+        cvonbon_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        cvonbon_party_size = tk.OptionMenu(bc_win, cvonbon_party_size_choice, *party_size)
+        cvonbon_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        cvonbon_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvonbon_status, command=lambda:update_check_status('Chaos Von Bon', cvonbon_status, cvonbon_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        cvonbon_clear_status.config(indicatoron=False, borderwidth=0)
+
+        # Chaos Vellum
+        cvell_name = tk.Label(bc_win, text='Chaos Vellum', **font_preset, bg='#DBEDF3')
+        cvell_img = tk.Label(bc_win, image=cvell_icon, bg='#DBEDF3')
+        cvell_difficulty = tk.OptionMenu(bc_win, cvell_difficulty_choice, *difficulty_a) 
+        cvell_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        cvell_party_size = tk.OptionMenu(bc_win, cvell_party_size_choice, *party_size)
+        cvell_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        cvell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cvell_status, command=lambda:update_check_status('Chaos Vellum', cvell_status, cvell_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        cvell_clear_status.config(indicatoron=False, borderwidth=0)
+
+        # Akechi Mitsuhide
+        akechi_name = tk.Label(bc_win, text='Akechi Mitsuhide', **font_preset, bg='#DBEDF3')
+        akechi_img = tk.Label(bc_win, image=akechi_icon, bg='#DBEDF3')
+        akechi_difficulty = tk.OptionMenu(bc_win, akechi_difficulty_choice, *difficulty_a) 
+        akechi_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        akechi_party_size = tk.OptionMenu(bc_win, akechi_party_size_choice, *party_size)
+        akechi_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        akechi_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=akechi_status, command=lambda:update_check_status('Akechi Mitsuhide', akechi_status, akechi_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        akechi_clear_status.config(indicatoron=False, borderwidth=0)
+
+        # Hard Magnus
+        hmag_name = tk.Label(bc_win, text='Hard Magnus', **font_preset, bg='#DBEDF3')
+        hmag_img = tk.Label(bc_win, image=hmag_icon, bg='#DBEDF3')
+        hmag_difficulty = tk.OptionMenu(bc_win, hmag_difficulty_choice, *difficulty_a) 
+        hmag_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        hmag_party_size = tk.OptionMenu(bc_win, hmag_party_size_choice, *party_size)
+        hmag_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        hmag_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=hmag_status, command=lambda:update_check_status('Hard Magnus', hmag_status, hmag_clear_status), 
                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    seren_clear_status.config(indicatoron=False, borderwidth=0)
+        hmag_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # Kaling
-    kaling_name = tk.Label(bc_win, text='Kaling', **font_preset, bg='#DBEDF3')
-    kaling_img = tk.Label(bc_win, image=kaling_icon, bg='#DBEDF3')
-    kaling_difficulty = tk.OptionMenu(bc_win, kaling_difficulty_choice, *difficulty_e)
-    kaling_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    kaling_party_size = tk.OptionMenu(bc_win, kaling_party_size_choice, *party_size)
-    kaling_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    kaling_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kaling_status, command=lambda:update_check_status('Kaling', kaling_status, kaling_clear_status), 
-                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    kaling_clear_status.config(indicatoron=False, borderwidth=0)
-
-    # Kalos
-    kalos_name = tk.Label(bc_win, text='Kalos', **font_preset, bg='#DBEDF3')
-    kalos_img = tk.Label(bc_win, image=kalos_icon, bg='#DBEDF3')
-    kalos_difficulty = tk.OptionMenu(bc_win, kalos_difficulty_choice, *difficulty_e)
-    kalos_difficulty.config(font=('Kozuka Gothic Pro B', 8))
-    kalos_party_size = tk.OptionMenu(bc_win, kalos_party_size_choice, *party_size)
-    kalos_party_size.config(font=('Kozuka Gothic Pro B', 8))
-    kalos_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status, kalos_clear_status), 
+        # Chaos Papulatus
+        cpap_name = tk.Label(bc_win, text='Chaos Papulatus', **font_preset, bg='#DBEDF3')
+        cpap_img = tk.Label(bc_win, image=cpap_icon, bg='#DBEDF3')
+        cpap_difficulty = tk.OptionMenu(bc_win, cpap_difficulty_choice, *difficulty_a) 
+        cpap_difficulty.config(state='disabled', font=('Kozuka Gothic Pro B', 8))
+        cpap_party_size = tk.OptionMenu(bc_win, cpap_party_size_choice, *party_size)
+        cpap_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        cpap_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpap_status, command=lambda:update_check_status('Chaos Papulatus', cpap_status, cpap_clear_status), 
                                         bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
-    kalos_clear_status.config(indicatoron=False, borderwidth=0)
-    # endregion
+        cpap_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # button widgets 
-    reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, width=15, command=reset_clears_only, bg='#B5DAE6', activebackground='#DBEDF3')
-    reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset, width=15, command=reset_all, bg='#B5DAE6', activebackground='#DBEDF3')
-    update_btn = tk.Button(bc_win, text='Update', **font_preset, width=15, command=update_difficulty_party_size, bg='#B5DAE6', activebackground='#DBEDF3')
-    cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, width=15, command=bc_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
+        # Lotus
+        lotus_name = tk.Label(bc_win, text='Lotus', **font_preset, bg='#DBEDF3')
+        lotus_img = tk.Label(bc_win, image=lotus_icon, bg='#DBEDF3')
+        lotus_difficulty = tk.OptionMenu(bc_win, lotus_difficulty_choice, *difficulty_d)
+        lotus_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        lotus_party_size = tk.OptionMenu(bc_win, lotus_party_size_choice, *party_size)
+        lotus_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        lotus_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lotus_status, command=lambda:update_check_status('Lotus', lotus_status, lotus_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        lotus_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # load the saved checkbutton status with relevant status icons upon popup's opening
-    load_clear_statuses()
+        # Damien
+        damien_name = tk.Label(bc_win, text='Damien', **font_preset, bg='#DBEDF3')
+        damien_img = tk.Label(bc_win, image=damien_icon, bg='#DBEDF3')
+        damien_difficulty = tk.OptionMenu(bc_win, damien_difficulty_choice, *difficulty_b)
+        damien_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        damien_party_size = tk.OptionMenu(bc_win, damien_party_size_choice, *party_size)
+        damien_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        damien_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=damien_status, command=lambda:update_check_status('Damien', damien_status, damien_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        damien_clear_status.config(indicatoron=False, borderwidth=0)
 
-    # region - grid layout
-    bossing_checklist_title.grid(row=0, columnspan=9)
-    character_details_lbl.grid(row=1, columnspan=9)
+        # Guardian Slime
+        gslime_name = tk.Label(bc_win, text='Guardian Slime', **font_preset, bg='#DBEDF3')
+        gslime_img = tk.Label(bc_win, image=gslime_icon, bg='#DBEDF3')
+        gslime_difficulty = tk.OptionMenu(bc_win, gslime_difficulty_choice, *difficulty_b)
+        gslime_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        gslime_party_size = tk.OptionMenu(bc_win, gslime_party_size_choice, *party_size)
+        gslime_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        gslime_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gslime_status, command=lambda:update_check_status('Guardian Slime', gslime_status, gslime_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        gslime_clear_status.config(indicatoron=False, borderwidth=0)
 
-    cpb_name.grid(row=2, column=0, pady=10, padx=(30, 10))
-    cpb_img.grid(row=3, column=0, padx=(30, 10))
-    cpb_difficulty.grid(row=4, column=0, padx=(30, 10))
-    cpb_party_size.grid(row=5, column=0, padx=(30, 10))
-    cpb_clear_status.grid(row=6, column=0, pady=10, padx=(30, 10))
+        # Lucid
+        lucid_name = tk.Label(bc_win, text='Lucid', **font_preset, bg='#DBEDF3')
+        lucid_img = tk.Label(bc_win, image=lucid_icon, bg='#DBEDF3')
+        lucid_difficulty = tk.OptionMenu(bc_win, lucid_difficulty_choice, *difficulty_c)
+        lucid_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        lucid_party_size = tk.OptionMenu(bc_win, lucid_party_size_choice, *party_size)
+        lucid_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        lucid_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=lucid_status, command=lambda:update_check_status('Lucid', lucid_status, lucid_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        lucid_clear_status.config(indicatoron=False, borderwidth=0)
 
-    hh_name.grid(row=2, column=1, pady=10, padx=10)
-    hh_img.grid(row=3, column=1, padx=10)
-    hh_difficulty.grid(row=4, column=1, padx=10)
-    hh_party_size.grid(row=5, column=1, padx=10)
-    hh_clear_status.grid(row=6, column=1, pady=10, padx=10)
+        # Will
+        will_name = tk.Label(bc_win, text='Will', **font_preset, bg='#DBEDF3')
+        will_img = tk.Label(bc_win, image=will_icon, bg='#DBEDF3')
+        will_difficulty = tk.OptionMenu(bc_win, will_difficulty_choice, *difficulty_c)
+        will_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        will_party_size = tk.OptionMenu(bc_win, will_party_size_choice, *party_size)
+        will_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        will_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=will_status, command=lambda:update_check_status('Will', will_status, will_clear_status), 
+                                        bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        will_clear_status.config(indicatoron=False, borderwidth=0)
 
-    cyg_name.grid(row=2, column=2, pady=10, padx=10)
-    cyg_img.grid(row=3, column=2, padx=10)
-    cyg_difficulty.grid(row=4, column=2, padx=10)
-    cyg_party_size.grid(row=5, column=2, padx=10)
-    cyg_clear_status.grid(row=6, column=2, pady=10, padx=10)
+        # Gloom
+        gloom_name = tk.Label(bc_win, text='Gloom', **font_preset, bg='#DBEDF3')
+        gloom_img = tk.Label(bc_win, image=gloom_icon, bg='#DBEDF3')
+        gloom_difficulty = tk.OptionMenu(bc_win, gloom_difficulty_choice, *difficulty_b)
+        gloom_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        gloom_party_size = tk.OptionMenu(bc_win, gloom_party_size_choice, *party_size)
+        gloom_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        gloom_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=gloom_status, command=lambda:update_check_status('Gloom', gloom_status, gloom_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        gloom_clear_status.config(indicatoron=False, borderwidth=0)
 
-    czak_name.grid(row=2, column=3, pady=10, padx=10)
-    czak_img.grid(row=3, column=3, padx=10)
-    czak_difficulty.grid(row=4, column=3, padx=10)
-    czak_party_size.grid(row=5, column=3, padx=10)
-    czak_clear_status.grid(row=6, column=3, pady=10, padx=10)
+        # Darknell
+        darknell_name = tk.Label(bc_win, text='Darknell', **font_preset, bg='#DBEDF3')
+        darknell_img = tk.Label(bc_win, image=darknell_icon, bg='#DBEDF3')
+        darknell_difficulty = tk.OptionMenu(bc_win, darknell_difficulty_choice, *difficulty_b)
+        darknell_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        darknell_party_size = tk.OptionMenu(bc_win, darknell_party_size_choice, *party_size)
+        darknell_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        darknell_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=darknell_status, command=lambda:update_check_status('Darknell', darknell_status, darknell_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        darknell_clear_status.config(indicatoron=False, borderwidth=0)
 
-    pno_name.grid(row=2, column=4, pady=10, padx=10)
-    pno_img.grid(row=3, column=4, padx=10)
-    pno_difficulty.grid(row=4, column=4, padx=10)
-    pno_party_size.grid(row=5, column=4, padx=10)
-    pno_clear_status.grid(row=6, column=4, pady=10, padx=10)
+        # Versus Hilla
+        vhilla_name = tk.Label(bc_win, text='Versus Hilla', **font_preset, bg='#DBEDF3')
+        vhilla_img = tk.Label(bc_win, image=vhilla_icon, bg='#DBEDF3')
+        vhilla_difficulty = tk.OptionMenu(bc_win, vhilla_difficulty_choice, *difficulty_b)
+        vhilla_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        vhilla_party_size = tk.OptionMenu(bc_win, vhilla_party_size_choice, *party_size)
+        vhilla_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        vhilla_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=vhilla_status, command=lambda:update_check_status('Versus Hilla', vhilla_status, vhilla_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        vhilla_clear_status.config(indicatoron=False, borderwidth=0)
 
-    cqueen_name.grid(row=2, column=5, pady=10, padx=10)
-    cqueen_img.grid(row=3, column=5, padx=10)
-    cqueen_difficulty.grid(row=4, column=5, padx=10)
-    cqueen_party_size.grid(row=5, column=5, padx=10)
-    cqueen_clear_status.grid(row=6, column=5, pady=10, padx=10)
+        # Seren
+        seren_name = tk.Label(bc_win, text='Seren', **font_preset, bg='#DBEDF3')
+        seren_img = tk.Label(bc_win, image=seren_icon, bg='#DBEDF3')
+        seren_difficulty = tk.OptionMenu(bc_win, seren_difficulty_choice, *difficulty_d)
+        seren_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        seren_party_size = tk.OptionMenu(bc_win, seren_party_size_choice, *party_size)
+        seren_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        seren_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=seren_status, command=lambda:update_check_status('Seren', seren_status, seren_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        seren_clear_status.config(indicatoron=False, borderwidth=0)
 
-    cpierre_name.grid(row=7, column=0, pady=10, padx=(30, 10))
-    cpierre_img.grid(row=8, column=0, padx=(30, 10))
-    cpierre_difficulty.grid(row=9, column=0, padx=(30, 10))
-    cpierre_party_size.grid(row=10, column=0, padx=(30, 10))
-    cpierre_clear_status.grid(row=11, column=0, pady=10, padx=(30, 10))
+        # Kaling
+        kaling_name = tk.Label(bc_win, text='Kaling', **font_preset, bg='#DBEDF3')
+        kaling_img = tk.Label(bc_win, image=kaling_icon, bg='#DBEDF3')
+        kaling_difficulty = tk.OptionMenu(bc_win, kaling_difficulty_choice, *difficulty_e)
+        kaling_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        kaling_party_size = tk.OptionMenu(bc_win, kaling_party_size_choice, *party_size)
+        kaling_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        kaling_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kaling_status, command=lambda:update_check_status('Kaling', kaling_status, kaling_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        kaling_clear_status.config(indicatoron=False, borderwidth=0)
 
-    cvonbon_name.grid(row=7, column=1, pady=10, padx=10)
-    cvonbon_img.grid(row=8, column=1, padx=10)
-    cvonbon_difficulty.grid(row=9, column=1, padx=10)
-    cvonbon_party_size.grid(row=10, column=1, padx=10)
-    cvonbon_clear_status.grid(row=11, column=1, pady=10, padx=10)
+        # Kalos
+        kalos_name = tk.Label(bc_win, text='Kalos', **font_preset, bg='#DBEDF3')
+        kalos_img = tk.Label(bc_win, image=kalos_icon, bg='#DBEDF3')
+        kalos_difficulty = tk.OptionMenu(bc_win, kalos_difficulty_choice, *difficulty_e)
+        kalos_difficulty.config(font=('Kozuka Gothic Pro B', 8))
+        kalos_party_size = tk.OptionMenu(bc_win, kalos_party_size_choice, *party_size)
+        kalos_party_size.config(font=('Kozuka Gothic Pro B', 8))
+        kalos_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=kalos_status, command=lambda:update_check_status('Kalos', kalos_status, kalos_clear_status), 
+                                            bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
+        kalos_clear_status.config(indicatoron=False, borderwidth=0)
+        # endregion
 
-    cvell_name.grid(row=7, column=2, pady=10, padx=10)
-    cvell_img.grid(row=8, column=2, padx=10)
-    cvell_difficulty.grid(row=9, column=2, padx=10)
-    cvell_party_size.grid(row=10, column=2, padx=10)
-    cvell_clear_status.grid(row=11, column=2, pady=10, padx=10)
+        # button widgets 
+        reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, width=15, command=reset_clears_only, bg='#B5DAE6', activebackground='#DBEDF3')
+        reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset, width=15, command=reset_all, bg='#B5DAE6', activebackground='#DBEDF3')
+        update_btn = tk.Button(bc_win, text='Update', **font_preset, width=15, command=update_difficulty_party_size, bg='#B5DAE6', activebackground='#DBEDF3')
+        cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, width=15, command=bc_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
 
-    akechi_name.grid(row=7, column=3, pady=10, padx=10)
-    akechi_img.grid(row=8, column=3, padx=10)
-    akechi_difficulty.grid(row=9, column=3, padx=10)
-    akechi_party_size.grid(row=10, column=3, padx=10)
-    akechi_clear_status.grid(row=11, column=3, pady=10, padx=10)
+        # load the saved checkbutton status with relevant status icons upon popup's opening
+        load_clear_statuses()
 
-    hmag_name.grid(row=7, column=4, pady=10, padx=10)
-    hmag_img.grid(row=8, column=4, padx=10)
-    hmag_difficulty.grid(row=9, column=4, padx=10)
-    hmag_party_size.grid(row=10, column=4, padx=10)
-    hmag_clear_status.grid(row=11, column=4, pady=10, padx=10)
+        # region - grid layout
+        bossing_checklist_title.grid(row=0, columnspan=9)
+        character_details_lbl.grid(row=1, columnspan=9)
 
-    cpap_name.grid(row=7, column=5, pady=10, padx=10)
-    cpap_img.grid(row=8, column=5, padx=10)
-    cpap_difficulty.grid(row=9, column=5, padx=10)
-    cpap_party_size.grid(row=10, column=5, padx=10)
-    cpap_clear_status.grid(row=11, column=5, pady=10, padx=10)
+        cpb_name.grid(row=2, column=0, pady=10, padx=(30, 10))
+        cpb_img.grid(row=3, column=0, padx=(30, 10))
+        cpb_difficulty.grid(row=4, column=0, padx=(30, 10))
+        cpb_party_size.grid(row=5, column=0, padx=(30, 10))
+        cpb_clear_status.grid(row=6, column=0, pady=10, padx=(30, 10))
 
-    lotus_name.grid(row=2, column=6, pady=10, padx=10)
-    lotus_img.grid(row=3, column=6, padx=10)
-    lotus_difficulty.grid(row=4, column=6, padx=10)
-    lotus_party_size.grid(row=5, column=6, padx=10)
-    lotus_clear_status.grid(row=6, column=6, pady=10, padx=10)
+        hh_name.grid(row=2, column=1, pady=10, padx=10)
+        hh_img.grid(row=3, column=1, padx=10)
+        hh_difficulty.grid(row=4, column=1, padx=10)
+        hh_party_size.grid(row=5, column=1, padx=10)
+        hh_clear_status.grid(row=6, column=1, pady=10, padx=10)
 
-    damien_name.grid(row=2, column=7, pady=10, padx=10)
-    damien_img.grid(row=3, column=7, padx=10)
-    damien_difficulty.grid(row=4, column=7, padx=10)
-    damien_party_size.grid(row=5, column=7, padx=10)
-    damien_clear_status.grid(row=6, column=7, pady=10, padx=10)
+        cyg_name.grid(row=2, column=2, pady=10, padx=10)
+        cyg_img.grid(row=3, column=2, padx=10)
+        cyg_difficulty.grid(row=4, column=2, padx=10)
+        cyg_party_size.grid(row=5, column=2, padx=10)
+        cyg_clear_status.grid(row=6, column=2, pady=10, padx=10)
 
-    gslime_name.grid(row=2, column=8, pady=10, padx=(10, 30))
-    gslime_img.grid(row=3, column=8, padx=(10, 30))
-    gslime_difficulty.grid(row=4, column=8, padx=(10, 30))
-    gslime_party_size.grid(row=5, column=8, padx=(10, 30))
-    gslime_clear_status.grid(row=6, column=8, pady=10, padx=(10, 30))
+        czak_name.grid(row=2, column=3, pady=10, padx=10)
+        czak_img.grid(row=3, column=3, padx=10)
+        czak_difficulty.grid(row=4, column=3, padx=10)
+        czak_party_size.grid(row=5, column=3, padx=10)
+        czak_clear_status.grid(row=6, column=3, pady=10, padx=10)
 
-    lucid_name.grid(row=7, column=6, pady=10, padx=10)
-    lucid_img.grid(row=8, column=6, padx=10)
-    lucid_difficulty.grid(row=9, column=6, padx=10)
-    lucid_party_size.grid(row=10, column=6, padx=10)
-    lucid_clear_status.grid(row=11, column=6, pady=10, padx=10)
+        pno_name.grid(row=2, column=4, pady=10, padx=10)
+        pno_img.grid(row=3, column=4, padx=10)
+        pno_difficulty.grid(row=4, column=4, padx=10)
+        pno_party_size.grid(row=5, column=4, padx=10)
+        pno_clear_status.grid(row=6, column=4, pady=10, padx=10)
 
-    will_name.grid(row=7, column=7, pady=10, padx=10)
-    will_img.grid(row=8, column=7, padx=10)
-    will_difficulty.grid(row=9, column=7, padx=10)
-    will_party_size.grid(row=10, column=7, padx=10)
-    will_clear_status.grid(row=11, column=7, pady=10, padx=10)
+        cqueen_name.grid(row=2, column=5, pady=10, padx=10)
+        cqueen_img.grid(row=3, column=5, padx=10)
+        cqueen_difficulty.grid(row=4, column=5, padx=10)
+        cqueen_party_size.grid(row=5, column=5, padx=10)
+        cqueen_clear_status.grid(row=6, column=5, pady=10, padx=10)
 
-    gloom_name.grid(row=7, column=8, pady=10, padx=(10, 30))
-    gloom_img.grid(row=8, column=8, padx=(10, 30))
-    gloom_difficulty.grid(row=9, column=8, padx=(10, 30))
-    gloom_party_size.grid(row=10, column=8, padx=(10, 30))
-    gloom_clear_status.grid(row=11, column=8, pady=10, padx=(10, 30))
-    
-    darknell_name.grid(row=12, column=0, pady=10, padx=(30, 10))
-    darknell_img.grid(row=13, column=0, padx=(30, 10))
-    darknell_difficulty.grid(row=14, column=0, padx=(30, 10))
-    darknell_party_size.grid(row=15, column=0, padx=(30, 10))
-    darknell_clear_status.grid(row=16, column=0, pady=10, padx=(30, 10))
+        cpierre_name.grid(row=7, column=0, pady=10, padx=(30, 10))
+        cpierre_img.grid(row=8, column=0, padx=(30, 10))
+        cpierre_difficulty.grid(row=9, column=0, padx=(30, 10))
+        cpierre_party_size.grid(row=10, column=0, padx=(30, 10))
+        cpierre_clear_status.grid(row=11, column=0, pady=10, padx=(30, 10))
 
-    vhilla_name.grid(row=12, column=1, pady=10, padx=10)
-    vhilla_img.grid(row=13, column=1, padx=10)
-    vhilla_difficulty.grid(row=14, column=1, padx=10)
-    vhilla_party_size.grid(row=15, column=1, padx=10)
-    vhilla_clear_status.grid(row=16, column=1, pady=10, padx=10)
+        cvonbon_name.grid(row=7, column=1, pady=10, padx=10)
+        cvonbon_img.grid(row=8, column=1, padx=10)
+        cvonbon_difficulty.grid(row=9, column=1, padx=10)
+        cvonbon_party_size.grid(row=10, column=1, padx=10)
+        cvonbon_clear_status.grid(row=11, column=1, pady=10, padx=10)
 
-    seren_name.grid(row=12, column=2, pady=10, padx=10)
-    seren_img.grid(row=13, column=2, padx=10)
-    seren_difficulty.grid(row=14, column=2, padx=10)
-    seren_party_size.grid(row=15, column=2, padx=10)
-    seren_clear_status.grid(row=16, column=2, pady=10, padx=10)
+        cvell_name.grid(row=7, column=2, pady=10, padx=10)
+        cvell_img.grid(row=8, column=2, padx=10)
+        cvell_difficulty.grid(row=9, column=2, padx=10)
+        cvell_party_size.grid(row=10, column=2, padx=10)
+        cvell_clear_status.grid(row=11, column=2, pady=10, padx=10)
 
-    kaling_name.grid(row=12, column=3, pady=10, padx=10)
-    kaling_img.grid(row=13, column=3, padx=10)
-    kaling_difficulty.grid(row=14, column=3, padx=10)
-    kaling_party_size.grid(row=15, column=3, padx=10)
-    kaling_clear_status.grid(row=16, column=3, pady=10, padx=10)
+        akechi_name.grid(row=7, column=3, pady=10, padx=10)
+        akechi_img.grid(row=8, column=3, padx=10)
+        akechi_difficulty.grid(row=9, column=3, padx=10)
+        akechi_party_size.grid(row=10, column=3, padx=10)
+        akechi_clear_status.grid(row=11, column=3, pady=10, padx=10)
 
-    kalos_name.grid(row=12, column=4, pady=10, padx=10)
-    kalos_img.grid(row=13, column=4, padx=10)
-    kalos_difficulty.grid(row=14, column=4, padx=10)
-    kalos_party_size.grid(row=15, column=4, padx=10)
-    kalos_clear_status.grid(row=16, column=4, pady=10, padx=10)
+        hmag_name.grid(row=7, column=4, pady=10, padx=10)
+        hmag_img.grid(row=8, column=4, padx=10)
+        hmag_difficulty.grid(row=9, column=4, padx=10)
+        hmag_party_size.grid(row=10, column=4, padx=10)
+        hmag_clear_status.grid(row=11, column=4, pady=10, padx=10)
 
-    update_btn.grid(row=23, column=2, pady=(20, 30))
-    reset_clears_btn.grid(row=23, column=3, pady=(20, 30))
-    reset_all_btn.grid(row=23, column=4, pady=(20, 30))
-    cancel_btn.grid(row=23, column=5, pady=(20, 30))
+        cpap_name.grid(row=7, column=5, pady=10, padx=10)
+        cpap_img.grid(row=8, column=5, padx=10)
+        cpap_difficulty.grid(row=9, column=5, padx=10)
+        cpap_party_size.grid(row=10, column=5, padx=10)
+        cpap_clear_status.grid(row=11, column=5, pady=10, padx=10)
 
-    # endregion
+        lotus_name.grid(row=2, column=6, pady=10, padx=10)
+        lotus_img.grid(row=3, column=6, padx=10)
+        lotus_difficulty.grid(row=4, column=6, padx=10)
+        lotus_party_size.grid(row=5, column=6, padx=10)
+        lotus_clear_status.grid(row=6, column=6, pady=10, padx=10)
 
-    # region - reference vars
-    # save image reference to avoid garbage collection
-    cpb_img.image = cpb_icon
-    hh_img.image = hh_icon
-    cyg_img.image = cyg_icon
-    czak_img.image = czak_icon
-    pno_img.image = pno_icon
-    cqueen_img.image = cqueen_icon
-    cpierre_img.image = cpierre_icon
-    cvonbon_img.image = cvonbon_icon
-    cvell_img.image = cvell_icon
-    akechi_img.image = akechi_icon
-    hmag_img.image = hmag_icon
-    cpap_img.image = cpap_icon
-    lotus_img.image = lotus_icon
-    damien_img.image = damien_icon
-    gslime_img.image = gslime_icon
-    lucid_img.image = lucid_icon
-    will_img.image = will_icon
-    gloom_img.image = gloom_icon
-    darknell_img.image = darknell_icon
-    vhilla_img.image = vhilla_icon
-    seren_img.image = seren_icon
-    kaling_img.image = kaling_icon
-    kalos_img.image = kalos_icon
-    # endregion
+        damien_name.grid(row=2, column=7, pady=10, padx=10)
+        damien_img.grid(row=3, column=7, padx=10)
+        damien_difficulty.grid(row=4, column=7, padx=10)
+        damien_party_size.grid(row=5, column=7, padx=10)
+        damien_clear_status.grid(row=6, column=7, pady=10, padx=10)
+
+        gslime_name.grid(row=2, column=8, pady=10, padx=(10, 30))
+        gslime_img.grid(row=3, column=8, padx=(10, 30))
+        gslime_difficulty.grid(row=4, column=8, padx=(10, 30))
+        gslime_party_size.grid(row=5, column=8, padx=(10, 30))
+        gslime_clear_status.grid(row=6, column=8, pady=10, padx=(10, 30))
+
+        lucid_name.grid(row=7, column=6, pady=10, padx=10)
+        lucid_img.grid(row=8, column=6, padx=10)
+        lucid_difficulty.grid(row=9, column=6, padx=10)
+        lucid_party_size.grid(row=10, column=6, padx=10)
+        lucid_clear_status.grid(row=11, column=6, pady=10, padx=10)
+
+        will_name.grid(row=7, column=7, pady=10, padx=10)
+        will_img.grid(row=8, column=7, padx=10)
+        will_difficulty.grid(row=9, column=7, padx=10)
+        will_party_size.grid(row=10, column=7, padx=10)
+        will_clear_status.grid(row=11, column=7, pady=10, padx=10)
+
+        gloom_name.grid(row=7, column=8, pady=10, padx=(10, 30))
+        gloom_img.grid(row=8, column=8, padx=(10, 30))
+        gloom_difficulty.grid(row=9, column=8, padx=(10, 30))
+        gloom_party_size.grid(row=10, column=8, padx=(10, 30))
+        gloom_clear_status.grid(row=11, column=8, pady=10, padx=(10, 30))
+        
+        darknell_name.grid(row=12, column=0, pady=10, padx=(30, 10))
+        darknell_img.grid(row=13, column=0, padx=(30, 10))
+        darknell_difficulty.grid(row=14, column=0, padx=(30, 10))
+        darknell_party_size.grid(row=15, column=0, padx=(30, 10))
+        darknell_clear_status.grid(row=16, column=0, pady=10, padx=(30, 10))
+
+        vhilla_name.grid(row=12, column=1, pady=10, padx=10)
+        vhilla_img.grid(row=13, column=1, padx=10)
+        vhilla_difficulty.grid(row=14, column=1, padx=10)
+        vhilla_party_size.grid(row=15, column=1, padx=10)
+        vhilla_clear_status.grid(row=16, column=1, pady=10, padx=10)
+
+        seren_name.grid(row=12, column=2, pady=10, padx=10)
+        seren_img.grid(row=13, column=2, padx=10)
+        seren_difficulty.grid(row=14, column=2, padx=10)
+        seren_party_size.grid(row=15, column=2, padx=10)
+        seren_clear_status.grid(row=16, column=2, pady=10, padx=10)
+
+        kaling_name.grid(row=12, column=3, pady=10, padx=10)
+        kaling_img.grid(row=13, column=3, padx=10)
+        kaling_difficulty.grid(row=14, column=3, padx=10)
+        kaling_party_size.grid(row=15, column=3, padx=10)
+        kaling_clear_status.grid(row=16, column=3, pady=10, padx=10)
+
+        kalos_name.grid(row=12, column=4, pady=10, padx=10)
+        kalos_img.grid(row=13, column=4, padx=10)
+        kalos_difficulty.grid(row=14, column=4, padx=10)
+        kalos_party_size.grid(row=15, column=4, padx=10)
+        kalos_clear_status.grid(row=16, column=4, pady=10, padx=10)
+
+        update_btn.grid(row=23, column=2, pady=(20, 30))
+        reset_clears_btn.grid(row=23, column=3, pady=(20, 30))
+        reset_all_btn.grid(row=23, column=4, pady=(20, 30))
+        cancel_btn.grid(row=23, column=5, pady=(20, 30))
+
+        # endregion
+
+        # region - reference vars
+        # save image reference to avoid garbage collection
+        cpb_img.image = cpb_icon
+        hh_img.image = hh_icon
+        cyg_img.image = cyg_icon
+        czak_img.image = czak_icon
+        pno_img.image = pno_icon
+        cqueen_img.image = cqueen_icon
+        cpierre_img.image = cpierre_icon
+        cvonbon_img.image = cvonbon_icon
+        cvell_img.image = cvell_icon
+        akechi_img.image = akechi_icon
+        hmag_img.image = hmag_icon
+        cpap_img.image = cpap_icon
+        lotus_img.image = lotus_icon
+        damien_img.image = damien_icon
+        gslime_img.image = gslime_icon
+        lucid_img.image = lucid_icon
+        will_img.image = will_icon
+        gloom_img.image = gloom_icon
+        darknell_img.image = darknell_icon
+        vhilla_img.image = vhilla_icon
+        seren_img.image = seren_icon
+        kaling_img.image = kaling_icon
+        kalos_img.image = kalos_icon
+        # endregion
 
 # // purple functions //
 # add mesos amount to balance
 def add_mesos():
     
+    global current_popup
+    global am_win
+
     mesos_amount = tk.StringVar()
 
     def topup_balance():
@@ -1903,27 +1943,37 @@ def add_mesos():
             # present popup window post closure of error prompt
             am_win.lift()
 
-    # small popup window asking for user input
-    am_win = tk.Toplevel(purple_frame, bg='#DBEDF3')
-    am_win.title('Add Mesos')
-    am_win.geometry('250x150+900+350')
-    am_win.resizable(False, False)
+    # check to see if a popup is currently opened
+    if is_popup_open():
+        messagebox.showerror('Active Popup Detected.',
+                             'There is already a Popup opened.')
+        am_win.lift()
+    else:
+        # small popup window asking for user input
+        am_win = tk.Toplevel(purple_frame, bg='#DBEDF3')
+        am_win.title('Add Mesos')
+        am_win.geometry('250x150+900+350')
+        am_win.resizable(False, False)
+        current_popup = am_win
 
-    am_prompt_lbl = tk.Label(am_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    am_amount_entry = tk.Entry(am_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-    am_submit_btn = tk.Button(am_win, text='Add to Balance', font=('Kozuka Gothic Pro B', 12), command=topup_balance, bg='#B5DAE6', activebackground='#DBEDF3')
+        am_prompt_lbl = tk.Label(am_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        am_amount_entry = tk.Entry(am_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+        am_submit_btn = tk.Button(am_win, text='Add to Balance', font=('Kozuka Gothic Pro B', 12), command=topup_balance, bg='#B5DAE6', activebackground='#DBEDF3')
 
-    am_prompt_lbl.grid(row=0, column=0)
-    am_amount_entry.grid(row=1, column=0)
-    am_submit_btn.grid(row=2, column=0, pady=(0, 10))
+        am_prompt_lbl.grid(row=0, column=0)
+        am_amount_entry.grid(row=1, column=0)
+        am_submit_btn.grid(row=2, column=0, pady=(0, 10))
 
-    am_win.grid_rowconfigure(0, weight=1)
-    am_win.grid_rowconfigure(1, weight=1)
-    am_win.grid_rowconfigure(2, weight=1)
-    am_win.grid_columnconfigure(0, weight=1)
+        am_win.grid_rowconfigure(0, weight=1)
+        am_win.grid_rowconfigure(1, weight=1)
+        am_win.grid_rowconfigure(2, weight=1)
+        am_win.grid_columnconfigure(0, weight=1)
 
 # subtract mesos amount from balance
 def subtract_mesos():
+
+    global current_popup
+    global sm_win
 
     mesos_amount = tk.StringVar()
 
@@ -1953,24 +2003,31 @@ def subtract_mesos():
                                  'Digits Only')
             sm_win.lift()
 
-    # small popup window asking for user input
-    sm_win = tk.Toplevel(purple_frame, bg='#DBEDF3')
-    sm_win.title('Subtract Mesos')
-    sm_win.geometry('250x150+900+350')
-    sm_win.resizable(False, False)
+    # check to see if a popup is currently opened
+    if is_popup_open():
+        messagebox.showerror('Active Popup Detected.',
+                             'There is already a Popup opened.')
+        sm_win.lift()
+    else:
+        # small popup window asking for user input
+        sm_win = tk.Toplevel(purple_frame, bg='#DBEDF3')
+        sm_win.title('Subtract Mesos')
+        sm_win.geometry('250x150+900+350')
+        sm_win.resizable(False, False)
+        current_popup = sm_win
 
-    sm_prompt_lbl = tk.Label(sm_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    sm_amount_entry = tk.Entry(sm_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-    sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=('Kozuka Gothic Pro B', 12), command=reduce_balance, bg='#B5DAE6', activebackground='#DBEDF3')
+        sm_prompt_lbl = tk.Label(sm_win, text='Enter Mesos Amount', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        sm_amount_entry = tk.Entry(sm_win, font=('Kozuka Gothic Pro B', 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+        sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=('Kozuka Gothic Pro B', 12), command=reduce_balance, bg='#B5DAE6', activebackground='#DBEDF3')
 
-    sm_prompt_lbl.grid(row=0, column=0)
-    sm_amount_entry.grid(row=1, column=0)
-    sm_submit_btn.grid(row=2, column=0, pady=(0, 10))
+        sm_prompt_lbl.grid(row=0, column=0)
+        sm_amount_entry.grid(row=1, column=0)
+        sm_submit_btn.grid(row=2, column=0, pady=(0, 10))
 
-    sm_win.grid_rowconfigure(0, weight=1)
-    sm_win.grid_rowconfigure(1, weight=1)
-    sm_win.grid_rowconfigure(2, weight=1)
-    sm_win.grid_columnconfigure(0, weight=1)
+        sm_win.grid_rowconfigure(0, weight=1)
+        sm_win.grid_rowconfigure(1, weight=1)
+        sm_win.grid_rowconfigure(2, weight=1)
+        sm_win.grid_columnconfigure(0, weight=1)
 
 # rest mesos balance to 0
 def reset_mesos():
@@ -2014,6 +2071,8 @@ def open_hotlink(hotlink):
 # editing hotlinks
 def edit_hotlinks():
 
+    global current_popup
+    global ehl_win
     first_hotlink = tk.StringVar()
     second_hotlink = tk.StringVar()
     third_hotlink = tk.StringVar()
@@ -2038,28 +2097,35 @@ def edit_hotlinks():
         # close popup
         ehl_win.destroy()
 
-    ehl_win = tk.Toplevel(orange_frame, bg='#DBEDF3')
-    ehl_win.title('Edit Hotlinks')
-    ehl_win.geometry('500x200+750+350')
-    ehl_win.resizable(False, False)
+    # check to see if a popup is currently opened
+    if is_popup_open():
+        messagebox.showerror('Active Popup Detected.',
+                             'There is already a Popup opened.')
+        ehl_win.lift()
+    else:
+        ehl_win = tk.Toplevel(orange_frame, bg='#DBEDF3')
+        ehl_win.title('Edit Hotlinks')
+        ehl_win.geometry('500x200+750+350')
+        ehl_win.resizable(False, False)
+        current_popup = ehl_win
 
-    ehl_hotlinks_title_lbl = tk.Label(ehl_win, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ehl_first_hotlink_entry = tk.Entry(ehl_win, textvariable=first_hotlink, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-    ehl_second_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 2:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-    ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
-    ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-    ehl_edit_btn = tk.Button(ehl_win, text='Save Edit', font=('Kozuka Gothic Pro B', 12), command=save_edit, bg='#B5DAE6', activebackground='#DBEDF3')
+        ehl_hotlinks_title_lbl = tk.Label(ehl_win, text='Edit Hot Links', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        ehl_first_hotlink_entry = tk.Entry(ehl_win, textvariable=first_hotlink, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+        ehl_second_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 2:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+        ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
+        ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
+        ehl_edit_btn = tk.Button(ehl_win, text='Save Edit', font=('Kozuka Gothic Pro B', 12), command=save_edit, bg='#B5DAE6', activebackground='#DBEDF3')
 
-    ehl_hotlinks_title_lbl.place(x=0, y=5, width=500, height=30)
-    ehl_first_hotlink_lbl.place(x=0, y=40, width=100, height=30)
-    ehl_first_hotlink_entry.place(x=100, y=40, width=385, height=30)
-    ehl_second_hotlink_lbl.place(x=0, y=80, width=100, height=30)
-    ehl_second_hotlink_entry.place(x=100, y=80, width=385, height=30)
-    ehl_third_hotlink_lbl.place(x=0, y=120, width=100, height=30)
-    ehl_third_hotlink_entry.place(x=100, y=120, width=385, height=30)
-    ehl_edit_btn.place(x=200, y=160, width=100, height=30)
+        ehl_hotlinks_title_lbl.place(x=0, y=5, width=500, height=30)
+        ehl_first_hotlink_lbl.place(x=0, y=40, width=100, height=30)
+        ehl_first_hotlink_entry.place(x=100, y=40, width=385, height=30)
+        ehl_second_hotlink_lbl.place(x=0, y=80, width=100, height=30)
+        ehl_second_hotlink_entry.place(x=100, y=80, width=385, height=30)
+        ehl_third_hotlink_lbl.place(x=0, y=120, width=100, height=30)
+        ehl_third_hotlink_entry.place(x=100, y=120, width=385, height=30)
+        ehl_edit_btn.place(x=200, y=160, width=100, height=30)
 
 # load in the user 
 load_user()

@@ -2,12 +2,19 @@ import tkinter as tk
 
 current_toplevel = None
 
+def current_toplevel_exists():
+    if current_toplevel is not None and current_toplevel.winfo_exists():
+        return current_toplevel
+    return None
+
 root = tk.Tk()
 root.geometry('400x400')
 
 def first_popup():
     global current_toplevel
-    if current_toplevel is not None and current_toplevel.winfo_exists():
+    # if current_toplevel is not None and current_toplevel.winfo_exists():
+    #     print('window already exists')
+    if current_toplevel_exists():
         print('window already exists')
     else:
         
@@ -22,7 +29,9 @@ def first_popup():
 
 def second_popup():
     global current_toplevel
-    if current_toplevel is not None and current_toplevel.winfo_exists():
+    # if current_toplevel is not None and current_toplevel.winfo_exists():
+    #     print('window already exists')
+    if current_toplevel_exists():
         print('window already exists')
     else:
         sp_win = tk.Toplevel(root)
