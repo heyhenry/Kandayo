@@ -525,7 +525,7 @@ def update_character_popup():
             messagebox.showerror('Invalid Choice',
                                  'You must choose a Job/Class.')
         # ensure user enters a valid number between 1 and 300
-        elif int(uc_level.get()) > 300 or int(uc_level.get()) < 1:
+        elif not uc_level.get().isdigit() or int(uc_level.get()) > 300 or int(uc_level.get()) < 1:
             uc_win.destroy()
             messagebox.showerror('Invalid Level',
                                  'You must enter a valid level.') 
