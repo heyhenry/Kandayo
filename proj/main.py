@@ -2345,8 +2345,11 @@ edit_hotlinks_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, stat
 edit_hotlinks_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
 
 # // grey //
-status_bar_lbl = tk.Label(grey_frame, text='', anchor='e', bg='#dbedf3')
-status_bar_lbl.pack(fill='x', side='bottom', padx=10)
+status_bar_lbl = tk.Label(grey_frame, text='', bg='#dbedf3')
+status_bar_lbl.pack(fill='x', side='right', padx=10)
+
+author_lbl = tk.Label(grey_frame, text='Created By NampaDevelops', padx=10, bg='#dbedf3')
+author_lbl.pack(side='left')
 
 # run on startup
 
