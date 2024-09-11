@@ -2273,7 +2273,7 @@ add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=('Kozuka Gothic P
 remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=('Kozuka Gothic Pro B', 10), command=subtract_mesos, bg='#b5dae6', fg='#283149', width=15)
 reset_balance_btn = tk.Button(purple_frame, text='Reset Balance', font=('Kozuka Gothic Pro B', 10), command=reset_mesos, bg='#b5dae6', fg='#283149', width=15)
 
-bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Cyrstals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 16), bg='#dbedf3', fg='#283149')
+bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Crystals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 16), bg='#dbedf3', fg='#283149')
 bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=('Kozuka Gothic Pro B', 16), bg='#dbedf3', fg='#283149')
 wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}', font=('Kozuka Gothic Pro B', 16), bg='#dbedf3', fg='#283149')
 
@@ -2345,9 +2345,11 @@ edit_hotlinks_btn.bind("<Enter>", lambda mouse_event: on_hover(mouse_event, stat
 edit_hotlinks_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_bar_lbl))
 
 # // grey //
+# brief information display for widgets upon hover
 status_bar_lbl = tk.Label(grey_frame, text='', bg='#dbedf3')
 status_bar_lbl.pack(fill='x', side='right', padx=10)
 
+# authorship of developer
 author_lbl = tk.Label(grey_frame, text='Created By NampaDevelops', padx=10, bg='#dbedf3')
 author_lbl.pack(side='left')
 
