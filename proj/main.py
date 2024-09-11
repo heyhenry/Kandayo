@@ -448,7 +448,7 @@ def add_character_popup():
             'Hayato',
             'Kanna'
         )
-        ac_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10))
+        ac_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10), state='readonly')
         ac_job_dropdown.current(0)
         ac_level_lbl = tk.Label(ac_win, text='Level:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
         ac_level_entry = tk.Entry(ac_win, textvariable=ac_level, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
@@ -611,7 +611,7 @@ def update_character_popup():
             'Hayato',
             'Kanna'
         )
-        uc_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10))
+        uc_job_dropdown.config(background='#ffffff', font=('Kozuka Gothic Pro B', 10), state='readonly')
         uc_job_dropdown.set(characters[selected_ign].job)
         uc_level_lbl = tk.Label(uc_win, text='Level:', font=('Kozuka Gothic Pro B', 12), bg='#DBEDF3')
         uc_level_entry = tk.Entry(uc_win, textvariable=uc_level, font=('Kozuka Gothic Pro B', 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
