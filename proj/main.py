@@ -2346,11 +2346,11 @@ edit_hotlinks_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event
 
 # // grey //
 # brief information display for widgets upon hover
-status_bar_lbl = tk.Label(grey_frame, text='', bg='#dbedf3')
+status_bar_lbl = tk.Label(grey_frame, text='', bg='#dbedf3') # tbd whether to re-incorporate font
 status_bar_lbl.pack(fill='x', side='right', padx=10)
 
 # authorship of developer
-author_lbl = tk.Label(grey_frame, text='Created By NampaDevelops', padx=10, bg='#dbedf3')
+author_lbl = tk.Label(grey_frame, text='Created By NampaDevelops', padx=10, bg='#dbedf3', font=('Kozuka Gothic Pro B', 8))
 author_lbl.pack(side='left')
 
 # run on startup
