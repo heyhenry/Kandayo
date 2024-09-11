@@ -409,7 +409,7 @@ def add_character_popup():
             'Bishop',
             'Dark Knight',
             'Paladin',
-            'Hero'
+            'Hero',
             'Angelic Buster',
             'Lynn',
             'Khali',
@@ -572,7 +572,7 @@ def update_character_popup():
             'Bishop',
             'Dark Knight',
             'Paladin',
-            'Hero'
+            'Hero',
             'Angelic Buster',
             'Lynn',
             'Khali',
