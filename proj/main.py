@@ -1061,6 +1061,8 @@ def bossing_checklist_popup():
         with open(storage_filename, 'w') as outfile:
             outfile.write(json_object)
 
+        load_clear_statuses()
+
     # load the boss_clear values to determine which status icon it should display upon opening the popup
     def load_clear_statuses():
 
