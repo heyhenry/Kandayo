@@ -811,7 +811,7 @@ def bossing_checklist_popup():
             outfile.write(json_object)
 
     # updates both boss_difficulty and party_size simultaneously
-    def update_difficulty_party_size():
+    def update_all():
         update_bossing_difficulty()
         update_party_size()
         update_weekly_mesos_earned()
@@ -1727,7 +1727,7 @@ def bossing_checklist_popup():
         # button widgets 
         reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, width=15, command=reset_clears_only, bg='#B5DAE6', activebackground='#DBEDF3')
         reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset, width=15, command=reset_all, bg='#B5DAE6', activebackground='#DBEDF3')
-        update_btn = tk.Button(bc_win, text='Update', **font_preset, width=15, command=update_difficulty_party_size, bg='#B5DAE6', activebackground='#DBEDF3')
+        update_btn = tk.Button(bc_win, text='Update', **font_preset, width=15, command=update_all, bg='#B5DAE6', activebackground='#DBEDF3')
         cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, width=15, command=bc_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
 
         # load the saved checkbutton status with relevant status icons upon popup's opening

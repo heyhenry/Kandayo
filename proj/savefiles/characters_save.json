@@ -26,13 +26,13 @@
                 "boss_name": "Chaos Zakum",
                 "boss_clear": false,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "party_size": 1
             },
             "Princess No": {
                 "boss_name": "Princess No",
                 "boss_clear": false,
                 "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "party_size": 1
             },
             "Chaos Queen": {
                 "boss_name": "Chaos Queen",
@@ -79,8 +79,8 @@
             "Lotus": {
                 "boss_name": "Lotus",
                 "boss_clear": false,
-                "boss_difficulty": "Select Difficulty",
-                "party_size": "Select Party Size"
+                "boss_difficulty": "Hard/Chaos",
+                "party_size": 3
             },
             "Damien": {
                 "boss_name": "Damien",
