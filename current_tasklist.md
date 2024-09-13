@@ -1,8 +1,13 @@
 ## Tasklist:
 
-1. (?) - Potentially, flip the mechanics around for lifting the existing popup post error message
-1.1 Achieve this by pushing the root window behind the existing popup. 
-2. create a copy of distribution of app in main 
+1. use a variable to store font attribute then call variable in all widgets that currently use font
+2. reduce code
+3. better comments
+4. reorg locations if applicable
+
+
+?. (?) - Potentially, flip the mechanics around for lifting the existing popup post error message
+?.1 Achieve this by pushing the root window behind the existing popup. 
 
 
 Addressing points 1 & 3: 
