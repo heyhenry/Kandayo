@@ -24,13 +24,13 @@
             },
             "Chaos Zakum": {
                 "boss_name": "Chaos Zakum",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
             "Princess No": {
                 "boss_name": "Princess No",
-                "boss_clear": false,
+                "boss_clear": true,
                 "boss_difficulty": "Select Difficulty",
                 "party_size": "Select Party Size"
             },
