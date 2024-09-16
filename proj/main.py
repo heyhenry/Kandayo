@@ -449,7 +449,7 @@ def add_character_popup():
         ac_job_dropdown.current(0)
         ac_level_lbl = tk.Label(ac_win, text='Level:', font=(font_choice, 12), bg='#DBEDF3')
         ac_level_entry = tk.Entry(ac_win, textvariable=ac_level, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        ac_submit_btn = tk.Button(ac_win, text='Add to Roster', font=(font_choice, 10), width=15, command=lambda:validate_character_entry(ac_ign.get()), bg='#B5DAE6', activebackground='#DBEDF3')
+        ac_submit_btn = tk.Button(ac_win, text='Add to Roster', font=(font_choice, 10), width=15, bg='#B5DAE6', activebackground='#DBEDF3', command=lambda:validate_character_entry(ac_ign.get()))
         ac_cancel_btn = tk.Button(ac_win, text='Cancel', font=(font_choice, 10), width=15, command=ac_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
 
         ac_title_lbl.grid(row=0, columnspan=2)
@@ -2237,10 +2237,10 @@ chars_lb.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_event, status_
 
 # // blue frame // 
 # blue widgets
-addchar_btn = tk.Button(blue_frame, text='Add Character', font=(font_choice, 10), bg='#b5dae6', fg='#283149', width=15, command=add_character_popup)
-updchar_btn = tk.Button(blue_frame, text='Update Character', font=(font_choice, 10), bg='#b5dae6', fg='#283149', width=15, command=update_character_popup)
-delchar_btn = tk.Button(blue_frame, text='Delete Character', font=(font_choice, 10), bg='#b5dae6', fg='#283149', width=15, command=delete_character)
-bossing_checklist_btn = tk.Button(blue_frame, text='Bossing Checklist', font=(font_choice, 10), bg='#b5dae6', fg='#283149', width=15, command=bossing_checklist_popup)
+addchar_btn = tk.Button(blue_frame, text='Add Character', font=(font_choice, 10), bg='#b5dae6', fg='#283149', width=15, activebackground='#dbedf3', command=add_character_popup)
+updchar_btn = tk.Button(blue_frame, text='Update Character', font=(font_choice, 10), bg='#b5dae6', fg='#283149', width=15, activebackground='#dbedf3', command=update_character_popup)
+delchar_btn = tk.Button(blue_frame, text='Delete Character', font=(font_choice, 10), bg='#b5dae6', fg='#283149', width=15, activebackground='#dbedf3', command=delete_character)
+bossing_checklist_btn = tk.Button(blue_frame, text='Bossing Checklist', font=(font_choice, 10), bg='#b5dae6', fg='#283149', width=15, activebackground='#dbedf3', command=bossing_checklist_popup)
 
 addchar_btn.grid(row=0, column=0)
 updchar_btn.grid(row=0, column=1)
@@ -2268,13 +2268,13 @@ bossing_checklist_btn.bind("<Leave>", lambda mouse_event: on_hover_leave(mouse_e
 # purple widgets
 mesos_balance_title_lbl = tk.Label(purple_frame, text='Mesos Balance:', font=(font_choice, 16), bg='#dbedf3', fg='#283149')
 mesos_balance_display_lbl = tk.Label(purple_frame, text=f'${user['usr'].mesos_balance:,.0f}', font=(font_choice, 14), bg='#dbedf3', fg='#283149')
-add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=(font_choice, 10), command=add_mesos, bg='#b5dae6', fg='#283149', width=15)
-remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=(font_choice, 10), command=subtract_mesos, bg='#b5dae6', fg='#283149', width=15)
-reset_balance_btn = tk.Button(purple_frame, text='Reset Balance', font=(font_choice, 10), command=reset_mesos, bg='#b5dae6', fg='#283149', width=15)
+add_mesos_btn = tk.Button(purple_frame, text='Add Mesos', font=(font_choice, 10), activebackground='#dbedf3', command=add_mesos, bg='#b5dae6', fg='#283149', width=15)
+remove_mesos_btn = tk.Button(purple_frame, text='Remove Mesos', font=(font_choice, 10), activebackground='#dbedf3', command=subtract_mesos, bg='#b5dae6', fg='#283149', width=15)
+reset_balance_btn = tk.Button(purple_frame, text='Reset Balance', font=(font_choice, 10), activebackground='#dbedf3', command=reset_mesos, bg='#b5dae6', fg='#283149', width=15)
 
-bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Crystals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=(font_choice, 16), bg='#dbedf3', fg='#283149')
-bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=(font_choice, 16), bg='#dbedf3', fg='#283149')
-wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}', font=(font_choice, 16), bg='#dbedf3', fg='#283149')
+bc_remaining_lbl = tk.Label(purple_frame, text=f'Boss Crystals Remaining: {user['usr'].boss_crystal_count - user['usr'].boss_crystal_sold}', font=(font_choice, 16), activebackground='#dbedf3', bg='#dbedf3', fg='#283149')
+bc_sold_lbl = tk.Label(purple_frame, text=f'Boss Crystals Sold: {user['usr'].boss_crystal_sold}', font=(font_choice, 16), activebackground='#dbedf3', bg='#dbedf3', fg='#283149')
+wm_gained_lbl = tk.Label(purple_frame, text=f'Weekly Mesos Gained: ${user['usr'].weekly_mesos_gained:,.0f}', font=(font_choice, 16), activebackground='#dbedf3', bg='#dbedf3', fg='#283149')
 
 mesos_balance_title_lbl.place(x=0, y=20, width=490, height=30)
 mesos_balance_display_lbl.place(x=0, y=50, width=490, height=30)
@@ -2317,9 +2317,9 @@ edit_cog_img = Image.open('./img/edit_cog.png')
 edit_cog_img.thumbnail((100, 100))
 edit_cog_img = ImageTk.PhotoImage(edit_cog_img)
 
-hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1', font=(font_choice, 12), command=lambda:open_hotlink(user['usr'].hotlink_one), bg='#b5dae6', fg='#283149')
-hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2', font=(font_choice, 12), command=lambda:open_hotlink(user['usr'].hotlink_two), bg='#b5dae6', fg='#283149')
-hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3', font=(font_choice, 12), command=lambda:open_hotlink(user['usr'].hotlink_three), bg='#b5dae6', fg='#283149')
+hotlink_one_btn = tk.Button(orange_frame, text='Hot Link 1', font=(font_choice, 12), activebackground='#dbedf3', command=lambda:open_hotlink(user['usr'].hotlink_one), bg='#b5dae6', fg='#283149')
+hotlink_two_btn = tk.Button(orange_frame, text='Hot Link 2', font=(font_choice, 12), activebackground='#dbedf3', command=lambda:open_hotlink(user['usr'].hotlink_two), bg='#b5dae6', fg='#283149')
+hotlink_three_btn = tk.Button(orange_frame, text='Hot Link 3', font=(font_choice, 12), activebackground='#dbedf3', command=lambda:open_hotlink(user['usr'].hotlink_three), bg='#b5dae6', fg='#283149')
 edit_hotlinks_btn = tk.Button(orange_frame, text='Edit Hot Links', font=(font_choice, 12), borderwidth=0, image=edit_cog_img, command=edit_hotlinks, bg='#dbedf3', activebackground='#dbedf3')
 
 hotlink_one_btn.grid(row=0, column=0)
