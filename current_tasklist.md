@@ -4,6 +4,7 @@
 2. reduce code
 3. better comments
 4. reorg locations if applicable
+5. update boss images to be more on scale with each other
 
 
 ?. (?) - Potentially, flip the mechanics around for lifting the existing popup post error message
