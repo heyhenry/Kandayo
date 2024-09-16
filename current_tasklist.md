@@ -1,10 +1,10 @@
 ## Tasklist:
 
-1. use a variable to store font attribute then call variable in all widgets that currently use font
-2. reduce code
+1. use a variable to store font attribute then call variable in all widgets that currently use font x
+2. reduce code 
 3. better comments
 4. reorg locations if applicable
-5. update boss images to be more on scale with each other
+5. update boss images to be more on scale with each other x
 
 
 ?. (?) - Potentially, flip the mechanics around for lifting the existing popup post error message

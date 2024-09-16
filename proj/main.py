@@ -13,11 +13,6 @@ import os
 from PIL import Image, ImageTk
 import ctypes
 
-# colour palette that looks decent and tried
-# preset 1 (dark theme style) - button_bg='#dbedf3', text_fg='#283149', main_bg='#dbedf3'
-# preset 2 (light blue style) - button_fg = '#283149', button_bg = '#b5dae6', main_bg = '#dbedf3', 
-# separator_colour(highlight background) = '#161b28', listbox_bg = '#ffffff', listbox_fg = '#283149', selectbackground='#b4dae6', entry_highlight_colour: '#6F85B6'
-
 # list of character (CharInfo) objects
 characters = {}
 
