@@ -382,16 +382,16 @@ def add_character_popup():
         ac_win.lift()
     else:
         # ac short for add_character
-        ac_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
+        ac_win = tk.Toplevel(blue_frame, bg='#dbedf3')
         current_popup = ac_win
         ac_win.title('Add New Character')
         ac_win.geometry('400x250+850+300')
         ac_win.resizable(False, False)
 
-        ac_title_lbl = tk.Label(ac_win, text='Add New Character', font=(font_choice, 12), bg='#DBEDF3')
-        ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:', font=(font_choice, 12), bg='#DBEDF3')
-        ac_ign_entry = tk.Entry(ac_win, textvariable=ac_ign, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        ac_job_lbl = tk.Label(ac_win, text='Job (Class):', font=(font_choice, 12), bg='#DBEDF3')
+        ac_title_lbl = tk.Label(ac_win, text='Add New Character', font=(font_choice, 12), bg='#dbedf3')
+        ac_ign_lbl = tk.Label(ac_win, text='In-Game Name:', font=(font_choice, 12), bg='#dbedf3')
+        ac_ign_entry = tk.Entry(ac_win, textvariable=ac_ign, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6f85b6', highlightthickness=2)
+        ac_job_lbl = tk.Label(ac_win, text='Job (Class):', font=(font_choice, 12), bg='#dbedf3')
         ac_job_dropdown = ttk.Combobox(ac_win, width=24, textvariable=ac_maple_job_choice)
         ac_job_dropdown['values'] = ( 
             'Select a Job/Class',
@@ -447,10 +447,10 @@ def add_character_popup():
         )
         ac_job_dropdown.config(background='#ffffff', font=(font_choice, 10), state='readonly')
         ac_job_dropdown.current(0)
-        ac_level_lbl = tk.Label(ac_win, text='Level:', font=(font_choice, 12), bg='#DBEDF3')
-        ac_level_entry = tk.Entry(ac_win, textvariable=ac_level, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        ac_submit_btn = tk.Button(ac_win, text='Add to Roster', font=(font_choice, 10), width=15, bg='#B5DAE6', activebackground='#DBEDF3', command=lambda:validate_character_entry(ac_ign.get()))
-        ac_cancel_btn = tk.Button(ac_win, text='Cancel', font=(font_choice, 10), width=15, command=ac_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
+        ac_level_lbl = tk.Label(ac_win, text='Level:', font=(font_choice, 12), bg='#dbedf3')
+        ac_level_entry = tk.Entry(ac_win, textvariable=ac_level, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6f85b6', highlightthickness=2)
+        ac_submit_btn = tk.Button(ac_win, text='Add to Roster', font=(font_choice, 10), width=15, bg='#b5dae6', activebackground='#dbedf3', command=lambda:validate_character_entry(ac_ign.get()))
+        ac_cancel_btn = tk.Button(ac_win, text='Cancel', font=(font_choice, 10), width=15, command=ac_win.destroy, bg='#b5dae6', activebackground='#dbedf3')
 
         ac_title_lbl.grid(row=0, columnspan=2)
         ac_ign_lbl.grid(row=1, column=0, sticky='w', padx=(20, 0))
@@ -546,16 +546,16 @@ def update_character_popup():
                              'There is already a Popup opened.')
         uc_win.lift()
     else:
-        uc_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
+        uc_win = tk.Toplevel(blue_frame, bg='#dbedf3')
         uc_win.title('Update Character')
         uc_win.geometry('400x250+850+300')
         uc_win.resizable(False, False)
         current_popup = uc_win
 
-        uc_title_lbl = tk.Label(uc_win, text='Update Character', font=(font_choice, 12), bg='#DBEDF3')
-        uc_ign_lbl = tk.Label(uc_win, text='In-Game Name:', font=(font_choice, 12), bg='#DBEDF3')
-        uc_ign_entry = tk.Entry(uc_win, textvariable=uc_ign, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        uc_job_lbl = tk.Label(uc_win, text='Job (Class):', font=(font_choice, 12), bg='#DBEDF3')
+        uc_title_lbl = tk.Label(uc_win, text='Update Character', font=(font_choice, 12), bg='#dbedf3')
+        uc_ign_lbl = tk.Label(uc_win, text='In-Game Name:', font=(font_choice, 12), bg='#dbedf3')
+        uc_ign_entry = tk.Entry(uc_win, textvariable=uc_ign, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6f85b6', highlightthickness=2)
+        uc_job_lbl = tk.Label(uc_win, text='Job (Class):', font=(font_choice, 12), bg='#dbedf3')
         uc_job_dropdown = ttk.Combobox(uc_win, width=24, textvariable=uc_maple_job_choice)
         uc_job_dropdown['values'] = ( 
             'Night Lord',
@@ -610,10 +610,10 @@ def update_character_popup():
         )
         uc_job_dropdown.config(background='#ffffff', font=(font_choice, 10), state='readonly')
         uc_job_dropdown.set(characters[selected_ign].job)
-        uc_level_lbl = tk.Label(uc_win, text='Level:', font=(font_choice, 12), bg='#DBEDF3')
-        uc_level_entry = tk.Entry(uc_win, textvariable=uc_level, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        uc_submit_btn = tk.Button(uc_win, text='Update Roster', font=(font_choice, 12), width=15, command=validate_updated_entry, bg='#B5DAE6', activebackground='#DBEDF3')
-        uc_cancel_btn = tk.Button(uc_win, text='Cancel', font=(font_choice, 12), width=15, command=uc_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
+        uc_level_lbl = tk.Label(uc_win, text='Level:', font=(font_choice, 12), bg='#dbedf3')
+        uc_level_entry = tk.Entry(uc_win, textvariable=uc_level, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6f85b6', highlightthickness=2)
+        uc_submit_btn = tk.Button(uc_win, text='Update Roster', font=(font_choice, 12), width=15, command=validate_updated_entry, bg='#b5dae6', activebackground='#dbedf3')
+        uc_cancel_btn = tk.Button(uc_win, text='Cancel', font=(font_choice, 12), width=15, command=uc_win.destroy, bg='#b5dae6', activebackground='#dbedf3')
 
         uc_title_lbl.grid(row=0, columnspan=2)
         uc_ign_lbl.grid(row=1, column=0, sticky='w', padx=(20, 0))
@@ -1106,7 +1106,7 @@ def bossing_checklist_popup():
                              'There is already a Popup opened.')
         bc_win.lift()
     else:
-        bc_win = tk.Toplevel(blue_frame, bg='#DBEDF3')
+        bc_win = tk.Toplevel(blue_frame, bg='#dbedf3')
         bc_win.title("Bossing Checklist")
         bc_win.geometry('1400x1010+250+10')
         bc_win.resizable(False, False)
@@ -1470,8 +1470,8 @@ def bossing_checklist_popup():
 
         # region - boss widgets
         # Chaos Pink Bean
-        cpb_name = tk.Label(bc_win, text='Chaos Pink Bean', **font_preset, bg='#DBEDF3')
-        cpb_img = tk.Label(bc_win, image=cpb_icon, bg='#DBEDF3')
+        cpb_name = tk.Label(bc_win, text='Chaos Pink Bean', **font_preset, bg='#dbedf3')
+        cpb_img = tk.Label(bc_win, image=cpb_icon, bg='#dbedf3')
         cpb_difficulty = tk.OptionMenu(bc_win, cpb_difficulty_choice, *difficulty_a)
         cpb_difficulty.config(state='disabled', font=(font_choice, 8))
         cpb_party_size = tk.OptionMenu(bc_win, cpb_party_size_choice, *party_size)
@@ -1479,8 +1479,8 @@ def bossing_checklist_popup():
         cpb_clear_status = tk.Checkbutton(bc_win, image=incomplete_status_icon, variable=cpb_status, command=lambda:update_check_status('Chaos Pink Bean', cpb_status, cpb_clear_status), bg='#dbedf3', indicatoron=False, borderwidth=0, selectcolor='#dbedf3', activebackground='#dbedf3')
 
         # Hard Hilla
-        hh_name = tk.Label(bc_win, text='Hard Hilla', **font_preset, bg='#DBEDF3')
-        hh_img = tk.Label(bc_win, image=hh_icon, bg='#DBEDF3')
+        hh_name = tk.Label(bc_win, text='Hard Hilla', **font_preset, bg='#dbedf3')
+        hh_img = tk.Label(bc_win, image=hh_icon, bg='#dbedf3')
         hh_difficulty = tk.OptionMenu(bc_win, hh_difficulty_choice, *difficulty_a) 
         hh_difficulty.config(state='disabled', font=(font_choice, 8))
         hh_party_size = tk.OptionMenu(bc_win, hh_party_size_choice, *party_size)
@@ -1490,8 +1490,8 @@ def bossing_checklist_popup():
         hh_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Cygnus
-        cyg_name = tk.Label(bc_win, text='Cygnus', **font_preset, bg='#DBEDF3')
-        cyg_img = tk.Label(bc_win, image=cyg_icon, bg='#DBEDF3')
+        cyg_name = tk.Label(bc_win, text='Cygnus', **font_preset, bg='#dbedf3')
+        cyg_img = tk.Label(bc_win, image=cyg_icon, bg='#dbedf3')
         cyg_difficulty = tk.OptionMenu(bc_win, cyg_difficulty_choice, *difficulty_a)
         cyg_difficulty.config(font=(font_choice, 8))
         cyg_party_size = tk.OptionMenu(bc_win, cyg_party_size_choice, *party_size)
@@ -1501,8 +1501,8 @@ def bossing_checklist_popup():
         cyg_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Chaos Zakum
-        czak_name = tk.Label(bc_win, text='Chaos Zakum', **font_preset, bg='#DBEDF3')
-        czak_img = tk.Label(bc_win, image=czak_icon, bg='#DBEDF3')
+        czak_name = tk.Label(bc_win, text='Chaos Zakum', **font_preset, bg='#dbedf3')
+        czak_img = tk.Label(bc_win, image=czak_icon, bg='#dbedf3')
         czak_difficulty = tk.OptionMenu(bc_win, czak_difficulty_choice, *difficulty_a) 
         czak_difficulty.config(state='disabled', font=(font_choice, 8))
         czak_party_size = tk.OptionMenu(bc_win, czak_party_size_choice, *party_size)
@@ -1512,8 +1512,8 @@ def bossing_checklist_popup():
         czak_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Princess No
-        pno_name = tk.Label(bc_win, text='Princess No', **font_preset, bg='#DBEDF3')
-        pno_img = tk.Label(bc_win, image=pno_icon, bg='#DBEDF3')
+        pno_name = tk.Label(bc_win, text='Princess No', **font_preset, bg='#dbedf3')
+        pno_img = tk.Label(bc_win, image=pno_icon, bg='#dbedf3')
         pno_difficulty = tk.OptionMenu(bc_win, pno_difficulty_choice, *difficulty_a) 
         pno_difficulty.config(state='disabled', font=(font_choice, 8))
         pno_party_size = tk.OptionMenu(bc_win, pno_party_size_choice, *party_size)
@@ -1523,8 +1523,8 @@ def bossing_checklist_popup():
         pno_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Chaos Queen
-        cqueen_name = tk.Label(bc_win, text='Chaos Queen', **font_preset, bg='#DBEDF3')
-        cqueen_img = tk.Label(bc_win, image=cqueen_icon, bg='#DBEDF3')
+        cqueen_name = tk.Label(bc_win, text='Chaos Queen', **font_preset, bg='#dbedf3')
+        cqueen_img = tk.Label(bc_win, image=cqueen_icon, bg='#dbedf3')
         cqueen_difficulty = tk.OptionMenu(bc_win, cqueen_difficulty_choice, *difficulty_a) 
         cqueen_difficulty.config(state='disabled', font=(font_choice, 8))
         cqueen_party_size = tk.OptionMenu(bc_win, cqueen_party_size_choice, *party_size)
@@ -1534,8 +1534,8 @@ def bossing_checklist_popup():
         cqueen_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Chaos Pierre
-        cpierre_name = tk.Label(bc_win, text='Chaos Pierre', **font_preset, bg='#DBEDF3')
-        cpierre_img = tk.Label(bc_win, image=cpierre_icon, bg='#DBEDF3')
+        cpierre_name = tk.Label(bc_win, text='Chaos Pierre', **font_preset, bg='#dbedf3')
+        cpierre_img = tk.Label(bc_win, image=cpierre_icon, bg='#dbedf3')
         cpierre_difficulty = tk.OptionMenu(bc_win, cpierre_difficulty_choice, *difficulty_a) 
         cpierre_difficulty.config(state='disabled', font=(font_choice, 8))
         cpierre_party_size = tk.OptionMenu(bc_win, cpierre_party_size_choice, *party_size)
@@ -1545,8 +1545,8 @@ def bossing_checklist_popup():
         cpierre_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Chaos Von Bon
-        cvonbon_name = tk.Label(bc_win, text='Chaos Von Bon', **font_preset, bg='#DBEDF3')
-        cvonbon_img = tk.Label(bc_win, image=cvonbon_icon, bg='#DBEDF3')
+        cvonbon_name = tk.Label(bc_win, text='Chaos Von Bon', **font_preset, bg='#dbedf3')
+        cvonbon_img = tk.Label(bc_win, image=cvonbon_icon, bg='#dbedf3')
         cvonbon_difficulty = tk.OptionMenu(bc_win, cvonbon_difficulty_choice, *difficulty_a) 
         cvonbon_difficulty.config(state='disabled', font=(font_choice, 8))
         cvonbon_party_size = tk.OptionMenu(bc_win, cvonbon_party_size_choice, *party_size)
@@ -1556,8 +1556,8 @@ def bossing_checklist_popup():
         cvonbon_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Chaos Vellum
-        cvell_name = tk.Label(bc_win, text='Chaos Vellum', **font_preset, bg='#DBEDF3')
-        cvell_img = tk.Label(bc_win, image=cvell_icon, bg='#DBEDF3')
+        cvell_name = tk.Label(bc_win, text='Chaos Vellum', **font_preset, bg='#dbedf3')
+        cvell_img = tk.Label(bc_win, image=cvell_icon, bg='#dbedf3')
         cvell_difficulty = tk.OptionMenu(bc_win, cvell_difficulty_choice, *difficulty_a) 
         cvell_difficulty.config(state='disabled', font=(font_choice, 8))
         cvell_party_size = tk.OptionMenu(bc_win, cvell_party_size_choice, *party_size)
@@ -1567,8 +1567,8 @@ def bossing_checklist_popup():
         cvell_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Akechi Mitsuhide
-        akechi_name = tk.Label(bc_win, text='Akechi Mitsuhide', **font_preset, bg='#DBEDF3')
-        akechi_img = tk.Label(bc_win, image=akechi_icon, bg='#DBEDF3')
+        akechi_name = tk.Label(bc_win, text='Akechi Mitsuhide', **font_preset, bg='#dbedf3')
+        akechi_img = tk.Label(bc_win, image=akechi_icon, bg='#dbedf3')
         akechi_difficulty = tk.OptionMenu(bc_win, akechi_difficulty_choice, *difficulty_a) 
         akechi_difficulty.config(state='disabled', font=(font_choice, 8))
         akechi_party_size = tk.OptionMenu(bc_win, akechi_party_size_choice, *party_size)
@@ -1578,8 +1578,8 @@ def bossing_checklist_popup():
         akechi_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Hard Magnus
-        hmag_name = tk.Label(bc_win, text='Hard Magnus', **font_preset, bg='#DBEDF3')
-        hmag_img = tk.Label(bc_win, image=hmag_icon, bg='#DBEDF3')
+        hmag_name = tk.Label(bc_win, text='Hard Magnus', **font_preset, bg='#dbedf3')
+        hmag_img = tk.Label(bc_win, image=hmag_icon, bg='#dbedf3')
         hmag_difficulty = tk.OptionMenu(bc_win, hmag_difficulty_choice, *difficulty_a) 
         hmag_difficulty.config(state='disabled', font=(font_choice, 8))
         hmag_party_size = tk.OptionMenu(bc_win, hmag_party_size_choice, *party_size)
@@ -1589,8 +1589,8 @@ def bossing_checklist_popup():
         hmag_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Chaos Papulatus
-        cpap_name = tk.Label(bc_win, text='Chaos Papulatus', **font_preset, bg='#DBEDF3')
-        cpap_img = tk.Label(bc_win, image=cpap_icon, bg='#DBEDF3')
+        cpap_name = tk.Label(bc_win, text='Chaos Papulatus', **font_preset, bg='#dbedf3')
+        cpap_img = tk.Label(bc_win, image=cpap_icon, bg='#dbedf3')
         cpap_difficulty = tk.OptionMenu(bc_win, cpap_difficulty_choice, *difficulty_a) 
         cpap_difficulty.config(state='disabled', font=(font_choice, 8))
         cpap_party_size = tk.OptionMenu(bc_win, cpap_party_size_choice, *party_size)
@@ -1600,8 +1600,8 @@ def bossing_checklist_popup():
         cpap_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Lotus
-        lotus_name = tk.Label(bc_win, text='Lotus', **font_preset, bg='#DBEDF3')
-        lotus_img = tk.Label(bc_win, image=lotus_icon, bg='#DBEDF3')
+        lotus_name = tk.Label(bc_win, text='Lotus', **font_preset, bg='#dbedf3')
+        lotus_img = tk.Label(bc_win, image=lotus_icon, bg='#dbedf3')
         lotus_difficulty = tk.OptionMenu(bc_win, lotus_difficulty_choice, *difficulty_d)
         lotus_difficulty.config(font=(font_choice, 8))
         lotus_party_size = tk.OptionMenu(bc_win, lotus_party_size_choice, *party_size)
@@ -1611,8 +1611,8 @@ def bossing_checklist_popup():
         lotus_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Damien
-        damien_name = tk.Label(bc_win, text='Damien', **font_preset, bg='#DBEDF3')
-        damien_img = tk.Label(bc_win, image=damien_icon, bg='#DBEDF3')
+        damien_name = tk.Label(bc_win, text='Damien', **font_preset, bg='#dbedf3')
+        damien_img = tk.Label(bc_win, image=damien_icon, bg='#dbedf3')
         damien_difficulty = tk.OptionMenu(bc_win, damien_difficulty_choice, *difficulty_b)
         damien_difficulty.config(font=(font_choice, 8))
         damien_party_size = tk.OptionMenu(bc_win, damien_party_size_choice, *party_size)
@@ -1622,8 +1622,8 @@ def bossing_checklist_popup():
         damien_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Guardian Slime
-        gslime_name = tk.Label(bc_win, text='Guardian Slime', **font_preset, bg='#DBEDF3')
-        gslime_img = tk.Label(bc_win, image=gslime_icon, bg='#DBEDF3')
+        gslime_name = tk.Label(bc_win, text='Guardian Slime', **font_preset, bg='#dbedf3')
+        gslime_img = tk.Label(bc_win, image=gslime_icon, bg='#dbedf3')
         gslime_difficulty = tk.OptionMenu(bc_win, gslime_difficulty_choice, *difficulty_b)
         gslime_difficulty.config(font=(font_choice, 8))
         gslime_party_size = tk.OptionMenu(bc_win, gslime_party_size_choice, *party_size)
@@ -1633,8 +1633,8 @@ def bossing_checklist_popup():
         gslime_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Lucid
-        lucid_name = tk.Label(bc_win, text='Lucid', **font_preset, bg='#DBEDF3')
-        lucid_img = tk.Label(bc_win, image=lucid_icon, bg='#DBEDF3')
+        lucid_name = tk.Label(bc_win, text='Lucid', **font_preset, bg='#dbedf3')
+        lucid_img = tk.Label(bc_win, image=lucid_icon, bg='#dbedf3')
         lucid_difficulty = tk.OptionMenu(bc_win, lucid_difficulty_choice, *difficulty_c)
         lucid_difficulty.config(font=(font_choice, 8))
         lucid_party_size = tk.OptionMenu(bc_win, lucid_party_size_choice, *party_size)
@@ -1644,8 +1644,8 @@ def bossing_checklist_popup():
         lucid_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Will
-        will_name = tk.Label(bc_win, text='Will', **font_preset, bg='#DBEDF3')
-        will_img = tk.Label(bc_win, image=will_icon, bg='#DBEDF3')
+        will_name = tk.Label(bc_win, text='Will', **font_preset, bg='#dbedf3')
+        will_img = tk.Label(bc_win, image=will_icon, bg='#dbedf3')
         will_difficulty = tk.OptionMenu(bc_win, will_difficulty_choice, *difficulty_c)
         will_difficulty.config(font=(font_choice, 8))
         will_party_size = tk.OptionMenu(bc_win, will_party_size_choice, *party_size)
@@ -1655,8 +1655,8 @@ def bossing_checklist_popup():
         will_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Gloom
-        gloom_name = tk.Label(bc_win, text='Gloom', **font_preset, bg='#DBEDF3')
-        gloom_img = tk.Label(bc_win, image=gloom_icon, bg='#DBEDF3')
+        gloom_name = tk.Label(bc_win, text='Gloom', **font_preset, bg='#dbedf3')
+        gloom_img = tk.Label(bc_win, image=gloom_icon, bg='#dbedf3')
         gloom_difficulty = tk.OptionMenu(bc_win, gloom_difficulty_choice, *difficulty_b)
         gloom_difficulty.config(font=(font_choice, 8))
         gloom_party_size = tk.OptionMenu(bc_win, gloom_party_size_choice, *party_size)
@@ -1666,8 +1666,8 @@ def bossing_checklist_popup():
         gloom_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Darknell
-        darknell_name = tk.Label(bc_win, text='Darknell', **font_preset, bg='#DBEDF3')
-        darknell_img = tk.Label(bc_win, image=darknell_icon, bg='#DBEDF3')
+        darknell_name = tk.Label(bc_win, text='Darknell', **font_preset, bg='#dbedf3')
+        darknell_img = tk.Label(bc_win, image=darknell_icon, bg='#dbedf3')
         darknell_difficulty = tk.OptionMenu(bc_win, darknell_difficulty_choice, *difficulty_b)
         darknell_difficulty.config(font=(font_choice, 8))
         darknell_party_size = tk.OptionMenu(bc_win, darknell_party_size_choice, *party_size)
@@ -1677,8 +1677,8 @@ def bossing_checklist_popup():
         darknell_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Versus Hilla
-        vhilla_name = tk.Label(bc_win, text='Versus Hilla', **font_preset, bg='#DBEDF3')
-        vhilla_img = tk.Label(bc_win, image=vhilla_icon, bg='#DBEDF3')
+        vhilla_name = tk.Label(bc_win, text='Versus Hilla', **font_preset, bg='#dbedf3')
+        vhilla_img = tk.Label(bc_win, image=vhilla_icon, bg='#dbedf3')
         vhilla_difficulty = tk.OptionMenu(bc_win, vhilla_difficulty_choice, *difficulty_b)
         vhilla_difficulty.config(font=(font_choice, 8))
         vhilla_party_size = tk.OptionMenu(bc_win, vhilla_party_size_choice, *party_size)
@@ -1688,8 +1688,8 @@ def bossing_checklist_popup():
         vhilla_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Seren
-        seren_name = tk.Label(bc_win, text='Seren', **font_preset, bg='#DBEDF3')
-        seren_img = tk.Label(bc_win, image=seren_icon, bg='#DBEDF3')
+        seren_name = tk.Label(bc_win, text='Seren', **font_preset, bg='#dbedf3')
+        seren_img = tk.Label(bc_win, image=seren_icon, bg='#dbedf3')
         seren_difficulty = tk.OptionMenu(bc_win, seren_difficulty_choice, *difficulty_d)
         seren_difficulty.config(font=(font_choice, 8))
         seren_party_size = tk.OptionMenu(bc_win, seren_party_size_choice, *party_size)
@@ -1699,8 +1699,8 @@ def bossing_checklist_popup():
         seren_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Kaling
-        kaling_name = tk.Label(bc_win, text='Kaling', **font_preset, bg='#DBEDF3')
-        kaling_img = tk.Label(bc_win, image=kaling_icon, bg='#DBEDF3')
+        kaling_name = tk.Label(bc_win, text='Kaling', **font_preset, bg='#dbedf3')
+        kaling_img = tk.Label(bc_win, image=kaling_icon, bg='#dbedf3')
         kaling_difficulty = tk.OptionMenu(bc_win, kaling_difficulty_choice, *difficulty_e)
         kaling_difficulty.config(font=(font_choice, 8))
         kaling_party_size = tk.OptionMenu(bc_win, kaling_party_size_choice, *party_size)
@@ -1710,8 +1710,8 @@ def bossing_checklist_popup():
         kaling_clear_status.config(indicatoron=False, borderwidth=0)
 
         # Kalos
-        kalos_name = tk.Label(bc_win, text='Kalos', **font_preset, bg='#DBEDF3')
-        kalos_img = tk.Label(bc_win, image=kalos_icon, bg='#DBEDF3')
+        kalos_name = tk.Label(bc_win, text='Kalos', **font_preset, bg='#dbedf3')
+        kalos_img = tk.Label(bc_win, image=kalos_icon, bg='#dbedf3')
         kalos_difficulty = tk.OptionMenu(bc_win, kalos_difficulty_choice, *difficulty_e)
         kalos_difficulty.config(font=(font_choice, 8))
         kalos_party_size = tk.OptionMenu(bc_win, kalos_party_size_choice, *party_size)
@@ -1722,10 +1722,10 @@ def bossing_checklist_popup():
         # endregion
 
         # button widgets 
-        reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, width=15, command=reset_clears_only, bg='#B5DAE6', activebackground='#DBEDF3')
-        reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset, width=15, command=reset_all, bg='#B5DAE6', activebackground='#DBEDF3')
-        update_btn = tk.Button(bc_win, text='Update', **font_preset, width=15, command=update_all, bg='#B5DAE6', activebackground='#DBEDF3')
-        cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, width=15, command=bc_win.destroy, bg='#B5DAE6', activebackground='#DBEDF3')
+        reset_clears_btn = tk.Button(bc_win, text='Reset Clears Only', **font_preset, width=15, command=reset_clears_only, bg='#b5dae6', activebackground='#dbedf3')
+        reset_all_btn = tk.Button(bc_win, text='Reset All', **font_preset, width=15, command=reset_all, bg='#b5dae6', activebackground='#dbedf3')
+        update_btn = tk.Button(bc_win, text='Update', **font_preset, width=15, command=update_all, bg='#b5dae6', activebackground='#dbedf3')
+        cancel_btn = tk.Button(bc_win, text='Cancel', **font_preset, width=15, command=bc_win.destroy, bg='#b5dae6', activebackground='#dbedf3')
 
         # load the saved checkbutton status with relevant status icons upon popup's opening
         load_clear_statuses()
@@ -1949,15 +1949,15 @@ def add_mesos():
         am_win.lift()
     else:
         # small popup window asking for user input
-        am_win = tk.Toplevel(purple_frame, bg='#DBEDF3')
+        am_win = tk.Toplevel(purple_frame, bg='#dbedf3')
         am_win.title('Add Mesos')
         am_win.geometry('250x150+900+350')
         am_win.resizable(False, False)
         current_popup = am_win
 
-        am_prompt_lbl = tk.Label(am_win, text='Enter Mesos Amount', font=(font_choice, 12), bg='#DBEDF3')
-        am_amount_entry = tk.Entry(am_win, font=(font_choice, 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        am_submit_btn = tk.Button(am_win, text='Add to Balance', font=(font_choice, 12), command=topup_balance, bg='#B5DAE6', activebackground='#DBEDF3')
+        am_prompt_lbl = tk.Label(am_win, text='Enter Mesos Amount', font=(font_choice, 12), bg='#dbedf3')
+        am_amount_entry = tk.Entry(am_win, font=(font_choice, 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6f85b6', highlightthickness=2)
+        am_submit_btn = tk.Button(am_win, text='Add to Balance', font=(font_choice, 12), command=topup_balance, bg='#b5dae6', activebackground='#dbedf3')
 
         am_prompt_lbl.grid(row=0, column=0)
         am_amount_entry.grid(row=1, column=0)
@@ -2009,15 +2009,15 @@ def subtract_mesos():
         sm_win.lift()
     else:
         # small popup window asking for user input
-        sm_win = tk.Toplevel(purple_frame, bg='#DBEDF3')
+        sm_win = tk.Toplevel(purple_frame, bg='#dbedf3')
         sm_win.title('Subtract Mesos')
         sm_win.geometry('250x150+900+350')
         sm_win.resizable(False, False)
         current_popup = sm_win
 
-        sm_prompt_lbl = tk.Label(sm_win, text='Enter Mesos Amount', font=(font_choice, 12), bg='#DBEDF3')
-        sm_amount_entry = tk.Entry(sm_win, font=(font_choice, 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=(font_choice, 12), command=reduce_balance, bg='#B5DAE6', activebackground='#DBEDF3')
+        sm_prompt_lbl = tk.Label(sm_win, text='Enter Mesos Amount', font=(font_choice, 12), bg='#dbedf3')
+        sm_amount_entry = tk.Entry(sm_win, font=(font_choice, 12), textvariable=mesos_amount, bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6f85b6', highlightthickness=2)
+        sm_submit_btn = tk.Button(sm_win, text='Subtract from Balance', font=(font_choice, 12), command=reduce_balance, bg='#b5dae6', activebackground='#dbedf3')
 
         sm_prompt_lbl.grid(row=0, column=0)
         sm_amount_entry.grid(row=1, column=0)
@@ -2108,20 +2108,20 @@ def edit_hotlinks():
                              'There is already a Popup opened.')
         ehl_win.lift()
     else:
-        ehl_win = tk.Toplevel(orange_frame, bg='#DBEDF3')
+        ehl_win = tk.Toplevel(orange_frame, bg='#dbedf3')
         ehl_win.title('Edit Hotlinks')
         ehl_win.geometry('500x200+750+350')
         ehl_win.resizable(False, False)
         current_popup = ehl_win
 
-        ehl_hotlinks_title_lbl = tk.Label(ehl_win, text='Edit Hot Links', font=(font_choice, 12), bg='#DBEDF3')
-        ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1:', font=(font_choice, 12), bg='#DBEDF3')
-        ehl_first_hotlink_entry = tk.Entry(ehl_win, textvariable=first_hotlink, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        ehl_second_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 2:', font=(font_choice, 12), bg='#DBEDF3')
-        ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3:', font=(font_choice, 12), bg='#DBEDF3')
-        ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6F85B6', highlightthickness=2)
-        ehl_edit_btn = tk.Button(ehl_win, text='Save Edit', font=(font_choice, 12), command=save_edit, bg='#B5DAE6', activebackground='#DBEDF3')
+        ehl_hotlinks_title_lbl = tk.Label(ehl_win, text='Edit Hot Links', font=(font_choice, 12), bg='#dbedf3')
+        ehl_first_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 1:', font=(font_choice, 12), bg='#dbedf3')
+        ehl_first_hotlink_entry = tk.Entry(ehl_win, textvariable=first_hotlink, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6f85b6', highlightthickness=2)
+        ehl_second_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 2:', font=(font_choice, 12), bg='#dbedf3')
+        ehl_second_hotlink_entry = tk.Entry(ehl_win, textvariable=second_hotlink, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6f85b6', highlightthickness=2)
+        ehl_third_hotlink_lbl = tk.Label(ehl_win, text='Hot Link 3:', font=(font_choice, 12), bg='#dbedf3')
+        ehl_third_hotlink_entry = tk.Entry(ehl_win, textvariable=third_hotlink, font=(font_choice, 12), bg='#ffffff', highlightbackground='#161b28', highlightcolor='#6f85b6', highlightthickness=2)
+        ehl_edit_btn = tk.Button(ehl_win, text='Save Edit', font=(font_choice, 12), command=save_edit, bg='#b5dae6', activebackground='#dbedf3')
 
         ehl_hotlinks_title_lbl.place(x=0, y=5, width=500, height=30)
         ehl_first_hotlink_lbl.place(x=0, y=40, width=100, height=30)

@@ -17,3 +17,9 @@ prior to this, the 'reset clears only' and 'reset all' buttons will be primarily
 so that the user can re tinker how they want to setup their checklist. 
 
 
+# To Note Currently:
+
+- make all hex colour capitalisation the same
+- 
+
+
